@@ -7,5 +7,9 @@ int main()
 	std::cout << "Dylan says hello (edited)" << std::endl; // Print your name here
 
 	std::cout << "Team leader says hello (edited)" << std::endl;
+<<<<<<< HEAD
 
+=======
+	std::cout << "Michael says hello" << std::endl;
+>>>>>>> feature_J
 }
