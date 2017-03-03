@@ -2,5 +2,5 @@
 
 int main()
 {
-	std::cout << "Team leader says hello" << std::endl;
+	std::cout << "Team leader says hello (edited)" << std::endl;
 }
