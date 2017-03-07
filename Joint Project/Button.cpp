@@ -14,7 +14,7 @@ Button::Button(std::string s="", float x=0, float y=0):
 	isActive = true; //starts active
 
 	m_id = "button";
-	if (!m_font.loadFromFile("Figurativative.ttf"))
+	if (!m_font.loadFromFile("Fonts/American Captain.ttf"))
 	{
 	}
 

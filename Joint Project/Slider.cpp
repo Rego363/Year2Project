@@ -11,7 +11,7 @@ Summary: A simple sfml game with menu, options that use the common UI elements
 Slider::Slider(float x, float y, float &value, std::string s) :
 	Widget()
 {
-	if (!m_font.loadFromFile("Figurativative.ttf"))
+	if (!m_font.loadFromFile("Fonts/American Captain.ttf"))
 	{
 		//error message
 	}

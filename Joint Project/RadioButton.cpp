@@ -20,7 +20,7 @@ RadioButton::RadioButton(std::string s, float x, float y, std::string tag) :
 	m_icon.setOutlineThickness(1.3);
 	m_isActive = false;
 	m_hasFocus = false;
-	if (!m_font.loadFromFile("Figurativative.ttf"))
+	if (!m_font.loadFromFile("Fonts/American Captain.ttf"))
 	{
 		//error message
 	}

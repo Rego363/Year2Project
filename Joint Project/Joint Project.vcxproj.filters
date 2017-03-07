@@ -28,6 +28,9 @@
     <ClCompile Include="Widget.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="OptionsScreen.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Button.h">
@@ -52,6 +55,9 @@
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="Controller.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="OptionsScreen.h">
       <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>

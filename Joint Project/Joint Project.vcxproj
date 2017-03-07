@@ -128,6 +128,7 @@
     <ClCompile Include="GUI.cpp" />
     <ClCompile Include="Label.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="OptionsScreen.cpp" />
     <ClCompile Include="RadioButton.cpp" />
     <ClCompile Include="Slider.cpp" />
     <ClCompile Include="Widget.cpp" />
@@ -138,6 +139,7 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="GUI.h" />
     <ClInclude Include="Label.h" />
+    <ClInclude Include="OptionsScreen.h" />
     <ClInclude Include="RadioButton.h" />
     <ClInclude Include="Slider.h" />
     <ClInclude Include="Widget.h" />

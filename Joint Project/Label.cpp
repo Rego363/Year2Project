@@ -12,7 +12,7 @@ Label::Label(std::string s,float x=0,float y=0):
 {
 	hasTexture = false; //standard label will have no texture
 	m_id = "label";
-	if (!m_font.loadFromFile("Figurativative.ttf"))
+	if (!m_font.loadFromFile("Fonts/American Captain.ttf"))
 	{
 		//error message
 	}
