@@ -5,6 +5,8 @@
 #include <SFML\Audio.hpp>
 #include <iostream>
 
+#include "Controller.h"
+
 using namespace std;
 
 
@@ -24,6 +26,9 @@ private:
 	void update(sf::Time);
 	void render();
 	sf::RenderWindow m_window;
+
+	X360Controller controller;
+
 };
 
 #endif
