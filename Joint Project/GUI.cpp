@@ -62,11 +62,11 @@ void GUI::update(int &index, int maxItems)
 
 	if (m_elements[index]->getID() == "slider") //if element is a slider the these can be performed
 	{
-		if (m_xbox.m_currentState.DpadLeft == true || sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+		if (m_xbox.m_current.DpadLeft == true || sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
 		{
 			decreaseSliderValue(index);
 		}
-		if (m_xbox.m_currentState.DpadRight == true || sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+		if (m_xbox.m_current.DpadRight == true || sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 		{
 			increaseSliderValue(index);
 		}
@@ -295,15 +295,15 @@ void GUI::decreaseSliderValue(int &index)
 //vertical control scheme for xbox controller, dpad vertical use only
 void GUI::verticalControls(int &index, int maxItems)
 {
-	if (m_xbox.m_currentState.DpadUp == true && !m_xbox.m_previousState.DpadUp || sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+	if (m_xbox.m_current.DpadUp == true && !m_xbox.m_previous.DpadUp || sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 	{
 		moveUp(index);
 	}
-	if (m_xbox.m_currentState.DpadDown == true && !m_xbox.m_previousState.DpadDown || sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+	if (m_xbox.m_current.DpadDown == true && !m_xbox.m_previous.DpadDown || sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
 	{
 		moveDown(index, maxItems);
 	}
-	if (m_xbox.m_currentState.A == true && !m_xbox.m_previousState.A || sf::Keyboard::isKeyPressed(sf::Keyboard::Return))
+	if (m_xbox.m_current.A == true && !m_xbox.m_previous.A || sf::Keyboard::isKeyPressed(sf::Keyboard::Return))
 	{
 		if (m_elements[index]->getID() == "button")
 		{
@@ -320,15 +320,15 @@ void GUI::verticalControls(int &index, int maxItems)
 //horizontal control scheme for xbox controller, dpad horizontal use only
 void GUI::horizontalControls(int & index, int maxItems)
 {
-	if (m_xbox.m_currentState.DpadLeft == true && !m_xbox.m_previousState.DpadLeft || sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+	if (m_xbox.m_current.DpadLeft == true && !m_xbox.m_previous.DpadLeft || sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 	{
 		moveUp(index);
 	}
-	if (m_xbox.m_currentState.DpadRight == true && !m_xbox.m_previousState.DpadRight || sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+	if (m_xbox.m_current.DpadRight == true && !m_xbox.m_previous.DpadRight || sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
 	{
 		moveDown(index, maxItems);
 	}
-	if (m_xbox.m_currentState.A == true && !m_xbox.m_previousState.A || sf::Keyboard::isKeyPressed(sf::Keyboard::Return))
+	if (m_xbox.m_current.A == true && !m_xbox.m_previous.A || sf::Keyboard::isKeyPressed(sf::Keyboard::Return))
 	{
 		activate(index);
 	}
@@ -337,23 +337,23 @@ void GUI::horizontalControls(int & index, int maxItems)
 //vertical and horizontal control scheme for xbox controller, dpad vertical and horizontal
 void GUI::vertAndHorControls(int & index, int maxItems)
 {
-	if (m_xbox.m_currentState.DpadLeft == true && !m_xbox.m_previousState.DpadLeft || sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+	if (m_xbox.m_current.DpadLeft == true && !m_xbox.m_previous.DpadLeft || sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 	{
 		moveUp(index);
 	}
-	if (m_xbox.m_currentState.DpadRight == true && !m_xbox.m_previousState.DpadRight || sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+	if (m_xbox.m_current.DpadRight == true && !m_xbox.m_previous.DpadRight || sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
 	{
 		moveDown(index, maxItems);
 	}
-	if (m_xbox.m_currentState.DpadUp == true && !m_xbox.m_previousState.DpadUp || sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+	if (m_xbox.m_current.DpadUp == true && !m_xbox.m_previous.DpadUp || sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 	{
 		moveUp2(index);
 	}
-	if (m_xbox.m_currentState.DpadDown == true && !m_xbox.m_previousState.DpadDown || sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+	if (m_xbox.m_current.DpadDown == true && !m_xbox.m_previous.DpadDown || sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
 	{
 		moveDown2(index, maxItems);
 	}
-	if (m_xbox.m_currentState.A == true && !m_xbox.m_previousState.A || sf::Keyboard::isKeyPressed(sf::Keyboard::Return))
+	if (m_xbox.m_current.A == true && !m_xbox.m_previous.A || sf::Keyboard::isKeyPressed(sf::Keyboard::Return))
 	{
 		activate(index);
 	}

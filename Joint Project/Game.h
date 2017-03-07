@@ -28,6 +28,8 @@ private:
 	sf::RenderWindow m_window;
 
 	X360Controller controller;
+	sf::Font m_font;
+	sf::Text m_text;
 
 };
 

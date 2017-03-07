@@ -9,7 +9,14 @@ static sf::Int32 MS_PER_UPDATE = 10.0;
 /// </summary>
 Game::Game() : m_window(sf::VideoMode(1280, 720), "Joint Project, Team C")
 {
-	
+	if (!m_font.loadFromFile("Fonts/American Captain.ttf"))
+	{
+		std::cout << "failed to load font" << std::endl;
+	}
+	m_text.setFont(m_font);
+	m_text.setString("RACING GAME");
+	m_text.setPosition(m_window.getSize().x / 4, m_window.getSize().y / 2);
+	m_text.setCharacterSize(70);
 }
 
 /// <summary>
@@ -78,6 +85,8 @@ void Game::update(sf::Time time)
 /// </summary>
 void Game::render()
 {
-
+	m_window.clear(sf::Color(0, 0, 0, 255));
+	m_window.draw(m_text);
+	m_window.display();
 
 }
