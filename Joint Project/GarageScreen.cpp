@@ -1,6 +1,7 @@
 #include "GarageScreen.h"
 
-GarageScreen::GarageScreen(float x, float y)
+GarageScreen::GarageScreen(float x, float y, Game &game):
+	m_game(&game)
 {
 	m_label = new Label("Garage", (x / 2), float(y / MAX_ITEMS + 0.2f)*0.1f);
 	m_label->changeTextSize(70);
@@ -13,6 +14,7 @@ GarageScreen::GarageScreen(float x, float y)
 	m_widgets[3] = new Button("Turbo", (x / 2), float(y / MAX_ITEMS + 0.2f)*5.5f);
 	m_widgets[4] = new Button("Steering", (x / 2), float(y / MAX_ITEMS + 0.2f)*6.5f);
 	m_widgets[5] = new Button("Back", (x / 2), float(y / MAX_ITEMS + 0.2f)*7.5f);
+	m_widgets[5]->Enter = std::bind(&GarageScreen::goBack, this);
 
 	for each (Widget* var in m_widgets)
 	{
@@ -29,4 +31,9 @@ void GarageScreen::update()
 void GarageScreen::draw(sf::RenderWindow &window)
 {
 	m_gui.draw(window);
+}
+
+void GarageScreen::goBack()
+{
+	m_game->changeGameState(GameState::TheMenu);
 }

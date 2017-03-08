@@ -127,6 +127,7 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GarageScreen.cpp" />
     <ClCompile Include="GUI.cpp" />
+    <ClCompile Include="Help.cpp" />
     <ClCompile Include="Label.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainMenu.cpp" />
@@ -144,6 +145,7 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="GarageScreen.h" />
     <ClInclude Include="GUI.h" />
+    <ClInclude Include="Help.h" />
     <ClInclude Include="Label.h" />
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="OptionsScreen.h" />

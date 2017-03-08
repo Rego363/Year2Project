@@ -11,6 +11,7 @@
 #include "MainMenu.h"
 #include "GarageScreen.h"
 #include "DisplayScreen.h"
+#include"Help.h"
 
 using namespace std;
 
@@ -18,6 +19,9 @@ class SoundScreen;
 class DisplayScreen;
 class OptionsScreen;
 
+class MainMenu;
+class GarageScreen;
+class HelpScreen;
 
 enum GameState {
 	TheLicense,
@@ -29,7 +33,8 @@ enum GameState {
 	Difficulty,
 	Sound,
 	Garage,
-	MapSelect
+	MapSelect,
+	Help
 };
 
 
@@ -44,18 +49,16 @@ public:
 	void init();
 	void run();
 	void changeGameState(GameState gameState);
-
+	sf::RenderWindow m_window;
 private:
 	void processInput();
 	void update(sf::Time);
 	void render();
 
-	sf::RenderWindow m_window;
-
 	
 	sf::Font m_font;
 	sf::Text m_text;
-	GameState m_currentGameState = GameState::Display;
+	GameState m_currentGameState = GameState::TheMenu;
 
 	playGame * m_mapSelect;
 	OptionsScreen* m_optionsScreen;
@@ -63,7 +66,7 @@ private:
 	DisplayScreen* m_displayScreen;
 	GarageScreen* m_garageScreen;
 	MainMenu *m_MainMenu;
-	
+	HelpScreen *m_helpScreen;
 	
 };
 
