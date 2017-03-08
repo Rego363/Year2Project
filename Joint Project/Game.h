@@ -6,13 +6,10 @@
 #include <iostream>
 
 #include "OptionsScreen.h"
-<<<<<<< HEAD
 #include "playGame.h"
-=======
 #include "SoundScreen.h"
 #include "MainMenu.h"
 #include"GarageScreen.h"
->>>>>>> f2e16c175919c11297e855f498f39340de55a8d4
 
 using namespace std;
 
@@ -54,22 +51,16 @@ private:
 
 	
 	OptionsScreen* m_optionsScreen;
-<<<<<<< HEAD
 	playGame * m_mapSelect;
 	sf::Font m_font;
 	sf::Text m_text;
-	GameState m_currentGameState = GameState::MapSelect;
+	GameState m_currentGameState = GameState::Sound;
 
-=======
 	SoundScreen* m_soundScreen;
 	GarageScreen* m_garageScreen;
-	sf::Font m_font;
-	sf::Text m_text;
 	MainMenu *m_MainMenu;
-	GameState m_currentGameState = GameState::Garage;
 	
 	
->>>>>>> f2e16c175919c11297e855f498f39340de55a8d4
 };
 
 #endif

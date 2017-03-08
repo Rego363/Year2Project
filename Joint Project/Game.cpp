@@ -18,15 +18,11 @@ Game::Game() : m_window(sf::VideoMode(1280, 720), "Joint Project, Team C")
 	m_text.setPosition(m_window.getSize().x / 4, m_window.getSize().y / 2);
 	m_text.setCharacterSize(70);
 	m_optionsScreen = new OptionsScreen();
-<<<<<<< HEAD
 	m_mapSelect = new playGame();
-=======
 	m_soundScreen = new SoundScreen(*this);
-	m_currentGameState = GameState::Sound;
 	m_garageScreen = new GarageScreen(m_window.getSize().x / 4, m_window.getSize().y / 2);
 	m_MainMenu = new MainMenu();
 
->>>>>>> f2e16c175919c11297e855f498f39340de55a8d4
 }
 
 /// <summary>
@@ -112,12 +108,9 @@ void Game::update(sf::Time time)
 		break;
 	case GameState::Display:
 		break;
-<<<<<<< HEAD
 	case GameState::MapSelect:
 		m_mapSelect->update();
-=======
 	default:
->>>>>>> f2e16c175919c11297e855f498f39340de55a8d4
 		break;
 	}
 
