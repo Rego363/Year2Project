@@ -7,6 +7,7 @@
 
 #include "Controller.h"
 #include "OptionsScreen.h"
+#include "MainMenu.h"
 
 using namespace std;
 
@@ -46,9 +47,10 @@ private:
 
 	X360Controller controller;
 	OptionsScreen* m_optionsScreen;
+	MainMenu *m_MainMenu;
 	sf::Font m_font;
 	sf::Text m_text;
-	GameState m_currentGameState = GameState::TheOptions;
+	GameState m_currentGameState = GameState::TheMenu;
 
 };
 
