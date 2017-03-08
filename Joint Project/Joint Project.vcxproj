@@ -131,6 +131,7 @@
     <ClCompile Include="OptionsScreen.cpp" />
     <ClCompile Include="RadioButton.cpp" />
     <ClCompile Include="Slider.cpp" />
+    <ClCompile Include="SoundScreen.cpp" />
     <ClCompile Include="Widget.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -142,6 +143,7 @@
     <ClInclude Include="OptionsScreen.h" />
     <ClInclude Include="RadioButton.h" />
     <ClInclude Include="Slider.h" />
+    <ClInclude Include="SoundScreen.h" />
     <ClInclude Include="Widget.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -18,6 +18,8 @@ Game::Game() : m_window(sf::VideoMode(1280, 720), "Joint Project, Team C")
 	m_text.setPosition(m_window.getSize().x / 4, m_window.getSize().y / 2);
 	m_text.setCharacterSize(70);
 	m_optionsScreen = new OptionsScreen();
+	m_soundScreen = new SoundScreen(*this);
+	m_currentGameState = GameState::Sound;
 }
 
 /// <summary>
@@ -99,6 +101,7 @@ void Game::update(sf::Time time)
 	case GameState::TheSplash:
 		break;
 	case GameState::Sound:
+		m_soundScreen->update();
 		break;
 	case GameState::Display:
 		break;
@@ -159,7 +162,7 @@ void Game::render()
 		break;
 	case GameState::Sound:
 		m_window.clear(sf::Color(0, 0, 0, 255));
-		//m_optionsScreen->render(m_window);
+		m_soundScreen->render(m_window);
 		m_window.display();
 		break;
 	case GameState::Display:

@@ -7,9 +7,11 @@
 
 #include "Controller.h"
 #include "OptionsScreen.h"
+#include "SoundScreen.h"
 
 using namespace std;
 
+class SoundScreen;
 
 
 enum GameState {
@@ -35,17 +37,18 @@ public:
 	Game();
 	void init();
 	void run();
+	void changeGameState(GameState gameState);
 
 private:
 	void processInput();
 	void update(sf::Time);
 	void render();
-	void changeGameState(GameState gameState);
 
 	sf::RenderWindow m_window;
 
 	X360Controller controller;
 	OptionsScreen* m_optionsScreen;
+	SoundScreen* m_soundScreen;
 	sf::Font m_font;
 	sf::Text m_text;
 	GameState m_currentGameState = GameState::TheOptions;
