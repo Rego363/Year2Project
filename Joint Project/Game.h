@@ -11,6 +11,20 @@
 using namespace std;
 
 
+
+enum GameState {
+	TheLicense,
+	TheSplash,
+	TheMenu,
+	TheOptions,
+	Playing,
+	Display,
+	Difficulty,
+	Sound,
+	Garage
+};
+
+
 /// <summary>
 /// Game class
 /// </summary>
@@ -26,12 +40,15 @@ private:
 	void processInput();
 	void update(sf::Time);
 	void render();
+	void changeGameState(GameState gameState);
+
 	sf::RenderWindow m_window;
 
 	X360Controller controller;
 	OptionsScreen* m_optionsScreen;
 	sf::Font m_font;
 	sf::Text m_text;
+	GameState m_currentGameState = GameState::TheOptions;
 
 };
 

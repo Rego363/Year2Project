@@ -78,7 +78,36 @@ void Game::processInput()
 /// </summary>
 void Game::update(sf::Time time)
 {
-	m_optionsScreen->update();
+	switch (m_currentGameState)
+	{
+	default:
+		break;
+
+	case GameState::TheOptions:
+		m_optionsScreen->update();
+		break;
+	case GameState::TheMenu:
+		break;
+	case GameState::Difficulty:
+		break;
+	case GameState::Garage:
+		break;
+	case GameState::Playing:
+		break;
+	case GameState::TheLicense:
+		break;
+	case GameState::TheSplash:
+		break;
+	case GameState::Sound:
+		break;
+	case GameState::Display:
+		break;
+	}
+
+
+
+
+	
 }
 
 /// <summary>
@@ -86,9 +115,64 @@ void Game::update(sf::Time time)
 /// </summary>
 void Game::render()
 {
-	m_window.clear(sf::Color(0, 0, 0, 255));
-	//m_window.draw(m_text);
-	m_optionsScreen->render(m_window);
-	m_window.display();
 
+	switch (m_currentGameState)
+	{
+	default:
+		break;
+
+	case GameState::TheOptions:
+
+		m_window.clear(sf::Color(0, 0, 0, 255));
+		m_optionsScreen->render(m_window);
+		m_window.display();
+		break;
+	case GameState::TheMenu:
+		m_window.clear(sf::Color(0, 0, 0, 255));
+		//m_optionsScreen->render(m_window);
+		m_window.display();
+		break;
+	case GameState::Difficulty:
+		m_window.clear(sf::Color(0, 0, 0, 255));
+		//m_optionsScreen->render(m_window);
+		m_window.display();
+		break;
+	case GameState::Garage:
+		m_window.clear(sf::Color(0, 0, 0, 255));
+		//m_optionsScreen->render(m_window);
+		m_window.display();
+		break;
+	case GameState::Playing:
+		m_window.clear(sf::Color(0, 0, 0, 255));
+		//m_optionsScreen->render(m_window);
+		m_window.display();
+		break;
+	case GameState::TheLicense:
+		m_window.clear(sf::Color(0, 0, 0, 255));
+		//m_optionsScreen->render(m_window);
+		m_window.display();
+		break;
+	case GameState::TheSplash:
+		m_window.clear(sf::Color(0, 0, 0, 255));
+		//m_optionsScreen->render(m_window);
+		m_window.display();
+		break;
+	case GameState::Sound:
+		m_window.clear(sf::Color(0, 0, 0, 255));
+		//m_optionsScreen->render(m_window);
+		m_window.display();
+		break;
+	case GameState::Display:
+		m_window.clear(sf::Color(0, 0, 0, 255));
+		//m_optionsScreen->render(m_window);
+		m_window.display();
+		break;
+	}
+
+
+}
+
+void Game::changeGameState(GameState gameState)
+{
+	m_currentGameState = gameState;
 }
