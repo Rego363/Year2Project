@@ -1,6 +1,14 @@
+
+
+#ifndef MAINMENU
+#define MAINMENU
+
 #include "GUI.h"
 #include "Button.h"
+#include"Game.h"
 
+
+class Game;
 ///<summary>
 // This class will create and manage the main menu screen
 ///<summary>
@@ -8,10 +16,15 @@ class MainMenu
 {
 public:
 
-	MainMenu();
+	MainMenu(Game &game);
 	~MainMenu();
 	void render(sf::RenderWindow & window);
 	void update();
+	void GotoGarage();
+	void quit();
+	void goToOptions();
+	void goToPlay();
+	void goToHelp();
 
 private:
 
@@ -24,5 +37,6 @@ private:
 	Button *m_Help;
 	Button *m_Exit;
 	int m_currentSelect;
-
+	Game *m_game;
 };
+#endif // !MAINMENU

@@ -20,8 +20,9 @@ Game::Game() : m_window(sf::VideoMode(1280, 720), "Joint Project, Team C")
 	m_optionsScreen = new OptionsScreen();
 	m_mapSelect = new playGame();
 	m_soundScreen = new SoundScreen(*this);
-	m_garageScreen = new GarageScreen(m_window.getSize().x / 4, m_window.getSize().y / 2);
-	m_MainMenu = new MainMenu();
+	m_garageScreen = new GarageScreen(m_window.getSize().x / 4, m_window.getSize().y / 2,*this);
+	m_MainMenu = new MainMenu(*this);
+	m_helpScreen = new HelpScreen(*this);
 
 }
 
@@ -112,6 +113,11 @@ void Game::update(sf::Time time)
 		m_mapSelect->update();
 	default:
 		break;
+	case GameState::Help:
+		m_helpScreen->update();
+		break;
+
+		
 	}
 
 
@@ -181,6 +187,11 @@ void Game::render()
 	case GameState::MapSelect:
 		m_window.clear(sf::Color(0, 0, 0, 255));
 		m_mapSelect->render(m_window);
+		m_window.display();
+		break;
+	case GameState::Help:
+		m_window.clear(sf::Color(0, 0, 0, 255));
+		m_helpScreen->draw(m_window);
 		m_window.display();
 		break;
 	}

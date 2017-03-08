@@ -1,13 +1,17 @@
 #pragma once
+#ifndef GARAGESCREEN
+#define GARAGESCREEN
 
 #include"GUI.h"
+#include"Game.h"
 
 class GarageScreen {
 
 public:
-	GarageScreen(float x, float y);
+	GarageScreen(float x, float y, Game& game);
 	void update();
 	void draw(sf::RenderWindow &window);
+	void goBack();
 
 private:
 	int m_selectedItem = 0;
@@ -15,5 +19,7 @@ private:
 	Widget* m_widgets[MAX_ITEMS];
 	Label* m_label;
 	GUI m_gui;
+	Game *m_game;
 
 };
+#endif // !GARAGESCREEN
