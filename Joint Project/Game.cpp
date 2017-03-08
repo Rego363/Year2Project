@@ -2,7 +2,7 @@
 
 #include "Game.h"
 
-static sf::Int32 MS_PER_UPDATE = 10.0;
+static double const MS_PER_UPDATE = 10.0;
 
 /// <summary>
 /// Game is constructed
@@ -18,7 +18,15 @@ Game::Game() : m_window(sf::VideoMode(1280, 720), "Joint Project, Team C")
 	m_text.setPosition(m_window.getSize().x / 4, m_window.getSize().y / 2);
 	m_text.setCharacterSize(70);
 	m_optionsScreen = new OptionsScreen();
+<<<<<<< HEAD
 	m_mapSelect = new playGame();
+=======
+	m_soundScreen = new SoundScreen(*this);
+	m_currentGameState = GameState::Sound;
+	m_garageScreen = new GarageScreen(m_window.getSize().x / 4, m_window.getSize().y / 2);
+	m_MainMenu = new MainMenu();
+
+>>>>>>> f2e16c175919c11297e855f498f39340de55a8d4
 }
 
 /// <summary>
@@ -81,17 +89,17 @@ void Game::update(sf::Time time)
 {
 	switch (m_currentGameState)
 	{
-	default:
-		break;
 
 	case GameState::TheOptions:
 		m_optionsScreen->update();
 		break;
 	case GameState::TheMenu:
+		m_MainMenu->update();
 		break;
 	case GameState::Difficulty:
 		break;
 	case GameState::Garage:
+		m_garageScreen->update();
 		break;
 	case GameState::Playing:
 		break;
@@ -100,11 +108,16 @@ void Game::update(sf::Time time)
 	case GameState::TheSplash:
 		break;
 	case GameState::Sound:
+		m_soundScreen->update();
 		break;
 	case GameState::Display:
 		break;
+<<<<<<< HEAD
 	case GameState::MapSelect:
 		m_mapSelect->update();
+=======
+	default:
+>>>>>>> f2e16c175919c11297e855f498f39340de55a8d4
 		break;
 	}
 
@@ -133,7 +146,7 @@ void Game::render()
 		break;
 	case GameState::TheMenu:
 		m_window.clear(sf::Color(0, 0, 0, 255));
-		//m_optionsScreen->render(m_window);
+		m_MainMenu->render(m_window);
 		m_window.display();
 		break;
 	case GameState::Difficulty:
@@ -144,6 +157,7 @@ void Game::render()
 	case GameState::Garage:
 		m_window.clear(sf::Color(0, 0, 0, 255));
 		//m_optionsScreen->render(m_window);
+		m_garageScreen->draw(m_window);
 		m_window.display();
 		break;
 	case GameState::Playing:
@@ -163,7 +177,7 @@ void Game::render()
 		break;
 	case GameState::Sound:
 		m_window.clear(sf::Color(0, 0, 0, 255));
-		//m_optionsScreen->render(m_window);
+		m_soundScreen->render(m_window);
 		m_window.display();
 		break;
 	case GameState::Display:

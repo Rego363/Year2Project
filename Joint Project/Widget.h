@@ -7,7 +7,7 @@ Summary: A simple sfml game with menu, options that use the common UI elements
 Known Bugs: none
 */
 #include<SFML\Graphics.hpp>
-#include"Controller.h"
+//#include"Controller.h"
 #include<functional>
 
 

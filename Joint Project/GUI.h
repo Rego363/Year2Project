@@ -13,7 +13,7 @@ Known Bugs: none
 #include"Label.h"
 #include"Widget.h"
 #include<SFML\Graphics.hpp>
-#include"Controller.h"
+#include"XBOX360CONTROLLER.h"
 #include<SFML\Audio.hpp>
 
 
@@ -54,7 +54,7 @@ public:
 private:
 	std::vector<Widget *> m_elements; // container to hold all widgets
 	std::vector<Label *>m_labels; //holds all labels, labels can be also stored in m_elements
-	X360Controller m_xbox; //xbox controller
+	Xbox360Controller m_xbox; //xbox controller
 	sf::Clock m_timer; //timer
 	double timeElapsed;
 	bool animating; //when element is undergoeing an animation 
