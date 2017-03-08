@@ -5,9 +5,10 @@
 #include <SFML\Audio.hpp>
 #include <iostream>
 
-#include "Controller.h"
 #include "OptionsScreen.h"
 #include "SoundScreen.h"
+#include "MainMenu.h"
+#include"GarageScreen.h"
 
 using namespace std;
 
@@ -46,13 +47,16 @@ private:
 
 	sf::RenderWindow m_window;
 
-	X360Controller controller;
+	
 	OptionsScreen* m_optionsScreen;
 	SoundScreen* m_soundScreen;
+	GarageScreen* m_garageScreen;
 	sf::Font m_font;
 	sf::Text m_text;
-	GameState m_currentGameState = GameState::TheOptions;
-
+	MainMenu *m_MainMenu;
+	GameState m_currentGameState = GameState::Garage;
+	
+	
 };
 
 #endif

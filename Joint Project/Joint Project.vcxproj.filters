@@ -4,9 +4,6 @@
     <ClCompile Include="Button.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="Controller.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
     <ClCompile Include="Game.cpp">
       <Filter>Source</Filter>
     </ClCompile>
@@ -32,6 +29,11 @@
       <Filter>Source</Filter>
     </ClCompile>
     <ClCompile Include="SoundScreen.cpp">
+    <ClCompile Include="MainMenu.cpp" />
+    <ClCompile Include="GarageScreen.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="XBOX360CONTROLLER.cpp">
       <Filter>Source</Filter>
     </ClCompile>
   </ItemGroup>
@@ -57,10 +59,16 @@
     <ClInclude Include="GUI.h">
       <Filter>Headers</Filter>
     </ClInclude>
-    <ClInclude Include="Controller.h">
+    <ClInclude Include="OptionsScreen.h">
       <Filter>Headers</Filter>
     </ClInclude>
-    <ClInclude Include="OptionsScreen.h">
+    <ClInclude Include="MainMenu.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="GarageScreen.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="XBOX360CONTROLLER.h">
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="SoundScreen.h">

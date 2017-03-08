@@ -10,11 +10,15 @@ OptionsScreen::OptionsScreen()
 	m_soundButton = new Button("Sound", 570, 350);
 	m_displayButton = new Button("Display", 565, 450);
 	m_backButton = new Button("Back", 575, 550);
+	//m_radio = new RadioButton("fuck you", 580, 600, "lol");
+	m_slider = new Slider(580, 600, pizza, "lol");
 	m_gui.addButton(m_difficultyButton);
 	m_gui.addButton(m_soundButton);
 	m_gui.addButton(m_displayButton);
 	m_gui.addButton(m_backButton);
 	m_gui.addLabel(m_title);
+	m_gui.addSlider(m_slider);
+	//m_gui.addRadioButton(m_radio);
 	m_currentSelect = 0;
 	m_gui.vertical = true;
 	m_title->changeTextSize(100);
@@ -34,5 +38,5 @@ void OptionsScreen::render(sf::RenderWindow & window)
 
 void OptionsScreen::update()
 {
-	m_gui.update(m_currentSelect,4);
+	m_gui.update(m_currentSelect,5);
 }

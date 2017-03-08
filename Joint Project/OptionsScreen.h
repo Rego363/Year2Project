@@ -18,6 +18,9 @@ private:
 	Button *m_soundButton;
 	Button *m_displayButton;
 	Button *m_backButton;
+	//RadioButton* m_radio;
+	Slider *m_slider;
 	int m_currentSelect;
+	float pizza = 100;
 };
 
