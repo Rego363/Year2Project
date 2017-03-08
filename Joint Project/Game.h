@@ -9,11 +9,13 @@
 #include "playGame.h"
 #include "SoundScreen.h"
 #include "MainMenu.h"
-#include"GarageScreen.h"
+#include "GarageScreen.h"
+#include "DisplayScreen.h"
 
 using namespace std;
 
 class SoundScreen;
+class DisplayScreen;
 
 
 enum GameState {
@@ -50,13 +52,14 @@ private:
 	sf::RenderWindow m_window;
 
 	
-	OptionsScreen* m_optionsScreen;
-	playGame * m_mapSelect;
 	sf::Font m_font;
 	sf::Text m_text;
-	GameState m_currentGameState = GameState::Sound;
+	GameState m_currentGameState = GameState::Display;
 
+	playGame * m_mapSelect;
+	OptionsScreen* m_optionsScreen;
 	SoundScreen* m_soundScreen;
+	DisplayScreen* m_displayScreen;
 	GarageScreen* m_garageScreen;
 	MainMenu *m_MainMenu;
 	
