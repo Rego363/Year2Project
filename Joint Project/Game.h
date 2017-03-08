@@ -7,6 +7,7 @@
 
 #include "Controller.h"
 #include "OptionsScreen.h"
+#include "playGame.h"
 
 using namespace std;
 
@@ -21,7 +22,8 @@ enum GameState {
 	Display,
 	Difficulty,
 	Sound,
-	Garage
+	Garage,
+	MapSelect
 };
 
 
@@ -46,9 +48,10 @@ private:
 
 	X360Controller controller;
 	OptionsScreen* m_optionsScreen;
+	playGame * m_mapSelect;
 	sf::Font m_font;
 	sf::Text m_text;
-	GameState m_currentGameState = GameState::TheOptions;
+	GameState m_currentGameState = GameState::MapSelect;
 
 };
 
