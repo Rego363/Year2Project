@@ -17,7 +17,7 @@ Game::Game() : m_window(sf::VideoMode(1280, 720), "Joint Project, Team C")
 	m_text.setString("RACING GAME");
 	m_text.setPosition(m_window.getSize().x / 4, m_window.getSize().y / 2);
 	m_text.setCharacterSize(70);
-	m_optionsScreen = new OptionsScreen();
+	m_optionsScreen = new OptionsScreen(*this);
 	m_mapSelect = new playGame();
 	m_soundScreen = new SoundScreen(*this);
 	m_displayScreen = new DisplayScreen(*this);

@@ -16,6 +16,7 @@ using namespace std;
 
 class SoundScreen;
 class DisplayScreen;
+class OptionsScreen;
 
 
 enum GameState {

@@ -4,7 +4,7 @@
 #define SOUNDSCREEN
 
 #include "Game.h"
-//#include "GUI.h"
+
 class Game;
 
 class SoundScreen
