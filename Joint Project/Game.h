@@ -5,9 +5,9 @@
 #include <SFML\Audio.hpp>
 #include <iostream>
 
-#include "Controller.h"
-#include "OptionsScreen.h"
 
+#include "OptionsScreen.h"
+#include"GarageScreen.h"
 using namespace std;
 
 
@@ -44,11 +44,12 @@ private:
 
 	sf::RenderWindow m_window;
 
-	X360Controller controller;
+	
 	OptionsScreen* m_optionsScreen;
+	GarageScreen* m_garageScreen;
 	sf::Font m_font;
 	sf::Text m_text;
-	GameState m_currentGameState = GameState::TheOptions;
+	GameState m_currentGameState = GameState::Garage;
 
 };
 
