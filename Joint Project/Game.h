@@ -6,6 +6,9 @@
 #include <iostream>
 
 
+#include "MainMenu.h"
+
+
 #include "OptionsScreen.h"
 #include"GarageScreen.h"
 using namespace std;
@@ -46,11 +49,14 @@ private:
 
 	
 	OptionsScreen* m_optionsScreen;
+
 	GarageScreen* m_garageScreen;
 	sf::Font m_font;
 	sf::Text m_text;
+	MainMenu *m_MainMenu;
 	GameState m_currentGameState = GameState::Garage;
-
+	
+	
 };
 
 #endif

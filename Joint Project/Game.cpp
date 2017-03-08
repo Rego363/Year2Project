@@ -19,6 +19,8 @@ Game::Game() : m_window(sf::VideoMode(1280, 720), "Joint Project, Team C")
 	m_text.setCharacterSize(70);
 	m_optionsScreen = new OptionsScreen();
 	m_garageScreen = new GarageScreen(m_window.getSize().x / 4, m_window.getSize().y / 2);
+	m_MainMenu = new MainMenu();
+
 }
 
 /// <summary>
@@ -81,13 +83,12 @@ void Game::update(sf::Time time)
 {
 	switch (m_currentGameState)
 	{
-	default:
-		break;
 
 	case GameState::TheOptions:
 		m_optionsScreen->update();
 		break;
 	case GameState::TheMenu:
+		m_MainMenu->update();
 		break;
 	case GameState::Difficulty:
 		break;
@@ -103,6 +104,8 @@ void Game::update(sf::Time time)
 	case GameState::Sound:
 		break;
 	case GameState::Display:
+		break;
+	default:
 		break;
 	}
 
@@ -131,7 +134,7 @@ void Game::render()
 		break;
 	case GameState::TheMenu:
 		m_window.clear(sf::Color(0, 0, 0, 255));
-		//m_optionsScreen->render(m_window);
+		m_MainMenu->render(m_window);
 		m_window.display();
 		break;
 	case GameState::Difficulty:
