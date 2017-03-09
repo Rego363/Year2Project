@@ -122,7 +122,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AccelerationScreen.cpp" />
+    <ClCompile Include="BrakingScreen.cpp" />
     <ClCompile Include="Button.cpp" />
+    <ClCompile Include="DifficultyScreen.cpp" />
     <ClCompile Include="DisplayScreen.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GarageScreen.cpp" />
@@ -136,11 +139,17 @@
     <ClCompile Include="RadioButton.cpp" />
     <ClCompile Include="Slider.cpp" />
     <ClCompile Include="SoundScreen.cpp" />
+    <ClCompile Include="SpeedScreen.cpp" />
+    <ClCompile Include="SteeringScreen.cpp" />
+    <ClCompile Include="TurboScreen.cpp" />
     <ClCompile Include="Widget.cpp" />
     <ClCompile Include="XBOX360CONTROLLER.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AccelerationScreen.h" />
+    <ClInclude Include="BrakingScreen.h" />
     <ClInclude Include="Button.h" />
+    <ClInclude Include="DifficultyScreen.h" />
     <ClInclude Include="DisplayScreen.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GarageScreen.h" />
@@ -153,6 +162,9 @@
     <ClInclude Include="RadioButton.h" />
     <ClInclude Include="Slider.h" />
     <ClInclude Include="SoundScreen.h" />
+    <ClInclude Include="SpeedScreen.h" />
+    <ClInclude Include="SteeringScreen.h" />
+    <ClInclude Include="TurboScreen.h" />
     <ClInclude Include="Widget.h" />
     <ClInclude Include="XBOX360CONTROLLER.h" />
   </ItemGroup>

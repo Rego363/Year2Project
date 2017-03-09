@@ -17,6 +17,12 @@
     <ClCompile Include="XBOX360CONTROLLER.cpp" />
     <ClCompile Include="DisplayScreen.cpp" />
     <ClCompile Include="Help.cpp" />
+    <ClCompile Include="DifficultyScreen.cpp" />
+    <ClCompile Include="AccelerationScreen.cpp" />
+    <ClCompile Include="SpeedScreen.cpp" />
+    <ClCompile Include="BrakingScreen.cpp" />
+    <ClCompile Include="TurboScreen.cpp" />
+    <ClCompile Include="SteeringScreen.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Button.h" />
@@ -34,5 +40,11 @@
     <ClInclude Include="XBOX360CONTROLLER.h" />
     <ClInclude Include="DisplayScreen.h" />
     <ClInclude Include="Help.h" />
+    <ClInclude Include="DifficultyScreen.h" />
+    <ClInclude Include="AccelerationScreen.h" />
+    <ClInclude Include="SpeedScreen.h" />
+    <ClInclude Include="BrakingScreen.h" />
+    <ClInclude Include="TurboScreen.h" />
+    <ClInclude Include="SteeringScreen.h" />
   </ItemGroup>
 </Project>
