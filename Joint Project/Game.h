@@ -12,6 +12,8 @@
 #include "GarageScreen.h"
 #include "DisplayScreen.h"
 #include"Help.h"
+#include "Liscence.h"
+#include "Splash.h"
 #include"DifficultyScreen.h"
 #include"SteeringScreen.h"
 #include"TurboScreen.h"
@@ -26,7 +28,8 @@ using namespace std;
 class SoundScreen;
 class DisplayScreen;
 class OptionsScreen;
-
+class Liscence;
+class Splash;
 class MainMenu;
 class GarageScreen;
 class HelpScreen;
@@ -89,7 +92,11 @@ private:
 	
 	sf::Font m_font;
 	sf::Text m_text;
+
 	GameState m_currentGameState = GameState::Racing;
+
+	
+
 	GameDifficulty m_currentDifficulty = GameDifficulty::Medium;
 
 	playGame * m_mapSelect;
@@ -99,6 +106,8 @@ private:
 	GarageScreen* m_garageScreen;
 	MainMenu *m_MainMenu;
 	HelpScreen *m_helpScreen;
+	Liscence *m_Liscence;
+	Splash *m_Splash;
 	DifficultyScreen *m_diffScreen;
 
 	SteeringScreen *m_steeringScreen;

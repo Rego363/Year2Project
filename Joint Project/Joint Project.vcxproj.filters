@@ -1,10 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
+<<<<<<< HEAD
     <ClCompile Include="AccelerationScreen.cpp" />
     <ClCompile Include="BrakingScreen.cpp" />
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="DifficultyScreen.cpp" />
+=======
+    <ClCompile Include="Button.cpp" />
+>>>>>>> de16b9785887194b88bef9d9d2d381bf5f8b3ff0
     <ClCompile Include="DisplayScreen.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GarageScreen.cpp" />
@@ -19,18 +23,37 @@
     <ClCompile Include="Slider.cpp" />
     <ClCompile Include="SoundScreen.cpp" />
     <ClCompile Include="Specs.cpp" />
+<<<<<<< HEAD
+=======
+    <ClCompile Include="Widget.cpp" />
+    <ClCompile Include="XBOX360CONTROLLER.cpp" />
+    <ClCompile Include="Liscence.cpp" />
+    <ClCompile Include="Splash.cpp" />
+
+    <ClCompile Include="DisplayScreen.cpp" />
+    <ClCompile Include="Help.cpp" />
+    <ClCompile Include="DifficultyScreen.cpp" />
+    <ClCompile Include="AccelerationScreen.cpp" />
+>>>>>>> de16b9785887194b88bef9d9d2d381bf5f8b3ff0
     <ClCompile Include="SpeedScreen.cpp" />
     <ClCompile Include="SteeringScreen.cpp" />
+<<<<<<< HEAD
     <ClCompile Include="TurboScreen.cpp" />
     <ClCompile Include="Widget.cpp" />
     <ClCompile Include="XBOX360CONTROLLER.cpp" />
     <ClCompile Include="Car.cpp" />
+=======
+
+>>>>>>> de16b9785887194b88bef9d9d2d381bf5f8b3ff0
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AccelerationScreen.h" />
     <ClInclude Include="BrakingScreen.h" />
     <ClInclude Include="Button.h" />
+<<<<<<< HEAD
     <ClInclude Include="DifficultyScreen.h" />
+=======
+>>>>>>> de16b9785887194b88bef9d9d2d381bf5f8b3ff0
     <ClInclude Include="DisplayScreen.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GarageScreen.h" />
@@ -44,11 +67,109 @@
     <ClInclude Include="Slider.h" />
     <ClInclude Include="SoundScreen.h" />
     <ClInclude Include="Specs.h" />
+<<<<<<< HEAD
+=======
+    <ClInclude Include="Widget.h" />
+    <ClInclude Include="XBOX360CONTROLLER.h" />
+
+    <ClInclude Include="Liscence.h" />
+    <ClInclude Include="Splash.h" />
+
+    <ClInclude Include="DisplayScreen.h" />
+    <ClInclude Include="Help.h" />
+
+    <ClCompile Include="Button.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Controller.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="GUI.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Label.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="RadioButton.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Slider.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Widget.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="OptionsScreen.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="playGame.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Specs.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Button.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Widget.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Slider.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="RadioButton.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Label.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="GUI.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Controller.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="OptionsScreen.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="playGame.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Specs.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Headers">
+      <UniqueIdentifier>{7731cb16-df59-4735-a68d-21194b71895d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source">
+      <UniqueIdentifier>{dc16daac-3c4d-48b8-835f-c9e28a1f7264}</UniqueIdentifier>
+    </Filter>
+
+    <ClInclude Include="DifficultyScreen.h" />
+    <ClInclude Include="AccelerationScreen.h" />
+>>>>>>> de16b9785887194b88bef9d9d2d381bf5f8b3ff0
     <ClInclude Include="SpeedScreen.h" />
     <ClInclude Include="SteeringScreen.h" />
+<<<<<<< HEAD
     <ClInclude Include="TurboScreen.h" />
     <ClInclude Include="Widget.h" />
     <ClInclude Include="XBOX360CONTROLLER.h" />
     <ClInclude Include="Car.h" />
+=======
+
+>>>>>>> de16b9785887194b88bef9d9d2d381bf5f8b3ff0
   </ItemGroup>
 </Project>

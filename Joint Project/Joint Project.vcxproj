@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -133,6 +133,7 @@
     <ClCompile Include="GUI.cpp" />
     <ClCompile Include="Help.cpp" />
     <ClCompile Include="Label.cpp" />
+    <ClCompile Include="Liscence.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="OptionsScreen.cpp" />
@@ -141,6 +142,9 @@
     <ClCompile Include="Slider.cpp" />
     <ClCompile Include="SoundScreen.cpp" />
     <ClCompile Include="Specs.cpp" />
+
+    <ClCompile Include="Splash.cpp" />
+
     <ClCompile Include="SpeedScreen.cpp" />
     <ClCompile Include="SteeringScreen.cpp" />
     <ClCompile Include="TurboScreen.cpp" />
@@ -159,6 +163,7 @@
     <ClInclude Include="GUI.h" />
     <ClInclude Include="Help.h" />
     <ClInclude Include="Label.h" />
+    <ClInclude Include="Liscence.h" />
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="OptionsScreen.h" />
     <ClInclude Include="playGame.h" />
@@ -166,6 +171,7 @@
     <ClInclude Include="Slider.h" />
     <ClInclude Include="SoundScreen.h" />
     <ClInclude Include="Specs.h" />
+    <ClInclude Include="Splash.h" />
     <ClInclude Include="SpeedScreen.h" />
     <ClInclude Include="SteeringScreen.h" />
     <ClInclude Include="TurboScreen.h" />
