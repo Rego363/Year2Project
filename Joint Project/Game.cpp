@@ -24,6 +24,16 @@ Game::Game() : m_window(sf::VideoMode(1280, 720), "Joint Project, Team C")
 	m_garageScreen = new GarageScreen(m_window.getSize().x / 4, m_window.getSize().y / 2, *this);
 	m_MainMenu = new MainMenu(*this);
 	m_helpScreen = new HelpScreen(*this);
+	m_Liscence = new Liscence(*this);
+	m_Splash = new Splash(*this);
+	m_diffScreen = new DifficultyScreen(*this);
+
+	m_steeringScreen = new SteeringScreen(*this);
+	m_turboScreen = new TurboScreen(*this);
+	m_brakingScreen = new BrakingScreen(*this);
+	m_speedScreen = new SpeedScreen(*this);
+	m_accelerationScreen = new AccelerationScreen(*this);
+
 
 	m_specs = new specs(*this);
 
@@ -139,7 +149,6 @@ void Game::update(sf::Time time)
 	case GameState::Thespecs:
 		m_specs->update();
 
-
 	case GameState::Acceleration:
 		m_accelerationScreen->update();
 		break;
@@ -154,7 +163,6 @@ void Game::update(sf::Time time)
 		break;
 	case GameState::Turbo:
 		m_turboScreen->update();
-
 		break;
 		
 	}
@@ -233,12 +241,10 @@ void Game::render()
 		m_helpScreen->draw(m_window);
 		m_window.display();
 		break;
-
 	case GameState::Thespecs:
 		m_window.clear(sf::Color(0, 0, 0, 255));
 		m_specs->render(m_window);
-
-
+		break;
 	case GameState::Acceleration:
 		m_window.clear(sf::Color(0, 0, 0, 255));
 		m_accelerationScreen->draw(m_window);
@@ -262,7 +268,6 @@ void Game::render()
 	case GameState::Turbo:
 		m_window.clear(sf::Color(0, 0, 0, 255));
 		m_turboScreen->draw(m_window);
-
 		m_window.display();
 		break;
 	}
