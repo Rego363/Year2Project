@@ -34,6 +34,9 @@
     <ClCompile Include="playGame.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="Specs.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Button.h">
@@ -64,6 +67,9 @@
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="playGame.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Specs.h">
       <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>
