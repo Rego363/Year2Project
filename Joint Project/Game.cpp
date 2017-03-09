@@ -24,6 +24,8 @@ Game::Game() : m_window(sf::VideoMode(1280, 720), "Joint Project, Team C")
 	m_garageScreen = new GarageScreen(m_window.getSize().x / 4, m_window.getSize().y / 2, *this);
 	m_MainMenu = new MainMenu(*this);
 	m_helpScreen = new HelpScreen(*this);
+	m_Liscence = new Liscence(*this);
+	m_Splash = new Splash(*this);
 
 }
 
@@ -102,8 +104,10 @@ void Game::update(sf::Time time)
 	case GameState::Playing:
 		break;
 	case GameState::TheLicense:
+		m_Liscence->update(time);
 		break;
 	case GameState::TheSplash:
+		m_Splash->update();
 		break;
 	case GameState::Sound:
 		m_soundScreen->update();
@@ -168,12 +172,12 @@ void Game::render()
 		break;
 	case GameState::TheLicense:
 		m_window.clear(sf::Color(0, 0, 0, 255));
-		//m_optionsScreen->render(m_window);
+		m_Liscence->render(m_window);
 		m_window.display();
 		break;
 	case GameState::TheSplash:
 		m_window.clear(sf::Color(0, 0, 0, 255));
-		//m_optionsScreen->render(m_window);
+		m_Splash->render(m_window);
 		m_window.display();
 		break;
 	case GameState::Sound:

@@ -12,13 +12,16 @@
 #include "GarageScreen.h"
 #include "DisplayScreen.h"
 #include"Help.h"
+#include "Liscence.h"
+#include "Splash.h"
 
 using namespace std;
 
 class SoundScreen;
 class DisplayScreen;
 class OptionsScreen;
-
+class Liscence;
+class Splash;
 class MainMenu;
 class GarageScreen;
 class HelpScreen;
@@ -58,7 +61,7 @@ private:
 	
 	sf::Font m_font;
 	sf::Text m_text;
-	GameState m_currentGameState = GameState::TheMenu;
+	GameState m_currentGameState = GameState::TheLicense;
 
 	playGame * m_mapSelect;
 	OptionsScreen* m_optionsScreen;
@@ -67,6 +70,8 @@ private:
 	GarageScreen* m_garageScreen;
 	MainMenu *m_MainMenu;
 	HelpScreen *m_helpScreen;
+	Liscence *m_Liscence;
+	Splash *m_Splash;
 	
 };
 

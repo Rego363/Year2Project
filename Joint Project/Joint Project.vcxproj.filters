@@ -1,11 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-<<<<<<< HEAD
     <ClCompile Include="Button.cpp" />
+    <ClCompile Include="DisplayScreen.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GarageScreen.cpp" />
     <ClCompile Include="GUI.cpp" />
+    <ClCompile Include="Help.cpp" />
     <ClCompile Include="Label.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainMenu.cpp" />
@@ -14,16 +15,19 @@
     <ClCompile Include="RadioButton.cpp" />
     <ClCompile Include="Slider.cpp" />
     <ClCompile Include="SoundScreen.cpp" />
+    <ClCompile Include="Specs.cpp" />
     <ClCompile Include="Widget.cpp" />
     <ClCompile Include="XBOX360CONTROLLER.cpp" />
-    <ClCompile Include="DisplayScreen.cpp" />
-    <ClCompile Include="Help.cpp" />
+    <ClCompile Include="Liscence.cpp" />
+    <ClCompile Include="Splash.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Button.h" />
+    <ClInclude Include="DisplayScreen.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GarageScreen.h" />
     <ClInclude Include="GUI.h" />
+    <ClInclude Include="Help.h" />
     <ClInclude Include="Label.h" />
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="OptionsScreen.h" />
@@ -31,90 +35,10 @@
     <ClInclude Include="RadioButton.h" />
     <ClInclude Include="Slider.h" />
     <ClInclude Include="SoundScreen.h" />
+    <ClInclude Include="Specs.h" />
     <ClInclude Include="Widget.h" />
     <ClInclude Include="XBOX360CONTROLLER.h" />
-    <ClInclude Include="DisplayScreen.h" />
-    <ClInclude Include="Help.h" />
-=======
-    <ClCompile Include="Button.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Controller.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Game.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="GUI.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Label.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="main.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="RadioButton.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Slider.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Widget.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="OptionsScreen.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="playGame.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Specs.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Button.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Widget.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Slider.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="RadioButton.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Label.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Game.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="GUI.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Controller.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="OptionsScreen.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="playGame.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Specs.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <Filter Include="Headers">
-      <UniqueIdentifier>{7731cb16-df59-4735-a68d-21194b71895d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source">
-      <UniqueIdentifier>{dc16daac-3c4d-48b8-835f-c9e28a1f7264}</UniqueIdentifier>
-    </Filter>
->>>>>>> playgame
+    <ClInclude Include="Liscence.h" />
+    <ClInclude Include="Splash.h" />
   </ItemGroup>
 </Project>
