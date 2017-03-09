@@ -135,7 +135,11 @@
     <ClCompile Include="playGame.cpp" />
     <ClCompile Include="RadioButton.cpp" />
     <ClCompile Include="Slider.cpp" />
+<<<<<<< HEAD
     <ClCompile Include="SoundScreen.cpp" />
+=======
+    <ClCompile Include="Specs.cpp" />
+>>>>>>> playgame
     <ClCompile Include="Widget.cpp" />
     <ClCompile Include="XBOX360CONTROLLER.cpp" />
   </ItemGroup>
@@ -152,7 +156,11 @@
     <ClInclude Include="playGame.h" />
     <ClInclude Include="RadioButton.h" />
     <ClInclude Include="Slider.h" />
+<<<<<<< HEAD
     <ClInclude Include="SoundScreen.h" />
+=======
+    <ClInclude Include="Specs.h" />
+>>>>>>> playgame
     <ClInclude Include="Widget.h" />
     <ClInclude Include="XBOX360CONTROLLER.h" />
   </ItemGroup>

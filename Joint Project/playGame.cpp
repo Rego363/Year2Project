@@ -8,9 +8,11 @@ playGame::playGame()
 
 	m_title = new Label("Map Select", 450, 30);
 	m_mapSelection = new Button("Map **", 450, 250);
-	moveLeft = new Button("Left", 250, 200);
+	moveLeft = new Button("Fuck", 250, 150);
 	moveLeft->getFocus();
-	moveRight = new Button("Right", 940, 200);
+	moveRight = new Button("My", 250, 200);
+	moveDowner = new Button("Life", 250, 250);
+	moveDownest = new Button("PLEASE", 250, 300);
 	
 
 	if (!m_texture.loadFromFile("09RoadCourseMap.jpg"))
@@ -32,10 +34,12 @@ playGame::playGame()
 	m_gui.addButton(moveLeft);
 //	m_gui.addButton(m_mapSelection);
 	m_gui.addButton(moveRight);
+	m_gui.addButton(moveDowner);
+	m_gui.addButton(moveDownest);
 	m_gui.addLabel(m_title);
 //	m_gui.addButton(m_rectB);
 	m_currentSelect = 0;
-	m_gui.horizontal = true;
+	m_gui.vertical = true;
 	m_title->changeTextSize(100);
 	m_sprite.setPosition(360, 140);
 	m_sprite.setScale(0.5, 0.5);
@@ -80,15 +84,28 @@ void playGame::render(sf::RenderWindow & window)
 
 void playGame::update()
 {
+	if (m_currentSelect == 0)
+	{
+		m_rect.setFillColor(sf::Color::Red);
+		m_rect.setOutlineColor(sf::Color::Blue);
+	}
+	if (m_currentSelect == 1)
+	{
+		m_rect.setFillColor(sf::Color::Blue);
+		m_rect.setOutlineColor(sf::Color::Red);
+	}
 	if (m_currentSelect == 2)
 	{
-
-		maptrue = true;
-		
-
+		m_rect.setFillColor(sf::Color::Green);
+		m_rect.setOutlineColor(sf::Color::Blue);
+	}
+	if (m_currentSelect == 3)
+	{
+		m_rect.setFillColor(sf::Color::Magenta);
+		m_rect.setOutlineColor(sf::Color::Blue);
 	}
 
+	
 
-
-	m_gui.update(m_currentSelect, 2);
+	m_gui.update(m_currentSelect, 4);
 }

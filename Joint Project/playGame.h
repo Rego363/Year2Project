@@ -5,7 +5,7 @@
 #include"Widget.h"
 #include "GUI.h"
 
-class playGame : public Widget {
+class playGame  {
 
 
 public:
@@ -23,6 +23,8 @@ private:
 	Button *moveLeft;
 	Button *m_rectB;
 	Button *moveRight;
+	Button *moveDowner;
+	Button *moveDownest;
 	sf::Texture m_texture;
 	sf::Sprite m_sprite; 
 	sf::Texture m_texture2;
@@ -31,6 +33,5 @@ private:
 	//void setRectColor(sf::Color color);
 	sf::RectangleShape m_rect;
 	bool maptrue = false;
-
 
 };
