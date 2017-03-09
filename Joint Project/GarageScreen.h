@@ -12,6 +12,11 @@ public:
 	void update();
 	void draw(sf::RenderWindow &window);
 	void goBack();
+	void goAccel();
+	void goTurbo();
+	void goBrake();
+	void goSpeed();
+	void goSteer();
 
 private:
 	int m_selectedItem = 0;
