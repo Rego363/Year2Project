@@ -18,6 +18,8 @@
 #include"BrakingScreen.h"
 #include"SpeedScreen.h"
 #include"AccelerationScreen.h"
+#include"Car.h"
+#include"XBOX360CONTROLLER.h"
 
 using namespace std;
 
@@ -53,7 +55,11 @@ enum GameState {
 	Speed,
 	Braking,
 	Turbo,
-	Steering
+	Steering,
+
+	Racing
+
+	
 };
 
 enum GameDifficulty {
@@ -83,7 +89,7 @@ private:
 	
 	sf::Font m_font;
 	sf::Text m_text;
-	GameState m_currentGameState = GameState::TheMenu;
+	GameState m_currentGameState = GameState::Racing;
 	GameDifficulty m_currentDifficulty = GameDifficulty::Medium;
 
 	playGame * m_mapSelect;
@@ -100,7 +106,15 @@ private:
 	BrakingScreen *m_brakingScreen;
 	SpeedScreen *m_speedScreen;
 	AccelerationScreen *m_accelerationScreen;
+
+	Car *m_car;
+	sf::Texture m_testText;
+	sf::Vector2f m_startPos;
+	sf::View m_view;
 	
+	sf::Texture m_testTextBack;
+	sf::Sprite m_testSprite;
+	Xbox360Controller m_xbox;
 };
 
 #endif
