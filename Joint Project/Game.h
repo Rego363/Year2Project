@@ -11,7 +11,8 @@
 #include "MainMenu.h"
 #include "GarageScreen.h"
 #include "DisplayScreen.h"
-#include"Help.h"
+#include "Help.h"
+#include "Player.h"
 
 using namespace std;
 
@@ -22,6 +23,7 @@ class OptionsScreen;
 class MainMenu;
 class GarageScreen;
 class HelpScreen;
+class Player;
 
 enum GameState {
 	TheLicense,
@@ -59,7 +61,6 @@ private:
 	sf::Font m_font;
 	sf::Text m_text;
 	GameState m_currentGameState = GameState::TheMenu;
-
 	playGame * m_mapSelect;
 	OptionsScreen* m_optionsScreen;
 	SoundScreen* m_soundScreen;
@@ -67,6 +68,7 @@ private:
 	GarageScreen* m_garageScreen;
 	MainMenu *m_MainMenu;
 	HelpScreen *m_helpScreen;
+	Player *m_player;
 	
 };
 

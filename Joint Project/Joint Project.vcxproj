@@ -132,14 +132,12 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="OptionsScreen.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="playGame.cpp" />
     <ClCompile Include="RadioButton.cpp" />
     <ClCompile Include="Slider.cpp" />
-
     <ClCompile Include="SoundScreen.cpp" />
-
     <ClCompile Include="Specs.cpp" />
-
     <ClCompile Include="Widget.cpp" />
     <ClCompile Include="XBOX360CONTROLLER.cpp" />
   </ItemGroup>
@@ -153,14 +151,12 @@
     <ClInclude Include="Label.h" />
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="OptionsScreen.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="playGame.h" />
     <ClInclude Include="RadioButton.h" />
     <ClInclude Include="Slider.h" />
-
     <ClInclude Include="SoundScreen.h" />
-
     <ClInclude Include="Specs.h" />
-
     <ClInclude Include="Widget.h" />
     <ClInclude Include="XBOX360CONTROLLER.h" />
   </ItemGroup>
