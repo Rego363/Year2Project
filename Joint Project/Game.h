@@ -117,7 +117,7 @@ private:
 	sf::Font m_font;
 	sf::Text m_text;
 
-	GameState m_currentGameState = GameState::TheLicense;
+	GameState m_currentGameState = GameState::Racing;
 
 	
 
@@ -148,6 +148,7 @@ private:
 	sf::Texture m_testText;
 	sf::Vector2f m_startPos;
 	sf::View m_view;
+	sf::View m_view2;
 
 	sf::Texture m_testTextBack;
 	sf::Sprite m_testSprite[30];
