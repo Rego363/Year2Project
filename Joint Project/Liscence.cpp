@@ -15,7 +15,7 @@ void Liscence::update(sf::Time dt)
 {
 	m_CumulativeTime += dt;
 
-	if (m_CumulativeTime.asSeconds() > 5)
+	if (m_CumulativeTime.asSeconds() > 3)
 	{
 		m_game->changeGameState(GameState::TheSplash);
 	}
