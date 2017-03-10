@@ -270,7 +270,6 @@ void Game::render()
 		break;
 	case GameState::Garage:
 		m_window.clear(sf::Color(0, 0, 0, 255));
-		//m_optionsScreen->render(m_window);
 		m_garageScreen->draw(m_window);
 		m_window.display();
 		break;
