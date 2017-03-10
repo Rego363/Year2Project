@@ -12,6 +12,14 @@
 #include "GarageScreen.h"
 #include "DisplayScreen.h"
 #include"Help.h"
+#include "Liscence.h"
+#include "Splash.h"
+#include"DifficultyScreen.h"
+#include"SteeringScreen.h"
+#include"TurboScreen.h"
+#include"BrakingScreen.h"
+#include"SpeedScreen.h"
+#include"AccelerationScreen.h"
 
 #include "Specs.h"
 
@@ -35,6 +43,13 @@ class Splash;
 class MainMenu;
 class GarageScreen;
 class HelpScreen;
+class DifficultyScreen;
+
+class SteeringScreen;
+class TurboScreen;
+class BrakingScreen;
+class SpeedScreen;
+class AccelerationScreen;
 
 class specs;
 	class playGame;
@@ -60,16 +75,12 @@ enum GameState {
 	Garage,
 	MapSelect,
 	Help,
-
 	Thespecs,
-
-
 	Acceleration,
 	Speed,
 	Braking,
 	Turbo,
 	Steering
-
 };
 
 enum GameDifficulty {
@@ -109,19 +120,15 @@ private:
 	GarageScreen* m_garageScreen;
 	MainMenu *m_MainMenu;
 	HelpScreen *m_helpScreen;
-
 	specs *m_specs;
-
 	Liscence *m_Liscence;
 	Splash *m_Splash;
 	DifficultyScreen *m_diffScreen;
-
 	SteeringScreen *m_steeringScreen;
 	TurboScreen *m_turboScreen;
 	BrakingScreen *m_brakingScreen;
 	SpeedScreen *m_speedScreen;
 	AccelerationScreen *m_accelerationScreen;
-
 	
 };
 
