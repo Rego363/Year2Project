@@ -33,6 +33,7 @@
 #include"BrakingScreen.h"
 #include"SpeedScreen.h"
 #include"AccelerationScreen.h"
+#include "changeProfile.h"
 
 
 using namespace std;
@@ -63,6 +64,7 @@ class TurboScreen;
 class BrakingScreen;
 class SpeedScreen;
 class AccelerationScreen;
+class changeProfile;
 
 
 enum GameState {
@@ -83,8 +85,8 @@ enum GameState {
 	Braking,
 	Turbo,
 	Steering,
-
-	Racing
+	Racing,
+	ChangeP
 
 	
 };
@@ -139,6 +141,7 @@ private:
 	BrakingScreen *m_brakingScreen;
 	SpeedScreen *m_speedScreen;
 	AccelerationScreen *m_accelerationScreen;
+	changeProfile * m_changeProfile;
 
 
 	/*For testing*/

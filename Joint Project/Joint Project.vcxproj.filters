@@ -27,6 +27,8 @@
     <ClCompile Include="TurboScreen.cpp" />
     <ClCompile Include="Widget.cpp" />
     <ClCompile Include="XBOX360CONTROLLER.cpp" />
+    <ClCompile Include="changeProfile.cpp" />
+    <ClCompile Include="WorldSquares.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AccelerationScreen.h" />
@@ -54,5 +56,7 @@
     <ClInclude Include="TurboScreen.h" />
     <ClInclude Include="Widget.h" />
     <ClInclude Include="XBOX360CONTROLLER.h" />
+    <ClInclude Include="changeProfile.h" />
+    <ClInclude Include="WorldSquares.h" />
   </ItemGroup>
 </Project>

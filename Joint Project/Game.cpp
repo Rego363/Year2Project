@@ -75,7 +75,7 @@ Game::Game() : m_window(sf::VideoMode(1280, 720), "Joint Project, Team C")
 	m_brakingScreen = new BrakingScreen(*this);
 	m_speedScreen = new SpeedScreen(*this);
 	m_accelerationScreen = new AccelerationScreen(*this);
-
+	m_changeProfile = new changeProfile(*this);
 
 
 
@@ -194,7 +194,10 @@ void Game::update(sf::Time time)
 		break;
 	case GameState::Racing:
 		//m_view.setCenter(m_car->getPos());
-
+		break;
+	case GameState::ChangeP:
+		m_changeProfile->update();
+		break;
 		
 
 		//m_view.move(m_car->getPos().x, m_car->getPos().y );
@@ -339,6 +342,15 @@ void Game::render()
 		break;
 	case GameState::Racing:
 		m_window.clear(sf::Color(0, 0, 0, 255));
+		break;
+	case GameState::ChangeP:
+		m_window.clear(sf::Color(0, 0, 0, 255));
+		m_changeProfile->render(m_window);
+		m_window.display();
+		break;
+
+
+
 
 		for (int i = 0; i < 10; i++)
 		{
