@@ -3,17 +3,23 @@
 
 
 
-playGame::playGame()
+playGame::playGame(Game &game): 
+	m_game(&game)
 {
 
 	m_title = new Label("Map Select", 450, 30);
 	m_mapSelection = new Button("Map **", 450, 250);
-	moveLeft = new Button("Fuck", 250, 150);
+	moveLeft = new Button("Map Zero", 250, 150);
+	moveLeft->Enter = std::bind(&playGame::goToSpecs, this);
 	moveLeft->getFocus();
-	moveRight = new Button("My", 250, 200);
-	moveDowner = new Button("Life", 250, 250);
-	moveDownest = new Button("PLEASE", 250, 300);
-	
+	moveRight = new Button("Map One", 250, 200);
+	moveRight->Enter = std::bind(&playGame::goToSpecs, this);
+	moveDowner = new Button("Map Two", 250, 250);
+	moveDowner->Enter = std::bind(&playGame::goToSpecs, this);
+	moveDownest = new Button("Map Three", 250, 300);
+	moveDownest->Enter = std::bind(&playGame::goToSpecs, this);
+	goBack = new Button("Back", 100, 500);
+	goBack->Enter = std::bind(&playGame::goToMenu, this);
 
 	if (!m_texture.loadFromFile("09RoadCourseMap.jpg"))
 	{
@@ -36,6 +42,7 @@ playGame::playGame()
 	m_gui.addButton(moveRight);
 	m_gui.addButton(moveDowner);
 	m_gui.addButton(moveDownest);
+	m_gui.addButton(goBack);
 	m_gui.addLabel(m_title);
 //	m_gui.addButton(m_rectB);
 	m_currentSelect = 0;
@@ -105,7 +112,26 @@ void playGame::update()
 		m_rect.setOutlineColor(sf::Color::Blue);
 	}
 
-	
+	if (m_currentSelect == 4)
+	{
+		
+		//	m_game->changeGameState(GameState::TheMenu);
 
-	m_gui.update(m_currentSelect, 4);
+
+	}
+	
+	
+	m_gui.update(m_currentSelect, 5);
 }
+
+void playGame::goToMenu()
+{
+	m_game->changeGameState(GameState::TheMenu);
+	
+}
+
+void playGame::goToSpecs()
+{
+	m_game->changeGameState(GameState::Thespecs);
+
+ }

@@ -71,3 +71,10 @@ void MainMenu::goToHelp()
 {
 	m_game->changeGameState(GameState::Help);
 }
+
+void MainMenu::goToSpecs()
+{
+
+	m_game->changeGameState(GameState::Thespecs);
+
+}

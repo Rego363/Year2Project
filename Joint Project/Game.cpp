@@ -20,14 +20,67 @@ Game::Game() :
 	m_text.setCharacterSize(70);
 	m_player = new Player();
 	m_optionsScreen = new OptionsScreen(*this);
-	m_mapSelect = new playGame();
+	m_mapSelect = new playGame(*this);
 	m_soundScreen = new SoundScreen(*this);
 	m_displayScreen = new DisplayScreen(*this);
 	m_garageScreen = new GarageScreen(m_window.getSize().x / 4, m_window.getSize().y / 2, *this);
 	m_MainMenu = new MainMenu(*this);
 	m_helpScreen = new HelpScreen(*this);
+	m_Liscence = new Liscence(*this);
+	m_Splash = new Splash(*this);
+	m_diffScreen = new DifficultyScreen(*this);
 
-	m_player->save("Sean");
+	m_steeringScreen = new SteeringScreen(*this);
+	m_turboScreen = new TurboScreen(*this);
+	m_brakingScreen = new BrakingScreen(*this);
+	m_speedScreen = new SpeedScreen(*this);
+	m_accelerationScreen = new AccelerationScreen(*this);
+
+
+
+
+
+	/*  FOR TESTING*/
+	/*******************************************************************************/
+
+	if (!m_testText.loadFromFile("lambo.png"))
+	{
+
+	}
+	m_startPos = sf::Vector2f(m_window.getSize().x / 2, m_window.getSize().y / 4);
+	m_car = new Car(m_testText, m_startPos);
+
+
+
+	if (!m_testTextBack.loadFromFile("ground.png"))
+	{
+
+	}
+	for (int i = 0; i < 10; i++)
+	{
+		m_testSprite[i].setTexture(m_testTextBack);
+		m_testSprite[i].setScale(1.22, 1.22);
+		m_testSprite[i].setPosition(i*m_testSprite[i].getGlobalBounds().width, 0);
+		
+	}
+	//m_window.setView(m_view);
+	/*******************************************************************************/
+	
+	m_specs = new specs(*this);
+
+	m_Liscence = new Liscence(*this);
+	m_Splash = new Splash(*this);
+	m_diffScreen = new DifficultyScreen(*this);
+
+	m_steeringScreen = new SteeringScreen(*this);
+	m_turboScreen = new TurboScreen(*this);
+	m_brakingScreen = new BrakingScreen(*this);
+	m_speedScreen = new SpeedScreen(*this);
+	m_accelerationScreen = new AccelerationScreen(*this);
+
+
+
+
 }
 
 /// <summary>
@@ -98,6 +151,7 @@ void Game::update(sf::Time time)
 		m_MainMenu->update();
 		break;
 	case GameState::Difficulty:
+		m_diffScreen->update();
 		break;
 	case GameState::Garage:
 		m_garageScreen->update();
@@ -105,8 +159,10 @@ void Game::update(sf::Time time)
 	case GameState::Playing:
 		break;
 	case GameState::TheLicense:
+		m_Liscence->update(time);
 		break;
 	case GameState::TheSplash:
+		m_Splash->update();
 		break;
 	case GameState::Sound:
 		m_soundScreen->update();
@@ -116,12 +172,66 @@ void Game::update(sf::Time time)
 		break;
 	case GameState::MapSelect:
 		m_mapSelect->update();
-	default:
 		break;
 	case GameState::Help:
 		m_helpScreen->update();
 		break;
+	case GameState::Thespecs:
+		m_specs->update();
+		break;
+	case GameState::Acceleration:
+		m_accelerationScreen->update();
+		break;
+	case GameState::Braking:
+		m_brakingScreen->update();
+		break;
+	case GameState::Speed:
+		m_speedScreen->update();
+		break;
+	case GameState::Steering:
+		m_steeringScreen->update();
+		break;
+	case GameState::Turbo:
+		m_turboScreen->update();
+		break;
+	case GameState::Racing:
+		//m_view.setCenter(m_car->getPos());
 
+		
+
+		//m_view.move(m_car->getPos().x, m_car->getPos().y );
+		//m_window.setView(m_view);
+
+		//m_view.move(m_car->getPos().x+100, m_car->getPos().y + 100);
+
+		m_car->update();
+
+		m_xbox.update();
+		if (m_xbox.m_currentState.RTtrigger<-10.0)
+		{
+			m_car->increaseSpeed();
+		}
+		if (m_xbox.m_currentState.LTtrigger>10.0)
+		{
+			m_car->decreaseSpeed();
+		}
+		if (m_xbox.m_currentState.LeftThumbStick.x>75)
+		{
+			m_car->increaseRotation();
+		}
+		if (m_xbox.m_currentState.LeftThumbStick.x<-75)
+		{
+			m_car->decreaseRotation();
+		}
+		if (m_xbox.m_currentState.Back)
+		{
+			m_currentGameState = GameState::TheMenu;
+		}
+
+
+	default:
+
+		break;
 		
 	}
 
@@ -155,7 +265,7 @@ void Game::render()
 		break;
 	case GameState::Difficulty:
 		m_window.clear(sf::Color(0, 0, 0, 255));
-		//m_optionsScreen->render(m_window);
+		m_diffScreen->render(m_window);
 		m_window.display();
 		break;
 	case GameState::Garage:
@@ -171,12 +281,12 @@ void Game::render()
 		break;
 	case GameState::TheLicense:
 		m_window.clear(sf::Color(0, 0, 0, 255));
-		//m_optionsScreen->render(m_window);
+		m_Liscence->render(m_window);
 		m_window.display();
 		break;
 	case GameState::TheSplash:
 		m_window.clear(sf::Color(0, 0, 0, 255));
-		//m_optionsScreen->render(m_window);
+		m_Splash->render(m_window);
 		m_window.display();
 		break;
 	case GameState::Sound:
@@ -199,6 +309,50 @@ void Game::render()
 		m_helpScreen->draw(m_window);
 		m_window.display();
 		break;
+	case GameState::Thespecs:
+		m_window.clear(sf::Color(0, 0, 0, 255));
+		m_specs->render(m_window);
+		m_window.display();
+		break;
+	case GameState::Acceleration:
+		m_window.clear(sf::Color(0, 0, 0, 255));
+		m_accelerationScreen->draw(m_window);
+		m_window.display();
+		break;
+	case GameState::Braking:
+		m_window.clear(sf::Color(0, 0, 0, 255));
+		m_brakingScreen->draw(m_window);
+		m_window.display();
+		break;
+	case GameState::Speed:
+		m_window.clear(sf::Color(0, 0, 0, 255));
+		m_speedScreen->draw(m_window);
+		m_window.display();
+		break;
+	case GameState::Steering:
+		m_window.clear(sf::Color(0, 0, 0, 255));
+		m_steeringScreen->draw(m_window);
+		m_window.display();
+		break;
+	case GameState::Turbo:
+		m_window.clear(sf::Color(0, 0, 0, 255));
+		m_turboScreen->draw(m_window);
+		m_window.display();
+		break;
+	case GameState::Racing:
+		m_window.clear(sf::Color(0, 0, 0, 255));
+
+		for (int i = 0; i < 10; i++)
+		{
+
+
+			m_window.draw(m_testSprite[i]);
+		}
+
+		//m_window.draw(m_testSprite);
+		m_car->draw(m_window);
+		m_window.display();
+		break;
 	}
 
 
@@ -207,4 +361,9 @@ void Game::render()
 void Game::changeGameState(GameState gameState)
 {
 	m_currentGameState = gameState;
+}
+
+void Game::changeGameDifficulty(GameDifficulty gameDiff)
+{
+	m_currentDifficulty = gameDiff;
 }

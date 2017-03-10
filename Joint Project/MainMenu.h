@@ -25,6 +25,7 @@ public:
 	void goToOptions();
 	void goToPlay();
 	void goToHelp();
+	void goToSpecs();
 
 private:
 

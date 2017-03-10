@@ -122,13 +122,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AccelerationScreen.cpp" />
+    <ClCompile Include="BrakingScreen.cpp" />
     <ClCompile Include="Button.cpp" />
+    <ClCompile Include="Car.cpp" />
+    <ClCompile Include="DifficultyScreen.cpp" />
     <ClCompile Include="DisplayScreen.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GarageScreen.cpp" />
     <ClCompile Include="GUI.cpp" />
     <ClCompile Include="Help.cpp" />
     <ClCompile Include="Label.cpp" />
+    <ClCompile Include="Liscence.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="OptionsScreen.cpp" />
@@ -138,17 +143,26 @@
     <ClCompile Include="Slider.cpp" />
     <ClCompile Include="SoundScreen.cpp" />
     <ClCompile Include="Specs.cpp" />
+    <ClCompile Include="Splash.cpp" />
+    <ClCompile Include="SpeedScreen.cpp" />
+    <ClCompile Include="SteeringScreen.cpp" />
+    <ClCompile Include="TurboScreen.cpp" />
     <ClCompile Include="Widget.cpp" />
     <ClCompile Include="XBOX360CONTROLLER.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AccelerationScreen.h" />
+    <ClInclude Include="BrakingScreen.h" />
     <ClInclude Include="Button.h" />
+    <ClInclude Include="Car.h" />
+    <ClInclude Include="DifficultyScreen.h" />
     <ClInclude Include="DisplayScreen.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GarageScreen.h" />
     <ClInclude Include="GUI.h" />
     <ClInclude Include="Help.h" />
     <ClInclude Include="Label.h" />
+    <ClInclude Include="Liscence.h" />
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="OptionsScreen.h" />
     <ClInclude Include="Player.h" />
@@ -157,6 +171,10 @@
     <ClInclude Include="Slider.h" />
     <ClInclude Include="SoundScreen.h" />
     <ClInclude Include="Specs.h" />
+    <ClInclude Include="Splash.h" />
+    <ClInclude Include="SpeedScreen.h" />
+    <ClInclude Include="SteeringScreen.h" />
+    <ClInclude Include="TurboScreen.h" />
     <ClInclude Include="Widget.h" />
     <ClInclude Include="XBOX360CONTROLLER.h" />
   </ItemGroup>
