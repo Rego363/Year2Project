@@ -12,7 +12,15 @@ public:
 	Player();
 	~Player();
 	void load(std::string name);
-	void save(std::string name);
+	void save(std::string replace);
+	void cost(int amount);
+	void earned(int amount);
+	int getMoney();
+	void setHighScore(int min, int sec);
+	void setName(std::string name);
+	int getMinHighScore();
+	int getSecHighScore(); 
+	std::string getName();
 
 private:
 	std::string filename;
@@ -26,7 +34,6 @@ private:
 	int m_secHighScore;
 	int m_minHighScore;
 	std::string m_name;
-	void rewriteSave();
 	
 };
 

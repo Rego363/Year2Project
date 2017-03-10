@@ -27,6 +27,7 @@ Game::Game() :
 	m_MainMenu = new MainMenu(*this);
 	m_helpScreen = new HelpScreen(*this);
 
+	m_player->save("Sean");
 }
 
 /// <summary>
@@ -87,7 +88,6 @@ void Game::processInput()
 /// </summary>
 void Game::update(sf::Time time)
 {
-	m_player->save();
 	switch (m_currentGameState)
 	{
 
