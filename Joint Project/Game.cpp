@@ -18,7 +18,7 @@ Game::Game() : m_window(sf::VideoMode(1280, 720), "Joint Project, Team C")
 	m_text.setPosition(m_window.getSize().x / 4, m_window.getSize().y / 2);
 	m_text.setCharacterSize(70);
 	m_optionsScreen = new OptionsScreen(*this);
-	m_mapSelect = new playGame();
+	m_mapSelect = new playGame(*this);
 	m_soundScreen = new SoundScreen(*this);
 	m_displayScreen = new DisplayScreen(*this);
 	m_garageScreen = new GarageScreen(m_window.getSize().x / 4, m_window.getSize().y / 2, *this);
@@ -33,6 +33,7 @@ Game::Game() : m_window(sf::VideoMode(1280, 720), "Joint Project, Team C")
 	m_brakingScreen = new BrakingScreen(*this);
 	m_speedScreen = new SpeedScreen(*this);
 	m_accelerationScreen = new AccelerationScreen(*this);
+
 
 
 
@@ -63,6 +64,21 @@ Game::Game() : m_window(sf::VideoMode(1280, 720), "Joint Project, Team C")
 	//m_window.setView(m_view);
 	/*******************************************************************************/
 	
+	m_specs = new specs(*this);
+
+	m_Liscence = new Liscence(*this);
+	m_Splash = new Splash(*this);
+	m_diffScreen = new DifficultyScreen(*this);
+
+	m_steeringScreen = new SteeringScreen(*this);
+	m_turboScreen = new TurboScreen(*this);
+	m_brakingScreen = new BrakingScreen(*this);
+	m_speedScreen = new SpeedScreen(*this);
+	m_accelerationScreen = new AccelerationScreen(*this);
+
+
+
+
 }
 
 /// <summary>
@@ -154,12 +170,13 @@ void Game::update(sf::Time time)
 		break;
 	case GameState::MapSelect:
 		m_mapSelect->update();
-	default:
 		break;
 	case GameState::Help:
 		m_helpScreen->update();
 		break;
-
+	case GameState::Thespecs:
+		m_specs->update();
+		break;
 	case GameState::Acceleration:
 		m_accelerationScreen->update();
 		break;
@@ -175,6 +192,7 @@ void Game::update(sf::Time time)
 	case GameState::Turbo:
 		m_turboScreen->update();
 		break;
+
 
 	case GameState::Racing:
 		//m_view.setCenter(m_car->getPos());
@@ -205,6 +223,9 @@ void Game::update(sf::Time time)
 		{
 			m_car->decreaseRotation();
 		}
+
+	default:
+
 		break;
 		
 	}
@@ -283,7 +304,11 @@ void Game::render()
 		m_helpScreen->draw(m_window);
 		m_window.display();
 		break;
-
+	case GameState::Thespecs:
+		m_window.clear(sf::Color(0, 0, 0, 255));
+		m_specs->render(m_window);
+		m_window.display();
+		break;
 	case GameState::Acceleration:
 		m_window.clear(sf::Color(0, 0, 0, 255));
 		m_accelerationScreen->draw(m_window);

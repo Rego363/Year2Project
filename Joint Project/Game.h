@@ -23,6 +23,18 @@
 #include"Car.h"
 #include"XBOX360CONTROLLER.h"
 
+#include "Specs.h"
+
+#include "Liscence.h"
+#include "Splash.h"
+#include"DifficultyScreen.h"
+#include"SteeringScreen.h"
+#include"TurboScreen.h"
+#include"BrakingScreen.h"
+#include"SpeedScreen.h"
+#include"AccelerationScreen.h"
+
+
 using namespace std;
 
 class SoundScreen;
@@ -41,6 +53,18 @@ class BrakingScreen;
 class SpeedScreen;
 class AccelerationScreen;
 
+class specs;
+	class playGame;
+
+class DifficultyScreen;
+
+class SteeringScreen;
+class TurboScreen;
+class BrakingScreen;
+class SpeedScreen;
+class AccelerationScreen;
+
+
 enum GameState {
 	TheLicense,
 	TheSplash,
@@ -53,7 +77,7 @@ enum GameState {
 	Garage,
 	MapSelect,
 	Help,
-
+	Thespecs,
 	Acceleration,
 	Speed,
 	Braking,
@@ -99,17 +123,17 @@ private:
 
 	GameDifficulty m_currentDifficulty = GameDifficulty::Medium;
 
-	playGame * m_mapSelect;
+	playGame* m_mapSelect;
 	OptionsScreen* m_optionsScreen;
 	SoundScreen* m_soundScreen;
 	DisplayScreen* m_displayScreen;
 	GarageScreen* m_garageScreen;
 	MainMenu *m_MainMenu;
 	HelpScreen *m_helpScreen;
+	specs *m_specs;
 	Liscence *m_Liscence;
 	Splash *m_Splash;
 	DifficultyScreen *m_diffScreen;
-
 	SteeringScreen *m_steeringScreen;
 	TurboScreen *m_turboScreen;
 	BrakingScreen *m_brakingScreen;
