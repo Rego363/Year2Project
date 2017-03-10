@@ -6,9 +6,10 @@ specs::specs(Game &game):
 {
 	m_EnemiesNum = 100.0f;
 	m_title = new Label("Specifications", 400, 30);
-	m_Enemies = new Button("No. Enemies", 340, 100);
 	m_Time = new Button("Duration of Race", 300, 400);
 	m_laps = new Button("No. Laps", 300, 200);
+	m_Race = new Button("Play", 300, 450);
+	m_Race->Enter = std::bind(&specs::goToMapRacing, this);
 	m_Back = new Button("Back", 100, 500);
 	m_Back->Enter = std::bind(&specs::goToMapSelect, this);
 
@@ -18,6 +19,7 @@ specs::specs(Game &game):
 
 
 	m_EnemiesNo = new Slider(300.0f, 100.0f, m_EnemiesNum, "Enemies");
+	m_EnemiesNo->getFocus();
 
 	m_title->changeTextSize(100);
 	m_gui.addSlider(m_EnemiesNo);
@@ -25,16 +27,17 @@ specs::specs(Game &game):
 	m_gui.addRadioButton(m_5);
 	m_gui.addRadioButton(m_7);
 	m_gui.addButton(m_Time);
-	
+	m_gui.addButton(m_Race);
 	m_gui.addButton(m_Back);
 	
-	
-	
-
 	m_currentSelect = 0;
 	m_gui.vertical = true;
 
 
+}
+
+specs::~specs()
+{
 }
 
 
@@ -47,7 +50,7 @@ void specs::render(sf::RenderWindow & window)
 void specs::update()
 {
 
-	m_gui.update(m_currentSelect, 6);
+	m_gui.update(m_currentSelect, 7);
 }
 
 void specs::goToMapSelect()
@@ -56,5 +59,10 @@ void specs::goToMapSelect()
 
 }
 
+void specs::goToMapRacing()
+{
+	m_game->changeGameState(GameState::Racing);
+
+}
 
 

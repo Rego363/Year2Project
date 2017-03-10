@@ -117,7 +117,7 @@ private:
 	sf::Font m_font;
 	sf::Text m_text;
 
-	GameState m_currentGameState = GameState::Racing;
+	GameState m_currentGameState = GameState::TheLicense;
 
 	
 

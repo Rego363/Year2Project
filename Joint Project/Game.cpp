@@ -192,8 +192,6 @@ void Game::update(sf::Time time)
 	case GameState::Turbo:
 		m_turboScreen->update();
 		break;
-
-
 	case GameState::Racing:
 		//m_view.setCenter(m_car->getPos());
 
@@ -223,6 +221,11 @@ void Game::update(sf::Time time)
 		{
 			m_car->decreaseRotation();
 		}
+		if (m_xbox.m_currentState.Back)
+		{
+			m_currentGameState = GameState::TheMenu;
+		}
+
 
 	default:
 

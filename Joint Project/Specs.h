@@ -26,6 +26,7 @@ private:
 	GUI m_gui;
 	Label  *m_title;
 	Button *m_Enemies;
+	Button *m_Race;
 	Slider *m_EnemiesNo;
 	Button *m_Time;
 	Button *m_laps;
@@ -37,6 +38,7 @@ private:
 
 	Game *m_game;
 	void goToMapSelect();
+	void goToMapRacing();
 	int m_currentSelect;
 
 	float m_EnemiesNum;
