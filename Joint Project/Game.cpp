@@ -140,13 +140,13 @@ void Game::update(sf::Time time)
 		break;
 	case GameState::MapSelect:
 		m_mapSelect->update();
-	default:
 		break;
 	case GameState::Help:
 		m_helpScreen->update();
 		break;
 	case GameState::Thespecs:
 		m_specs->update();
+		break;
 	case GameState::Acceleration:
 		m_accelerationScreen->update();
 		break;
@@ -161,6 +161,8 @@ void Game::update(sf::Time time)
 		break;
 	case GameState::Turbo:
 		m_turboScreen->update();
+		break;
+	default:
 		break;
 		
 	}
@@ -242,6 +244,7 @@ void Game::render()
 	case GameState::Thespecs:
 		m_window.clear(sf::Color(0, 0, 0, 255));
 		m_specs->render(m_window);
+		m_window.display();
 		break;
 	case GameState::Acceleration:
 		m_window.clear(sf::Color(0, 0, 0, 255));
