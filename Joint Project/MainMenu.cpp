@@ -11,6 +11,7 @@ MainMenu::MainMenu(Game &game):
 	m_Garage = new Button("Garage", 550, 300);
 	m_Garage->Enter = std::bind(&MainMenu::GotoGarage, this);
 	m_ChangeProfile = new Button("Change Profile", 550, 350);
+	m_ChangeProfile->Enter = std::bind(&MainMenu::goToChangeP, this);
 	m_Options = new Button("Options", 550, 400);
 	m_Options->Enter = std::bind(&MainMenu::goToOptions, this);
 	m_Help = new Button("Help", 550, 450);
@@ -76,5 +77,12 @@ void MainMenu::goToSpecs()
 {
 
 	m_game->changeGameState(GameState::Thespecs);
+
+}
+
+void MainMenu::goToChangeP()
+{
+
+	m_game->changeGameState(GameState::ChangeP);
 
 }

@@ -81,7 +81,7 @@ Game::Game() :
 	m_brakingScreen = new BrakingScreen(*this);
 	m_speedScreen = new SpeedScreen(*this);
 	m_accelerationScreen = new AccelerationScreen(*this);
-
+	m_changeProfile = new changeProfile(*this);
 
 
 
@@ -218,12 +218,10 @@ void Game::update(sf::Time time)
 		m_window.setView(m_view2);
 		break;
 	case GameState::Racing:
-
-		
 		m_view.setCenter(playerPos);
 
 		m_window.setView(m_view);
-		
+
 		m_car->update();
 
 		m_xbox.update();
@@ -259,6 +257,13 @@ void Game::update(sf::Time time)
 		{
 			m_car->breaks();
 		}
+		break;
+	case GameState::ChangeP:
+		m_changeProfile->update();
+		break;
+
+		
+		
 
 	default:
 
@@ -372,16 +377,16 @@ void Game::render()
 		break;
 	case GameState::Racing:
 		m_window.clear(sf::Color(0, 0, 0, 255));
-
 		for (int i = 0; i < 10; i++)
 		{
-
-
 			m_window.draw(m_testSprite[i]);
 		}
-
-		//m_window.draw(m_testSprite);
 		m_car->draw(m_window);
+		m_window.display();
+		break;
+	case GameState::ChangeP:
+		m_window.clear(sf::Color(0, 0, 0, 255));
+		m_changeProfile->render(m_window);
 		m_window.display();
 		break;
 	}

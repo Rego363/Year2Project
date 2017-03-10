@@ -6,10 +6,11 @@
 playGame::playGame(Game &game): 
 	m_game(&game)
 {
-
+	// This is where buttons are created and assigned positions
 	m_title = new Label("Map Select", 450, 30);
 	m_mapSelection = new Button("Map **", 450, 250);
 	moveLeft = new Button("Map Zero", 250, 150);
+	// I assign each button to bring the player to a different gamestate when pressed
 	moveLeft->Enter = std::bind(&playGame::goToSpecs, this);
 	moveLeft->getFocus();
 	moveRight = new Button("Map One", 250, 200);
@@ -20,6 +21,7 @@ playGame::playGame(Game &game):
 	moveDownest->Enter = std::bind(&playGame::goToSpecs, this);
 	goBack = new Button("Back", 100, 500);
 	goBack->Enter = std::bind(&playGame::goToMenu, this);
+
 
 	if (!m_texture.loadFromFile("09RoadCourseMap.jpg"))
 	{
@@ -36,7 +38,7 @@ playGame::playGame(Game &game):
 	m_sprite2.setPosition(0, 0);
 
 
-
+	
 	m_gui.addButton(moveLeft);
 //	m_gui.addButton(m_mapSelection);
 	m_gui.addButton(moveRight);
@@ -90,22 +92,27 @@ void playGame::render(sf::RenderWindow & window)
 }
 
 void playGame::update()
-{
+{ 
+	// If the focus is on "Map Zero than the map window will change to red with a blue border"
 	if (m_currentSelect == 0)
 	{
 		m_rect.setFillColor(sf::Color::Red);
 		m_rect.setOutlineColor(sf::Color::Blue);
 	}
+	// If the focus is on "Map One than the map window will change to Blue with a Red border"
 	if (m_currentSelect == 1)
 	{
 		m_rect.setFillColor(sf::Color::Blue);
 		m_rect.setOutlineColor(sf::Color::Red);
 	}
+	// If the focus is on "Map Two than the map window will change to Green with a Blue border"
 	if (m_currentSelect == 2)
 	{
 		m_rect.setFillColor(sf::Color::Green);
 		m_rect.setOutlineColor(sf::Color::Blue);
 	}
+	// If the focus is on "Map Two than the map window will change to Magenta with a Blue border"
+	if (m_currentSelect == 2)
 	if (m_currentSelect == 3)
 	{
 		m_rect.setFillColor(sf::Color::Magenta);
@@ -124,12 +131,14 @@ void playGame::update()
 	m_gui.update(m_currentSelect, 5);
 }
 
+
+//Method that returns the player to the main menu
 void playGame::goToMenu()
 {
 	m_game->changeGameState(GameState::TheMenu);
 	
 }
-
+//Method that sends the player to the spec menu
 void playGame::goToSpecs()
 {
 	m_game->changeGameState(GameState::Thespecs);
