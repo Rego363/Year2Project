@@ -35,6 +35,31 @@ Game::Game() : m_window(sf::VideoMode(1280, 720), "Joint Project, Team C")
 	m_accelerationScreen = new AccelerationScreen(*this);
 
 
+
+	/*  FOR TESTING*/
+	/*******************************************************************************/
+	if (!m_testText.loadFromFile("lambo.png"))
+	{
+
+	}
+	m_startPos = sf::Vector2f(m_window.getSize().x / 2, m_window.getSize().y / 4);
+	m_car = new Car(m_testText, m_startPos);
+
+
+	if (!m_testTextBack.loadFromFile("ground.png"))
+	{
+
+	}
+	for (int i = 0; i < 10; i++)
+	{
+		m_testSprite[i].setTexture(m_testTextBack);
+		m_testSprite[i].setScale(1.22, 1.22);
+		m_testSprite[i].setPosition(i*m_testSprite[i].getGlobalBounds().width, 0);
+		
+	}
+	//m_window.setView(m_view);
+	/*******************************************************************************/
+	
 }
 
 /// <summary>
@@ -147,6 +172,33 @@ void Game::update(sf::Time time)
 	case GameState::Turbo:
 		m_turboScreen->update();
 		break;
+
+	case GameState::Racing:
+		//m_view.setCenter(m_car->getPos());
+		
+
+		//m_view.move(m_car->getPos().x, m_car->getPos().y );
+		//m_window.setView(m_view);
+		m_car->update();
+
+		m_xbox.update();
+		if (m_xbox.m_currentState.RTtrigger<-10.0)
+		{
+			m_car->increaseSpeed();
+		}
+		if (m_xbox.m_currentState.LTtrigger>10.0)
+		{
+			m_car->decreaseSpeed();
+		}
+		if (m_xbox.m_currentState.LeftThumbStick.x>75)
+		{
+			m_car->increaseRotation();
+		}
+		if (m_xbox.m_currentState.LeftThumbStick.x<-75)
+		{
+			m_car->decreaseRotation();
+		}
+		break;
 		
 	}
 
@@ -248,6 +300,17 @@ void Game::render()
 	case GameState::Turbo:
 		m_window.clear(sf::Color(0, 0, 0, 255));
 		m_turboScreen->draw(m_window);
+		m_window.display();
+		break;
+	case GameState::Racing:
+		m_window.clear(sf::Color(0, 0, 0, 255));
+		for (int i = 0; i < 10; i++)
+		{
+
+
+			m_window.draw(m_testSprite[i]);
+		}
+		m_car->draw(m_window);
 		m_window.display();
 		break;
 	}
