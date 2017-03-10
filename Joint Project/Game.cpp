@@ -36,14 +36,17 @@ Game::Game() : m_window(sf::VideoMode(1280, 720), "Joint Project, Team C")
 
 
 
+
 	/*  FOR TESTING*/
 	/*******************************************************************************/
+
 	if (!m_testText.loadFromFile("lambo.png"))
 	{
 
 	}
 	m_startPos = sf::Vector2f(m_window.getSize().x / 2, m_window.getSize().y / 4);
 	m_car = new Car(m_testText, m_startPos);
+
 
 
 	if (!m_testTextBack.loadFromFile("ground.png"))
@@ -175,10 +178,14 @@ void Game::update(sf::Time time)
 
 	case GameState::Racing:
 		//m_view.setCenter(m_car->getPos());
+
 		
 
 		//m_view.move(m_car->getPos().x, m_car->getPos().y );
 		//m_window.setView(m_view);
+
+		//m_view.move(m_car->getPos().x+100, m_car->getPos().y + 100);
+
 		m_car->update();
 
 		m_xbox.update();
@@ -304,12 +311,15 @@ void Game::render()
 		break;
 	case GameState::Racing:
 		m_window.clear(sf::Color(0, 0, 0, 255));
+
 		for (int i = 0; i < 10; i++)
 		{
 
 
 			m_window.draw(m_testSprite[i]);
 		}
+
+		//m_window.draw(m_testSprite);
 		m_car->draw(m_window);
 		m_window.display();
 		break;

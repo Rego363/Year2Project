@@ -116,16 +116,20 @@ private:
 	SpeedScreen *m_speedScreen;
 	AccelerationScreen *m_accelerationScreen;
 
+
 	/*For testing*/
 	/**********************/
+
 	Car *m_car;
 	sf::Texture m_testText;
 	sf::Vector2f m_startPos;
 	sf::View m_view;
+
 	sf::Texture m_testTextBack;
 	sf::Sprite m_testSprite[30];
 	Xbox360Controller m_xbox;
 	/**********************/
+
 	
 };
 
