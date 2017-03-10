@@ -145,10 +145,8 @@ void Game::update(sf::Time time)
 	case GameState::Help:
 		m_helpScreen->update();
 		break;
-
 	case GameState::Thespecs:
 		m_specs->update();
-
 	case GameState::Acceleration:
 		m_accelerationScreen->update();
 		break;

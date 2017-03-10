@@ -76,13 +76,11 @@ enum GameState {
 	MapSelect,
 	Help,
 	Thespecs,
-
 	Acceleration,
 	Speed,
 	Braking,
 	Turbo,
 	Steering
-
 };
 
 enum GameDifficulty {
@@ -122,13 +120,10 @@ private:
 	GarageScreen* m_garageScreen;
 	MainMenu *m_MainMenu;
 	HelpScreen *m_helpScreen;
-
 	specs *m_specs;
-
 	Liscence *m_Liscence;
 	Splash *m_Splash;
 	DifficultyScreen *m_diffScreen;
-
 	SteeringScreen *m_steeringScreen;
 	TurboScreen *m_turboScreen;
 	BrakingScreen *m_brakingScreen;
