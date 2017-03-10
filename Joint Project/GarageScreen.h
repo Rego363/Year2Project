@@ -5,18 +5,20 @@
 #include"GUI.h"
 #include"Game.h"
 
-class GarageScreen {
 
+
+//Garage is where upgrades and customisation on the players car is done
+class GarageScreen {
 public:
-	GarageScreen(float x, float y, Game& game);
-	void update();
-	void draw(sf::RenderWindow &window);
-	void goBack();
-	void goAccel();
-	void goTurbo();
-	void goBrake();
-	void goSpeed();
-	void goSteer();
+	GarageScreen(float x, float y, Game& game); //constructor
+	void update(); //update loop
+	void draw(sf::RenderWindow &window); //draw loop 
+	void goBack();   //go to gamestate menu
+	void goAccel();	 //go to gamestate acceleration
+	void goTurbo();	 //go to gamestate turbo
+	void goBrake();	 //go to gamestate braking
+	void goSpeed();	 //go to gamestate speed
+	void goSteer();	 //go to gamestate steering
 
 private:
 	int m_selectedItem = 0;

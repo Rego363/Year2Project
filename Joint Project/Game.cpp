@@ -63,7 +63,11 @@ Game::Game() :
 		m_testSprite[i].setPosition(i*m_testSprite[i].getGlobalBounds().width, 0);
 		
 	}
-	//m_window.setView(m_view);
+
+
+	m_view = sf::View(sf::Vector2f( 0, 0), sf::Vector2f(1280, 720));
+	m_view2 = sf::View(sf::Vector2f(0, 0), sf::Vector2f(1280, 720));
+	m_view2.setCenter(m_window.getSize().x / 2, m_window.getSize().y / 2);
 	/*******************************************************************************/
 	
 	m_specs = new specs(*this);
@@ -77,7 +81,7 @@ Game::Game() :
 	m_brakingScreen = new BrakingScreen(*this);
 	m_speedScreen = new SpeedScreen(*this);
 	m_accelerationScreen = new AccelerationScreen(*this);
-
+	m_changeProfile = new changeProfile(*this);
 
 
 
@@ -141,68 +145,82 @@ void Game::processInput()
 /// </summary>
 void Game::update(sf::Time time)
 {
+	sf::Vector2f playerPos = m_car->getPos();
+
 	switch (m_currentGameState)
 	{
 
 	case GameState::TheOptions:
 		m_optionsScreen->update();
+		m_window.setView(m_view2);
 		break;
 	case GameState::TheMenu:
 		m_MainMenu->update();
+		m_window.setView(m_view2);
 		break;
 	case GameState::Difficulty:
 		m_diffScreen->update();
+		m_window.setView(m_view2);
 		break;
 	case GameState::Garage:
 		m_garageScreen->update();
+		m_window.setView(m_view2);
 		break;
 	case GameState::Playing:
+		m_window.setView(m_view2);
 		break;
 	case GameState::TheLicense:
 		m_Liscence->update(time);
+		m_window.setView(m_view2);
 		break;
 	case GameState::TheSplash:
 		m_Splash->update();
+		m_window.setView(m_view2);
 		break;
 	case GameState::Sound:
 		m_soundScreen->update();
+		m_window.setView(m_view2);
 		break;
 	case GameState::Display:
 		m_displayScreen->update();
+		m_window.setView(m_view2);
 		break;
 	case GameState::MapSelect:
 		m_mapSelect->update();
+		m_window.setView(m_view2);
 		break;
 	case GameState::Help:
 		m_helpScreen->update();
+		m_window.setView(m_view2);
 		break;
 	case GameState::Thespecs:
 		m_specs->update();
+		m_window.setView(m_view2);
 		break;
 	case GameState::Acceleration:
 		m_accelerationScreen->update();
+		m_window.setView(m_view2);
 		break;
 	case GameState::Braking:
 		m_brakingScreen->update();
+		m_window.setView(m_view2);
 		break;
 	case GameState::Speed:
 		m_speedScreen->update();
+		m_window.setView(m_view2);
 		break;
 	case GameState::Steering:
 		m_steeringScreen->update();
+		m_window.setView(m_view2);
 		break;
 	case GameState::Turbo:
 		m_turboScreen->update();
+		m_window.setView(m_view2);
 		break;
 	case GameState::Racing:
-		//m_view.setCenter(m_car->getPos());
+		m_view.setCenter(playerPos);
 
-		
-
-		//m_view.move(m_car->getPos().x, m_car->getPos().y );
-		//m_window.setView(m_view);
-
-		//m_view.move(m_car->getPos().x+100, m_car->getPos().y + 100);
+		m_window.setView(m_view);
 
 		m_car->update();
 
@@ -211,23 +229,41 @@ void Game::update(sf::Time time)
 		{
 			m_car->increaseSpeed();
 		}
+		else if (m_xbox.m_currentState.RTtrigger < 0.0&& m_xbox.m_currentState.RTtrigger > -10.0)
+		{
+			m_car->slowDown();
+		}
+
 		if (m_xbox.m_currentState.LTtrigger>10.0)
 		{
 			m_car->decreaseSpeed();
 		}
-		if (m_xbox.m_currentState.LeftThumbStick.x>75)
+		if (m_car->isCarMoving() == true)
 		{
-			m_car->increaseRotation();
-		}
-		if (m_xbox.m_currentState.LeftThumbStick.x<-75)
-		{
-			m_car->decreaseRotation();
+			if (m_xbox.m_currentState.LeftThumbStick.x > 75)
+			{
+				m_car->increaseRotation();
+			}
+			if (m_xbox.m_currentState.LeftThumbStick.x < -75)
+			{
+				m_car->decreaseRotation();
+			}
 		}
 		if (m_xbox.m_currentState.Back)
 		{
 			m_currentGameState = GameState::TheMenu;
 		}
+		if (m_xbox.m_currentState.A)
+		{
+			m_car->breaks();
+		}
+		break;
+	case GameState::ChangeP:
+		m_changeProfile->update();
+		break;
 
+		
+		
 
 	default:
 
@@ -340,16 +376,16 @@ void Game::render()
 		break;
 	case GameState::Racing:
 		m_window.clear(sf::Color(0, 0, 0, 255));
-
 		for (int i = 0; i < 10; i++)
 		{
-
-
 			m_window.draw(m_testSprite[i]);
 		}
-
-		//m_window.draw(m_testSprite);
 		m_car->draw(m_window);
+		m_window.display();
+		break;
+	case GameState::ChangeP:
+		m_window.clear(sf::Color(0, 0, 0, 255));
+		m_changeProfile->render(m_window);
 		m_window.display();
 		break;
 	}

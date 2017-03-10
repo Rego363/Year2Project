@@ -27,6 +27,18 @@
 #include "Specs.h"
 
 
+#include "Liscence.h"
+#include "Splash.h"
+#include"DifficultyScreen.h"
+#include"SteeringScreen.h"
+#include"TurboScreen.h"
+#include"BrakingScreen.h"
+#include"SpeedScreen.h"
+#include"AccelerationScreen.h"
+#include "changeProfile.h"
+
+
+
 using namespace std;
 
 class SoundScreen;
@@ -47,7 +59,21 @@ class SpeedScreen;
 class AccelerationScreen;
 
 class specs;
+
+	class playGame;
+
+class DifficultyScreen;
+
+class SteeringScreen;
+class TurboScreen;
+class BrakingScreen;
+class SpeedScreen;
+class AccelerationScreen;
+class changeProfile;
+
+
 class playGame;
+
 
 enum GameState {
 	TheLicense,
@@ -67,8 +93,8 @@ enum GameState {
 	Braking,
 	Turbo,
 	Steering,
-
-	Racing
+	Racing,
+	ChangeP
 
 	
 };
@@ -100,8 +126,11 @@ private:
 	
 	sf::Font m_font;
 	sf::Text m_text;
-	GameState m_currentGameState = GameState::TheMenu;
+
+
+	GameState m_currentGameState = GameState::Racing;
 	playGame * m_mapSelect;
+
 
 	
 
@@ -123,6 +152,7 @@ private:
 	BrakingScreen *m_brakingScreen;
 	SpeedScreen *m_speedScreen;
 	AccelerationScreen *m_accelerationScreen;
+	changeProfile * m_changeProfile;
 
 
 	/*For testing*/
@@ -132,6 +162,7 @@ private:
 	sf::Texture m_testText;
 	sf::Vector2f m_startPos;
 	sf::View m_view;
+	sf::View m_view2;
 
 	sf::Texture m_testTextBack;
 	sf::Sprite m_testSprite[30];
