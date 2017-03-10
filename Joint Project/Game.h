@@ -11,6 +11,7 @@
 #include "MainMenu.h"
 #include "GarageScreen.h"
 #include "DisplayScreen.h"
+#include "Player.h"
 #include"Help.h"
 #include "Liscence.h"
 #include "Splash.h"
@@ -25,15 +26,6 @@
 
 #include "Specs.h"
 
-#include "Liscence.h"
-#include "Splash.h"
-#include"DifficultyScreen.h"
-#include"SteeringScreen.h"
-#include"TurboScreen.h"
-#include"BrakingScreen.h"
-#include"SpeedScreen.h"
-#include"AccelerationScreen.h"
-
 
 using namespace std;
 
@@ -45,6 +37,7 @@ class Splash;
 class MainMenu;
 class GarageScreen;
 class HelpScreen;
+class Player;
 class DifficultyScreen;
 
 class SteeringScreen;
@@ -54,16 +47,7 @@ class SpeedScreen;
 class AccelerationScreen;
 
 class specs;
-	class playGame;
-
-class DifficultyScreen;
-
-class SteeringScreen;
-class TurboScreen;
-class BrakingScreen;
-class SpeedScreen;
-class AccelerationScreen;
-
+class playGame;
 
 enum GameState {
 	TheLicense,
@@ -117,19 +101,22 @@ private:
 	sf::Font m_font;
 	sf::Text m_text;
 
+
 	GameState m_currentGameState = GameState::Racing;
+	playGame * m_mapSelect;
+
 
 	
 
 	GameDifficulty m_currentDifficulty = GameDifficulty::Medium;
 
-	playGame* m_mapSelect;
 	OptionsScreen* m_optionsScreen;
 	SoundScreen* m_soundScreen;
 	DisplayScreen* m_displayScreen;
 	GarageScreen* m_garageScreen;
 	MainMenu *m_MainMenu;
 	HelpScreen *m_helpScreen;
+	Player *m_player;
 	specs *m_specs;
 	Liscence *m_Liscence;
 	Splash *m_Splash;
@@ -155,7 +142,6 @@ private:
 	Xbox360Controller m_xbox;
 	/**********************/
 
-	
 };
 
 #endif
