@@ -7,7 +7,8 @@ static double const MS_PER_UPDATE = 10.0;
 /// <summary>
 /// Game is constructed
 /// </summary>
-Game::Game() : m_window(sf::VideoMode(1280, 720), "Joint Project, Team C") 
+Game::Game() :
+	m_window(sf::VideoMode(1280, 720), "Joint Project, Team C")
 {
 	if (!m_font.loadFromFile("Fonts/American Captain.ttf"))
 	{
@@ -17,6 +18,7 @@ Game::Game() : m_window(sf::VideoMode(1280, 720), "Joint Project, Team C")
 	m_text.setString("RACING GAME");
 	m_text.setPosition(m_window.getSize().x / 4, m_window.getSize().y / 2);
 	m_text.setCharacterSize(70);
+	m_player = new Player();
 	m_optionsScreen = new OptionsScreen(*this);
 	m_mapSelect = new playGame(*this);
 	m_soundScreen = new SoundScreen(*this);
