@@ -74,10 +74,10 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SFML_SDK)\include;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SFML_SDK)\include;C:\SFML-2.3.2\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>$(SFML_SDK)\lib;</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SFML_SDK)\lib;C:\SFML-2.3.2\lib</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -123,10 +123,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AccelerationScreen.cpp" />
+    <ClCompile Include="Animation.cpp" />
     <ClCompile Include="BrakingScreen.cpp" />
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="Car.cpp" />
     <ClCompile Include="changeProfile.cpp" />
+    <ClCompile Include="CheckBox.cpp" />
     <ClCompile Include="DifficultyScreen.cpp" />
     <ClCompile Include="DisplayScreen.cpp" />
     <ClCompile Include="Game.cpp" />
@@ -154,10 +156,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AccelerationScreen.h" />
+    <ClInclude Include="Animation.h" />
     <ClInclude Include="BrakingScreen.h" />
     <ClInclude Include="Button.h" />
     <ClInclude Include="Car.h" />
     <ClInclude Include="changeProfile.h" />
+    <ClInclude Include="CheckBox.h" />
     <ClInclude Include="DifficultyScreen.h" />
     <ClInclude Include="DisplayScreen.h" />
     <ClInclude Include="Game.h" />

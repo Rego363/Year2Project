@@ -15,9 +15,10 @@ DisplayScreen::DisplayScreen(Game & game) :
 	m_title->changeTextSize(100);
 	m_gui.addLabel(m_title);
 
-	m_animeOn = new RadioButton("Animations On/Off", 50, 150, "Anime");
+	m_animeOn = new CheckBox("Animations On/Off", 50, 150);
 	m_animeOn->getFocus();
-	m_gui.addRadioButton(m_animeOn);
+	m_animeOn->getActive();
+	m_gui.addCheckBox(m_animeOn);
 	m_animeSpeed = new Slider(75.0f, 225.0f, m_speed, "Animation speed");
 	m_gui.addSlider(m_animeSpeed);
 

@@ -32,6 +32,8 @@
     <ClCompile Include="XBOX360CONTROLLER.cpp" />
     <ClCompile Include="changeProfile.cpp" />
     <ClCompile Include="WorldSquares.cpp" />
+    <ClCompile Include="CheckBox.cpp" />
+    <ClCompile Include="Animation.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AccelerationScreen.h" />
@@ -62,5 +64,7 @@
     <ClInclude Include="XBOX360CONTROLLER.h" />
     <ClInclude Include="changeProfile.h" />
     <ClInclude Include="WorldSquares.h" />
+    <ClInclude Include="CheckBox.h" />
+    <ClInclude Include="Animation.h" />
   </ItemGroup>
 </Project>

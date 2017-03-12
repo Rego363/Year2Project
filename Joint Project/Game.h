@@ -57,22 +57,11 @@ class TurboScreen;
 class BrakingScreen;
 class SpeedScreen;
 class AccelerationScreen;
-
 class specs;
-
-	class playGame;
-
-class DifficultyScreen;
-
-class SteeringScreen;
-class TurboScreen;
-class BrakingScreen;
-class SpeedScreen;
-class AccelerationScreen;
+class playGame;
 class changeProfile;
 
 
-class playGame;
 
 
 enum GameState {

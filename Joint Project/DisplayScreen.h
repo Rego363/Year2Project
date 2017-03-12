@@ -21,7 +21,7 @@ private:
 	Label *m_title;
 
 	//Text animations
-	RadioButton *m_animeOn;
+	CheckBox *m_animeOn;
 	Slider *m_animeSpeed;
 
 	Button *m_backButton;

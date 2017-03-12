@@ -44,6 +44,11 @@ void GUI::addRadioButton(RadioButton * radioButton)
 	m_elements.push_back(radioButton);
 }
 
+void GUI::addCheckBox(CheckBox * checkBox)
+{
+	m_elements.push_back(checkBox);
+}
+
 //can be used instead of all above adds
 void GUI::addWidget(Widget * widget)
 {
@@ -232,6 +237,26 @@ void GUI::activate(int &index)
 			std::cout << "Bad Function Call" << std::endl;
 		}
 	}
+	else if (m_elements[index]->getID() == "checkbox")
+	{
+		if (m_elements[index]->checkActive() == false)
+		{
+			m_elements[index]->getActive();
+			try
+			{
+				m_elements[index]->Enter();
+
+			}
+			catch (std::bad_function_call)
+			{
+				std::cout << "Bad Function Call" << std::endl;
+			}
+		}
+		else {
+			m_elements[index]->loseActive();
+		}
+	}
+
 	else
 	{
 		for (int i = 0; i < m_elements.size();i++)
@@ -311,7 +336,7 @@ void GUI::verticalControls(int &index, int maxItems)
 		{
 			animating = true;
 		}
-		if (m_elements[index]->getID() == "radiobutton")
+		if (m_elements[index]->getID() == "radiobutton"|| m_elements[index]->getID() == "checkbox")
 		{
 			activate(index);
 		}
