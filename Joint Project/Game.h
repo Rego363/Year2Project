@@ -5,7 +5,6 @@
 #include <SFML\Audio.hpp>
 #include <iostream>
 #include <SFML\Graphics\Rect.hpp>
-
 #include "OptionsScreen.h"
 #include "playGame.h"
 #include "SoundScreen.h"
@@ -24,9 +23,7 @@
 #include "AccelerationScreen.h"
 #include "Car.h"
 #include "XBOX360CONTROLLER.h"
-
 #include "Specs.h"
-
 #include "Liscence.h"
 #include "Splash.h"
 #include "DifficultyScreen.h"
@@ -53,7 +50,6 @@ class GarageScreen;
 class HelpScreen;
 class Player;
 class DifficultyScreen;
-
 class SteeringScreen;
 class TurboScreen;
 class BrakingScreen;
@@ -157,7 +153,7 @@ private:
 	sf::View m_view2;
 
 	sf::Texture m_ground;
-	sf::Sprite m_groundSprite[30];
+	sf::Sprite m_groundSprite[70];
 	Xbox360Controller m_xbox;
 	/**********************/
 

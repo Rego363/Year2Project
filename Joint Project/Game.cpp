@@ -26,7 +26,7 @@ Game::Game() :
 	m_text.setString("RACING GAME");
 	m_text.setPosition(m_window.getSize().x / 4, m_window.getSize().y / 2);
 	m_text.setCharacterSize(70);
-	
+
 	m_optionsScreen = new OptionsScreen(*this);
 	m_mapSelect = new playGame(*this);
 	m_soundScreen = new SoundScreen(*this);
@@ -54,7 +54,12 @@ Game::Game() :
 	/*******************************************************************************/
 
 	///to be moved
-	if (!m_ground.loadFromFile(m_currentLevel.m_ground.m_fileName))
+	/*if (!m_ground.loadFromFile(m_currentLevel.m_ground.m_fileName))
+	{
+
+	}*/
+
+	if (!m_ground.loadFromFile(m_currentLevel.m_sand.m_fileName))
 	{
 	}
 
@@ -62,10 +67,50 @@ Game::Game() :
 	{
 		m_groundSprite[i].setTexture(m_ground);
 		m_groundSprite[i].setScale(1.22, 1.22);
-		m_groundSprite[i].setPosition(i*m_groundSprite[i].getGlobalBounds().width, 0);
+		m_groundSprite[i].setPosition(0, -i*m_groundSprite[i].getGlobalBounds().height);
 	}
-	///
+		for (int i = 10; i < 20; i++)
+		{
 
+			m_groundSprite[i].setTexture(m_ground);
+			m_groundSprite[i].setScale(1.22, 1.22);
+			m_groundSprite[i].setPosition(1 * m_groundSprite[i].getGlobalBounds().width, (-i+10)*m_groundSprite[i].getGlobalBounds().height);
+		}
+		for (int i = 20; i < 30; i++)
+		{
+
+			m_groundSprite[i].setTexture(m_ground);
+			m_groundSprite[i].setScale(1.22, 1.22);
+			m_groundSprite[i].setPosition(2 * m_groundSprite[i].getGlobalBounds().width, (-i+20)*m_groundSprite[i].getGlobalBounds().height);
+		}
+		for (int i = 30; i < 40; i++)
+		{
+			m_groundSprite[i].setTexture(m_ground);
+			m_groundSprite[i].setScale(1.22, 1.22);
+			m_groundSprite[i].setPosition(3* m_groundSprite[i].getGlobalBounds().width, (-i+30)*m_groundSprite[i].getGlobalBounds().height);
+		}
+
+		for (int i = 40; i < 50; i++)
+		{
+
+			m_groundSprite[i].setTexture(m_ground);
+			m_groundSprite[i].setScale(1.22, 1.22);
+			m_groundSprite[i].setPosition(4 * m_groundSprite[i].getGlobalBounds().width, (-i + 40)*m_groundSprite[i].getGlobalBounds().height);
+		}
+
+		for (int i = 50; i < 60; i++)
+		{
+
+			m_groundSprite[i].setTexture(m_ground);
+			m_groundSprite[i].setScale(1.22, 1.22);
+			m_groundSprite[i].setPosition(5 * m_groundSprite[i].getGlobalBounds().width, (-i + 50)*m_groundSprite[i].getGlobalBounds().height);
+		}
+		for (int i = 60; i < 70; i++)
+		{
+			m_groundSprite[i].setTexture(m_ground);
+			m_groundSprite[i].setScale(1.22, 1.22);
+			m_groundSprite[i].setPosition(6 * m_groundSprite[i].getGlobalBounds().width, (-i + 60)*m_groundSprite[i].getGlobalBounds().height);
+		}
 	m_view = sf::View(sf::Vector2f( 0, 0), sf::Vector2f(1280, 720));
 	m_view2 = sf::View(sf::Vector2f(0, 0), sf::Vector2f(1280, 720));
 	m_view2.setCenter(m_window.getSize().x / 2, m_window.getSize().y / 2);
@@ -342,8 +387,6 @@ void Game::render()
 		break;
 	case GameState::Racing:   //put in levels
 		m_window.clear(sf::Color(0, 0, 0, 255));
-		
-
 		for (int i = 0; i < 10; i++)
 		{
 			if (isInView(m_groundSprite[i]) == true)

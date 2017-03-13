@@ -6,3 +6,5 @@ font:
   fontfile: Fonts\AmericanCaptain.ttf
 ground:
   groundfile: ground.png
+sand:
+  sandfile: sand1.png

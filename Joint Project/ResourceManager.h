@@ -35,12 +35,18 @@ struct GroundData
 	std::string m_fileName;
 };
 
+struct SandData
+{
+	std::string m_fileName;
+};
+
 struct LevelData
 {
 	LamboData m_lambo;
 	FontData m_Font;
 	TileData m_Tiles;
 	GroundData m_ground;
+	SandData m_sand;
 };
 
 class LevelLoader

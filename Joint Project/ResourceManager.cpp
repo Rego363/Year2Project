@@ -20,12 +20,18 @@ void operator >> (const YAML::Node& groundNode, GroundData& ground)
 	ground.m_fileName = groundNode["groundfile"].as<std::string>();
 }
 
+void operator >> (const YAML::Node& sandNode, SandData& sand)
+{
+	sand.m_fileName = sandNode["sandfile"].as<std::string>();
+}
+
 void operator >> (const YAML::Node& levelNode, LevelData& level)
 {
 	levelNode["lambo"] >> level.m_lambo;
 	levelNode["font"] >> level.m_Font;
 	levelNode["maptile"] >> level.m_Tiles;
 	levelNode["ground"] >> level.m_ground;
+	levelNode["sand"] >> level.m_sand;
 }
 
 LevelLoader::LevelLoader()

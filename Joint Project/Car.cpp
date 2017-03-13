@@ -8,9 +8,8 @@ Car::Car(sf::Texture const & texture, sf::Vector2f const & pos):
 {
 	m_sprite.setTexture(m_texture); //set texture
 	m_sprite.setPosition(m_position); //set pos
-	m_sprite.setScale(0.10, 0.10); //scale texture down
+	m_sprite.setScale(0.05, 0.05); //scale texture down
 	m_sprite.setOrigin(m_sprite.getTextureRect().width/1.5, m_sprite.getTextureRect().height / 2.0); //origin set to centre for rotations
-
 
 	if (!m_fireTexture.loadFromFile("fire.png") )
 	{
