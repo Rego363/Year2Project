@@ -36,6 +36,7 @@
 #include"SpeedScreen.h"
 #include"AccelerationScreen.h"
 #include "changeProfile.h"
+#include "WorldSquares.h"
 
 
 
@@ -60,7 +61,7 @@ class AccelerationScreen;
 class specs;
 class playGame;
 class changeProfile;
-
+class worldSquares;
 
 
 
@@ -83,7 +84,8 @@ enum GameState {
 	Turbo,
 	Steering,
 	Racing,
-	ChangeP
+	ChangeP,
+	ThewSquares
 
 	
 };
@@ -142,6 +144,7 @@ private:
 	SpeedScreen *m_speedScreen;
 	AccelerationScreen *m_accelerationScreen;
 	changeProfile * m_changeProfile;
+	worldSquares * m_worldSquares;
 
 
 	/*For testing*/

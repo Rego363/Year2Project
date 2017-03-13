@@ -35,6 +35,7 @@ Game::Game() :
 	m_brakingScreen = new BrakingScreen(*this);
 	m_speedScreen = new SpeedScreen(*this);
 	m_accelerationScreen = new AccelerationScreen(*this);
+	m_worldSquares = new worldSquares(*this);
 
 
 
@@ -219,7 +220,7 @@ void Game::update(sf::Time time)
 		break;
 	case GameState::Racing:
 		m_view.setCenter(playerPos);
-
+		m_worldSquares->update();
 		m_window.setView(m_view);
 
 		m_car->update(time.asSeconds());
@@ -380,6 +381,7 @@ void Game::render()
 		{
 			m_window.draw(m_testSprite[i]);
 		}
+		m_worldSquares->render(m_window);
 		m_car->draw(m_window);
 		m_window.display();
 		break;
