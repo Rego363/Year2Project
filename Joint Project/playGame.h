@@ -46,6 +46,8 @@ private:
 	//void setRectColor(sf::Color color);
 	sf::RectangleShape m_rect;
 	bool maptrue = false;
+
+
 	Game *m_game;
 	void goToMenu();
 	void goToSpecs();

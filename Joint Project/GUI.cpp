@@ -24,7 +24,7 @@ GUI::~GUI()
 {
 }
 //add label to container
-void GUI::addLabel(Label *label)
+void GUI::addLabel(Label * label)
 {
 	m_labels.push_back(label);
 }
@@ -34,7 +34,7 @@ void GUI::addButton(Button * button)
 	m_elements.push_back(button);
 }
 //add slider to container
-void GUI::addSlider(Slider * slider)
+void GUI::addSlider(Slider *slider)
 {
 	m_elements.push_back(slider);
 }

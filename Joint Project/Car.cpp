@@ -9,8 +9,8 @@ Car::Car(sf::Texture const & texture, sf::Vector2f const & pos):
 	m_sprite.setTexture(m_texture); //set texture
 	m_sprite.setPosition(m_position); //set pos
 	m_sprite.setScale(0.10, 0.10); //scale texture down
-	m_sprite.setOrigin(m_sprite.getTextureRect().width / 2.0, m_sprite.getTextureRect().height / 2.0); //origin set to centre for rotations		
-
+	m_sprite.setScale(0.05, 0.05); //scale texture down
+	m_sprite.setOrigin(m_sprite.getTextureRect().width/1.5, m_sprite.getTextureRect().height / 2.0); //origin set to centre for rotations
 
 	if (!m_fireTexture.loadFromFile("fire.png") )
 	{
@@ -24,7 +24,7 @@ Car::Car(sf::Texture const & texture, sf::Vector2f const & pos):
 	//m_fireSprite = sf::RectangleShape(sf::Vector2f(100, 150));
 	m_fireSprite.setTexture(m_fireTexture);
 
-	animation = new Animation(&m_fireTexture, sf::Vector2u(8, 4), 0.3f);
+	animation = new Animation(&m_fireTexture, sf::Vector2u(8, 4), 0.1f);
 
 	
 	m_fireSprite.setPosition(m_sprite.getPosition().x, m_sprite.getPosition().y);
@@ -60,8 +60,8 @@ void Car::update(float dt)
 			m_speed = 0;
 		}
 	}
-	/*m_fireSprite.setPosition(m_sprite.getPosition().x , m_sprite.getPosition().y-30);
-	m_fireSprite.setRotation(m_sprite.getRotation()-90);*/
+	m_fireSprite.setPosition(m_fireSprite.getPosition().x  , m_fireSprite.getPosition().y);
+	m_fireSprite.setRotation(m_fireSprite.getRotation());
 	animation->update(0, dt);
 	m_fireSprite.setTextureRect(animation->uvRect);
 }
@@ -94,7 +94,7 @@ void Car::decreaseSpeed()
 //when called the rotation of the car increases
 void Car::increaseRotation()
 {
-	m_rotation += 3;
+	m_rotation += 2;
 	if (m_rotation == 360.0)
 	{
 		m_rotation = 0;
@@ -104,7 +104,7 @@ void Car::increaseRotation()
 //when called the rotation of the car decreases
 void Car::decreaseRotation()
 {
-	m_rotation -= 3;
+	m_rotation -= 2;
 	if (m_rotation == 0.0)
 	{
 		m_rotation = 359.0;
@@ -144,3 +144,10 @@ void Car::breaks()
 		m_speed = 0;
 	}
 }
+
+void Car::setCurrentTexture(sf::Texture carTex)
+{
+	m_texture = carTex;
+	m_sprite.setTexture(m_texture);
+}
+

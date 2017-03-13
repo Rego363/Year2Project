@@ -4,7 +4,7 @@
 #include <SFML\Graphics.hpp>
 #include <SFML\Audio.hpp>
 #include <iostream>
-
+#include <SFML\Graphics\Rect.hpp>
 #include "OptionsScreen.h"
 #include "playGame.h"
 #include "SoundScreen.h"
@@ -12,31 +12,30 @@
 #include "GarageScreen.h"
 #include "DisplayScreen.h"
 #include "Player.h"
-#include"Help.h"
+#include "Help.h"
 #include "Liscence.h"
 #include "Splash.h"
-#include"DifficultyScreen.h"
-#include"SteeringScreen.h"
-#include"TurboScreen.h"
-#include"BrakingScreen.h"
-#include"SpeedScreen.h"
-#include"AccelerationScreen.h"
-#include"Car.h"
-#include"XBOX360CONTROLLER.h"
-
+#include "DifficultyScreen.h"
+#include "SteeringScreen.h"
+#include "TurboScreen.h"
+#include "BrakingScreen.h"
+#include "SpeedScreen.h"
+#include "AccelerationScreen.h"
+#include "Car.h"
+#include "XBOX360CONTROLLER.h"
 #include "Specs.h"
-
-
 #include "Liscence.h"
 #include "Splash.h"
-#include"DifficultyScreen.h"
-#include"SteeringScreen.h"
-#include"TurboScreen.h"
-#include"BrakingScreen.h"
-#include"SpeedScreen.h"
-#include"AccelerationScreen.h"
+#include "DifficultyScreen.h"
+#include "SteeringScreen.h"
+#include "TurboScreen.h"
+#include "BrakingScreen.h"
+#include "SpeedScreen.h"
+#include "AccelerationScreen.h"
 #include "changeProfile.h"
-
+#include "ResourceManager.h"
+#include "levels.h"
+#include "WorldSquares.h"
 
 
 using namespace std;
@@ -51,7 +50,6 @@ class GarageScreen;
 class HelpScreen;
 class Player;
 class DifficultyScreen;
-
 class SteeringScreen;
 class TurboScreen;
 class BrakingScreen;
@@ -60,7 +58,8 @@ class AccelerationScreen;
 class specs;
 class playGame;
 class changeProfile;
-
+class worldSquares;
+class Levels;
 
 
 
@@ -83,7 +82,8 @@ enum GameState {
 	Turbo,
 	Steering,
 	Racing,
-	ChangeP
+	ChangeP,
+	ThewSquares
 
 	
 };
@@ -107,22 +107,19 @@ public:
 	void changeGameState(GameState gameState);
 	void changeGameDifficulty(GameDifficulty gameDiff);
 	sf::RenderWindow m_window;
+	bool isInView(sf::Sprite sprite);
+
 private:
 	void processInput();
 	void update(sf::Time);
 	void render();
 
-	
 	sf::Font m_font;
 	sf::Text m_text;
 
-
-	GameState m_currentGameState = GameState::Racing;
+	GameState m_currentGameState = GameState::TheLicense;
 	playGame * m_mapSelect;
-
-
 	
-
 	GameDifficulty m_currentDifficulty = GameDifficulty::Medium;
 
 	OptionsScreen* m_optionsScreen;
@@ -142,21 +139,26 @@ private:
 	SpeedScreen *m_speedScreen;
 	AccelerationScreen *m_accelerationScreen;
 	changeProfile * m_changeProfile;
+	Levels *m_level;
+	worldSquares * m_worldSquares;
 
 
 	/*For testing*/
 	/**********************/
 
 	Car *m_car;
-	sf::Texture m_testText;
+	sf::Texture m_startCar;
 	sf::Vector2f m_startPos;
 	sf::View m_view;
 	sf::View m_view2;
 
-	sf::Texture m_testTextBack;
-	sf::Sprite m_testSprite[30];
+	sf::Texture m_ground;
+	sf::Sprite m_groundSprite[70];
 	Xbox360Controller m_xbox;
 	/**********************/
+
+	LevelData m_currentLevel;
+	LevelLoader m_levelLoader;
 
 };
 
