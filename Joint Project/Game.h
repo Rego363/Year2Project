@@ -37,6 +37,7 @@
 #include"AccelerationScreen.h"
 #include "changeProfile.h"
 #include "ResourceManager.h"
+#include "levels.h"
 
 using namespace std;
 
@@ -107,8 +108,6 @@ public:
 	void changeGameDifficulty(GameDifficulty gameDiff);
 	sf::RenderWindow m_window;
 
-	LevelData level;
-
 private:
 	void processInput();
 	void update(sf::Time);
@@ -144,6 +143,7 @@ private:
 	SpeedScreen *m_speedScreen;
 	AccelerationScreen *m_accelerationScreen;
 	changeProfile * m_changeProfile;
+	Levels *m_level;
 
 
 	/*For testing*/
@@ -160,6 +160,7 @@ private:
 	Xbox360Controller m_xbox;
 	/**********************/
 
+	LevelData m_currentLevel;
 	LevelLoader m_levelLoader;
 
 };

@@ -35,6 +35,7 @@
     <ClCompile Include="CheckBox.cpp" />
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
+    <ClCompile Include="levels.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AccelerationScreen.h" />
@@ -68,5 +69,6 @@
     <ClInclude Include="CheckBox.h" />
     <ClInclude Include="Animation.h" />
     <ClInclude Include="ResourceManager.h" />
+    <ClInclude Include="levels.h" />
   </ItemGroup>
 </Project>

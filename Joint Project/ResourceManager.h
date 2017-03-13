@@ -9,6 +9,12 @@
 #include "yaml-cpp/yaml.h"
 #include "ResourcePath.hpp"
 
+
+///<summary>
+/// Dylan
+/// loads information from yaml file
+/// images, music and font files
+///<summary>
 struct FontData
 {
 	std::string m_fileNameFont;

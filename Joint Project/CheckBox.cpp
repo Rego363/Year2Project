@@ -11,6 +11,10 @@ CheckBox::CheckBox(std::string s, float x, float y) :
 	Widget()
 {
 	m_id = "checkbox";
+	if (!m_font.loadFromFile("Fonts/AmericanCaptain.ttf"))
+	{
+
+	}
 	m_icon.setFillColor(sf::Color::White);
 	m_icon.setOutlineColor(sf::Color::White);
 	m_icon.setPosition(x - 5, y + 10);
@@ -19,11 +23,6 @@ CheckBox::CheckBox(std::string s, float x, float y) :
 	m_icon.setOutlineThickness(1.3);
 	m_isActive = false;
 	m_hasFocus = false;
-
-	if (!m_font.loadFromFile(level.m_Font.m_fileNameFont))
-	{
-		//error message
-	}
 
 	m_text.setFont(m_font);
 	m_text.setString(s);

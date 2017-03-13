@@ -8,6 +8,7 @@ Known Bugs: none
 */
 #include<SFML\Graphics.hpp>
 #include"Widget.h"
+#include "levels.h"
 
 class Label: public Widget {
 public:
@@ -18,6 +19,7 @@ public:
 	void setUnderLined(); //make  label underlined
 	void updateText(std::string s); //change the text of the label
 	void changeTextSize(int size); //change size of the label
+
 protected:
 	sf::Vector2f m_pos;
 	sf::Text m_text;
