@@ -34,6 +34,8 @@
     <ClCompile Include="WorldSquares.cpp" />
     <ClCompile Include="CheckBox.cpp" />
     <ClCompile Include="Animation.cpp" />
+    <ClCompile Include="Ai.cpp" />
+    <ClCompile Include="Math.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AccelerationScreen.h" />
@@ -66,5 +68,7 @@
     <ClInclude Include="WorldSquares.h" />
     <ClInclude Include="CheckBox.h" />
     <ClInclude Include="Animation.h" />
+    <ClInclude Include="Ai.h" />
+    <ClInclude Include="Math.h" />
   </ItemGroup>
 </Project>
