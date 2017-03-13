@@ -1,16 +1,18 @@
 #include "WorldSquares.h"
 
 
-worldSquares::worldSquares(Game &game):
-	m_game(&game)
+worldSquares::worldSquares(Game &game, LevelData &level):
+	m_game(&game),
+	m_currentLevel(&level)
 {
 
 
 
-	if (!m_texture.loadFromFile("Road-Tile.png"))
+	if (!m_texture.loadFromFile(m_currentLevel->m_Tiles.m_fileName))
 	{
-		//handle
+		std::cout << "failed to load tile Texture" << std::endl;
 	}
+
 	m_Straight.setTexture(m_texture);
 	m_Straight.setTextureRect(sf::IntRect(605, 107, 172, 348));
 	m_Straight.setPosition(150, 200);

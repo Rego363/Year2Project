@@ -11,14 +11,15 @@ static double const MS_PER_UPDATE = 10.0;
 Game::Game() :
 	m_window(sf::VideoMode(1280, 720), "Joint Project, Team C")
 {
+
 	if (!LevelLoader::load(m_currentLevel))
 	{
 		return;
 	}
 
-	if (!m_font.loadFromFile(m_currentLevel.m_Font.m_fileNameFont))
+	if (!m_startCar.loadFromFile(m_currentLevel.m_lambo.m_fileName))
 	{
-		std::cout << "failed to load font" << std::endl;
+		cout << "car setup" << endl;
 	}
 
 	m_text.setFont(m_font);
@@ -42,38 +43,33 @@ Game::Game() :
 	m_brakingScreen = new BrakingScreen(*this);
 	m_speedScreen = new SpeedScreen(*this);
 	m_accelerationScreen = new AccelerationScreen(*this);
-	m_worldSquares = new worldSquares(*this);
+	m_worldSquares = new worldSquares(*this, m_currentLevel);
+
+	m_startPos = sf::Vector2f(m_window.getSize().x / 2, m_window.getSize().y / 4);
+	m_car = new Car(m_startCar, m_startPos);
+	m_player = new Player((float)m_window.getSize().x / 2, (float)m_window.getSize().y / 4, m_startCar, m_window);
 
 
 	/*  FOR TESTING*/
 	/*******************************************************************************/
 
-	if (!m_testText.loadFromFile("lambo.png"))
+	///to be moved
+	if (!m_ground.loadFromFile(m_currentLevel.m_ground.m_fileName))
 	{
-
-	}
-	m_startPos = sf::Vector2f(m_window.getSize().x / 2, m_window.getSize().y / 4);
-	m_car = new Car(m_testText, m_startPos);
-	m_player = new Player((float)m_window.getSize().x / 2,(float) m_window.getSize().y / 4, m_testText, m_window);
-
-
-	if (!m_testTextBack.loadFromFile("ground.png"))
-	{
-
 	}
 
 	for (int i = 0; i < 10; i++)
 	{
-		m_testSprite[i].setTexture(m_testTextBack);
-		m_testSprite[i].setScale(1.22, 1.22);
-		m_testSprite[i].setPosition(i*m_testSprite[i].getGlobalBounds().width, 0);
-		
+		m_groundSprite[i].setTexture(m_ground);
+		m_groundSprite[i].setScale(1.22, 1.22);
+		m_groundSprite[i].setPosition(i*m_groundSprite[i].getGlobalBounds().width, 0);
 	}
-
+	///
 
 	m_view = sf::View(sf::Vector2f( 0, 0), sf::Vector2f(1280, 720));
 	m_view2 = sf::View(sf::Vector2f(0, 0), sf::Vector2f(1280, 720));
 	m_view2.setCenter(m_window.getSize().x / 2, m_window.getSize().y / 2);
+
 	/*******************************************************************************/
 	
 	m_specs = new specs(*this);
@@ -89,7 +85,7 @@ Game::Game() :
 	m_accelerationScreen = new AccelerationScreen(*this);
 	m_changeProfile = new changeProfile(*this);
 
-	m_level = new Levels(m_currentLevel, *m_car);
+	m_level = new Levels(m_currentLevel, *m_player, *m_worldSquares);
 
 }
 
@@ -236,66 +232,17 @@ void Game::update(sf::Time time)
 		m_window.setView(m_view2);
 		break;
 	case GameState::Racing:
-
 		m_view.setCenter(playerPos);
-		m_worldSquares->update();
 		m_window.setView(m_view);
-
-		m_level->update(time.asSeconds());
-
-		m_xbox.update();
-		if (m_xbox.m_currentState.RTtrigger<-10.0)
-		{
-			m_car->increaseSpeed();
-		}
-		else if (m_xbox.m_currentState.RTtrigger < 0.0&& m_xbox.m_currentState.RTtrigger > -10.0)
-		{
-			m_car->slowDown();
-		}
-
-		if (m_xbox.m_currentState.LTtrigger>10.0)
-		{
-			m_car->decreaseSpeed();
-		}
-		if (m_car->isCarMoving() == true)
-		{
-			if (m_xbox.m_currentState.LeftThumbStick.x > 75)
-			{
-				m_car->increaseRotation();
-			}
-			if (m_xbox.m_currentState.LeftThumbStick.x < -75)
-			{
-				m_car->decreaseRotation();
-			}
-		}
-		if (m_xbox.m_currentState.Back)
-		{
-			m_currentGameState = GameState::TheMenu;
-		}
-		if (m_xbox.m_currentState.A)
-		{
-			m_car->breaks();
-		}
-
-		m_player->update(time.asSeconds(), m_view);
-
+		m_level->update(time.asSeconds(), m_view);
 		break;
 	case GameState::ChangeP:
 		m_changeProfile->update();
 		break;
-
-		
-		
-
 	default:
-
 		break;
 		
 	}
-
-
-
-
 	
 }
 
@@ -395,21 +342,16 @@ void Game::render()
 		break;
 	case GameState::Racing:   //put in levels
 		m_window.clear(sf::Color(0, 0, 0, 255));
-		/*for (int i = 0; i < 10; i++)
-		{
-			m_window.draw(m_testSprite[i]);
-		}*/
-		m_level->render(m_window);
+		
+
 		for (int i = 0; i < 10; i++)
 		{
-			if (isInView(m_testSprite[i]) == true)
+			if (isInView(m_groundSprite[i]) == true)
 			{
-				m_window.draw(m_testSprite[i]);
+				m_window.draw(m_groundSprite[i]);
 			}
 		}
-		m_worldSquares->render(m_window);
-		m_car->draw(m_window);
-		m_player->draw();
+		m_level->render(m_window);
 		m_window.display();
 		break;
 	case GameState::ChangeP:

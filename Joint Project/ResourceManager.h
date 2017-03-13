@@ -20,17 +20,27 @@ struct FontData
 	std::string m_fileNameFont;
 };
 
-struct BackgroundData
+struct LamboData
 {
 	std::string m_fileName;
 };
 
+struct TileData
+{
+	std::string m_fileName;
+};
+
+struct GroundData
+{
+	std::string m_fileName;
+};
 
 struct LevelData
 {
-	BackgroundData m_background;
+	LamboData m_lambo;
 	FontData m_Font;
-
+	TileData m_Tiles;
+	GroundData m_ground;
 };
 
 class LevelLoader

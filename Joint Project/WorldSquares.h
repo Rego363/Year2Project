@@ -10,14 +10,14 @@ class Game;
 #include"Button.h"
 #include"Widget.h"
 #include "GUI.h"
-#include"Game.h"
+#include "ResourceManager.h"
 
 
 class worldSquares {
 
 
 public:
-	worldSquares(Game &game);
+	worldSquares(Game &game, LevelData &level);
 	~worldSquares();
 
 	void render(sf::RenderWindow& window);
@@ -29,6 +29,7 @@ public:
 
 private: 
 
+	LevelData *m_currentLevel;
 	GUI m_gui;
 	sf::Texture m_texture;
 

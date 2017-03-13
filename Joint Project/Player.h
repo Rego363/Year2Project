@@ -26,14 +26,13 @@ public:
 	std::string getName();
 
 	void update(float dt, sf::View &view);
-	void draw();
+	void draw(sf::RenderWindow & window);
+
+	Car m_car; //the players car
 
 private:
 	std::string filename;
 	std::ifstream fileInput;
-
-
-	Car m_car; //the players car
 
 	std::ofstream fileOutput;
 	std::stringstream fileStream;

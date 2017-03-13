@@ -23,7 +23,7 @@ public:
 	void slowDown();
 	bool isCarMoving();
 	void breaks();
-	void setTexture(sf::Texture carTex);
+	void setCurrentTexture(sf::Texture carTex);
 private:
 	
 	float m_maxSpeed;

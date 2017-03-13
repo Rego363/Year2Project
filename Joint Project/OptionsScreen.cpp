@@ -42,7 +42,7 @@ OptionsScreen::~OptionsScreen()
 void OptionsScreen::render(sf::RenderWindow & window)
 {
 
-	m_gui.draw(window);
+	m_gui. draw(window);
 }
 
 /// <summary>

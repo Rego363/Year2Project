@@ -8,7 +8,6 @@ Known Bugs: none
 */
 #include<SFML\Graphics.hpp>
 #include"Widget.h"
-#include "levels.h"
 
 class Label: public Widget {
 public:

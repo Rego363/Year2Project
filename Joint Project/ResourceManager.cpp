@@ -5,18 +5,27 @@ void operator >> (const YAML::Node& FontNode, FontData& font)
 	font.m_fileNameFont = FontNode["fontfile"].as<std::string>();
 }
 
-void operator >> (const YAML::Node& backgroundNode, BackgroundData& background)
+void operator >> (const YAML::Node& lamboNode, LamboData& lambo)
 {
-	background.m_fileName = backgroundNode["file"].as<std::string>();
+	lambo.m_fileName = lamboNode["file"].as<std::string>();
 }
 
+void operator >> (const YAML::Node& tileNode, TileData& maptile)
+{
+	maptile.m_fileName = tileNode["file"].as<std::string>();
+}
 
+void operator >> (const YAML::Node& groundNode, GroundData& ground)
+{
+	ground.m_fileName = groundNode["groundfile"].as<std::string>();
+}
 
 void operator >> (const YAML::Node& levelNode, LevelData& level)
 {
-	levelNode["background"] >> level.m_background;
+	levelNode["lambo"] >> level.m_lambo;
 	levelNode["font"] >> level.m_Font;
-
+	levelNode["maptile"] >> level.m_Tiles;
+	levelNode["ground"] >> level.m_ground;
 }
 
 LevelLoader::LevelLoader()

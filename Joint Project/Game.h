@@ -13,29 +13,28 @@
 #include "GarageScreen.h"
 #include "DisplayScreen.h"
 #include "Player.h"
-#include"Help.h"
+#include "Help.h"
 #include "Liscence.h"
 #include "Splash.h"
-#include"DifficultyScreen.h"
-#include"SteeringScreen.h"
-#include"TurboScreen.h"
-#include"BrakingScreen.h"
-#include"SpeedScreen.h"
-#include"AccelerationScreen.h"
-#include"Car.h"
-#include"XBOX360CONTROLLER.h"
+#include "DifficultyScreen.h"
+#include "SteeringScreen.h"
+#include "TurboScreen.h"
+#include "BrakingScreen.h"
+#include "SpeedScreen.h"
+#include "AccelerationScreen.h"
+#include "Car.h"
+#include "XBOX360CONTROLLER.h"
 
 #include "Specs.h"
 
-
 #include "Liscence.h"
 #include "Splash.h"
-#include"DifficultyScreen.h"
-#include"SteeringScreen.h"
-#include"TurboScreen.h"
-#include"BrakingScreen.h"
-#include"SpeedScreen.h"
-#include"AccelerationScreen.h"
+#include "DifficultyScreen.h"
+#include "SteeringScreen.h"
+#include "TurboScreen.h"
+#include "BrakingScreen.h"
+#include "SpeedScreen.h"
+#include "AccelerationScreen.h"
 #include "changeProfile.h"
 #include "ResourceManager.h"
 #include "levels.h"
@@ -64,6 +63,7 @@ class specs;
 class playGame;
 class changeProfile;
 class worldSquares;
+class Levels;
 
 
 
@@ -151,13 +151,13 @@ private:
 	/**********************/
 
 	Car *m_car;
-	sf::Texture m_testText;
+	sf::Texture m_startCar;
 	sf::Vector2f m_startPos;
 	sf::View m_view;
 	sf::View m_view2;
 
-	sf::Texture m_testTextBack;
-	sf::Sprite m_testSprite[30];
+	sf::Texture m_ground;
+	sf::Sprite m_groundSprite[30];
 	Xbox360Controller m_xbox;
 	/**********************/
 

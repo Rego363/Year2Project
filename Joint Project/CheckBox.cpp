@@ -13,7 +13,7 @@ CheckBox::CheckBox(std::string s, float x, float y) :
 	m_id = "checkbox";
 	if (!m_font.loadFromFile("Fonts/AmericanCaptain.ttf"))
 	{
-
+		
 	}
 	m_icon.setFillColor(sf::Color::White);
 	m_icon.setOutlineColor(sf::Color::White);

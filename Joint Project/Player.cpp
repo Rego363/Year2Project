@@ -263,9 +263,9 @@ void Player::update(float dt, sf::View &view)
 	}
 }
 
-void Player::draw()
+void Player::draw(sf::RenderWindow & window)
 {
-	m_car.draw(*m_window);
+	m_car.draw(window);
 }
 
 
