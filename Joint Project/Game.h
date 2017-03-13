@@ -4,6 +4,7 @@
 #include <SFML\Graphics.hpp>
 #include <SFML\Audio.hpp>
 #include <iostream>
+#include <SFML\Graphics\Rect.hpp>
 
 #include "OptionsScreen.h"
 #include "playGame.h"
@@ -109,6 +110,8 @@ public:
 	void changeGameState(GameState gameState);
 	void changeGameDifficulty(GameDifficulty gameDiff);
 	sf::RenderWindow m_window;
+
+	bool isInView(sf::Sprite sprite);
 private:
 	void processInput();
 	void update(sf::Time);
