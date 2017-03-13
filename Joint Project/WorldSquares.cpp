@@ -42,7 +42,7 @@ worldSquares::worldSquares(Game &game):
 	m_Flat4.setTexture(m_texture);
 	m_Flat4.setTextureRect(sf::IntRect(605, 107, 172, 348));
 	m_Flat4.setPosition(250, 100);
-	m_Flat4.rotate(90);
+	 m_Flat4.rotate(90);
 
 	m_Flat5.setTexture(m_texture);
 	m_Flat5.setTextureRect(sf::IntRect(605, 107, 172, 348));
