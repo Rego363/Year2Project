@@ -2,6 +2,7 @@
 
 #include "Game.h"
 
+
 static double const MS_PER_UPDATE = 10.0;
 
 /// <summary>
@@ -18,7 +19,7 @@ Game::Game() :
 	m_text.setString("RACING GAME");
 	m_text.setPosition(m_window.getSize().x / 4, m_window.getSize().y / 2);
 	m_text.setCharacterSize(70);
-	m_player = new Player();
+	
 	m_optionsScreen = new OptionsScreen(*this);
 	m_mapSelect = new playGame(*this);
 	m_soundScreen = new SoundScreen(*this);
@@ -49,7 +50,7 @@ Game::Game() :
 	}
 	m_startPos = sf::Vector2f(m_window.getSize().x / 2, m_window.getSize().y / 4);
 	m_car = new Car(m_testText, m_startPos);
-
+	m_player = new Player((float)m_window.getSize().x / 2,(float) m_window.getSize().y / 4, m_testText, m_window);
 
 
 	if (!m_testTextBack.loadFromFile("ground.png"))
@@ -118,6 +119,18 @@ void Game::run()
 		render();
 
 	}
+}
+
+
+//check if sprites in view, cull sprite if its not in view
+bool Game::isInView(sf::Sprite sprite)
+{
+	sf::FloatRect rect(m_view.getCenter().x - (m_view.getSize().x/2), m_view.getCenter().y - (m_view.getSize().y/2), m_view.getSize().x, m_view.getSize().y);
+	if (rect.intersects(sprite.getGlobalBounds()))
+	{
+		return true;
+	}
+	return false;
 }
 
 /// <summary>
@@ -218,45 +231,7 @@ void Game::update(sf::Time time)
 		m_window.setView(m_view2);
 		break;
 	case GameState::Racing:
-		m_view.setCenter(playerPos);
-
-		m_window.setView(m_view);
-
-		m_car->update(time.asSeconds());
-
-		m_xbox.update();
-		if (m_xbox.m_currentState.RTtrigger<-10.0)
-		{
-			m_car->increaseSpeed();
-		}
-		else if (m_xbox.m_currentState.RTtrigger < 0.0&& m_xbox.m_currentState.RTtrigger > -10.0)
-		{
-			m_car->slowDown();
-		}
-
-		if (m_xbox.m_currentState.LTtrigger>10.0)
-		{
-			m_car->decreaseSpeed();
-		}
-		if (m_car->isCarMoving() == true)
-		{
-			if (m_xbox.m_currentState.LeftThumbStick.x > 75)
-			{
-				m_car->increaseRotation();
-			}
-			if (m_xbox.m_currentState.LeftThumbStick.x < -75)
-			{
-				m_car->decreaseRotation();
-			}
-		}
-		if (m_xbox.m_currentState.Back)
-		{
-			m_currentGameState = GameState::TheMenu;
-		}
-		if (m_xbox.m_currentState.A)
-		{
-			m_car->breaks();
-		}
+		m_player->update(time.asSeconds(), m_view);
 		break;
 	case GameState::ChangeP:
 		m_changeProfile->update();
@@ -378,9 +353,12 @@ void Game::render()
 		m_window.clear(sf::Color(0, 0, 0, 255));
 		for (int i = 0; i < 10; i++)
 		{
-			m_window.draw(m_testSprite[i]);
+			if (isInView(m_testSprite[i]) == true)
+			{
+				m_window.draw(m_testSprite[i]);
+			}
 		}
-		m_car->draw(m_window);
+		m_player->draw();
 		m_window.display();
 		break;
 	case GameState::ChangeP:

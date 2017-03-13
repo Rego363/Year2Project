@@ -24,7 +24,7 @@ Car::Car(sf::Texture const & texture, sf::Vector2f const & pos):
 	//m_fireSprite = sf::RectangleShape(sf::Vector2f(100, 150));
 	m_fireSprite.setTexture(m_fireTexture);
 
-	animation = new Animation(&m_fireTexture, sf::Vector2u(8, 4), 0.3f);
+	animation = new Animation(&m_fireTexture, sf::Vector2u(8, 4), 0.1f);
 
 	
 	m_fireSprite.setPosition(m_sprite.getPosition().x, m_sprite.getPosition().y);
@@ -60,8 +60,8 @@ void Car::update(float dt)
 			m_speed = 0;
 		}
 	}
-	/*m_fireSprite.setPosition(m_sprite.getPosition().x , m_sprite.getPosition().y-30);
-	m_fireSprite.setRotation(m_sprite.getRotation()-90);*/
+	m_fireSprite.setPosition(m_fireSprite.getPosition().x  , m_fireSprite.getPosition().y);
+	m_fireSprite.setRotation(m_fireSprite.getRotation());
 	animation->update(0, dt);
 	m_fireSprite.setTextureRect(animation->uvRect);
 }

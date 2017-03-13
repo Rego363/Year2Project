@@ -1,8 +1,8 @@
 #include "Player.h"
 
-
-
-Player::Player()
+Player::Player(float carX, float carY, sf::Texture &carTexture, sf::RenderWindow &window):
+	m_car(carTexture, sf::Vector2f(carX,carY)),
+	m_window(&window)
 {
 	m_money = 100;
 	m_carSelect = 0;
@@ -223,6 +223,52 @@ std::string Player::getName()
 {
 	return m_name;
 }
+
+//where all the actions of the car are handled
+void Player::update(float dt, sf::View &view)
+{
+	view.setCenter(m_car.getPos()); //follow the player car
+	m_window->setView(view);
+	m_car.update(dt);
+
+	m_xbox.update();
+	if (m_xbox.m_currentState.RTtrigger<-10.0)
+	{
+		m_car.increaseSpeed();
+	}
+	else if (m_xbox.m_currentState.RTtrigger < 0.0&& m_xbox.m_currentState.RTtrigger > -10.0)
+	{
+		m_car.slowDown();
+	}
+
+	if (m_xbox.m_currentState.LTtrigger>10.0)
+	{
+		m_car.decreaseSpeed();
+	}
+	if (m_car.isCarMoving() == true)
+	{
+		if (m_xbox.m_currentState.LeftThumbStick.x > 75)
+		{
+			m_car.increaseRotation();
+		}
+		if (m_xbox.m_currentState.LeftThumbStick.x < -75)
+		{
+			m_car.decreaseRotation();
+		}
+	}
+	
+	if (m_xbox.m_currentState.A)
+	{
+		m_car.breaks();
+	}
+}
+
+void Player::draw()
+{
+	m_car.draw(*m_window);
+}
+
+
 
 /// <summary>
 ///  Method to return the minutes portion of the players highscore
