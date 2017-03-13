@@ -15,7 +15,7 @@ Known Bugs: none
 #include<SFML\Graphics.hpp>
 #include"XBOX360CONTROLLER.h"
 #include<SFML\Audio.hpp>
-
+#include"CheckBox.h"
 
 //will contain all ui elements
 class GUI
@@ -27,6 +27,7 @@ public:
 	void addButton(Button *button); //add button
 	void addSlider(Slider *slider); //add slider
 	void addRadioButton(RadioButton *radioButton);// add radioButton
+	void addCheckBox(CheckBox *checkBox); //add checkbox
 	void addWidget(Widget *widget); // add widget(can be used instead of all of the above adds)
 	void update(int &index, int maxItems); //update loop
 	void draw(sf::RenderWindow &window); //draw loop

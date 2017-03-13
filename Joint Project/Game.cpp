@@ -222,7 +222,7 @@ void Game::update(sf::Time time)
 
 		m_window.setView(m_view);
 
-		m_car->update();
+		m_car->update(time.asSeconds());
 
 		m_xbox.update();
 		if (m_xbox.m_currentState.RTtrigger<-10.0)

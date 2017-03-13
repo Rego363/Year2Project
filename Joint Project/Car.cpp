@@ -9,8 +9,27 @@ Car::Car(sf::Texture const & texture, sf::Vector2f const & pos):
 	m_sprite.setTexture(m_texture); //set texture
 	m_sprite.setPosition(m_position); //set pos
 	m_sprite.setScale(0.10, 0.10); //scale texture down
-	m_sprite.setOrigin(m_sprite.getTextureRect().width/2.0, m_sprite.getTextureRect().height / 2.0); //origin set to centre for rotations
+	m_sprite.setOrigin(m_sprite.getTextureRect().width / 2.0, m_sprite.getTextureRect().height / 2.0); //origin set to centre for rotations		
 
+
+	if (!m_fireTexture.loadFromFile("fire.png") )
+	{
+	
+	}
+
+	textureSize = m_fireTexture.getSize();
+	textureSize.x =textureSize.x/ 8;
+	textureSize.y = textureSize.y/4;
+
+	//m_fireSprite = sf::RectangleShape(sf::Vector2f(100, 150));
+	m_fireSprite.setTexture(m_fireTexture);
+
+	animation = new Animation(&m_fireTexture, sf::Vector2u(8, 4), 0.3f);
+
+	
+	m_fireSprite.setPosition(m_sprite.getPosition().x, m_sprite.getPosition().y);
+	m_fireSprite.setOrigin(m_fireSprite.getTextureRect().width / 2.0, m_fireSprite.getTextureRect().height / 2.0);
+	//m_fireSprite.setScale(0.20, 0.50); //scale texture down
 	m_speed = 0; 
 	m_rotation = 0;
 	m_acceleration = 0.5;
@@ -19,7 +38,7 @@ Car::Car(sf::Texture const & texture, sf::Vector2f const & pos):
 }
 
 //in this update loop the movement formula is implemented and also the cars rotation is set
-void Car::update()
+void Car::update(float dt)
 {
 	if (m_speed == 0.0f ||m_speed<0.9 &&m_speed>0.0)
 	{
@@ -41,13 +60,17 @@ void Car::update()
 			m_speed = 0;
 		}
 	}
-	
+	/*m_fireSprite.setPosition(m_sprite.getPosition().x , m_sprite.getPosition().y-30);
+	m_fireSprite.setRotation(m_sprite.getRotation()-90);*/
+	animation->update(0, dt);
+	m_fireSprite.setTextureRect(animation->uvRect);
 }
 
 //draw the car to the screen
 void Car::draw(sf::RenderWindow & window)
 {
 	window.draw(m_sprite);
+	window.draw(m_fireSprite);
 }
 
 //when called the speed of the car increases

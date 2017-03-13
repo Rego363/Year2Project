@@ -50,7 +50,7 @@ void OptionsScreen::render(sf::RenderWindow & window)
 /// </summary>
 void OptionsScreen::update()
 {
-	m_gui.update(m_currentSelect,5);
+	m_gui.update(m_currentSelect,4);
 }
 
 /// <summary>
