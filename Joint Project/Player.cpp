@@ -232,6 +232,7 @@ void Player::update(float dt, sf::View &view)
 	m_car.update(dt);
 
 	m_xbox.update();
+
 	if (m_xbox.m_currentState.RTtrigger<-10.0)
 	{
 		m_car.increaseSpeed();

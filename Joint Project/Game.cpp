@@ -19,7 +19,7 @@ Game::Game() :
 	m_text.setString("RACING GAME");
 	m_text.setPosition(m_window.getSize().x / 4, m_window.getSize().y / 2);
 	m_text.setCharacterSize(70);
-	
+
 	m_optionsScreen = new OptionsScreen(*this);
 	m_mapSelect = new playGame(*this);
 	m_soundScreen = new SoundScreen(*this);
@@ -51,10 +51,10 @@ Game::Game() :
 	}
 	m_startPos = sf::Vector2f(m_window.getSize().x / 2, m_window.getSize().y / 4);
 	m_car = new Car(m_testText, m_startPos);
-	m_player = new Player((float)m_window.getSize().x / 2,(float) m_window.getSize().y / 4, m_testText, m_window);
+	m_player = new Player((float)m_window.getSize().x / 2 +500, (float)m_window.getSize().y / 4 -300, m_testText, m_window);
 
 
-	if (!m_testTextBack.loadFromFile("ground.png"))
+	if (!m_testTextBack.loadFromFile("sand1.png"))
 	{
 
 	}
@@ -62,11 +62,54 @@ Game::Game() :
 	{
 		m_testSprite[i].setTexture(m_testTextBack);
 		m_testSprite[i].setScale(1.22, 1.22);
-		m_testSprite[i].setPosition(i*m_testSprite[i].getGlobalBounds().width, 0);
-		
+		m_testSprite[i].setPosition(0, -i*m_testSprite[i].getGlobalBounds().height);
+
 	}
+	
+		for (int i = 10; i < 20; i++)
+		{
 
+			m_testSprite[i].setTexture(m_testTextBack);
+			m_testSprite[i].setScale(1.22, 1.22);
+			m_testSprite[i].setPosition(1 * m_testSprite[i].getGlobalBounds().width, (-i+10)*m_testSprite[i].getGlobalBounds().height);
+		}
+		for (int i = 20; i < 30; i++)
+		{
 
+			m_testSprite[i].setTexture(m_testTextBack);
+			m_testSprite[i].setScale(1.22, 1.22);
+			m_testSprite[i].setPosition(2 * m_testSprite[i].getGlobalBounds().width, (-i+20)*m_testSprite[i].getGlobalBounds().height);
+		}
+		for (int i = 30; i < 40; i++)
+		{
+
+			m_testSprite[i].setTexture(m_testTextBack);
+			m_testSprite[i].setScale(1.22, 1.22);
+			m_testSprite[i].setPosition(3* m_testSprite[i].getGlobalBounds().width, (-i+30)*m_testSprite[i].getGlobalBounds().height);
+		}
+
+		for (int i = 40; i < 50; i++)
+		{
+
+			m_testSprite[i].setTexture(m_testTextBack);
+			m_testSprite[i].setScale(1.22, 1.22);
+			m_testSprite[i].setPosition(4 * m_testSprite[i].getGlobalBounds().width, (-i + 40)*m_testSprite[i].getGlobalBounds().height);
+		}
+
+		for (int i = 50; i < 60; i++)
+		{
+
+			m_testSprite[i].setTexture(m_testTextBack);
+			m_testSprite[i].setScale(1.22, 1.22);
+			m_testSprite[i].setPosition(5 * m_testSprite[i].getGlobalBounds().width, (-i + 50)*m_testSprite[i].getGlobalBounds().height);
+		}
+		for (int i = 60; i < 70; i++)
+		{
+
+			m_testSprite[i].setTexture(m_testTextBack);
+			m_testSprite[i].setScale(1.22, 1.22);
+			m_testSprite[i].setPosition(6 * m_testSprite[i].getGlobalBounds().width, (-i + 60)*m_testSprite[i].getGlobalBounds().height);
+		}
 	m_view = sf::View(sf::Vector2f( 0, 0), sf::Vector2f(1280, 720));
 	m_view2 = sf::View(sf::Vector2f(0, 0), sf::Vector2f(1280, 720));
 	m_view2.setCenter(m_window.getSize().x / 2, m_window.getSize().y / 2);
@@ -237,41 +280,17 @@ void Game::update(sf::Time time)
 		m_worldSquares->update();
 		m_window.setView(m_view);
 
-		m_car->update(time.asSeconds());
 
 		m_xbox.update();
-		if (m_xbox.m_currentState.RTtrigger<-10.0)
-		{
-			m_car->increaseSpeed();
-		}
-		else if (m_xbox.m_currentState.RTtrigger < 0.0&& m_xbox.m_currentState.RTtrigger > -10.0)
-		{
-			m_car->slowDown();
-		}
 
-		if (m_xbox.m_currentState.LTtrigger>10.0)
+		if (m_xbox.m_currentState.Back &&!m_xbox.m_previousState.Back)
 		{
-			m_car->decreaseSpeed();
+			//m_currentGameState = GameState::TheMenu;
+			m_worldSquares->clearTrack();
+			m_worldSquares->mapZero();
+
 		}
-		if (m_car->isCarMoving() == true)
-		{
-			if (m_xbox.m_currentState.LeftThumbStick.x > 75)
-			{
-				m_car->increaseRotation();
-			}
-			if (m_xbox.m_currentState.LeftThumbStick.x < -75)
-			{
-				m_car->decreaseRotation();
-			}
-		}
-		if (m_xbox.m_currentState.Back)
-		{
-			m_currentGameState = GameState::TheMenu;
-		}
-		if (m_xbox.m_currentState.A)
-		{
-			m_car->breaks();
-		}
+		
 
 		m_player->update(time.asSeconds(), m_view);
 
@@ -394,7 +413,7 @@ void Game::render()
 		break;
 	case GameState::Racing:
 		m_window.clear(sf::Color(0, 0, 0, 255));
-		for (int i = 0; i < 10; i++)
+		for (int i = 0; i < 50; i++)
 		{
 			if (isInView(m_testSprite[i]) == true)
 			{
@@ -403,7 +422,6 @@ void Game::render()
 		}
 
 		m_worldSquares->render(m_window);
-		m_car->draw(m_window);
 
 		m_player->draw();
 
