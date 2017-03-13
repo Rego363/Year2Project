@@ -4,6 +4,7 @@
 #include <SFML\Graphics.hpp>
 #include <SFML\Audio.hpp>
 #include <iostream>
+#include <SFML\Graphics\Rect.hpp>
 
 #include "OptionsScreen.h"
 #include "playGame.h"
@@ -38,6 +39,8 @@
 #include "changeProfile.h"
 #include "ResourceManager.h"
 #include "levels.h"
+#include "WorldSquares.h"
+
 
 using namespace std;
 
@@ -60,7 +63,7 @@ class AccelerationScreen;
 class specs;
 class playGame;
 class changeProfile;
-
+class worldSquares;
 
 
 
@@ -83,7 +86,8 @@ enum GameState {
 	Turbo,
 	Steering,
 	Racing,
-	ChangeP
+	ChangeP,
+	ThewSquares
 
 	
 };
@@ -107,23 +111,19 @@ public:
 	void changeGameState(GameState gameState);
 	void changeGameDifficulty(GameDifficulty gameDiff);
 	sf::RenderWindow m_window;
+	bool isInView(sf::Sprite sprite);
 
 private:
 	void processInput();
 	void update(sf::Time);
 	void render();
 
-	
 	sf::Font m_font;
 	sf::Text m_text;
 
-
 	GameState m_currentGameState = GameState::TheLicense;
 	playGame * m_mapSelect;
-
-
 	
-
 	GameDifficulty m_currentDifficulty = GameDifficulty::Medium;
 
 	OptionsScreen* m_optionsScreen;
@@ -144,6 +144,7 @@ private:
 	AccelerationScreen *m_accelerationScreen;
 	changeProfile * m_changeProfile;
 	Levels *m_level;
+	worldSquares * m_worldSquares;
 
 
 	/*For testing*/

@@ -5,11 +5,14 @@
 #include <sstream>
 #include <cstdlib>
 #include <cmath>
+#include "Car.h"
+#include "XBOX360CONTROLLER.h"
 
 class Player
 {
 public:
-	Player();
+	Player(float carX, float carY, sf::Texture &carTexture, sf::RenderWindow &window);
+	
 	~Player();
 	void load(std::string name);
 	void save(std::string replace);
@@ -22,9 +25,15 @@ public:
 	int getSecHighScore(); 
 	std::string getName();
 
+	void update(float dt, sf::View &view);
+	void draw();
+
 private:
 	std::string filename;
 	std::ifstream fileInput;
+
+
+	Car m_car; //the players car
 
 	std::ofstream fileOutput;
 	std::stringstream fileStream;
@@ -34,6 +43,7 @@ private:
 	int m_secHighScore;
 	int m_minHighScore;
 	std::string m_name;
-	
+	Xbox360Controller m_xbox;
+	sf::RenderWindow *m_window;
 };
 
