@@ -10,6 +10,8 @@ Known Bugs: none
 #include<SFML\Graphics.hpp>
 #include"Button.h"
 #include"Widget.h"
+#include "Game.h"
+
 
 //CheckBox
 class CheckBox : public Widget {

@@ -19,10 +19,12 @@ CheckBox::CheckBox(std::string s, float x, float y) :
 	m_icon.setOutlineThickness(1.3);
 	m_isActive = false;
 	m_hasFocus = false;
-	if (!m_font.loadFromFile("Fonts/American Captain.ttf"))
+
+	if (!m_font.loadFromFile(level.m_Font.m_fileNameFont))
 	{
 		//error message
 	}
+
 	m_text.setFont(m_font);
 	m_text.setString(s);
 	m_text.setPosition((x + 10), y);

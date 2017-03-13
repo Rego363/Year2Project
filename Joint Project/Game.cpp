@@ -10,10 +10,16 @@ static double const MS_PER_UPDATE = 10.0;
 Game::Game() :
 	m_window(sf::VideoMode(1280, 720), "Joint Project, Team C")
 {
-	if (!m_font.loadFromFile("Fonts/American Captain.ttf"))
+	if (!LevelLoader::load(level))
+	{
+		return;
+	}
+
+	if (!m_font.loadFromFile(level.m_Font.m_fileNameFont))
 	{
 		std::cout << "failed to load font" << std::endl;
 	}
+
 	m_text.setFont(m_font);
 	m_text.setString("RACING GAME");
 	m_text.setPosition(m_window.getSize().x / 4, m_window.getSize().y / 2);
