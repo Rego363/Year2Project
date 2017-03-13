@@ -12,7 +12,8 @@ Label::Label(std::string s,float x=0,float y=0):
 {
 	hasTexture = false; //standard label will have no texture
 	m_id = "label";
-	if (!m_font.loadFromFile("Fonts/American Captain.ttf"))
+
+	if (!m_font.loadFromFile("Fonts/AmericanCaptain.ttf"))
 	{
 		//error message
 	}
@@ -21,7 +22,6 @@ Label::Label(std::string s,float x=0,float y=0):
 	m_text.setPosition(x, y);
 	m_text.setColor(sf::Color::White);
 	m_text.setCharacterSize(50);
-	
 	
 }
 

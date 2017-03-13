@@ -144,3 +144,9 @@ void Car::breaks()
 		m_speed = 0;
 	}
 }
+
+void Car::setTexture(sf::Texture carTex)
+{
+	m_texture = carTex;
+}
+

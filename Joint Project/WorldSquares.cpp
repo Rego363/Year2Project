@@ -9,7 +9,7 @@ worldSquares::worldSquares(Game &game):
 	{
 		//handle
 	}
-	mapOne();
+	mapZero();
 }
 
 worldSquares::~worldSquares()

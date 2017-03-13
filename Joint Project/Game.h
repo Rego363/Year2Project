@@ -33,8 +33,9 @@
 #include"SpeedScreen.h"
 #include"AccelerationScreen.h"
 #include "changeProfile.h"
+#include "ResourceManager.h"
+#include "levels.h"
 #include "WorldSquares.h"
-
 
 
 using namespace std;
@@ -105,24 +106,19 @@ public:
 	void changeGameState(GameState gameState);
 	void changeGameDifficulty(GameDifficulty gameDiff);
 	sf::RenderWindow m_window;
-
 	bool isInView(sf::Sprite sprite);
+
 private:
 	void processInput();
 	void update(sf::Time);
 	void render();
 
-	
 	sf::Font m_font;
 	sf::Text m_text;
 
-
-	GameState m_currentGameState = GameState::Racing;
+	GameState m_currentGameState = GameState::TheLicense;
 	playGame * m_mapSelect;
-
-
 	
-
 	GameDifficulty m_currentDifficulty = GameDifficulty::Medium;
 
 	OptionsScreen* m_optionsScreen;
@@ -142,6 +138,7 @@ private:
 	SpeedScreen *m_speedScreen;
 	AccelerationScreen *m_accelerationScreen;
 	changeProfile * m_changeProfile;
+	Levels *m_level;
 	worldSquares * m_worldSquares;
 
 
@@ -158,6 +155,9 @@ private:
 	sf::Sprite m_testSprite[70];
 	Xbox360Controller m_xbox;
 	/**********************/
+
+	LevelData m_currentLevel;
+	LevelLoader m_levelLoader;
 
 };
 

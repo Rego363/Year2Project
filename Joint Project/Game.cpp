@@ -11,10 +11,16 @@ static double const MS_PER_UPDATE = 10.0;
 Game::Game() :
 	m_window(sf::VideoMode(1280, 720), "Joint Project, Team C")
 {
-	if (!m_font.loadFromFile("Fonts/American Captain.ttf"))
+	if (!LevelLoader::load(m_currentLevel))
+	{
+		return;
+	}
+
+	if (!m_font.loadFromFile(m_currentLevel.m_Font.m_fileNameFont))
 	{
 		std::cout << "failed to load font" << std::endl;
 	}
+
 	m_text.setFont(m_font);
 	m_text.setString("RACING GAME");
 	m_text.setPosition(m_window.getSize().x / 4, m_window.getSize().y / 2);
@@ -39,9 +45,6 @@ Game::Game() :
 	m_worldSquares = new worldSquares(*this);
 
 
-
-
-
 	/*  FOR TESTING*/
 	/*******************************************************************************/
 
@@ -58,6 +61,7 @@ Game::Game() :
 	{
 
 	}
+
 	for (int i = 0; i < 10; i++)
 	{
 		m_testSprite[i].setTexture(m_testTextBack);
@@ -128,7 +132,7 @@ Game::Game() :
 	m_accelerationScreen = new AccelerationScreen(*this);
 	m_changeProfile = new changeProfile(*this);
 
-
+	m_level = new Levels(m_currentLevel, *m_car);
 
 }
 
@@ -275,10 +279,10 @@ void Game::update(sf::Time time)
 		m_window.setView(m_view2);
 		break;
 	case GameState::Racing:
-
-		m_view.setCenter(playerPos);
 		m_worldSquares->update();
 		m_window.setView(m_view);
+
+		m_level->update(time.asSeconds());
 
 
 		m_xbox.update();
@@ -287,8 +291,7 @@ void Game::update(sf::Time time)
 		{
 			//m_currentGameState = GameState::TheMenu;
 			m_worldSquares->clearTrack();
-			m_worldSquares->mapZero();
-
+			m_worldSquares->mapOne();
 		}
 		
 
@@ -322,11 +325,8 @@ void Game::render()
 
 	switch (m_currentGameState)
 	{
-	default:
-		break;
 
 	case GameState::TheOptions:
-
 		m_window.clear(sf::Color(0, 0, 0, 255));
 		m_optionsScreen->render(m_window);
 		m_window.display();
@@ -411,26 +411,26 @@ void Game::render()
 		m_turboScreen->draw(m_window);
 		m_window.display();
 		break;
-	case GameState::Racing:
+	case GameState::Racing:   //put in levels
 		m_window.clear(sf::Color(0, 0, 0, 255));
-		for (int i = 0; i < 50; i++)
+		m_level->render(m_window);
+		for (int i = 0; i < 70; i++)
 		{
 			if (isInView(m_testSprite[i]) == true)
 			{
 				m_window.draw(m_testSprite[i]);
 			}
 		}
-
 		m_worldSquares->render(m_window);
-
 		m_player->draw();
-
 		m_window.display();
 		break;
 	case GameState::ChangeP:
 		m_window.clear(sf::Color(0, 0, 0, 255));
 		m_changeProfile->render(m_window);
 		m_window.display();
+		break;
+	default:
 		break;
 	}
 
@@ -446,3 +446,4 @@ void Game::changeGameDifficulty(GameDifficulty gameDiff)
 {
 	m_currentDifficulty = gameDiff;
 }
+
