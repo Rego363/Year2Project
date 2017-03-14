@@ -76,54 +76,54 @@ Game::Game() :
 		m_groundSprite[i].setScale(1.22, 1.22);
 		m_groundSprite[i].setPosition(0, -i*m_groundSprite[i].getGlobalBounds().height);
 	}
-		for (int i = 10; i < 20; i++)
-		{
+	for (int i = 10; i < 20; i++)
+	{
 
-			m_groundSprite[i].setTexture(m_ground);
-			m_groundSprite[i].setScale(1.22, 1.22);
-			m_groundSprite[i].setPosition(1 * m_groundSprite[i].getGlobalBounds().width, (-i+10)*m_groundSprite[i].getGlobalBounds().height);
-		}
-		for (int i = 20; i < 30; i++)
-		{
+		m_groundSprite[i].setTexture(m_ground);
+		m_groundSprite[i].setScale(1.22, 1.22);
+		m_groundSprite[i].setPosition(1 * m_groundSprite[i].getGlobalBounds().width, (-i + 10)*m_groundSprite[i].getGlobalBounds().height);
+	}
+	for (int i = 20; i < 30; i++)
+	{
 
-			m_groundSprite[i].setTexture(m_ground);
-			m_groundSprite[i].setScale(1.22, 1.22);
-			m_groundSprite[i].setPosition(2 * m_groundSprite[i].getGlobalBounds().width, (-i+20)*m_groundSprite[i].getGlobalBounds().height);
-		}
-		for (int i = 30; i < 40; i++)
-		{
-			m_groundSprite[i].setTexture(m_ground);
-			m_groundSprite[i].setScale(1.22, 1.22);
-			m_groundSprite[i].setPosition(3* m_groundSprite[i].getGlobalBounds().width, (-i+30)*m_groundSprite[i].getGlobalBounds().height);
-		}
+		m_groundSprite[i].setTexture(m_ground);
+		m_groundSprite[i].setScale(1.22, 1.22);
+		m_groundSprite[i].setPosition(2 * m_groundSprite[i].getGlobalBounds().width, (-i + 20)*m_groundSprite[i].getGlobalBounds().height);
+	}
+	for (int i = 30; i < 40; i++)
+	{
+		m_groundSprite[i].setTexture(m_ground);
+		m_groundSprite[i].setScale(1.22, 1.22);
+		m_groundSprite[i].setPosition(3 * m_groundSprite[i].getGlobalBounds().width, (-i + 30)*m_groundSprite[i].getGlobalBounds().height);
+	}
 
-		for (int i = 40; i < 50; i++)
-		{
+	for (int i = 40; i < 50; i++)
+	{
 
-			m_groundSprite[i].setTexture(m_ground);
-			m_groundSprite[i].setScale(1.22, 1.22);
-			m_groundSprite[i].setPosition(4 * m_groundSprite[i].getGlobalBounds().width, (-i + 40)*m_groundSprite[i].getGlobalBounds().height);
-		}
+		m_groundSprite[i].setTexture(m_ground);
+		m_groundSprite[i].setScale(1.22, 1.22);
+		m_groundSprite[i].setPosition(4 * m_groundSprite[i].getGlobalBounds().width, (-i + 40)*m_groundSprite[i].getGlobalBounds().height);
+	}
 
-		for (int i = 50; i < 60; i++)
-		{
+	for (int i = 50; i < 60; i++)
+	{
 
-			m_groundSprite[i].setTexture(m_ground);
-			m_groundSprite[i].setScale(1.22, 1.22);
-			m_groundSprite[i].setPosition(5 * m_groundSprite[i].getGlobalBounds().width, (-i + 50)*m_groundSprite[i].getGlobalBounds().height);
-		}
-		for (int i = 60; i < 70; i++)
-		{
-			m_groundSprite[i].setTexture(m_ground);
-			m_groundSprite[i].setScale(1.22, 1.22);
-			m_groundSprite[i].setPosition(6 * m_groundSprite[i].getGlobalBounds().width, (-i + 60)*m_groundSprite[i].getGlobalBounds().height);
-		}
-	m_view = sf::View(sf::Vector2f( 0, 0), sf::Vector2f(1280, 720));
+		m_groundSprite[i].setTexture(m_ground);
+		m_groundSprite[i].setScale(1.22, 1.22);
+		m_groundSprite[i].setPosition(5 * m_groundSprite[i].getGlobalBounds().width, (-i + 50)*m_groundSprite[i].getGlobalBounds().height);
+	}
+	for (int i = 60; i < 70; i++)
+	{
+		m_groundSprite[i].setTexture(m_ground);
+		m_groundSprite[i].setScale(1.22, 1.22);
+		m_groundSprite[i].setPosition(6 * m_groundSprite[i].getGlobalBounds().width, (-i + 60)*m_groundSprite[i].getGlobalBounds().height);
+	}
+	m_view = sf::View(sf::Vector2f(0, 0), sf::Vector2f(1280, 720));
 	m_view2 = sf::View(sf::Vector2f(0, 0), sf::Vector2f(1280, 720));
 	m_view2.setCenter(m_window.getSize().x / 2, m_window.getSize().y / 2);
 
 	/*******************************************************************************/
-	
+
 	m_specs = new specs(*this);
 
 	m_Liscence = new Liscence(*this);
@@ -178,8 +178,8 @@ void Game::run()
 //check if sprites in view, return false if sprite not in view
 bool Game::isInView(sf::Sprite sprite)
 {
-	sf::FloatRect rect(m_view.getCenter().x - (m_view.getSize().x/2), m_view.getCenter().y - (m_view.getSize().y/2), m_view.getSize().x, m_view.getSize().y);
 
+	sf::FloatRect rect(m_view.getCenter().x - (m_view.getSize().x/2), m_view.getCenter().y - (m_view.getSize().y/2), m_view.getSize().x, m_view.getSize().y);
 	if (rect.intersects(sprite.getGlobalBounds()))
 	{
 		return true;
@@ -305,9 +305,9 @@ void Game::update(sf::Time time)
 		break;
 	default:
 		break;
-		
+
 	}
-	
+
 }
 
 /// <summary>
@@ -406,7 +406,6 @@ void Game::render()
 		break;
 	case GameState::Racing:   //put in levels
 		m_window.clear(sf::Color(0, 0, 0, 255));
-		
 		for (int i = 0; i < 70; i++)
 		{
 			if (isInView(m_groundSprite[i]) == true)
