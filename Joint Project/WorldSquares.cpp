@@ -85,7 +85,7 @@ worldSquares::worldSquares(Game &game, LevelData &level):
 //	m_Corner4.setTextureRect(sf::IntRect(169, 109, 333, 337));
 //	m_Corner4.setPosition(250, 100);
 //	m_Corner4.rotate(180);
-	mapOne();
+	mapZero();
 }
 
 worldSquares::~worldSquares()
@@ -134,14 +134,43 @@ void worldSquares::mapZero()
 	addStraight(sf::Vector2f(1400 + (500), 95 + (-1400)), 90);
 	addStraight(sf::Vector2f(1520 + (500), 420 + (-1400)), 90);
 	addStraight(sf::Vector2f(1200 + (500), 420 + (-1400)), 90);
+	addStraight(sf::Vector2f(2300 + (500), -400 + (-1400)), 90);
+	addStraight(sf::Vector2f(2600 + (500), -400 + (-1400)), 90);
+	addStraight(sf::Vector2f(2800 + (500), -400 + (-1400)), 90);
+	addStraight(sf::Vector2f(3000 + (500), -400 + (-1400)), 90);
+	addStraight(sf::Vector2f(2750 + (500), -1835 + (-1400)), 90);
+	addStraight(sf::Vector2f(3050 + (500), -1835 + (-1400)), 90);
+	addStraight(sf::Vector2f(3130 + (500), -1535 + (-1400)), 0);
+	addStraight(sf::Vector2f(3130 + (500), -1200 + (-1400)), 0);
+	addStraight(sf::Vector2f(3130 + (500), -860 + (-1400)), 0);
+
+	
+	addStraight(sf::Vector2f(900 + (500), -600 + (-1400)), 0); // out of place
+	addStraight(sf::Vector2f(900 + (500), -900 + (-1400)), 0);      //
+	addStraight(sf::Vector2f(1850 + (500), -715 + (-1400)), 90);	//    DO NOT TOUCH
+	addStraight(sf::Vector2f(2190 + (500), -715 + (-1400)), 90);    //  
+	addStraight(sf::Vector2f(2500 + (500), -715 + (-1400)), 90);
+
 
 	addCorner(sf::Vector2f(250 + (500), 100 + (-1400)), 0);
 	addCorner(sf::Vector2f(530 + (500), 420 + (-1400)), 0);
 	addCorner(sf::Vector2f(1820 + (500), 590 + (-1400)), 180);
 	addCorner(sf::Vector2f(1550 + (500), 260 + (-1400)), 180);
+	addCorner(sf::Vector2f(1550 + (500), -200 + (-1400)), 90 );
+	addCorner(sf::Vector2f(900 + (500), -30 + (-1400)), 270 );
+	addCorner(sf::Vector2f(1190 + (500), -500 + (-1440)), 270);
+	addCorner(sf::Vector2f(1650 + (500), -360 + (-1440)), 0);
+	addCorner(sf::Vector2f(3300 + (500), -190 + (-1440)), 180);
+	addCorner(sf::Vector2f(3300 + (500), -1800 + (-1440)), 90);
+
+
 
 	addUTurn(sf::Vector2f(725 + (500), 750 + (-1400)), 90);
-	addUTurn(sf::Vector2f(1350 + (500), -70 + (-1400)), 270);
+	addUTurn(sf::Vector2f(880 + (500), -850 + (-1400)), 270);
+	addUTurn(sf::Vector2f(2390 + (500), -1020 + (-1400)), 0);
+	addUTurn(sf::Vector2f(2500 + (500), -800 + (-1400)), 180);
+	addUTurn(sf::Vector2f(2450 + (500), -1580 + (-1400)), 0);
+	addUTurn(sf::Vector2f(2500 + (500), -1360 + (-1400)), 180);
 }
 
 void worldSquares::mapOne()
