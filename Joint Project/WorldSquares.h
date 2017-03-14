@@ -1,16 +1,17 @@
 #pragma once
-
+#include<SFML\Graphics.hpp>
+#include"Button.h"
+#include"Widget.h"
+#include "GUI.h"
+#include "ResourceManager.h"
+#include "Game.h"
 #ifndef WORLDSQUARES
 #define WORLDSQUARES
 
 
 class Game;
 
-#include<SFML\Graphics.hpp>
-#include"Button.h"
-#include"Widget.h"
-#include "GUI.h"
-#include "ResourceManager.h"
+
 
 
 class worldSquares {

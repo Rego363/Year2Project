@@ -179,19 +179,19 @@ void GUI::moveDown(int &index, int maxItems)
 //alternative for moving up a row of elements
 void GUI::moveUp2(int & index)
 {
-	if (index - 4 >= 0)
+	if (index - 10 >= 0)
 	{
 
 		m_guiSound.play();
 
-		if (m_elements[index - 4]->isActive == false)
+		if (m_elements[index - 10]->isActive == false)
 		{
 			
 		}
 		else
 		{
 			m_elements[index]->loseFocus();
-			index-=4;
+			index-=10;
 			m_elements[index]->getFocus();
 		}
 
@@ -202,18 +202,18 @@ void GUI::moveUp2(int & index)
 //alternative for moving down a row of elements
 void GUI::moveDown2(int & index, int maxItems)
 {
-	if (index + 4 < maxItems)
+	if (index + 10 < maxItems)
 	{
 		m_guiSound.play();
 
-		if (m_elements[index + 4]->isActive == false)
+		if (m_elements[index + 10]->isActive == false)
 		{
 		
 		}
 		else
 		{
 			m_elements[index]->loseFocus();
-			index+=4;
+			index+=10;
 			m_elements[index]->getFocus();
 		}
 

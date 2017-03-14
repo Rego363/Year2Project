@@ -44,5 +44,10 @@ private:
 	std::string m_name;
 	Xbox360Controller m_xbox;
 	sf::RenderWindow *m_window;
+	bool carTurning = false;
+	bool carTurningLeft = false;
+	bool breaks = false;
+	bool carMoving = false;
+	float currentDrift = 0.0f;
 };
 

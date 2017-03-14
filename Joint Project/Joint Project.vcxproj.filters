@@ -38,6 +38,7 @@
     <ClCompile Include="Math.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="levels.cpp" />
+    <ClCompile Include="EnterNameScreen.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AccelerationScreen.h" />
@@ -74,5 +75,6 @@
     <ClInclude Include="Math.h" />
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="levels.h" />
+    <ClInclude Include="EnterNameScreen.h" />
   </ItemGroup>
 </Project>

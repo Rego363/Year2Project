@@ -10,6 +10,7 @@ worldSquares::worldSquares(Game &game, LevelData &level):
 		std::cout << "failed to load tile Texture" << std::endl;
 	}
 
+
 //	m_Straight.setTexture(m_texture);
 //	m_Straight.setTextureRect(sf::IntRect(605, 107, 172, 348));
 //	m_Straight.setPosition(150, 200);
@@ -85,6 +86,8 @@ worldSquares::worldSquares(Game &game, LevelData &level):
 //	m_Corner4.setTextureRect(sf::IntRect(169, 109, 333, 337));
 //	m_Corner4.setPosition(250, 100);
 //	m_Corner4.rotate(180);
+
+
 	mapZero();
 }
 
@@ -97,16 +100,25 @@ void worldSquares::render(sf::RenderWindow & window)
 
 	for each (sf::Sprite var in m_cornerTrack)
 	{
-		window.draw(var);
+		if (m_game->isInView(var))
+		{
+			window.draw(var);
+		}
 	}
 	
 	for each (sf::Sprite var in m_straightTrack)
 	{
-		window.draw(var);
+		if (m_game->isInView(var))
+		{
+			window.draw(var);
+		}
 	}
 	for each (sf::Sprite var in m_uTurnTrack)
 	{
-		window.draw(var);
+		if (m_game->isInView(var))
+		{
+			window.draw(var);
+		}
 	}
 
 	m_gui.draw(window);
