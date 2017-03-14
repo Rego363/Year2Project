@@ -35,15 +35,17 @@ private:
 	sf::Sprite m_Straight;
 	sf::Sprite m_Straight2;
 
-	sf::Sprite m_Flat;
+	sf::Sprite m_Flat[6]{};
 	sf::Sprite m_Flat2;
 	sf::Sprite m_Flat3;
 	sf::Sprite m_Flat4;
 	sf::Sprite m_Flat5;
 
+
+	int flat[6]{};
 	//sf::Sprite m_Bend;
 	//sf::Sprite m_Bend2;
-
+	sf::Sprite test;
 
 	sf::Sprite m_Corner;
 	sf::Sprite m_Corner2;

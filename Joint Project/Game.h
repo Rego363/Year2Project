@@ -110,19 +110,21 @@ public:
 	void changeGameState(GameState gameState);
 	void changeGameDifficulty(GameDifficulty gameDiff);
 	sf::RenderWindow m_window;
-
+	string nameDisplay();
 	bool isInView(sf::Sprite sprite);
 private:
 	void processInput();
 	void update(sf::Time);
 	void render();
 
-	
+
+	Label* m_currentName;
+	sf::Text m_name;
 	sf::Font m_font;
 	sf::Text m_text;
+	
 
-
-	GameState m_currentGameState = GameState::Racing;
+	GameState m_currentGameState = GameState::MapSelect;
 	playGame * m_mapSelect;
 
 

@@ -33,6 +33,7 @@ private:
 	Button *m_Delete;
 	Button *m_New;
 
+	Label *m_currentName;
 	int m_currentSelect;
 	Game *m_game;
 	void goToMenu();

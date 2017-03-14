@@ -85,7 +85,7 @@ Game::Game() :
 	m_accelerationScreen = new AccelerationScreen(*this);
 	m_changeProfile = new changeProfile(*this);
 
-
+	
 
 }
 
@@ -278,6 +278,8 @@ void Game::update(sf::Time time)
 		break;
 	case GameState::ChangeP:
 		m_changeProfile->update();
+	
+	//	m_player->update();
 		break;
 
 		
@@ -411,7 +413,10 @@ void Game::render()
 		break;
 	case GameState::ChangeP:
 		m_window.clear(sf::Color(0, 0, 0, 255));
+		//nameDisplay(m_currentName);
 		m_changeProfile->render(m_window);
+	//	m_player->getName(m_name);
+
 		m_window.display();
 		break;
 	}
@@ -427,4 +432,10 @@ void Game::changeGameState(GameState gameState)
 void Game::changeGameDifficulty(GameDifficulty gameDiff)
 {
 	m_currentDifficulty = gameDiff;
+}
+
+string Game::nameDisplay()
+{
+	return m_player->getName();
+	/*m_name.setString("Profile");*/
 }

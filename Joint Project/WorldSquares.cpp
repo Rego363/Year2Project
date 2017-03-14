@@ -11,6 +11,9 @@ worldSquares::worldSquares(Game &game):
 	{
 		//handle
 	}
+
+	
+
 	m_Straight.setTexture(m_texture);
 	m_Straight.setTextureRect(sf::IntRect(605, 107, 172, 348));
 	m_Straight.setPosition(150, 200);
@@ -24,7 +27,19 @@ worldSquares::worldSquares(Game &game):
 	m_Corner.setTextureRect(sf::IntRect(169, 109, 333, 337));
 	m_Corner.setPosition(250, 100);
 
-	m_Flat.setTexture(m_texture);
+
+	for (int i = 0; i < flat[i]; i++)
+	{
+		m_Flat[i].setTexture(m_texture);
+		m_Flat[i].setTextureRect(sf::IntRect(605, 107, 172, 348));
+		m_Flat[i].setPosition(250, 100);
+		m_Flat[i].rotate(90);
+
+
+	}
+
+
+	/*m_Flat.setTexture(m_texture);
 	m_Flat.setTextureRect(sf::IntRect(605, 107, 172, 348));
 	m_Flat.setPosition(250, 100);
 	m_Flat.rotate(90);
@@ -47,7 +62,7 @@ worldSquares::worldSquares(Game &game):
 	m_Flat5.setTexture(m_texture);
 	m_Flat5.setTextureRect(sf::IntRect(605, 107, 172, 348));
 	m_Flat5.setPosition(250, 100);
-	m_Flat5.rotate(90);
+	m_Flat5.rotate(90);*/
 
 
 
@@ -106,7 +121,12 @@ void worldSquares::render(sf::RenderWindow & window)
 	window.draw(m_Corner3);
 	window.draw(m_Corner4);
 
-	window.draw(m_Flat);
+
+	for (int i = 0; i < flat[i]; i++)
+	{
+
+		window.draw(m_Flat[i]);
+	}
 	window.draw(m_Flat2);
 	window.draw(m_Flat3);
 	window.draw(m_Flat4);
@@ -147,12 +167,12 @@ void worldSquares::mapZero()
 	m_Corner2.setPosition(530, 420);
 	m_Corner3.setPosition(1820, 590);
 	m_Corner4.setPosition(1550, 260);
-
-	m_Flat.setPosition(930, 95);
-	m_Flat2.setPosition(1100, 95);
-	m_Flat3.setPosition(1400, 95);
-	m_Flat4.setPosition(1520, 420);
-	m_Flat5.setPosition(1200, 420);
+//	for(int i = 0; i  )
+	m_Flat[1].setPosition(930, 95);
+	m_Flat[2].setPosition(1100, 95);
+	m_Flat[3].setPosition(1400, 95);
+	m_Flat[4].setPosition(1520, 420);
+	m_Flat[5].setPosition(1200, 420);
 
 	/*m_Bend.setPosition(1250, -120);
 	m_Bend2.setPosition(1250, -350);*/
