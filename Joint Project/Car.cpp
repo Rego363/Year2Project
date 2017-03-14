@@ -34,7 +34,7 @@ Car::Car(sf::Texture const & texture, sf::Vector2f const & pos):
 	//m_fireSprite.setScale(0.20, 0.50); //scale texture down
 	m_speed = 0; 
 	m_rotation = 0;
-	m_acceleration = 0.5;
+	m_acceleration = 0.45;
 	m_maxSpeed = 10;
 	isMoving = false;
 
@@ -125,6 +125,12 @@ void Car::decreaseRotation()
 	}
 }
 
+//function to rotate the texture to simulate a drift
+void Car::drift(float rotation)
+{
+	m_sprite.rotate(rotation);
+}
+
 //return the vector that represents the cars position on screen
 sf::Vector2f Car::getPos()
 {
@@ -135,11 +141,11 @@ void Car::slowDown()
 {
 	if(m_speed > 0.0)
 	{
-		m_speed -= m_acceleration/5.0;
+		m_speed -= m_acceleration;
 	} 
 	else if (m_speed < 0.0)
 	{
-		m_speed += m_acceleration/5.0;
+		m_speed += m_acceleration;
 	}
 	//m_speed = 0;
 	
@@ -152,8 +158,8 @@ bool Car::isCarMoving()
 
 void Car::breaks()
 {
-	m_speed /= 1.1;
-	if (m_speed < 0.0&& m_speed>-0.99)
+	m_speed /= 1.08;
+	if (m_speed < 0.0&& m_speed>-0.8)
 	{
 		m_speed = 0;
 	}

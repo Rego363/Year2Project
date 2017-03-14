@@ -47,6 +47,8 @@ struct TrackData
 	float m_size;
 };
 
+
+//contains all the levels data
 struct LevelData
 {
 	LamboData m_lambo;
@@ -57,6 +59,7 @@ struct LevelData
 	std::vector<TrackData> m_track;
 };
 
+//class to load in the level details
 class LevelLoader
 {
 public:

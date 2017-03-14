@@ -225,8 +225,14 @@ std::string Player::getName()
 }
 
 //where all the actions of the car are handled
+// updated to handle drift
 void Player::update(float dt, sf::View &view)
 {
+	bool carTurning = false;
+	bool carTurningLeft = false;
+	bool breaks = false;
+	bool carMoving = false;
+
 	view.setCenter(m_car.getPos()); //follow the player car
 	m_window->setView(view);
 	m_car.update(dt);
@@ -236,7 +242,9 @@ void Player::update(float dt, sf::View &view)
 	if (m_xbox.m_currentState.RTtrigger<-10.0)
 	{
 		m_car.increaseSpeed();
+		carMoving = true;
 	}
+
 	else if (m_xbox.m_currentState.RTtrigger < 0.0&& m_xbox.m_currentState.RTtrigger > -10.0)
 	{
 		m_car.slowDown();
@@ -250,17 +258,78 @@ void Player::update(float dt, sf::View &view)
 	{
 		if (m_xbox.m_currentState.LeftThumbStick.x > 75)
 		{
+			carTurningLeft = false;
 			m_car.increaseRotation();
+			carTurning = true;
 		}
 		if (m_xbox.m_currentState.LeftThumbStick.x < -75)
 		{
+			carTurning = false;
 			m_car.decreaseRotation();
+			carTurningLeft = true;
 		}
 	}
 	
 	if (m_xbox.m_currentState.A)
 	{
 		m_car.breaks();
+		breaks = true;
+	}
+	
+	if (breaks && carMoving && carTurning)
+	{
+		if (currentDrift == 45)
+		{
+			currentDrift = 44.5;
+		}
+
+		if (currentDrift < 0)
+		{
+			currentDrift += 0.5;
+			m_car.drift(currentDrift);
+		}
+
+		if(currentDrift < 45 && currentDrift >= 0)
+		{
+			currentDrift += 0.5;
+			m_car.drift(currentDrift);
+		}
+
+	}
+	else if (breaks && carMoving && carTurningLeft)
+	{
+		if (currentDrift == -45)
+		{
+			currentDrift = -44.5;
+		}
+
+		if (currentDrift > 0)
+		{
+			currentDrift -= 0.5;
+			m_car.drift(currentDrift);
+		}
+
+		if(currentDrift > -45 && currentDrift <= 0)
+		{
+			currentDrift -= 0.5;
+			m_car.drift(currentDrift);
+		}
+
+	}
+	else if (carMoving)
+	{
+		if (currentDrift > -47 && currentDrift < 0)
+		{
+			currentDrift += 0.5;
+			m_car.drift(currentDrift);
+		}
+
+		if (currentDrift < 47 && currentDrift > 0)
+		{
+			currentDrift -= 0.5;
+			m_car.drift(currentDrift);
+		}
+
 	}
 }
 

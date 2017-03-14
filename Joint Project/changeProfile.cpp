@@ -1,5 +1,5 @@
 #include "changeProfile.h"
-
+#include "player.h"
 
 
 
@@ -18,6 +18,7 @@ changeProfile::changeProfile(Game &game) :
 	m_Back->Enter = std::bind(&changeProfile::goToMenu, this);
 	m_Delete = new Button ("Delete", 100, 550);
 	m_New = new Button("New Profile", 100, 600);
+	//m_currentName = new Label(name, 50, 30);
 
 	m_gui.addButton(m_profileOne);
 	m_gui.addButton(m_profileTwo);

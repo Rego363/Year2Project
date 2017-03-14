@@ -2,9 +2,10 @@
 
 //Dylan
 //set textures in here for each level
-Levels::Levels(LevelData &level, Player &player, worldSquares &squares) : m_currentLevel(&level),
+Levels::Levels(LevelData &level, Player &player, worldSquares &squares, Game &game) : m_currentLevel(&level),
 										m_currentPlayer(&player),
-										m_squares(&squares)
+										m_squares(&squares),
+										m_game(&game)
 {
 	loadImages();
 	m_currentPlayer->m_car.setCurrentTexture(m_lambo);

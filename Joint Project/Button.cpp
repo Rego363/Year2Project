@@ -35,6 +35,32 @@ Button::Button(std::string s="", float x=0, float y=0):
 	posX = 0;
 }
 
+Button::Button(std::string s, float x, float y, int size)
+{
+	isActive = true; //starts active
+
+	m_id = "button";
+
+	if (!m_font.loadFromFile("Fonts/AmericanCaptain.ttf"))
+	{
+	}
+
+	m_hasFocus = false; //no focus
+	m_text.setFont(m_font);
+	m_text.setString(s);
+	m_text.setPosition(x, y);
+	m_text.setColor(sf::Color::White); //no focus means element is white
+	m_text.setCharacterSize(size);
+
+	m_rect.setPosition(x - 5, y);
+	m_rect.setSize(sf::Vector2f(m_text.getGlobalBounds().width + 10, m_text.getGlobalBounds().height + 15)); //dynamic rectangle sizing based on text
+	m_rect.setFillColor(sf::Color::Transparent);
+	m_rect.setOutlineColor(sf::Color::Transparent); //set to transparent
+	m_rect.setOutlineThickness(2);
+	animEnd = false;
+	posX = 0;
+}
+
 
 //alternative constructor that incorporates tags
 Button::Button(std::string s, float x, float y, sf::Color color, std::string tag)
@@ -120,6 +146,11 @@ void Button::endAnim()
 		animEnd = true;
 		posX = 0;
 	}	
+}
+
+void Button::changeTextSize(int size)
+{
+	m_text.setCharacterSize(size);
 }
 
 
