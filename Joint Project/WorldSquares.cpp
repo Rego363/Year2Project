@@ -85,7 +85,7 @@ worldSquares::worldSquares(Game &game, LevelData &level):
 //	m_Corner4.setTextureRect(sf::IntRect(169, 109, 333, 337));
 //	m_Corner4.setPosition(250, 100);
 //	m_Corner4.rotate(180);
-	mapOne();
+	mapZero();
 }
 
 worldSquares::~worldSquares()

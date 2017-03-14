@@ -9,6 +9,7 @@
 class Player;
 class worldSquares;
 
+//class to draw and update the game depending on what map was chosen
 class Levels
 {
 public:
