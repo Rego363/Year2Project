@@ -36,7 +36,8 @@
 #include "ResourceManager.h"
 #include "levels.h"
 #include "WorldSquares.h"
-
+#include "EnterNameScreen.h"
+#include <SFML\Audio.hpp>
 
 using namespace std;
 
@@ -60,7 +61,7 @@ class playGame;
 class changeProfile;
 class worldSquares;
 class Levels;
-
+class EnterNameScreen;
 
 
 enum GameState {
@@ -83,9 +84,8 @@ enum GameState {
 	Steering,
 	Racing,
 	ChangeP,
-	ThewSquares
-
-	
+	ThewSquares,
+	EnterName
 };
 
 enum GameDifficulty {
@@ -107,6 +107,10 @@ public:
 	void changeGameState(GameState gameState);
 	void changeGameDifficulty(GameDifficulty gameDiff);
 	sf::RenderWindow m_window;
+
+	string nameDisplay();
+
+
 	bool isInView(sf::Sprite sprite);
 
 private:
@@ -114,10 +118,19 @@ private:
 	void update(sf::Time);
 	void render();
 
+
+	Label* m_currentName;
+	sf::Text m_name;
+
 	sf::Font m_font;
 	sf::Text m_text;
+	
 
-	GameState m_currentGameState = GameState::TheLicense;
+
+	GameState m_currentGameState = GameState::MapSelect;
+
+
+
 	playGame * m_mapSelect;
 	
 	GameDifficulty m_currentDifficulty = GameDifficulty::Medium;
@@ -141,7 +154,7 @@ private:
 	changeProfile * m_changeProfile;
 	Levels *m_level;
 	worldSquares * m_worldSquares;
-
+	EnterNameScreen *m_enterName;
 
 	/*For testing*/
 	/**********************/
@@ -159,6 +172,9 @@ private:
 
 	LevelData m_currentLevel;
 	LevelLoader m_levelLoader;
+	bool hasName=false;
+	sf::SoundBuffer m_buffer;
+	sf::Sound music;
 
 };
 

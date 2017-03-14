@@ -40,6 +40,7 @@ struct SandData
 	std::string m_fileName;
 };
 
+//contains all the levels data
 struct LevelData
 {
 	LamboData m_lambo;
@@ -49,6 +50,7 @@ struct LevelData
 	SandData m_sand;
 };
 
+//class to load in the level details
 class LevelLoader
 {
 public:
