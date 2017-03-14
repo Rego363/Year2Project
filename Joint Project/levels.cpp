@@ -25,7 +25,7 @@ void Levels::update(float dt, sf::View &view)
 //draw game
 void Levels::render(sf::RenderWindow & window)
 {
-	m_squares->render(window);
+	//m_squares->render(window);
 	m_currentPlayer->m_car.draw(window);
 }
 
