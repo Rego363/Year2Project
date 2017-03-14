@@ -6,6 +6,7 @@
 
 class Game;
 
+//splash screen class
 class Splash
 {
 public:

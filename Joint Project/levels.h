@@ -8,11 +8,13 @@
 
 class Player;
 class worldSquares;
+class Game;
 
+//class to draw and update the game depending on what map was chosen
 class Levels
 {
 public:
-	Levels(LevelData &level, Player &player, worldSquares &squares);
+	Levels(LevelData &level, Player &player, worldSquares &squares, Game &game);
 	~Levels();
 
 	void update(float dt, sf::View &view);
@@ -25,6 +27,7 @@ private:
 	worldSquares *m_squares;
 	sf::Texture m_lambo;
 	sf::Font m_Font;
+	Game *m_game;
 
 };
 
