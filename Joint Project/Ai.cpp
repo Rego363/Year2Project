@@ -2,7 +2,7 @@
 
 
 
-Ai::Ai(float carX, float carY, sf::Texture &carTexture, std::vector<sf::CircleShape> const & track) :
+Ai::Ai(float carX, float carY, sf::Texture &carTexture, std::vector<sf::CircleShape> & track) :
 	m_car(carTexture, sf::Vector2f(carX, carY)), 
 	m_track(track)
 {
@@ -21,6 +21,7 @@ void Ai::update()
 	//m_steering += collisionAvoidance(aiId, entities);
 	m_steering = Math::truncate(m_steering, MAX_FORCE);
 	m_velocity = Math::truncate(m_velocity + m_steering, MAX_SPEED);
+	m_car.aiUpdate(m_velocity);
 }
 
 void Ai::render(sf::RenderWindow &window)

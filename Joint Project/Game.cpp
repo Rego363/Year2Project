@@ -12,6 +12,7 @@ Game::Game() :
 	m_window(sf::VideoMode(1280, 720), "Joint Project, Team C")
 {
 
+
 	if (!LevelLoader::load(m_currentLevel))
 	{
 		return;
@@ -47,6 +48,8 @@ Game::Game() :
 	m_enterName = new EnterNameScreen(*this);
 
 	m_startPos = sf::Vector2f(m_window.getSize().x / 2, m_window.getSize().y / 4);
+	m_car = new Car(m_startCar, m_startPos);
+	m_shagginWaggin = new Car(m_startCar, sf::Vector2f(0.0f, 0.0f));
 	m_player = new Player((float)m_window.getSize().x / 2, (float)m_window.getSize().y / 4, m_startCar, m_window);
 
 	if(!m_buffer.loadFromFile("hobbits.wav"))
@@ -142,6 +145,14 @@ Game::Game() :
 	m_level = new Levels(m_currentLevel, *m_player, *m_worldSquares, *this);
 
 
+	for (int i = 0; i < m_currentLevel.m_track.size(); i++)
+	{
+		sf::CircleShape circle(0,30);		
+		circle.setRadius(m_currentLevel.m_track[i].m_size);
+		circle.setPosition(m_currentLevel.m_track[i].m_position);
+		m_track.push_back(circle);
+	}
+	m_ai = new Ai(0.0f, 0.0f, m_startCar, m_track);
 }
 
 /// <summary>
@@ -299,6 +310,8 @@ void Game::update(sf::Time time)
 		//m_view.setCenter(playerPos);
 		m_window.setView(m_view);
 		m_level->update(time.asSeconds(), m_view);
+		m_ai->update();
+		
 		break;
 	case GameState::ChangeP:
 		m_changeProfile->update();
@@ -424,6 +437,7 @@ void Game::render()
 		system("cls");
 		
 		m_level->render(m_window);
+		m_ai->render(m_window);
 		m_window.display();
 		break;
 	case GameState::ChangeP:
