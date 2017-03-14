@@ -40,6 +40,13 @@ struct SandData
 	std::string m_fileName;
 };
 
+struct TrackData
+{
+	std::string m_type;
+	sf::Vector2f m_position;
+	float m_size;
+};
+
 struct LevelData
 {
 	LamboData m_lambo;
@@ -47,6 +54,7 @@ struct LevelData
 	TileData m_Tiles;
 	GroundData m_ground;
 	SandData m_sand;
+	std::vector<TrackData> m_track;
 };
 
 class LevelLoader

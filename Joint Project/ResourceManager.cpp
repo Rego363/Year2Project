@@ -25,6 +25,19 @@ void operator >> (const YAML::Node& sandNode, SandData& sand)
 	sand.m_fileName = sandNode["sandfile"].as<std::string>();
 }
 
+/// <summary>
+/// Loading data for the track
+/// </summary>
+/// <param name="trackNode"></param>
+/// <param name="track"></param>
+void operator >> (const YAML::Node& trackNode, TrackData& track)
+{
+	track.m_type = trackNode["type"].as<std::string>();				// Loading the type of node
+	track.m_position.x = trackNode["position"]["x"].as<float>();	// Loading the nodes x position
+	track.m_position.y = trackNode["position"]["y"].as<float>();	// Loading the nodes y position
+	track.m_size = trackNode["size"].as<float>();					// Loading the size of the node
+}
+
 void operator >> (const YAML::Node& levelNode, LevelData& level)
 {
 	levelNode["lambo"] >> level.m_lambo;
@@ -32,6 +45,15 @@ void operator >> (const YAML::Node& levelNode, LevelData& level)
 	levelNode["maptile"] >> level.m_Tiles;
 	levelNode["ground"] >> level.m_ground;
 	levelNode["sand"] >> level.m_sand;
+
+	// For loop to load track data into m_track 
+	const YAML::Node& trackNode = levelNode["track"].as<YAML::Node>();
+	for (unsigned i = 0; i < trackNode.size(); ++i)
+	{
+		TrackData track;
+		trackNode[i] >> track;
+		level.m_track.push_back(track);
+	}
 }
 
 LevelLoader::LevelLoader()

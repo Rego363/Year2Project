@@ -2,6 +2,7 @@
 #include<SFML\Graphics.hpp>
 #include<math.h>
 #include "Animation.h"
+#include "Label.h"
 
 /*
 Cars to be used by both the player and the Ai racers
@@ -11,6 +12,7 @@ public:
 	
 	Car(sf::Texture const &texture, sf::Vector2f const & pos); //constructor
 	void update(float dt); //update loop
+	void aiUpdate(sf::Vector2f velocity);	// Ai update loop
 	void draw(sf::RenderWindow &window); //draw loop
 	void increaseSpeed(); //increase cars speed
 	void decreaseSpeed(); //decrease cars speed
@@ -38,6 +40,9 @@ private:
 	sf::Vector2f m_position; //cars position on screen
 	bool isMoving;
 	float m_acceleration;
+
+	Label *currentPos;
+
 
 	Animation *animation;
 

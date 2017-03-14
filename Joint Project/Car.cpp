@@ -6,6 +6,8 @@ double const DEG_TO_RAD = 3.14 / 180.0f;  //calculation for angle degrees to rad
 Car::Car(sf::Texture const & texture, sf::Vector2f const & pos):
 	m_texture(texture), m_position(pos)
 {
+
+
 	m_sprite.setTexture(m_texture); //set texture
 	m_sprite.setPosition(m_position); //set pos
 	m_sprite.setScale(0.10, 0.10); //scale texture down
@@ -35,6 +37,8 @@ Car::Car(sf::Texture const & texture, sf::Vector2f const & pos):
 	m_acceleration = 0.5;
 	m_maxSpeed = 10;
 	isMoving = false;
+
+	//currentPos = new Label("x = " + std::to_string(m_sprite.getPosition().x) + "\n Y = " + std::to_string(m_sprite.getPosition().y), 0, 0);
 }
 
 //in this update loop the movement formula is implemented and also the cars rotation is set
@@ -64,13 +68,23 @@ void Car::update(float dt)
 	m_fireSprite.setRotation(m_fireSprite.getRotation());
 	animation->update(0, dt);
 	m_fireSprite.setTextureRect(animation->uvRect);
+
+	//currentPos->updateText("x = " + std::to_string(m_sprite.getPosition().x) + "\n Y = " + std::to_string(m_sprite.getPosition().y));
 }
+
+
+void Car::aiUpdate(sf::Vector2f velocity)
+{
+	m_sprite.setPosition((m_sprite.getPosition().x + velocity.x), (m_sprite.getPosition().y + velocity.y));   //car movement
+}
+
 
 //draw the car to the screen
 void Car::draw(sf::RenderWindow & window)
 {
 	window.draw(m_sprite);
 	window.draw(m_fireSprite);
+	//currentPos->draw(window);
 }
 
 //when called the speed of the car increases

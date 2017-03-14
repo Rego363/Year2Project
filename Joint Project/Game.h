@@ -36,6 +36,7 @@
 #include "ResourceManager.h"
 #include "levels.h"
 #include "WorldSquares.h"
+#include "Ai.h"
 
 
 using namespace std;
@@ -49,6 +50,7 @@ class MainMenu;
 class GarageScreen;
 class HelpScreen;
 class Player;
+class Ai;
 class DifficultyScreen;
 class SteeringScreen;
 class TurboScreen;
@@ -129,6 +131,7 @@ private:
 	MainMenu *m_MainMenu;
 	HelpScreen *m_helpScreen;
 	Player *m_player;
+	Ai *m_ai;
 	specs *m_specs;
 	Liscence *m_Liscence;
 	Splash *m_Splash;
@@ -141,20 +144,23 @@ private:
 	changeProfile * m_changeProfile;
 	Levels *m_level;
 	worldSquares * m_worldSquares;
+	Car *m_car;
+	Car *m_shagginWaggin;
+	sf::View m_view;
+	sf::View m_view2;
+	sf::Texture m_startCar;
+	sf::Vector2f m_startPos;
+
+	std::vector<sf::CircleShape> m_track;
+	sf::Texture m_ground;
+	sf::Sprite m_groundSprite[70];
+	Xbox360Controller m_xbox;
 
 
 	/*For testing*/
 	/**********************/
 
-	Car *m_car;
-	sf::Texture m_startCar;
-	sf::Vector2f m_startPos;
-	sf::View m_view;
-	sf::View m_view2;
 
-	sf::Texture m_ground;
-	sf::Sprite m_groundSprite[70];
-	Xbox360Controller m_xbox;
 	/**********************/
 
 	LevelData m_currentLevel;
