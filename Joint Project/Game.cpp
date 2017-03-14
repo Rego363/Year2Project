@@ -44,11 +44,18 @@ Game::Game() :
 	m_speedScreen = new SpeedScreen(*this);
 	m_accelerationScreen = new AccelerationScreen(*this);
 	m_worldSquares = new worldSquares(*this, m_currentLevel);
+	m_enterName = new EnterNameScreen(*this);
 
 	m_startPos = sf::Vector2f(m_window.getSize().x / 2, m_window.getSize().y / 4);
-	m_car = new Car(m_startCar, m_startPos);
 	m_player = new Player((float)m_window.getSize().x / 2, (float)m_window.getSize().y / 4, m_startCar, m_window);
 
+	if(!m_buffer.loadFromFile("hobbits.wav"))
+	{
+
+	}
+	music.setBuffer(m_buffer);
+	music.setLoop(true);
+	//music.play();
 
 	/*  FOR TESTING*/
 	/*******************************************************************************/
@@ -130,7 +137,7 @@ Game::Game() :
 	m_accelerationScreen = new AccelerationScreen(*this);
 	m_changeProfile = new changeProfile(*this);
 
-	m_level = new Levels(m_currentLevel, *m_player, *m_worldSquares);
+	m_level = new Levels(m_currentLevel, *m_player, *m_worldSquares, *this);
 
 }
 
@@ -168,16 +175,20 @@ void Game::run()
 }
 
 
-//check if sprites in view, cull sprite if its not in view
+//check if sprites in view, return false if sprite not in view
 bool Game::isInView(sf::Sprite sprite)
 {
 	sf::FloatRect rect(m_view.getCenter().x - (m_view.getSize().x/2), m_view.getCenter().y - (m_view.getSize().y/2), m_view.getSize().x, m_view.getSize().y);
+
 	if (rect.intersects(sprite.getGlobalBounds()))
 	{
 		return true;
 	}
 	return false;
 }
+
+
+
 
 /// <summary>
 /// Process Game inputs
@@ -204,7 +215,6 @@ void Game::processInput()
 /// </summary>
 void Game::update(sf::Time time)
 {
-	sf::Vector2f playerPos = m_car->getPos();
 
 	switch (m_currentGameState)
 	{
@@ -229,6 +239,12 @@ void Game::update(sf::Time time)
 		m_window.setView(m_view2);
 		break;
 	case GameState::TheLicense:
+		if (hasName == false)
+		{
+			m_player->setName(m_enterName->getEnteredName());
+			//m_player->save("Dave");
+			hasName = true;
+		}
 		m_Liscence->update(time);
 		m_window.setView(m_view2);
 		break;
@@ -277,12 +293,15 @@ void Game::update(sf::Time time)
 		m_window.setView(m_view2);
 		break;
 	case GameState::Racing:
-		m_view.setCenter(playerPos);
+		//m_view.setCenter(playerPos);
 		m_window.setView(m_view);
 		m_level->update(time.asSeconds(), m_view);
 		break;
 	case GameState::ChangeP:
 		m_changeProfile->update();
+		break;
+	case GameState::EnterName:
+		m_enterName->update();
 		break;
 	default:
 		break;
@@ -296,7 +315,7 @@ void Game::update(sf::Time time)
 /// </summary>
 void Game::render()
 {
-
+	static int visible = 0;
 	switch (m_currentGameState)
 	{
 
@@ -387,19 +406,30 @@ void Game::render()
 		break;
 	case GameState::Racing:   //put in levels
 		m_window.clear(sf::Color(0, 0, 0, 255));
-		for (int i = 0; i < 10; i++)
+		
+		for (int i = 0; i < 70; i++)
 		{
 			if (isInView(m_groundSprite[i]) == true)
 			{
+				visible++;
 				m_window.draw(m_groundSprite[i]);
 			}
 		}
+		std::cout << "Total visible tiles: " << visible << std::endl;
+		visible = 0;
+		system("cls");
+		
 		m_level->render(m_window);
 		m_window.display();
 		break;
 	case GameState::ChangeP:
 		m_window.clear(sf::Color(0, 0, 0, 255));
 		m_changeProfile->render(m_window);
+		m_window.display();
+		break;
+	case GameState::EnterName:
+		m_window.clear(sf::Color(0, 0, 0, 255));
+		m_enterName->draw(m_window);
 		m_window.display();
 		break;
 	default:

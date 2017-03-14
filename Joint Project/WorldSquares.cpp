@@ -10,82 +10,8 @@ worldSquares::worldSquares(Game &game, LevelData &level):
 		std::cout << "failed to load tile Texture" << std::endl;
 	}
 
-//	m_Straight.setTexture(m_texture);
-//	m_Straight.setTextureRect(sf::IntRect(605, 107, 172, 348));
-//	m_Straight.setPosition(150, 200);
-////	m_Straight.setScale(5,5);
-//
-//	m_Straight2.setTexture(m_texture);
-//	m_Straight2.setTextureRect(sf::IntRect(605, 107, 172, 348));
-//	m_Straight2.setPosition(150, 200);
-//
-//	m_Corner.setTexture(m_texture);
-//	m_Corner.setTextureRect(sf::IntRect(169, 109, 333, 337));
-//	m_Corner.setPosition(250, 100);
-//
-//	m_Flat.setTexture(m_texture);
-//	m_Flat.setTextureRect(sf::IntRect(605, 107, 172, 348));
-//	m_Flat.setPosition(250, 100);
-//	m_Flat.rotate(90);
-//
-//	m_Flat2.setTexture(m_texture);
-//	m_Flat2.setTextureRect(sf::IntRect(605, 107, 172, 348));
-//	m_Flat2.setPosition(250, 100);
-//	m_Flat2.rotate(90);
-//
-//	m_Flat3.setTexture(m_texture);
-//	m_Flat3.setTextureRect(sf::IntRect(605, 107, 172, 348));
-//	m_Flat3.setPosition(250, 100);
-//	m_Flat3.rotate(90);
-//
-//	m_Flat4.setTexture(m_texture);
-//	m_Flat4.setTextureRect(sf::IntRect(605, 107, 172, 348));
-//	m_Flat4.setPosition(250, 100);
-//	 m_Flat4.rotate(90);
-//
-//	m_Flat5.setTexture(m_texture);
-//	m_Flat5.setTextureRect(sf::IntRect(605, 107, 172, 348));
-//	m_Flat5.setPosition(250, 100);
-//	m_Flat5.rotate(90);
-//
-//
-//
-//	//m_Bend.setTexture(m_texture);
-//	//m_Bend.setTextureRect(sf::IntRect(433, 571, 280, 410));
-//	//m_Bend.setPosition(250, 100);
-//	//m_Bend.rotate(60);
-//
-//	//m_Bend2.setTexture(m_texture);
-//	//m_Bend2.setTextureRect(sf::IntRect(433, 571, 280, 410));
-//	//m_Bend2.setPosition(250, 100);
-//	////m_Bend2.rotate();
-//
-//
-//	m_Uturn.setTexture(m_texture);
-//	m_Uturn.setTextureRect(sf::IntRect(1307, 49, 600, 486));
-//	m_Uturn.setPosition(600, 100);
-//	m_Uturn.rotate(90);
-//
-//	m_Uturn2.setTexture(m_texture);
-//	m_Uturn2.setTextureRect(sf::IntRect(1307, 49, 600, 486));
-//	m_Uturn2.setPosition(600, 100);
-//	m_Uturn2.rotate(270);
-//
-//
-//	m_Corner2.setTexture(m_texture);
-//	m_Corner2.setTextureRect(sf::IntRect(169, 109, 333, 337));
-//	m_Corner2.setPosition(250, 100);
-//
-//	m_Corner3.setTexture(m_texture);
-//	m_Corner3.setTextureRect(sf::IntRect(169, 109, 333, 337));
-//	m_Corner3.setPosition(250, 100);
-//	m_Corner3.rotate(180);
-//
-//	m_Corner4.setTexture(m_texture);
-//	m_Corner4.setTextureRect(sf::IntRect(169, 109, 333, 337));
-//	m_Corner4.setPosition(250, 100);
-//	m_Corner4.rotate(180);
-	mapOne();
+
+	mapZero();
 }
 
 worldSquares::~worldSquares()
@@ -97,16 +23,25 @@ void worldSquares::render(sf::RenderWindow & window)
 
 	for each (sf::Sprite var in m_cornerTrack)
 	{
-		window.draw(var);
+		if (m_game->isInView(var))
+		{
+			window.draw(var);
+		}
 	}
 	
 	for each (sf::Sprite var in m_straightTrack)
 	{
-		window.draw(var);
+		if (m_game->isInView(var))
+		{
+			window.draw(var);
+		}
 	}
 	for each (sf::Sprite var in m_uTurnTrack)
 	{
-		window.draw(var);
+		if (m_game->isInView(var))
+		{
+			window.draw(var);
+		}
 	}
 
 	m_gui.draw(window);

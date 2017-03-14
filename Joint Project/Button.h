@@ -15,6 +15,7 @@ class Button:  public Widget       //button ui element
 {
 public:
 	Button(std::string s, float x, float y); //constructor
+	Button(std::string s, float x, float y, int size);
 	Button(std::string s, float x, float y, sf::Color color, std::string tag); //overloaded
 	~Button();
 	 void getFocus() override; //make button the current highlighted element
@@ -24,7 +25,7 @@ public:
 	 void draw(sf::RenderWindow &window)override; //draw loop
 	 void setRectColor(sf::Color color); //set the rect color of button
 	 void endAnim(); //animation transition
-	
+	 void changeTextSize(int size);
 
 protected:
 	sf::RectangleShape m_rect; //rectangle that will surround text
