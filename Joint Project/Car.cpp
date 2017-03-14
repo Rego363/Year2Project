@@ -9,8 +9,8 @@ Car::Car(sf::Texture const & texture, sf::Vector2f const & pos):
 	m_sprite.setTexture(m_texture); //set texture
 	m_sprite.setPosition(m_position); //set pos
 	m_sprite.setScale(0.10, 0.10); //scale texture down
-	m_sprite.setOrigin(m_sprite.getTextureRect().width/2.0, m_sprite.getTextureRect().height / 2.0); //origin set to centre for rotations
-
+	m_sprite.setScale(0.05, 0.05); //scale texture down
+	m_sprite.setOrigin(m_sprite.getTextureRect().width/1.5, m_sprite.getTextureRect().height / 2.0); //origin set to centre for rotations
 
 	if (!m_fireTexture.loadFromFile("fire.png") )
 	{
@@ -32,7 +32,7 @@ Car::Car(sf::Texture const & texture, sf::Vector2f const & pos):
 	//m_fireSprite.setScale(0.20, 0.50); //scale texture down
 	m_speed = 0; 
 	m_rotation = 0;
-	m_acceleration = 0.5;
+	m_acceleration = 0.45;
 	m_maxSpeed = 10;
 	isMoving = false;
 }
@@ -94,7 +94,7 @@ void Car::decreaseSpeed()
 //when called the rotation of the car increases
 void Car::increaseRotation()
 {
-	m_rotation += 3;
+	m_rotation += 2;
 	if (m_rotation == 360.0)
 	{
 		m_rotation = 0;
@@ -104,11 +104,17 @@ void Car::increaseRotation()
 //when called the rotation of the car decreases
 void Car::decreaseRotation()
 {
-	m_rotation -= 3;
+	m_rotation -= 2;
 	if (m_rotation == 0.0)
 	{
 		m_rotation = 359.0;
 	}
+}
+
+//function to rotate the texture to simulate a drift
+void Car::drift(float rotation)
+{
+	m_sprite.rotate(rotation);
 }
 
 //return the vector that represents the cars position on screen
@@ -121,11 +127,11 @@ void Car::slowDown()
 {
 	if(m_speed > 0.0)
 	{
-		m_speed -= m_acceleration/5.0;
+		m_speed -= m_acceleration;
 	} 
 	else if (m_speed < 0.0)
 	{
-		m_speed += m_acceleration/5.0;
+		m_speed += m_acceleration;
 	}
 	//m_speed = 0;
 	
@@ -138,9 +144,16 @@ bool Car::isCarMoving()
 
 void Car::breaks()
 {
-	m_speed /= 1.1;
-	if (m_speed < 0.0&& m_speed>-0.99)
+	m_speed /= 1.08;
+	if (m_speed < 0.0&& m_speed>-0.8)
 	{
 		m_speed = 0;
 	}
 }
+
+void Car::setCurrentTexture(sf::Texture carTex)
+{
+	m_texture = carTex;
+	m_sprite.setTexture(m_texture);
+}
+

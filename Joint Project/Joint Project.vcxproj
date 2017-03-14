@@ -74,10 +74,11 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SFML_SDK)\include;C:\SFML-2.3.2\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SFML_SDK)\include;.\include;.C:\SFML-2.3.2\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>$(SFML_SDK)\lib;C:\SFML-2.3.2\lib</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SFML_SDK)\lib;.\lib;C:\SFML-2.3.2\lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -89,6 +90,7 @@
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(SFML_SDK)\lib;</AdditionalLibraryDirectories>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -98,12 +100,13 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SFML_SDK)\include;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SFML_SDK)\include;.\include;.</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>$(SFML_SDK)\lib;</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SFML_SDK)\lib;.\lib;</AdditionalLibraryDirectories>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -119,10 +122,12 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalLibraryDirectories>$(SFML_SDK)\lib;</AdditionalLibraryDirectories>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AccelerationScreen.cpp" />
+    <ClCompile Include="Ai.cpp" />
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="BrakingScreen.cpp" />
     <ClCompile Include="Button.cpp" />
@@ -131,18 +136,22 @@
     <ClCompile Include="CheckBox.cpp" />
     <ClCompile Include="DifficultyScreen.cpp" />
     <ClCompile Include="DisplayScreen.cpp" />
+    <ClCompile Include="EnterNameScreen.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GarageScreen.cpp" />
     <ClCompile Include="GUI.cpp" />
     <ClCompile Include="Help.cpp" />
     <ClCompile Include="Label.cpp" />
+    <ClCompile Include="levels.cpp" />
     <ClCompile Include="Liscence.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainMenu.cpp" />
+    <ClCompile Include="Math.cpp" />
     <ClCompile Include="OptionsScreen.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="playGame.cpp" />
     <ClCompile Include="RadioButton.cpp" />
+    <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="Slider.cpp" />
     <ClCompile Include="SoundScreen.cpp" />
     <ClCompile Include="Specs.cpp" />
@@ -156,6 +165,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AccelerationScreen.h" />
+    <ClInclude Include="Ai.h" />
     <ClInclude Include="Animation.h" />
     <ClInclude Include="BrakingScreen.h" />
     <ClInclude Include="Button.h" />
@@ -164,17 +174,21 @@
     <ClInclude Include="CheckBox.h" />
     <ClInclude Include="DifficultyScreen.h" />
     <ClInclude Include="DisplayScreen.h" />
+    <ClInclude Include="EnterNameScreen.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GarageScreen.h" />
     <ClInclude Include="GUI.h" />
     <ClInclude Include="Help.h" />
     <ClInclude Include="Label.h" />
+    <ClInclude Include="levels.h" />
     <ClInclude Include="Liscence.h" />
     <ClInclude Include="MainMenu.h" />
+    <ClInclude Include="Math.h" />
     <ClInclude Include="OptionsScreen.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="playGame.h" />
     <ClInclude Include="RadioButton.h" />
+    <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="Slider.h" />
     <ClInclude Include="SoundScreen.h" />
     <ClInclude Include="Specs.h" />

@@ -34,6 +34,11 @@
     <ClCompile Include="WorldSquares.cpp" />
     <ClCompile Include="CheckBox.cpp" />
     <ClCompile Include="Animation.cpp" />
+    <ClCompile Include="Ai.cpp" />
+    <ClCompile Include="Math.cpp" />
+    <ClCompile Include="ResourceManager.cpp" />
+    <ClCompile Include="levels.cpp" />
+    <ClCompile Include="EnterNameScreen.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AccelerationScreen.h" />
@@ -66,5 +71,10 @@
     <ClInclude Include="WorldSquares.h" />
     <ClInclude Include="CheckBox.h" />
     <ClInclude Include="Animation.h" />
+    <ClInclude Include="Ai.h" />
+    <ClInclude Include="Math.h" />
+    <ClInclude Include="ResourceManager.h" />
+    <ClInclude Include="levels.h" />
+    <ClInclude Include="EnterNameScreen.h" />
   </ItemGroup>
 </Project>

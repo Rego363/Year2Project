@@ -1,0 +1,10 @@
+lambo:
+   file: lambo.png
+maptile:
+  file: Road-Tile.png
+font:
+  fontfile: Fonts\AmericanCaptain.ttf
+ground:
+  groundfile: ground.png
+sand:
+  sandfile: sand1.png

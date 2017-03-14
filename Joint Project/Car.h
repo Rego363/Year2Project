@@ -18,11 +18,14 @@ public:
 	void increaseRotation(); 
 	void decreaseRotation(); //turning/rotating car
 
+	void drift(float rotation);
+
 
 	sf::Vector2f getPos(); //returns player position
 	void slowDown();
 	bool isCarMoving();
 	void breaks();
+	void setCurrentTexture(sf::Texture carTex);
 private:
 	
 	float m_maxSpeed;

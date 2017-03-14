@@ -11,15 +11,22 @@ static double const MS_PER_UPDATE = 10.0;
 Game::Game() :
 	m_window(sf::VideoMode(1280, 720), "Joint Project, Team C")
 {
-	if (!m_font.loadFromFile("Fonts/American Captain.ttf"))
+
+	if (!LevelLoader::load(m_currentLevel))
 	{
-		std::cout << "failed to load font" << std::endl;
+		return;
 	}
+
+	if (!m_startCar.loadFromFile(m_currentLevel.m_lambo.m_fileName))
+	{
+		cout << "car setup" << endl;
+	}
+
 	m_text.setFont(m_font);
 	m_text.setString("RACING GAME");
 	m_text.setPosition(m_window.getSize().x / 4, m_window.getSize().y / 2);
 	m_text.setCharacterSize(70);
-	
+
 	m_optionsScreen = new OptionsScreen(*this);
 	m_mapSelect = new playGame(*this);
 	m_soundScreen = new SoundScreen(*this);
@@ -36,42 +43,87 @@ Game::Game() :
 	m_brakingScreen = new BrakingScreen(*this);
 	m_speedScreen = new SpeedScreen(*this);
 	m_accelerationScreen = new AccelerationScreen(*this);
-	m_worldSquares = new worldSquares(*this);
+	m_worldSquares = new worldSquares(*this, m_currentLevel);
+	m_enterName = new EnterNameScreen(*this);
 
+	m_startPos = sf::Vector2f(m_window.getSize().x / 2, m_window.getSize().y / 4);
+	m_player = new Player((float)m_window.getSize().x / 2, (float)m_window.getSize().y / 4, m_startCar, m_window);
 
+	if(!m_buffer.loadFromFile("hobbits.wav"))
+	{
 
-
+	}
+	music.setBuffer(m_buffer);
+	music.setLoop(true);
+	//music.play();
 
 	/*  FOR TESTING*/
 	/*******************************************************************************/
 
-	if (!m_testText.loadFromFile("lambo.png"))
+	///to be moved
+	/*if (!m_ground.loadFromFile(m_currentLevel.m_ground.m_fileName))
 	{
 
-	}
-	m_startPos = sf::Vector2f(m_window.getSize().x / 2, m_window.getSize().y / 4);
-	m_car = new Car(m_testText, m_startPos);
-	m_player = new Player((float)m_window.getSize().x / 2,(float) m_window.getSize().y / 4, m_testText, m_window);
+	}*/
 
-
-	if (!m_testTextBack.loadFromFile("ground.png"))
+	if (!m_ground.loadFromFile(m_currentLevel.m_sand.m_fileName))
 	{
-
 	}
+
 	for (int i = 0; i < 10; i++)
 	{
-		m_testSprite[i].setTexture(m_testTextBack);
-		m_testSprite[i].setScale(1.22, 1.22);
-		m_testSprite[i].setPosition(i*m_testSprite[i].getGlobalBounds().width, 0);
-		
+		m_groundSprite[i].setTexture(m_ground);
+		m_groundSprite[i].setScale(1.22, 1.22);
+		m_groundSprite[i].setPosition(0, -i*m_groundSprite[i].getGlobalBounds().height);
+	}
+	for (int i = 10; i < 20; i++)
+	{
+
+		m_groundSprite[i].setTexture(m_ground);
+		m_groundSprite[i].setScale(1.22, 1.22);
+		m_groundSprite[i].setPosition(1 * m_groundSprite[i].getGlobalBounds().width, (-i + 10)*m_groundSprite[i].getGlobalBounds().height);
+	}
+	for (int i = 20; i < 30; i++)
+	{
+
+		m_groundSprite[i].setTexture(m_ground);
+		m_groundSprite[i].setScale(1.22, 1.22);
+		m_groundSprite[i].setPosition(2 * m_groundSprite[i].getGlobalBounds().width, (-i + 20)*m_groundSprite[i].getGlobalBounds().height);
+	}
+	for (int i = 30; i < 40; i++)
+	{
+		m_groundSprite[i].setTexture(m_ground);
+		m_groundSprite[i].setScale(1.22, 1.22);
+		m_groundSprite[i].setPosition(3 * m_groundSprite[i].getGlobalBounds().width, (-i + 30)*m_groundSprite[i].getGlobalBounds().height);
 	}
 
+	for (int i = 40; i < 50; i++)
+	{
 
-	m_view = sf::View(sf::Vector2f( 0, 0), sf::Vector2f(1280, 720));
+		m_groundSprite[i].setTexture(m_ground);
+		m_groundSprite[i].setScale(1.22, 1.22);
+		m_groundSprite[i].setPosition(4 * m_groundSprite[i].getGlobalBounds().width, (-i + 40)*m_groundSprite[i].getGlobalBounds().height);
+	}
+
+	for (int i = 50; i < 60; i++)
+	{
+
+		m_groundSprite[i].setTexture(m_ground);
+		m_groundSprite[i].setScale(1.22, 1.22);
+		m_groundSprite[i].setPosition(5 * m_groundSprite[i].getGlobalBounds().width, (-i + 50)*m_groundSprite[i].getGlobalBounds().height);
+	}
+	for (int i = 60; i < 70; i++)
+	{
+		m_groundSprite[i].setTexture(m_ground);
+		m_groundSprite[i].setScale(1.22, 1.22);
+		m_groundSprite[i].setPosition(6 * m_groundSprite[i].getGlobalBounds().width, (-i + 60)*m_groundSprite[i].getGlobalBounds().height);
+	}
+	m_view = sf::View(sf::Vector2f(0, 0), sf::Vector2f(1280, 720));
 	m_view2 = sf::View(sf::Vector2f(0, 0), sf::Vector2f(1280, 720));
 	m_view2.setCenter(m_window.getSize().x / 2, m_window.getSize().y / 2);
+
 	/*******************************************************************************/
-	
+
 	m_specs = new specs(*this);
 
 	m_Liscence = new Liscence(*this);
@@ -85,7 +137,10 @@ Game::Game() :
 	m_accelerationScreen = new AccelerationScreen(*this);
 	m_changeProfile = new changeProfile(*this);
 
+
 	
+	m_level = new Levels(m_currentLevel, *m_player, *m_worldSquares, *this);
+
 
 }
 
@@ -123,9 +178,10 @@ void Game::run()
 }
 
 
-//check if sprites in view, cull sprite if its not in view
+//check if sprites in view, return false if sprite not in view
 bool Game::isInView(sf::Sprite sprite)
 {
+
 	sf::FloatRect rect(m_view.getCenter().x - (m_view.getSize().x/2), m_view.getCenter().y - (m_view.getSize().y/2), m_view.getSize().x, m_view.getSize().y);
 	if (rect.intersects(sprite.getGlobalBounds()))
 	{
@@ -133,6 +189,9 @@ bool Game::isInView(sf::Sprite sprite)
 	}
 	return false;
 }
+
+
+
 
 /// <summary>
 /// Process Game inputs
@@ -159,7 +218,6 @@ void Game::processInput()
 /// </summary>
 void Game::update(sf::Time time)
 {
-	sf::Vector2f playerPos = m_car->getPos();
 
 	switch (m_currentGameState)
 	{
@@ -184,6 +242,12 @@ void Game::update(sf::Time time)
 		m_window.setView(m_view2);
 		break;
 	case GameState::TheLicense:
+		if (hasName == false)
+		{
+			m_player->setName(m_enterName->getEnteredName());
+			//m_player->save("Dave");
+			hasName = true;
+		}
 		m_Liscence->update(time);
 		m_window.setView(m_view2);
 		break;
@@ -232,69 +296,23 @@ void Game::update(sf::Time time)
 		m_window.setView(m_view2);
 		break;
 	case GameState::Racing:
-
-		m_view.setCenter(playerPos);
-		m_worldSquares->update();
+		//m_view.setCenter(playerPos);
 		m_window.setView(m_view);
-
-		m_car->update(time.asSeconds());
-
-		m_xbox.update();
-		if (m_xbox.m_currentState.RTtrigger<-10.0)
-		{
-			m_car->increaseSpeed();
-		}
-		else if (m_xbox.m_currentState.RTtrigger < 0.0&& m_xbox.m_currentState.RTtrigger > -10.0)
-		{
-			m_car->slowDown();
-		}
-
-		if (m_xbox.m_currentState.LTtrigger>10.0)
-		{
-			m_car->decreaseSpeed();
-		}
-		if (m_car->isCarMoving() == true)
-		{
-			if (m_xbox.m_currentState.LeftThumbStick.x > 75)
-			{
-				m_car->increaseRotation();
-			}
-			if (m_xbox.m_currentState.LeftThumbStick.x < -75)
-			{
-				m_car->decreaseRotation();
-			}
-		}
-		if (m_xbox.m_currentState.Back)
-		{
-			m_currentGameState = GameState::TheMenu;
-		}
-		if (m_xbox.m_currentState.A)
-		{
-			m_car->breaks();
-		}
-
-		m_player->update(time.asSeconds(), m_view);
-
+		m_level->update(time.asSeconds(), m_view);
 		break;
 	case GameState::ChangeP:
 		m_changeProfile->update();
 	
 	//	m_player->update();
 		break;
-
-		
-		
-
-	default:
-
+	case GameState::EnterName:
+		m_enterName->update();
 		break;
-		
+	default:
+		break;
+
 	}
 
-
-
-
-	
 }
 
 /// <summary>
@@ -302,14 +320,11 @@ void Game::update(sf::Time time)
 /// </summary>
 void Game::render()
 {
-
+	static int visible = 0;
 	switch (m_currentGameState)
 	{
-	default:
-		break;
 
 	case GameState::TheOptions:
-
 		m_window.clear(sf::Color(0, 0, 0, 255));
 		m_optionsScreen->render(m_window);
 		m_window.display();
@@ -394,21 +409,21 @@ void Game::render()
 		m_turboScreen->draw(m_window);
 		m_window.display();
 		break;
-	case GameState::Racing:
+	case GameState::Racing:   //put in levels
 		m_window.clear(sf::Color(0, 0, 0, 255));
-		for (int i = 0; i < 10; i++)
+		for (int i = 0; i < 70; i++)
 		{
-			if (isInView(m_testSprite[i]) == true)
+			if (isInView(m_groundSprite[i]) == true)
 			{
-				m_window.draw(m_testSprite[i]);
+				visible++;
+				m_window.draw(m_groundSprite[i]);
 			}
 		}
-
-		m_worldSquares->render(m_window);
-		m_car->draw(m_window);
-
-		m_player->draw();
-
+		std::cout << "Total visible tiles: " << visible << std::endl;
+		visible = 0;
+		system("cls");
+		
+		m_level->render(m_window);
 		m_window.display();
 		break;
 	case GameState::ChangeP:
@@ -418,6 +433,13 @@ void Game::render()
 	//	m_player->getName(m_name);
 
 		m_window.display();
+		break;
+	case GameState::EnterName:
+		m_window.clear(sf::Color(0, 0, 0, 255));
+		m_enterName->draw(m_window);
+		m_window.display();
+		break;
+	default:
 		break;
 	}
 
@@ -433,6 +455,7 @@ void Game::changeGameDifficulty(GameDifficulty gameDiff)
 {
 	m_currentDifficulty = gameDiff;
 }
+
 
 string Game::nameDisplay()
 {

@@ -6,6 +6,7 @@
 
 class Game;
 
+//class for Licence sceen
 class Liscence
 {
 public:

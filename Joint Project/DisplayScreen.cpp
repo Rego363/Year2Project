@@ -11,22 +11,27 @@ DisplayScreen::DisplayScreen(Game & game) :
 	m_speed = 100.0f;
 	m_currentSelect = 0;
 
-	m_title = new Label("Display", 470, 50);
-	m_title->changeTextSize(100);
-	m_gui.addLabel(m_title);
+	// Title
+	m_title = new Label("Display", 470, 50);	// Constructor
+	m_title->changeTextSize(100);	// Resize and make it bigger
+	m_gui.addLabel(m_title);	// Add to gui array
 
-	m_animeOn = new CheckBox("Animations On/Off", 50, 150);
-	m_animeOn->getFocus();
-	m_animeOn->getActive();
-	m_gui.addCheckBox(m_animeOn);
-	m_animeSpeed = new Slider(75.0f, 225.0f, m_speed, "Animation speed");
-	m_gui.addSlider(m_animeSpeed);
+	// Animation on/off Checkbox
+	m_animeOn = new CheckBox("Animations On/Off", 50, 150);	// Constructor
+	m_animeOn->getFocus();	// Makes this button highlighted when the screen starts up
+	m_animeOn->getActive();	// Makes this button checked when the screen starts up
+	m_gui.addCheckBox(m_animeOn);	// Add to gui array
+	
+	// Animation speed slider
+	m_animeSpeed = new Slider(75.0f, 225.0f, m_speed, "Animation speed");	// Constructor
+	m_gui.addSlider(m_animeSpeed);	// Add to gui array
 
-	m_backButton = new Button("Back", 50, 600);
-	m_backButton->Enter = std::bind(&DisplayScreen::setStateBack, this);
-	m_gui.addButton(m_backButton);
+	// Back button
+	m_backButton = new Button("Back", 50, 600);	// Constructor
+	m_backButton->Enter = std::bind(&DisplayScreen::setStateBack, this);	// Sets callback function to back method
+	m_gui.addButton(m_backButton);	// Add to gui array
 
-	m_gui.vertical = true;
+	m_gui.vertical = true;		// Enables vertical controls
 
 }
 
