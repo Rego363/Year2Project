@@ -187,6 +187,20 @@ private:
 	sf::SoundBuffer m_buffer;
 	sf::Sound music;
 
+
+	sf::Clock clock;
+	sf::Time timeSinceLastUpdate;
+	sf::Time timePerFrame;
+
+
+	/******************************/
+
+	sf::Image image;
+	sf::Color color;
+	sf::Sprite testSprite;
+	sf::Color color2;
+
+	/*******************************/
 };
 
 #endif

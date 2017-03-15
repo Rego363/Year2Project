@@ -18,24 +18,28 @@ public:
 	void increaseSpeed(); //increase cars speed
 	void decreaseSpeed(); //decrease cars speed
 
-	void increaseRotation(); 
+	void increaseRotation();
 	void decreaseRotation(); //turning/rotating car
+
+	void increaseAiRotation();
+	void decreaseAiRotation(); //turning/rotating ai car
 
 	void drift(float rotation);
 
 
 	sf::Vector2f getPos(); //returns player position
+	float getRot(); //returns player rotation
 	void slowDown();
 	bool isCarMoving();
 	void breaks();
+	void offTrack();
+	void setMaxSpeed(float i);
 	void setCurrentTexture(sf::Texture carTex);
 private:
 	
 	float m_maxSpeed;
 
 	sf::Texture m_texture; //car texture
-	sf::Texture m_fireTexture;
-	sf::Sprite m_fireSprite;
 	sf::Vector2u textureSize;
 	sf::Sprite m_sprite; //car sprite
 	float m_speed; //speed of car

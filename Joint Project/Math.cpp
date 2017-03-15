@@ -15,4 +15,14 @@ namespace Math
 		v *= i;
 		return v;
 	}
+
+	float dotProduct(sf::Vector2f a, sf::Vector2f b)
+	{
+		return (a.x * b.x) + (a.y * b.y);
+	}
+
+	float length(sf::Vector2f a)
+	{
+		return std::sqrt((a.x * a.x) + (a.y * a.y));
+	}
 }
