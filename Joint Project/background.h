@@ -1,22 +1,30 @@
 #pragma once
 #include<SFML\Graphics.hpp>
 #include"Game.h"
+#include<iostream>
+#include<fstream>
+#include<cctype>
 #ifndef BACKGROUND
 #define BACKGROUND
 class Background {
 
 public:
-	Background(sf::Texture &texture,Game &m_game);
+	Background(Game &m_game);
 	sf::Color getPixelColor(sf::Vector2f pos);
 	void draw(sf::RenderWindow &window);
-	sf::Sprite getSprite(int i);
+	
 private:
-	sf::Sprite m_sprites[2];
-	//sf::Sprite m_sprite2;
-	sf::Texture m_texture;
+	
+
+	std::ifstream openFile;
+
+	
+	sf::Texture m_tileTexture;
+	sf::Sprite spr;
 	sf::Image m_image;
-	sf::Image m_image2;
-	sf::Color m_color;
+	sf::Vector2i map[100][100];
+	sf::Vector2i loadCounter;
+
 	Game *m_game;
 	
 };

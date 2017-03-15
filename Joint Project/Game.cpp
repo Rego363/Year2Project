@@ -99,38 +99,13 @@ Game::Game() :
 
 
 
-
-
-	/*if (!m_ground.loadFromFile("test.png"))
-	{
-
-	}
-	testSprite.setTexture(m_ground);
-	testSprite.setPosition(0, 0);
-
-	image = m_ground.copyToImage();
-
-	color = image.getPixel(m_player->m_car.getPos().x, m_player->m_car.getPos().y);
-
-
 	
 
-	color = image.getPixel(m_player->m_car.getPos().x, m_player->m_car.getPos().y);*/
-	//std::cout << color.toInteger() << std::endl;
+	//color = image.getPixel(m_player->m_car.getPos().x, m_player->m_car.getPos().y);
+	
 
-
-	if(!m_textureTest.loadFromFile("test.png"))
-	{
-		std::cout << "texture grass not loaded" << std::endl;
-	}
-	/*if (!m_textureTest2.loadFromFile("testMap5 p2.png"))
-	{
-		std::cout << "texture grass not loaded" << std::endl;
-	}*/
-	m_background = new Background(m_textureTest, *this);
-	//testSprite.setTexture(m_textureTest);
-	//testSprite.setTextureRect(sf::IntRect(testSprite.getTextureRect().left, testSprite.getTextureRect().top, testSprite.getTextureRect().width / 2, testSprite.getTextureRect().height));
-	//testSprite.setPosition(0, 0);
+	m_background = new Background( *this);
+	
 
 }
 
@@ -286,15 +261,11 @@ void Game::update(sf::Time time)
 		m_window.setView(m_view2);
 		break;
 	case GameState::Racing:
-		//m_view.setCenter(playerPos);
 		m_window.setView(m_view);
 		m_level->update(time.asSeconds(), m_view);
 		m_ai->update();
-
-		/*std::cout<<color.r<<","<< color.g<<","<<color.b<<std::endl;
-		system("cls");*/
 		
-		color2 = m_background->getPixelColor(m_player->m_car.getPos());
+		//color2 = m_background->getPixelColor(m_player->m_car.getPos());
 
 
 		//////if the pixel is green slow down!!
@@ -307,17 +278,6 @@ void Game::update(sf::Time time)
 		{
 			m_player->m_car.setMaxSpeed(10);
 		}
-
-
-
-
-		m_xbox.update();
-		if (m_xbox.m_currentState.Y == true)
-		{
-			std::cout << m_player->m_car.getPos().x << "," << m_player->m_car.getPos().y << std::endl;
-		}
-
-
 		break;
 	case GameState::ChangeP:
 		m_changeProfile->update();
@@ -339,7 +299,6 @@ void Game::update(sf::Time time)
 /// </summary>
 void Game::render()
 {
-	static int visible = 0;
 	switch (m_currentGameState)
 	{
 
@@ -430,15 +389,7 @@ void Game::render()
 		break;
 	case GameState::Racing:   //put in levels
 		m_window.clear(sf::Color(0, 0, 0, 255));
-
-		
-		
-			m_background->draw(m_window);
-		
-
-
-		
-
+		m_background->draw(m_window);
 		m_level->render(m_window);
 		
 		//m_ai->render(m_window);
