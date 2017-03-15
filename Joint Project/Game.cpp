@@ -158,6 +158,7 @@ Game::Game() :
 
 
 
+
 	if (!m_ground.loadFromFile("testMap4.png"))
 	{
 
@@ -167,8 +168,13 @@ Game::Game() :
 
 	image = m_ground.copyToImage();
 
+	color = image.getPixel(m_player->m_car.getPos().x, m_player->m_car.getPos().y);
+
+
+	
 
 	color = image.getPixel(m_player->m_car.getPos().x, m_player->m_car.getPos().y);
+	//std::cout << color.toInteger() << std::endl;
 
 }
 
@@ -328,9 +334,14 @@ void Game::update(sf::Time time)
 		m_window.setView(m_view);
 		m_level->update(time.asSeconds(), m_view);
 		m_ai->update();
+
+		/*std::cout<<color.r<<","<< color.g<<","<<color.b<<std::endl;
+		system("cls");*/
 		
 		color2 = image.getPixel(m_player->m_car.getPos().x, m_player->m_car.getPos().y);
 
+
+		//if the pixel is green slow down!!
 		if (color2.g>100&&color2.r<100&& color.b<100)
 		{
 			m_player->m_car.setMaxSpeed(2);
@@ -467,15 +478,17 @@ void Game::render()
 				visible++;
 				m_window.draw(m_groundSprite[i]);
 			}
-		}
-		std::cout << "Total visible tiles: " << visible << std::endl;
+		}*/
+		/*std::cout << "Total visible tiles: " << visible << std::endl;
 		visible = 0;
 		system("cls");*/
 		m_window.draw(testSprite);
 
 
-		//color = image.getPixel(m_player->m_car.getPos().x, m_player->m_car.getPos().y);
-		
+
+
+		m_window.draw(testSprite);
+
 		m_level->render(m_window);
 		//m_ai->render(m_window);
 		m_window.display();

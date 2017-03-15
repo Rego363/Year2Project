@@ -189,13 +189,15 @@ private:
 
 
 
+
 	/******************************/
+
 	sf::Image image;
 	sf::Color color;
 	sf::Sprite testSprite;
 	sf::Color color2;
-	/*******************************/
 
+	/*******************************/
 };
 
 #endif
