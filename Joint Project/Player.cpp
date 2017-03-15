@@ -332,8 +332,9 @@ void Player::update(float dt, sf::View &view)
 		}
 
 	}
-	else
+	else 
 	{
+		m_car.setRotation(currentDrift);
 		currentDrift = 0;
 	}
 }
