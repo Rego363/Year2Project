@@ -50,7 +50,7 @@ Game::Game() :
 	m_startPos = sf::Vector2f(m_window.getSize().x / 2, m_window.getSize().y / 4);
 	m_car = new Car(m_startCar, m_startPos);
 	m_shagginWaggin = new Car(m_startCar, sf::Vector2f(0.0f, 0.0f));
-	m_player = new Player(1336, 1575, m_startCar, m_window);
+	m_player = new Player(0, 0, m_startCar, m_window);
 
 	if(!m_buffer.loadFromFile("hobbits.wav"))
 	{
@@ -63,64 +63,6 @@ Game::Game() :
 	/*  FOR TESTING*/
 	/*******************************************************************************/
 
-	///to be moved
-	/*if (!m_ground.loadFromFile(m_currentLevel.m_ground.m_fileName))
-	{
-
-	}*/
-
-	//if (!m_ground.loadFromFile(m_currentLevel.m_sand.m_fileName))
-	//{
-	//}
-
-	//for (int i = 0; i < 10; i++)
-	//{
-	//	m_groundSprite[i].setTexture(m_ground);
-	//	m_groundSprite[i].setScale(1.22, 1.22);
-	//	m_groundSprite[i].setPosition(0, -i*m_groundSprite[i].getGlobalBounds().height);
-	//}
-	//for (int i = 10; i < 20; i++)
-	//{
-
-	//	m_groundSprite[i].setTexture(m_ground);
-	//	m_groundSprite[i].setScale(1.22, 1.22);
-	//	m_groundSprite[i].setPosition(1 * m_groundSprite[i].getGlobalBounds().width, (-i + 10)*m_groundSprite[i].getGlobalBounds().height);
-	//}
-	//for (int i = 20; i < 30; i++)
-	//{
-
-	//	m_groundSprite[i].setTexture(m_ground);
-	//	m_groundSprite[i].setScale(1.22, 1.22);
-	//	m_groundSprite[i].setPosition(2 * m_groundSprite[i].getGlobalBounds().width, (-i + 20)*m_groundSprite[i].getGlobalBounds().height);
-	//}
-	//for (int i = 30; i < 40; i++)
-	//{
-	//	m_groundSprite[i].setTexture(m_ground);
-	//	m_groundSprite[i].setScale(1.22, 1.22);
-	//	m_groundSprite[i].setPosition(3 * m_groundSprite[i].getGlobalBounds().width, (-i + 30)*m_groundSprite[i].getGlobalBounds().height);
-	//}
-
-	//for (int i = 40; i < 50; i++)
-	//{
-
-	//	m_groundSprite[i].setTexture(m_ground);
-	//	m_groundSprite[i].setScale(1.22, 1.22);
-	//	m_groundSprite[i].setPosition(4 * m_groundSprite[i].getGlobalBounds().width, (-i + 40)*m_groundSprite[i].getGlobalBounds().height);
-	//}
-
-	//for (int i = 50; i < 60; i++)
-	//{
-
-	//	m_groundSprite[i].setTexture(m_ground);
-	//	m_groundSprite[i].setScale(1.22, 1.22);
-	//	m_groundSprite[i].setPosition(5 * m_groundSprite[i].getGlobalBounds().width, (-i + 50)*m_groundSprite[i].getGlobalBounds().height);
-	//}
-	//for (int i = 60; i < 70; i++)
-	//{
-	//	m_groundSprite[i].setTexture(m_ground);
-	//	m_groundSprite[i].setScale(1.22, 1.22);
-	//	m_groundSprite[i].setPosition(6 * m_groundSprite[i].getGlobalBounds().width, (-i + 60)*m_groundSprite[i].getGlobalBounds().height);
-	//}
 	m_view = sf::View(sf::Vector2f(0, 0), sf::Vector2f(1280, 720));
 	m_view2 = sf::View(sf::Vector2f(0, 0), sf::Vector2f(1280, 720));
 	m_view2.setCenter(m_window.getSize().x / 2, m_window.getSize().y / 2);
@@ -159,7 +101,7 @@ Game::Game() :
 
 
 
-	if (!m_ground.loadFromFile("testMap4.png"))
+	/*if (!m_ground.loadFromFile("test.png"))
 	{
 
 	}
@@ -173,8 +115,22 @@ Game::Game() :
 
 	
 
-	color = image.getPixel(m_player->m_car.getPos().x, m_player->m_car.getPos().y);
+	color = image.getPixel(m_player->m_car.getPos().x, m_player->m_car.getPos().y);*/
 	//std::cout << color.toInteger() << std::endl;
+
+
+	if(!m_textureTest.loadFromFile("test.png"))
+	{
+		std::cout << "texture grass not loaded" << std::endl;
+	}
+	/*if (!m_textureTest2.loadFromFile("testMap5 p2.png"))
+	{
+		std::cout << "texture grass not loaded" << std::endl;
+	}*/
+	m_background = new Background(m_textureTest, *this);
+	//testSprite.setTexture(m_textureTest);
+	//testSprite.setTextureRect(sf::IntRect(testSprite.getTextureRect().left, testSprite.getTextureRect().top, testSprite.getTextureRect().width / 2, testSprite.getTextureRect().height));
+	//testSprite.setPosition(0, 0);
 
 }
 
@@ -338,18 +294,21 @@ void Game::update(sf::Time time)
 		/*std::cout<<color.r<<","<< color.g<<","<<color.b<<std::endl;
 		system("cls");*/
 		
-		color2 = image.getPixel(m_player->m_car.getPos().x, m_player->m_car.getPos().y);
+		color2 = m_background->getPixelColor(m_player->m_car.getPos());
 
 
-		//if the pixel is green slow down!!
-		if (color2.g>100&&color2.r<100&& color.b<100)
+		//////if the pixel is green slow down!!
+		if (color2.g>100&&color2.r<80&& color.b<80)
 		{
 			m_player->m_car.setMaxSpeed(2);
 		}
+		
 		else
 		{
 			m_player->m_car.setMaxSpeed(10);
 		}
+
+
 
 
 		m_xbox.update();
@@ -471,25 +430,17 @@ void Game::render()
 		break;
 	case GameState::Racing:   //put in levels
 		m_window.clear(sf::Color(0, 0, 0, 255));
-		/*for (int i = 0; i < 70; i++)
-		{
-			if (isInView(m_groundSprite[i]) == true)
-			{
-				visible++;
-				m_window.draw(m_groundSprite[i]);
-			}
-		}*/
-		/*std::cout << "Total visible tiles: " << visible << std::endl;
-		visible = 0;
-		system("cls");*/
-		m_window.draw(testSprite);
+
+		
+		
+			m_background->draw(m_window);
+		
 
 
-
-
-		m_window.draw(testSprite);
+		
 
 		m_level->render(m_window);
+		
 		//m_ai->render(m_window);
 		m_window.display();
 		break;

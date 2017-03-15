@@ -13,30 +13,30 @@ worldSquares::worldSquares(Game &game, LevelData &level):
 
 	
 
-	m_Straight.setTexture(m_texture);
-	m_Straight.setTextureRect(sf::IntRect(605, 107, 172, 348));
-	m_Straight.setPosition(150, 200);
-//	m_Straight.setScale(5,5);
-
-	m_Straight2.setTexture(m_texture);
-	m_Straight2.setTextureRect(sf::IntRect(605, 107, 172, 348));
-	m_Straight2.setPosition(150, 200);
-
-	m_Corner.setTexture(m_texture);
-	m_Corner.setTextureRect(sf::IntRect(169, 109, 333, 337));
-	m_Corner.setPosition(250, 100);
-
-
-	for (int i = 0; i < flat[i]; i++)
-	{
-		m_Flat[i].setTexture(m_texture);
-		m_Flat[i].setTextureRect(sf::IntRect(605, 107, 172, 348));
-		m_Flat[i].setPosition(250, 100);
-		m_Flat[i].rotate(90);
-
-
-	}
-
+//	m_Straight.setTexture(m_texture);
+//	m_Straight.setTextureRect(sf::IntRect(605, 107, 172, 348));
+//	m_Straight.setPosition(150, 200);
+////	m_Straight.setScale(5,5);
+//
+//	m_Straight2.setTexture(m_texture);
+//	m_Straight2.setTextureRect(sf::IntRect(605, 107, 172, 348));
+//	m_Straight2.setPosition(150, 200);
+//
+//	m_Corner.setTexture(m_texture);
+//	m_Corner.setTextureRect(sf::IntRect(169, 109, 333, 337));
+//	m_Corner.setPosition(250, 100);
+//
+//
+//	for (int i = 0; i < flat[i]; i++)
+//	{
+//		m_Flat[i].setTexture(m_texture);
+//		m_Flat[i].setTextureRect(sf::IntRect(605, 107, 172, 348));
+//		m_Flat[i].setPosition(250, 100);
+//		m_Flat[i].rotate(90);
+//
+//
+//	}
+//
 
 	/*m_Flat.setTexture(m_texture);
 	m_Flat.setTextureRect(sf::IntRect(605, 107, 172, 348));
@@ -157,30 +157,30 @@ void worldSquares::render(sf::RenderWindow & window)
 
 
 
-	//window.draw(m_rect);
-	window.draw(m_Straight);
-	window.draw(m_Straight2);
+	////window.draw(m_rect);
+	//window.draw(m_Straight);
+	//window.draw(m_Straight2);
 
-	window.draw(m_Corner);
-	window.draw(m_Corner2);
-	window.draw(m_Corner3);
-	window.draw(m_Corner4);
+	//window.draw(m_Corner);
+	//window.draw(m_Corner2);
+	//window.draw(m_Corner3);
+	//window.draw(m_Corner4);
 
 
-	for (int i = 0; i < flat[i]; i++)
-	{
+	//for (int i = 0; i < flat[i]; i++)
+	//{
 
-		window.draw(m_Flat[i]);
-	}
-	window.draw(m_Flat2);
-	window.draw(m_Flat3);
-	window.draw(m_Flat4);
-	window.draw(m_Flat5);
+	//	window.draw(m_Flat[i]);
+	//}
+	//window.draw(m_Flat2);
+	//window.draw(m_Flat3);
+	//window.draw(m_Flat4);
+	//window.draw(m_Flat5);
 
-	//window.draw(m_Bend);
-	//window.draw(m_Bend2);
-	window.draw(m_Uturn);
-	window.draw(m_Uturn2);
+	////window.draw(m_Bend);
+	////window.draw(m_Bend2);
+	//window.draw(m_Uturn);
+	//window.draw(m_Uturn2);
 
 
 	for each (sf::Sprite var in m_cornerTrack)

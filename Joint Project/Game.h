@@ -39,6 +39,7 @@
 #include "Ai.h"
 #include "EnterNameScreen.h"
 #include <SFML\Audio.hpp>
+#include "background.h"
 
 using namespace std;
 
@@ -64,6 +65,7 @@ class changeProfile;
 class worldSquares;
 class Levels;
 class EnterNameScreen;
+class Background;
 
 
 enum GameState {
@@ -198,6 +200,10 @@ private:
 	sf::Color color2;
 
 	/*******************************/
+
+	Background *m_background;
+	sf::Texture m_textureTest;
+	sf::Texture m_textureTest2;
 };
 
 #endif
