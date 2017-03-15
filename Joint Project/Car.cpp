@@ -64,11 +64,14 @@ void Car::update(float dt)
 			m_speed = 0;
 		}
 	}
-	m_fireSprite.setPosition(m_fireSprite.getPosition().x  , m_fireSprite.getPosition().y);
-	m_fireSprite.setRotation(m_fireSprite.getRotation());
+	m_fireSprite.setPosition(m_sprite.getPosition().x  , m_sprite.getPosition().y);
+	m_fireSprite.setRotation(m_sprite.getRotation());
 	animation->update(0, dt);
 	m_fireSprite.setTextureRect(animation->uvRect);
 
+
+	std::cout << "X: " + std::to_string(m_sprite.getPosition().x) << std::endl;
+	std::cout << "Y: " + std::to_string(m_sprite.getPosition().y) << std::endl;
 	//currentPos->updateText("x = " + std::to_string(m_sprite.getPosition().x) + "\n Y = " + std::to_string(m_sprite.getPosition().y));
 }
 

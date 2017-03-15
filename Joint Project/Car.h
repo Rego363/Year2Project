@@ -3,6 +3,7 @@
 #include<math.h>
 #include "Animation.h"
 #include "Label.h"
+#include <iostream>
 
 /*
 Cars to be used by both the player and the Ai racers
