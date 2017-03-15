@@ -34,7 +34,7 @@ Car::Car(sf::Texture const & texture, sf::Vector2f const & pos):
 	//m_fireSprite.setScale(0.20, 0.50); //scale texture down
 	m_speed = 0; 
 	m_rotation = 0;
-	m_acceleration = 0.45;
+	m_acceleration = 0.25;
 	m_maxSpeed = 10;
 	isMoving = false;
 
@@ -90,9 +90,15 @@ void Car::draw(sf::RenderWindow & window)
 //when called the speed of the car increases
 void Car::increaseSpeed()
 {
+	if (m_speed > m_maxSpeed)
+	{
+		m_speed = m_maxSpeed;
+	}
 	if (m_speed < m_maxSpeed)
 	{
 		m_speed += m_acceleration;
+		
+
 	}
 }
 
@@ -163,6 +169,20 @@ void Car::breaks()
 	{
 		m_speed = 0;
 	}
+}
+
+void Car::offTrack()
+{
+	m_speed /= 1.2;
+	/*if (m_speed < 0.0&& m_speed>-0.8)
+	{
+		m_speed = 0;
+	}*/
+}
+
+void Car::setMaxSpeed(float i)
+{
+	m_maxSpeed = i;
 }
 
 void Car::setCurrentTexture(sf::Texture carTex)
