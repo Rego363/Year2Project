@@ -307,15 +307,12 @@ void Game::update(sf::Time time)
 		m_window.setView(m_view2);
 		break;
 	case GameState::Racing:
-		//m_view.setCenter(playerPos);
 		m_window.setView(m_view);
 		m_level->update(time.asSeconds(), m_view);
 		m_ai->update();
-		
 		break;
 	case GameState::ChangeP:
 		m_changeProfile->update();
-	
 	//	m_player->update();
 		break;
 	case GameState::EnterName:

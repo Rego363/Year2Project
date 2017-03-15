@@ -29,6 +29,12 @@ private:
 	sf::Font m_Font;
 	Game *m_game;
 
+	sf::Clock m_startRace;
+	sf::Clock m_raceTime;
+	bool m_raceStarted = false;
+	bool m_countDown = true;
+	sf::Text m_countDownNumber;
+
 };
 
 #endif

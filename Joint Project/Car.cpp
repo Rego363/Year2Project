@@ -7,12 +7,13 @@ Car::Car(sf::Texture const & texture, sf::Vector2f const & pos):
 	m_texture(texture), m_position(pos)
 {
 
-
+	m_position = sf::Vector2f(3755, -2153);
 	m_sprite.setTexture(m_texture); //set texture
 	m_sprite.setPosition(m_position); //set pos
 	m_sprite.setScale(0.10, 0.10); //scale texture down
 	m_sprite.setScale(0.05, 0.05); //scale texture down
 	m_sprite.setOrigin(m_sprite.getTextureRect().width/1.5, m_sprite.getTextureRect().height / 2.0); //origin set to centre for rotations
+	m_sprite.setRotation(-90);
 
 	if (!m_fireTexture.loadFromFile("fire.png") )
 	{
@@ -37,8 +38,9 @@ Car::Car(sf::Texture const & texture, sf::Vector2f const & pos):
 	m_acceleration = 0.45;
 	m_maxSpeed = 10;
 	isMoving = false;
-
 	//currentPos = new Label("x = " + std::to_string(m_sprite.getPosition().x) + "\n Y = " + std::to_string(m_sprite.getPosition().y), 0, 0);
+
+	m_rotation = -90;
 }
 
 //in this update loop the movement formula is implemented and also the cars rotation is set
@@ -68,7 +70,7 @@ void Car::update(float dt)
 	m_fireSprite.setRotation(m_fireSprite.getRotation());
 	animation->update(0, dt);
 	m_fireSprite.setTextureRect(animation->uvRect);
-
+	
 	//currentPos->updateText("x = " + std::to_string(m_sprite.getPosition().x) + "\n Y = " + std::to_string(m_sprite.getPosition().y));
 }
 

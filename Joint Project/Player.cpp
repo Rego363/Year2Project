@@ -228,6 +228,7 @@ std::string Player::getName()
 // updated to handle drift
 void Player::update(float dt, sf::View &view)
 {
+	cout << to_string(m_car.getPos().x) + ", " + to_string(m_car.getPos().y) << endl;
 	bool carTurning = false;
 	bool carTurningLeft = false;
 	bool breaks = false;
@@ -320,16 +321,20 @@ void Player::update(float dt, sf::View &view)
 	{
 		if (currentDrift > -47 && currentDrift < 0)
 		{
-			currentDrift += 0.5;
+			currentDrift += 1;
 			m_car.drift(currentDrift);
 		}
 
 		if (currentDrift < 47 && currentDrift > 0)
 		{
-			currentDrift -= 0.5;
+			currentDrift -= 1;
 			m_car.drift(currentDrift);
 		}
 
+	}
+	else
+	{
+		currentDrift = 0;
 	}
 }
 

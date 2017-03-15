@@ -129,7 +129,7 @@ private:
 	
 
 
-	GameState m_currentGameState = GameState::MapSelect;
+	GameState m_currentGameState = GameState::Racing;
 
 
 
@@ -186,7 +186,6 @@ private:
 	bool hasName=false;
 	sf::SoundBuffer m_buffer;
 	sf::Sound music;
-
 };
 
 #endif
