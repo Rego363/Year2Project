@@ -188,7 +188,9 @@ private:
 	bool hasName=false;
 	sf::SoundBuffer m_buffer;
 	sf::Sound music;
-
+	sf::Clock clock;
+	sf::Time timeSinceLastUpdate;
+	sf::Time timePerFrame;
 
 
 

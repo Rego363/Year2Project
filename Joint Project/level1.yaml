@@ -10,62 +10,20 @@ sand:
   sandfile: sand1.png
 track:
    - type: checkpoint
-     position: {x: 100, y: 650}
+     position: {x: 3724.25, y: 1482.75}
      size: 5
    - type: checkpoint
-     position: {x: 100, y: 450}
+     position: {x: 3724.88, y: 1656.95}
      size: 5
    - type: checkpoint
-     position: {x: 100, y: 250}
+     position: {x: 3658.76, y: 1777.4}
      size: 5
    - type: checkpoint
-     position: {x: 100, y: 150}
+     position: {x: 1068.17, y: 1759.03}
      size: 5
    - type: checkpoint
-     position: {x: 250, y: 700}
+     position: {x: 1041.97, y: 1610.83}
      size: 5
    - type: checkpoint
-     position: {x: 250, y: 500}
-     size: 5
-   - type: checkpoint
-     position: {x: 250, y: 300}
-     size: 5
-   - type: checkpoint
-     position: {x: 250, y: 100}
-     size: 5
-   - type: checkpoint
-     position: {x: 500, y: 100}
-     size: 5
-   - type: checkpoint
-     position: {x: 500, y: 300}
-     size: 5
-   - type: checkpoint
-     position: {x: 500, y: 500}
-     size: 5
-   - type: checkpoint
-     position: {x: 500, y: 700}
-     size: 5
-   - type: checkpoint
-     position: {x: 700, y: 700}
-     size: 5
-   - type: checkpoint
-     position: {x: 700, y: 500}
-     size: 5
-   - type: checkpoint
-     position: {x: 700, y: 300}
-     size: 5
-   - type: checkpoint
-     position: {x: 700, y: 100}
-     size: 5
-   - type: checkpoint
-     position: {x: 600, y: 200}
-     size: 5
-   - type: checkpoint
-     position: {x: 500, y: 350}
-     size: 5
-   - type: checkpoint
-     position: {x: 400, y: 500}
-     size: 5
-   - type: checkpoint
-     position: {x: 300, y: 650}
+     position: {x: 1149.65, y: 1521.82}
      size: 5

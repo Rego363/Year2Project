@@ -116,6 +116,7 @@ void Game::init()
 {
 	// Display the list of all the video modes available for fullscreen
 	vector<sf::VideoMode> modes = sf::VideoMode::getFullscreenModes();
+	timePerFrame = sf::seconds(1.0f / 60.0f);
 }
 
 
@@ -124,9 +125,7 @@ void Game::init()
 /// </summary>
 void Game::run()
 {
-	sf::Clock clock;
-	sf::Time timeSinceLastUpdate = sf::Time::Zero;
-	sf::Time timePerFrame = sf::seconds(1.0f / 60.0f);
+	timeSinceLastUpdate = sf::Time::Zero;
 
 	while (m_window.isOpen())
 	{

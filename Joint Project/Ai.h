@@ -2,6 +2,7 @@
 #include <SFML\Graphics.hpp>
 #include "Car.h"
 #include <Thor/Vectors.hpp>
+
 #include "Math.h"
 
 class Ai
@@ -13,7 +14,10 @@ public:
 	void render(sf::RenderWindow &window);	// Draw loop
 
 private:
-	Car m_car;
+	Car m_car; 
+	sf::Vector2f trackDisVector;
+	sf::Vector2f aiDisVector;
+	sf::Vector2f vectorToNode;
 	sf::Vector2f m_steering;
 	sf::Vector2f m_velocity;
 	sf::Vector2f m_ahead;

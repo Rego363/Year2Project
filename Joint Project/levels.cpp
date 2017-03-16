@@ -46,7 +46,7 @@ void Levels::update(float dt, sf::View &view)
 		m_lastLap.setPosition(m_currentPlayer->m_car.getPos().x - 620, m_currentPlayer->m_car.getPos().y - 310);
 	}
 
-	if ((sf::IntRect(m_currentPlayer->m_car.m_sprite.getPosition().x, m_currentPlayer->m_car.m_sprite.getPosition().y -20,
+	if ((sf::IntRect(m_currentPlayer->m_car.getSprite().getPosition().x, m_currentPlayer->m_car.getSprite().getPosition().y -20,
 		60, 60))
 		.intersects(sf::IntRect(m_startLine.getPosition().x, m_startLine.getPosition().y, 180, 5)))
 	{
