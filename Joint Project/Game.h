@@ -131,7 +131,7 @@ private:
 	
 
 
-	GameState m_currentGameState = GameState::MapSelect;
+	GameState m_currentGameState = GameState::TheMenu;
 
 
 
