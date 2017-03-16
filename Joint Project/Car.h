@@ -21,7 +21,7 @@ public:
 	void decreaseRotation(); //turning/rotating car
 
 	void drift(float rotation);
-
+	void setRotation(float rotation);
 
 	sf::Vector2f getPos(); //returns player position
 	void slowDown();

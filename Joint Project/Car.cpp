@@ -137,6 +137,11 @@ void Car::drift(float rotation)
 	m_sprite.rotate(rotation);
 }
 
+void Car::setRotation(float rotation)
+{
+	m_rotation = rotation;
+}
+
 //return the vector that represents the cars position on screen
 sf::Vector2f Car::getPos()
 {
