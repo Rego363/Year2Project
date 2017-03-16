@@ -39,6 +39,7 @@
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="levels.cpp" />
     <ClCompile Include="EnterNameScreen.cpp" />
+    <ClCompile Include="background.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AccelerationScreen.h" />
@@ -76,5 +77,6 @@
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="levels.h" />
     <ClInclude Include="EnterNameScreen.h" />
+    <ClInclude Include="background.h" />
   </ItemGroup>
 </Project>

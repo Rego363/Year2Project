@@ -35,6 +35,7 @@ public:
 	void offTrack();
 	void setMaxSpeed(float i);
 	void setCurrentTexture(sf::Texture carTex);
+	sf::Sprite getSprite() const;
 private:
 	
 	float m_maxSpeed;
