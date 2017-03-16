@@ -7,22 +7,38 @@ Car::Car(sf::Texture const & texture, sf::Vector2f const & pos):
 	m_texture(texture), m_position(pos)
 {
 
-	m_position = sf::Vector2f(3755, -2153);
+
 	m_sprite.setTexture(m_texture); //set texture
 	m_sprite.setPosition(m_position); //set pos
-	m_sprite.setScale(0.10, 0.10); //scale texture down
+	//m_sprite.setScale(0.10, 0.10); //scale texture down
 	m_sprite.setScale(0.05, 0.05); //scale texture down
-	m_sprite.setOrigin(m_sprite.getTextureRect().width/1.5, m_sprite.getTextureRect().height / 2.0); //origin set to centre for rotations
-	m_sprite.setRotation(-90);
-	//m_sprite.setTextureRect(sf::IntRect(m_sprite.getPosition().x, m_sprite.getPosition().y, m_texture.getSize().x, m_texture.getSize().y));
+	m_sprite.setOrigin(m_sprite.getTextureRect().width/2.0, m_sprite.getTextureRect().height / 2.0); //origin set to centre for rotations
 
+	if (!m_fireTexture.loadFromFile("fire.png") )
+	{
+	
+	}
+
+	textureSize = m_fireTexture.getSize();
+	textureSize.x =textureSize.x/ 8;
+	textureSize.y = textureSize.y/4;
+
+	//m_fireSprite = sf::RectangleShape(sf::Vector2f(100, 150));
+	m_fireSprite.setTexture(m_fireTexture);
+
+	animation = new Animation(&m_fireTexture, sf::Vector2u(8, 4), 0.1f);
+
+	
+	m_fireSprite.setPosition(m_sprite.getPosition().x, m_sprite.getPosition().y);
+	m_fireSprite.setOrigin(m_fireSprite.getTextureRect().width / 2.0, m_fireSprite.getTextureRect().height / 2.0);
+	//m_fireSprite.setScale(0.20, 0.50); //scale texture down
 	m_speed = 0; 
 	m_rotation = 0;
-	m_acceleration = 0.45;
+	m_acceleration = 0.25;
 	m_maxSpeed = 10;
 	isMoving = false;
 
-	m_rotation = -90;
+	//currentPos = new Label("x = " + std::to_string(m_sprite.getPosition().x) + "\n Y = " + std::to_string(m_sprite.getPosition().y), 0, 0);
 }
 
 //in this update loop the movement formula is implemented and also the cars rotation is set
@@ -48,7 +64,12 @@ void Car::update(float dt)
 			m_speed = 0;
 		}
 	}
+	m_fireSprite.setPosition(m_fireSprite.getPosition().x  , m_fireSprite.getPosition().y);
+	m_fireSprite.setRotation(m_fireSprite.getRotation());
+	animation->update(0, dt);
+	m_fireSprite.setTextureRect(animation->uvRect);
 
+	//currentPos->updateText("x = " + std::to_string(m_sprite.getPosition().x) + "\n Y = " + std::to_string(m_sprite.getPosition().y));
 }
 
 
@@ -62,14 +83,22 @@ void Car::aiUpdate(sf::Vector2f velocity)
 void Car::draw(sf::RenderWindow & window)
 {
 	window.draw(m_sprite);
+	window.draw(m_fireSprite);
+	//currentPos->draw(window);
 }
 
 //when called the speed of the car increases
 void Car::increaseSpeed()
 {
+	if (m_speed > m_maxSpeed)
+	{
+		m_speed = m_maxSpeed;
+	}
 	if (m_speed < m_maxSpeed)
 	{
 		m_speed += m_acceleration;
+		
+
 	}
 }
 
@@ -108,12 +137,6 @@ void Car::drift(float rotation)
 	m_sprite.rotate(rotation);
 }
 
-void Car::setRotation(float rotation)
-{
-	m_rotation = m_rotation + rotation;
-	m_sprite.setRotation(m_rotation);
-}
-
 //return the vector that represents the cars position on screen
 sf::Vector2f Car::getPos()
 {
@@ -148,9 +171,28 @@ void Car::breaks()
 	}
 }
 
+void Car::offTrack()
+{
+	m_speed /= 1.2;
+	/*if (m_speed < 0.0&& m_speed>-0.8)
+	{
+		m_speed = 0;
+	}*/
+}
+
+void Car::setMaxSpeed(float i)
+{
+	m_maxSpeed = i;
+}
+
 void Car::setCurrentTexture(sf::Texture carTex)
 {
 	m_texture = carTex;
 	m_sprite.setTexture(m_texture);
+}
+
+sf::Sprite Car::getSprite() const
+{
+	return m_sprite;
 }
 

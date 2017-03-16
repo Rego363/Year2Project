@@ -22,18 +22,24 @@ public:
 
 	void drift(float rotation);
 
-	void setRotation(float rotation);
+
 	sf::Vector2f getPos(); //returns player position
 	void slowDown();
 	bool isCarMoving();
 	void breaks();
+	void offTrack();
+	void setMaxSpeed(float i);
 	void setCurrentTexture(sf::Texture carTex);
-	sf::Texture m_texture; //car texture
-	sf::Sprite m_sprite; //car sprite
-
+	sf::Sprite getSprite() const;
 private:
 	
 	float m_maxSpeed;
+
+	sf::Texture m_texture; //car texture
+	sf::Texture m_fireTexture;
+	sf::Sprite m_fireSprite;
+	sf::Vector2u textureSize;
+	sf::Sprite m_sprite; //car sprite
 	float m_speed; //speed of car
 	float m_rotation; //rotation of car
 	sf::Vector2f m_position; //cars position on screen

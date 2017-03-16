@@ -39,6 +39,7 @@
 #include "Ai.h"
 #include "EnterNameScreen.h"
 #include <SFML\Audio.hpp>
+#include "background.h"
 
 using namespace std;
 
@@ -64,6 +65,7 @@ class changeProfile;
 class worldSquares;
 class Levels;
 class EnterNameScreen;
+class Background;
 
 
 enum GameState {
@@ -109,7 +111,7 @@ public:
 	void changeGameState(GameState gameState);
 	void changeGameDifficulty(GameDifficulty gameDiff);
 	sf::RenderWindow m_window;
-
+	Player *m_player;
 	string nameDisplay();
 
 
@@ -129,7 +131,7 @@ private:
 	
 
 
-	GameState m_currentGameState = GameState::Racing;
+	GameState m_currentGameState = GameState::MapSelect;
 
 
 
@@ -143,7 +145,7 @@ private:
 	GarageScreen* m_garageScreen;
 	MainMenu *m_MainMenu;
 	HelpScreen *m_helpScreen;
-	Player *m_player;
+	
 	Ai *m_ai;
 	specs *m_specs;
 	Liscence *m_Liscence;
@@ -186,6 +188,22 @@ private:
 	bool hasName=false;
 	sf::SoundBuffer m_buffer;
 	sf::Sound music;
+
+
+
+
+	/******************************/
+
+	sf::Image image;
+	sf::Color color;
+	sf::Sprite testSprite;
+	sf::Color color2;
+
+	/*******************************/
+
+	Background *m_background;
+	sf::Texture m_textureTest;
+	sf::Texture m_textureTest2;
 };
 
 #endif
