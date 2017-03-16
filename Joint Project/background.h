@@ -4,8 +4,10 @@
 #include<iostream>
 #include<fstream>
 #include<cctype>
+
 #ifndef BACKGROUND
 #define BACKGROUND
+
 class Background {
 
 public:
@@ -22,7 +24,8 @@ private:
 	sf::Texture m_tileTexture;
 	sf::Sprite spr;
 	sf::Image m_image;
-	sf::Vector2i map[100][100];
+	bool isOnTrack;
+	sf::Vector2i map[1000][1000];
 	sf::Vector2i loadCounter;
 
 	Game *m_game;

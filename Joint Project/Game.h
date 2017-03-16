@@ -111,7 +111,7 @@ public:
 	void changeGameState(GameState gameState);
 	void changeGameDifficulty(GameDifficulty gameDiff);
 	sf::RenderWindow m_window;
-
+	Player *m_player;
 	string nameDisplay();
 
 
@@ -145,7 +145,7 @@ private:
 	GarageScreen* m_garageScreen;
 	MainMenu *m_MainMenu;
 	HelpScreen *m_helpScreen;
-	Player *m_player;
+	
 	Ai *m_ai;
 	specs *m_specs;
 	Liscence *m_Liscence;

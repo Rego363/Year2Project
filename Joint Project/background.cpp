@@ -5,19 +5,7 @@ Background::Background( Game &game):
 	m_game(&game)
 {
 	
-	/*m_texture = texture;
 	
-
-	m_image = m_texture.copyToImage();
-	
-
-	m_sprites[0].setTexture(m_texture);
-	m_sprites[0].setTextureRect(sf::IntRect(m_sprites[0].getTextureRect().left, m_sprites[0].getTextureRect().top, m_sprites[0].getTextureRect().width / 2, m_sprites[0].getTextureRect().height));
-	m_sprites[0].setPosition(0, 0);
-	
-	m_sprites[1].setTexture(m_texture);
-	m_sprites[1].setPosition(m_sprites[0].getGlobalBounds().width, 0);
-	m_sprites[1].setTextureRect(sf::IntRect(m_sprites[0].getGlobalBounds().width, 0, m_sprites[0].getTextureRect().width , m_sprites[0].getTextureRect().height));*/
 
 	loadCounter = sf::Vector2i(0, 0);
 
@@ -73,8 +61,26 @@ void Background::draw(sf::RenderWindow &window)
 	{
 		for (int j = 0; j<loadCounter.y; j++)
 		{
-			spr.setPosition(i * 100, j * 100);
-			spr.setTextureRect(sf::IntRect(map[i][j].x * 100, map[i][j].y * 100, 100, 100));
+			spr.setPosition(i * 200, j * 200);
+			spr.setTextureRect(sf::IntRect(map[i][j].x * 200, map[i][j].y * 200, 200, 200));
+			if (map[i][j].x == 1 && map[i][j].y == 0|| map[i][j].x == 2 && map[i][j].y == 0)
+			{
+				isOnTrack = true;
+			}
+			else
+			{
+				isOnTrack = false;
+			}
+
+			if (spr.getGlobalBounds().intersects(m_game->m_player->m_car.getSprite().getGlobalBounds())&& isOnTrack==true)
+			{
+				m_game->m_player->m_car.setMaxSpeed(10);
+			}
+			else if (spr.getGlobalBounds().intersects(m_game->m_player->m_car.getSprite().getGlobalBounds()) && isOnTrack == false)
+			{
+				m_game->m_player->m_car.setMaxSpeed(2);
+			}
+
 			if (m_game->isInView(spr))
 			{
 				window.draw(spr);

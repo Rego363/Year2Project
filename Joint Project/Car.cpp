@@ -191,3 +191,8 @@ void Car::setCurrentTexture(sf::Texture carTex)
 	m_sprite.setTexture(m_texture);
 }
 
+sf::Sprite Car::getSprite() const
+{
+	return m_sprite;
+}
+
