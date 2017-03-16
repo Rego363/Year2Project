@@ -3,6 +3,7 @@
 #include<math.h>
 #include "Animation.h"
 #include "Label.h"
+#include <iostream>
 
 /*
 Cars to be used by both the player and the Ai racers
@@ -17,13 +18,17 @@ public:
 	void increaseSpeed(); //increase cars speed
 	void decreaseSpeed(); //decrease cars speed
 
-	void increaseRotation(); 
+	void increaseRotation();
 	void decreaseRotation(); //turning/rotating car
+
+	void increaseAiRotation();
+	void decreaseAiRotation(); //turning/rotating ai car
 
 	void drift(float rotation);
 	void setRotation(float rotation);
 
 	sf::Vector2f getPos(); //returns player position
+	float getRot(); //returns player rotation
 	void slowDown();
 	bool isCarMoving();
 	void breaks();
@@ -36,8 +41,6 @@ private:
 	float m_maxSpeed;
 
 	sf::Texture m_texture; //car texture
-	sf::Texture m_fireTexture;
-	sf::Sprite m_fireSprite;
 	sf::Vector2u textureSize;
 	sf::Sprite m_sprite; //car sprite
 	float m_speed; //speed of car
