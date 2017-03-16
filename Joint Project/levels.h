@@ -2,6 +2,7 @@
 #ifndef LEVELS
 #define LEVELS
 
+#include <SFML\Graphics.hpp>
 #include "ResourceManager.h"
 #include "Player.h"
 #include "WorldSquares.h"
@@ -22,12 +23,28 @@ public:
 	void loadImages();
 	void loadFont();
 private:
+
+	void startTimes();
+	void setupTexts();
+
 	LevelData *m_currentLevel;
 	Player *m_currentPlayer;
 	worldSquares *m_squares;
 	sf::Texture m_lambo;
 	sf::Font m_Font;
 	Game *m_game;
+
+	sf::Clock m_startRace;
+	sf::Clock m_raceTime;
+	bool m_raceStarted = false;
+	bool m_countDown = true;
+	sf::Text m_countDownNumber;
+	sf::Text m_currentLapTime;
+	sf::Text m_bestLap;
+	sf::Text m_lastLap;
+	float tempTime = 0;
+
+	sf::RectangleShape m_startLine;
 
 };
 
