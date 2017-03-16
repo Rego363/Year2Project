@@ -23,6 +23,11 @@ Game::Game() :
 		cout << "car setup" << endl;
 	}
 
+	if (!m_aistartCar.loadFromFile(m_currentLevel.m_aiLambo.m_fileName))
+	{
+		cout << "car setup" << endl;
+	}
+
 	m_text.setFont(m_font);
 	m_text.setString("RACING GAME");
 	m_text.setPosition(m_window.getSize().x / 4, m_window.getSize().y / 2);
@@ -56,6 +61,7 @@ Game::Game() :
 	{
 
 	}
+
 	music.setBuffer(m_buffer);
 	music.setLoop(true);
 	//music.play();
@@ -82,11 +88,6 @@ Game::Game() :
 	m_accelerationScreen = new AccelerationScreen(*this);
 	m_changeProfile = new changeProfile(*this);
 
-
-	
-	m_level = new Levels(m_currentLevel, *m_player, *m_worldSquares, *this);
-
-
 	for (int i = 0; i < m_currentLevel.m_track.size(); i++)
 	{
 		sf::CircleShape circle(0,30);		
@@ -94,18 +95,12 @@ Game::Game() :
 		circle.setPosition(m_currentLevel.m_track[i].m_position);
 		m_track.push_back(circle);
 	}
-	m_ai = new Ai(0.0f, 0.0f, m_startCar, m_track);
 
-
-
-
-	
-
-	//color = image.getPixel(m_player->m_car.getPos().x, m_player->m_car.getPos().y);
-	
+	m_ai = new Ai(m_car->getPos().x, m_car->getPos().y + 100, m_aistartCar, m_track);
 
 	m_background = new Background( *this);
 	
+	m_level = new Levels(m_currentLevel, *m_player, *m_worldSquares, *m_ai, *this);
 
 }
 
@@ -262,10 +257,6 @@ void Game::update(sf::Time time)
 	case GameState::Racing:
 		m_window.setView(m_view);
 		m_level->update(time.asSeconds(), m_view);
-		m_ai->update();
-		
-		//color2 = m_background->getPixelColor(m_player->m_car.getPos());
-
 
 		//////if the pixel is green slow down!!
 		if (color2.g>100&&color2.r<80&& color.b<80)
@@ -390,8 +381,6 @@ void Game::render()
 		m_window.clear(sf::Color(0, 0, 0, 255));
 		m_background->draw(m_window);
 		m_level->render(m_window);
-		
-		//m_ai->render(m_window);
 		m_window.display();
 		break;
 	case GameState::ChangeP:

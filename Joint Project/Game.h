@@ -131,7 +131,7 @@ private:
 	
 
 
-	GameState m_currentGameState = GameState::MapSelect;
+	GameState m_currentGameState = GameState::TheLicense;
 
 
 
@@ -146,7 +146,6 @@ private:
 	MainMenu *m_MainMenu;
 	HelpScreen *m_helpScreen;
 	
-	Ai *m_ai;
 	specs *m_specs;
 	Liscence *m_Liscence;
 	Splash *m_Splash;
@@ -166,9 +165,12 @@ private:
 
 	Car *m_car;
 	Car *m_shagginWaggin;
+	Ai *m_ai;
+
 	sf::View m_view;
 	sf::View m_view2;
 	sf::Texture m_startCar;
+	sf::Texture m_aistartCar;
 	sf::Vector2f m_startPos;
 
 	std::vector<sf::CircleShape> m_track;
