@@ -113,6 +113,7 @@ public:
 	sf::RenderWindow m_window;
 	Player *m_player;
 	string nameDisplay();
+	sf::Sound music;
 
 
 	bool isInView(sf::Sprite sprite);
@@ -131,7 +132,7 @@ private:
 	
 
 
-	GameState m_currentGameState = GameState::MapSelect;
+	GameState m_currentGameState = GameState::TheMenu;
 
 
 
@@ -187,7 +188,6 @@ private:
 	LevelLoader m_levelLoader;
 	bool hasName=false;
 	sf::SoundBuffer m_buffer;
-	sf::Sound music;
 	sf::Clock clock;
 	sf::Time timeSinceLastUpdate;
 	sf::Time timePerFrame;
@@ -206,6 +206,9 @@ private:
 	Background *m_background;
 	sf::Texture m_textureTest;
 	sf::Texture m_textureTest2;
+
+	sf::Texture m_backgroundImage;
+	sf::Sprite sprBack;
 };
 
 #endif

@@ -2,7 +2,8 @@
 #ifndef LISCENCE
 #define LISCENCE
 
-#include "Game.h"
+#include"Game.h"
+
 
 class Game;
 
@@ -21,6 +22,7 @@ private:
 	Label *m_title;
 
 	sf::Time m_CumulativeTime;
+
 
 };
 

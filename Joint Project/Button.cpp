@@ -109,8 +109,8 @@ void Button::update()
 {
 	if (m_hasFocus == true&& isActive==true)   
 	{
-		m_text.setColor(sf::Color::Magenta);
-		m_rect.setOutlineColor(sf::Color::Magenta);     //turn magenta if the button has focus
+		m_text.setColor(sf::Color::Red);
+		m_rect.setOutlineColor(sf::Color::Red);     //turn magenta if the button has focus
 	}
 	else
 	{

@@ -52,13 +52,15 @@ Game::Game() :
 	m_shagginWaggin = new Car(m_startCar, sf::Vector2f(0.0f, 0.0f));
 	m_player = new Player(0, 0, m_startCar, m_window);
 
-	if(!m_buffer.loadFromFile("hobbits.wav"))
+	if(!m_buffer.loadFromFile("music.wav"))
 	{
-
+		std::cout << "NO MUSIC" << std::endl;
 	}
+
 	music.setBuffer(m_buffer);
 	music.setLoop(true);
-	//music.play();
+	music.setVolume(100);
+	music.play();
 
 	/*  FOR TESTING*/
 	/*******************************************************************************/
@@ -106,6 +108,13 @@ Game::Game() :
 
 	m_background = new Background( *this);
 	
+
+	if (!m_backgroundImage.loadFromFile("backgroundBlue.png"))
+	{
+
+	}
+	sprBack.setTexture(m_backgroundImage);
+	sprBack.setPosition(0, 0);
 
 }
 
@@ -303,21 +312,25 @@ void Game::render()
 
 	case GameState::TheOptions:
 		m_window.clear(sf::Color(0, 0, 0, 255));
+		m_window.draw(sprBack);
 		m_optionsScreen->render(m_window);
 		m_window.display();
 		break;
 	case GameState::TheMenu:
 		m_window.clear(sf::Color(0, 0, 0, 255));
+		m_window.draw(sprBack);
 		m_MainMenu->render(m_window);
 		m_window.display();
 		break;
 	case GameState::Difficulty:
 		m_window.clear(sf::Color(0, 0, 0, 255));
+		m_window.draw(sprBack);
 		m_diffScreen->render(m_window);
 		m_window.display();
 		break;
 	case GameState::Garage:
 		m_window.clear(sf::Color(0, 0, 0, 255));
+		m_window.draw(sprBack);
 		m_garageScreen->draw(m_window);
 		m_window.display();
 		break;
@@ -328,61 +341,73 @@ void Game::render()
 		break;
 	case GameState::TheLicense:
 		m_window.clear(sf::Color(0, 0, 0, 255));
+		m_window.draw(sprBack);
 		m_Liscence->render(m_window);
 		m_window.display();
 		break;
 	case GameState::TheSplash:
 		m_window.clear(sf::Color(0, 0, 0, 255));
+		m_window.draw(sprBack);
 		m_Splash->render(m_window);
 		m_window.display();
 		break;
 	case GameState::Sound:
 		m_window.clear(sf::Color(0, 0, 0, 255));
+		m_window.draw(sprBack);
 		m_soundScreen->render(m_window);
 		m_window.display();
 		break;
 	case GameState::Display:
 		m_window.clear(sf::Color(0, 0, 0, 255));
+		m_window.draw(sprBack);
 		m_displayScreen->render(m_window);
 		m_window.display();
 		break;
 	case GameState::MapSelect:
 		m_window.clear(sf::Color(0, 0, 0, 255));
+		m_window.draw(sprBack);
 		m_mapSelect->render(m_window);
 		m_window.display();
 		break;
 	case GameState::Help:
 		m_window.clear(sf::Color(0, 0, 0, 255));
+		m_window.draw(sprBack);
 		m_helpScreen->draw(m_window);
 		m_window.display();
 		break;
 	case GameState::Thespecs:
 		m_window.clear(sf::Color(0, 0, 0, 255));
+		m_window.draw(sprBack);
 		m_specs->render(m_window);
 		m_window.display();
 		break;
 	case GameState::Acceleration:
 		m_window.clear(sf::Color(0, 0, 0, 255));
+		m_window.draw(sprBack);
 		m_accelerationScreen->draw(m_window);
 		m_window.display();
 		break;
 	case GameState::Braking:
 		m_window.clear(sf::Color(0, 0, 0, 255));
+		m_window.draw(sprBack);
 		m_brakingScreen->draw(m_window);
 		m_window.display();
 		break;
 	case GameState::Speed:
 		m_window.clear(sf::Color(0, 0, 0, 255));
+		m_window.draw(sprBack);
 		m_speedScreen->draw(m_window);
 		m_window.display();
 		break;
 	case GameState::Steering:
 		m_window.clear(sf::Color(0, 0, 0, 255));
+		m_window.draw(sprBack);
 		m_steeringScreen->draw(m_window);
 		m_window.display();
 		break;
 	case GameState::Turbo:
 		m_window.clear(sf::Color(0, 0, 0, 255));
+		m_window.draw(sprBack);
 		m_turboScreen->draw(m_window);
 		m_window.display();
 		break;
@@ -396,6 +421,7 @@ void Game::render()
 		break;
 	case GameState::ChangeP:
 		m_window.clear(sf::Color(0, 0, 0, 255));
+		m_window.draw(sprBack);
 		//nameDisplay(m_currentName);
 		m_changeProfile->render(m_window);
 	//	m_player->getName(m_name);
@@ -404,6 +430,7 @@ void Game::render()
 		break;
 	case GameState::EnterName:
 		m_window.clear(sf::Color(0, 0, 0, 255));
+		m_window.draw(sprBack);
 		m_enterName->draw(m_window);
 		m_window.display();
 		break;
