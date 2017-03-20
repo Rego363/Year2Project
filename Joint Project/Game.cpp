@@ -40,7 +40,6 @@ Game::Game() :
 	m_garageScreen = new GarageScreen(m_window.getSize().x / 4, m_window.getSize().y / 2, *this);
 	m_MainMenu = new MainMenu(*this);
 	m_helpScreen = new HelpScreen(*this);
-	m_Liscence = new Liscence(*this);
 	m_Splash = new Splash(*this);
 	m_diffScreen = new DifficultyScreen(*this);
 
@@ -50,12 +49,14 @@ Game::Game() :
 	m_speedScreen = new SpeedScreen(*this);
 	m_accelerationScreen = new AccelerationScreen(*this);
 	m_worldSquares = new worldSquares(*this, m_currentLevel);
+	m_Liscence = new Liscence(*this);
 	m_enterName = new EnterNameScreen(*this);
+	m_credits = new Credits(*this, m_currentLevel);
 
 	m_startPos = sf::Vector2f(m_window.getSize().x / 2, m_window.getSize().y / 4);
 	m_car = new Car(m_startCar, m_startPos);
 	m_aiCar = new Car(m_startCar, sf::Vector2f(0.0f, 0.0f));
-	m_player = new Player(0, 0, m_startCar, m_window);
+	m_player = new Player(0, 0, m_startCar, m_window, *this);
 
 	if(!m_buffer.loadFromFile("music.wav"))
 	{
@@ -77,9 +78,6 @@ Game::Game() :
 	/*******************************************************************************/
 
 	m_specs = new specs(*this);
-
-	m_Liscence = new Liscence(*this);
-	m_Splash = new Splash(*this);
 	m_diffScreen = new DifficultyScreen(*this);
 
 	m_steeringScreen = new SteeringScreen(*this);
@@ -110,6 +108,8 @@ Game::Game() :
 	sprBack.setTexture(m_backgroundImage);
 	sprBack.setPosition(0, 0);
 
+
+	
 }
 
 /// <summary>
@@ -212,7 +212,7 @@ void Game::update(sf::Time time)
 			//m_player->save("Dave");
 			hasName = true;
 		}
-		m_Liscence->update(time);
+		m_Liscence->update();
 		m_window.setView(m_view2);
 		break;
 	case GameState::TheSplash:
@@ -263,16 +263,14 @@ void Game::update(sf::Time time)
 		m_window.setView(m_view);
 		m_level->update(time.asSeconds(), m_view);
 
-		//////if the pixel is green slow down!!
-		if (color2.g>100&&color2.r<80&& color.b<80)
-		{
-			m_player->m_car.setMaxSpeed(2);
-		}
 		
-		else
+		m_xbox.update();
+		if (m_xbox.m_currentState.Back&& !m_xbox.m_previousState.Back)
 		{
-			m_player->m_car.setMaxSpeed(10);
+			m_background->activateTheShader();
 		}
+
+		
 		break;
 	case GameState::ChangeP:
 		m_changeProfile->update();
@@ -281,6 +279,9 @@ void Game::update(sf::Time time)
 		break;
 	case GameState::EnterName:
 		m_enterName->update();
+		break;
+	case GameState::TheCredits:
+		m_credits->update();
 		break;
 	default:
 		break;
@@ -322,8 +323,7 @@ void Game::render()
 		m_window.display();
 		break;
 	case GameState::TheLicense:
-		m_window.clear(sf::Color(0, 0, 0, 255));
-		m_window.draw(sprBack);
+		m_window.clear();
 		m_Liscence->render(m_window);
 		m_window.display();
 		break;
@@ -414,6 +414,11 @@ void Game::render()
 		m_enterName->draw(m_window);
 		m_window.display();
 		break;
+	case GameState::TheCredits:
+		m_window.clear();
+		m_credits->render(m_window);
+		m_window.display();
+		break;
 	default:
 		break;
 	}
@@ -421,11 +426,13 @@ void Game::render()
 
 }
 
+//function to change the games current gamestate
 void Game::changeGameState(GameState gameState)
 {
 	m_currentGameState = gameState;
 }
 
+//function to change the difficulty of the game
 void Game::changeGameDifficulty(GameDifficulty gameDiff)
 {
 	m_currentDifficulty = gameDiff;

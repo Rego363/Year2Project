@@ -57,6 +57,21 @@ struct GarageData
 	std::string m_fileName;
 };
 
+struct CreditsData
+{
+	std::string m_fileName;
+};
+
+struct LisenceData
+{
+	std::string m_fileName;
+};
+
+struct SplashData
+{
+	std::string m_fileName;
+};
+
 
 //contains all the levels data
 struct LevelData
@@ -69,6 +84,9 @@ struct LevelData
 	blueLamboData m_aiLambo;
 	GarageData m_garage;
 	std::vector<TrackData> m_track;
+	CreditsData m_credits;
+	LisenceData m_lisence;
+	SplashData m_splash;
 };
 
 //class to load in the level details

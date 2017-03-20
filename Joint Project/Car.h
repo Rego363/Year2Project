@@ -27,6 +27,9 @@ public:
 	void drift(float rotation);
 	void setRotation(float rotation);
 
+	void turbo(float MaxturboSpeed);
+	bool useTurbo = false;
+
 	sf::Vector2f getPos(); //returns player position
 	float getRot(); //returns player rotation
 	void slowDown();
@@ -44,6 +47,8 @@ private:
 	float m_maxSpeed;
 
 	sf::Texture m_texture; //car texture
+	sf::Texture m_blankTexture;
+	sf::Sprite m_sprite2;
 	sf::Vector2u textureSize;
 	sf::Sprite m_sprite; //car sprite
 	float m_speed; //speed of car
@@ -57,5 +62,7 @@ private:
 
 
 	Animation *animation;
+
+	sf::Shader m_shader;
 
 };

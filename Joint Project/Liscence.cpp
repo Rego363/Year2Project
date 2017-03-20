@@ -3,9 +3,9 @@
 //creates the screen
 Liscence::Liscence(Game & game) : m_game(&game)
 {
-	m_title = new Label("Team C \n Racing \n 2k17", 100, 50);
-	m_title->changeTextSize(200);
-	m_gui.addLabel(m_title);
+
+	load();
+	m_animation.fit(sf::FloatRect(0, 0, 1280, 720), true);
 
 }
 
@@ -14,13 +14,23 @@ Liscence::~Liscence()
 {
 }
 
-//Displays screen for 3 seconds then switches to splash screen
-void Liscence::update(sf::Time dt)
+//Displays the lisence animation then switches to splash screen
+void Liscence::update()
 {
-	m_CumulativeTime += dt;
 
-	if (m_CumulativeTime.asSeconds() > 3)
+	m_game->music.pause();
+
+	if (m_play == true)
 	{
+		m_animation.play();
+	}
+
+	m_animation.update();
+	m_play = false;
+
+	if (m_animation.getStatus() == 0)
+	{
+		m_game->music.play();
 		m_game->changeGameState(GameState::TheSplash);
 	}
 }
@@ -28,6 +38,17 @@ void Liscence::update(sf::Time dt)
 //draws the screen
 void Liscence::render(sf::RenderWindow & window)
 {
-	m_gui.draw(window);
+	if (m_animation.getStatus() == 2)
+	{
+		window.draw(m_animation);
+	}
+}
+
+void Liscence::load()
+{
+	if (!m_animation.openFromFile("Final animation.mp4"))
+	{
+		cout << "lisence not loaded" << endl;
+	}
 }
 

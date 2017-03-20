@@ -27,6 +27,7 @@ public:
 	void goToHelp();
 	void goToSpecs();
 	void goToChangeP();
+	void goToCredits();
 
 private:
 
@@ -38,6 +39,7 @@ private:
 	Button *m_Options;
 	Button *m_Help;
 	Button *m_Exit;
+	Button *m_Credits;
 	int m_currentSelect;
 	Game *m_game;
 };

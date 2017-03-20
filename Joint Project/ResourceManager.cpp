@@ -54,6 +54,24 @@ void operator >> (const YAML::Node& trackNode, TrackData& track)
 	track.m_size = trackNode["size"].as<float>();					// Loading the size of the node
 }
 
+//video file for ceredits
+void operator >> (const YAML::Node& creditsNode, CreditsData& credits)
+{
+	credits.m_fileName = creditsNode["file"].as<std::string>();
+}
+
+// video file for Lisence screen
+void operator >> (const YAML::Node& lisenceNode, LisenceData& lisence)
+{
+	lisence.m_fileName = lisenceNode["file"].as<std::string>();
+}
+
+// video file for Splash screen
+void operator >> (const YAML::Node& splashNode, SplashData& splash)
+{
+	splash.m_fileName = splashNode["file"].as<std::string>();
+}
+
 //all levelData
 void operator >> (const YAML::Node& levelNode, LevelData& level)
 {
@@ -64,6 +82,9 @@ void operator >> (const YAML::Node& levelNode, LevelData& level)
 	levelNode["ground"] >> level.m_ground;
 	levelNode["sand"] >> level.m_sand;
 	levelNode["garage"] >> level.m_garage;
+	levelNode["credits"] >> level.m_credits;
+	levelNode["lisence"] >> level.m_lisence;
+	levelNode["splash"] >> level.m_splash;
 
 	// For loop to load track data into m_track 
 	const YAML::Node& trackNode = levelNode["track"].as<YAML::Node>();

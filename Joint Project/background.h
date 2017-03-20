@@ -14,6 +14,7 @@ public:
 	Background(Game &m_game);
 	sf::Color getPixelColor(sf::Vector2f pos);
 	void draw(sf::RenderWindow &window);
+	void activateTheShader();
 	
 private:
 	
@@ -32,6 +33,15 @@ private:
 	sf::Vector2i loadCounter;
 
 	Game *m_game;
+
+	sf::Shader m_shader;
+	sf::Shader m_shader2;
+	sf::Texture m_texture;
+	sf::Sprite m_blankSprite;
+
+
+	
+	static bool activateShader;
 	
 };
 #endif
