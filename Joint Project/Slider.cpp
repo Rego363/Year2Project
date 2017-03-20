@@ -11,7 +11,7 @@ Summary: A simple sfml game with menu, options that use the common UI elements
 Slider::Slider(float x, float y, float &value, std::string s) :
 	Widget()
 {
-	if (!m_font.loadFromFile("Fonts/American Captain.ttf"))
+	if (!m_font.loadFromFile("Fonts/AmericanCaptain.ttf"))
 	{
 		//error message
 	}
@@ -99,7 +99,7 @@ void Slider::update()
 	if (m_hasFocus == true)
 	{
 		
-		m_rect.setOutlineColor(sf::Color::Magenta);
+		m_rect.setOutlineColor(sf::Color::Red);
 	}
 	else
 	{

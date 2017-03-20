@@ -25,6 +25,11 @@ struct LamboData
 	std::string m_fileName;
 };
 
+struct blueLamboData
+{
+	std::string m_fileName;
+};
+
 struct TileData
 {
 	std::string m_fileName;
@@ -56,6 +61,7 @@ struct LevelData
 	TileData m_Tiles;
 	GroundData m_ground;
 	SandData m_sand;
+	blueLamboData m_aiLambo;
 	std::vector<TrackData> m_track;
 };
 

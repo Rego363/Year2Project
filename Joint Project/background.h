@@ -27,7 +27,8 @@ private:
 	sf::Sprite spr;
 	sf::Image m_image;
 	bool isOnTrack;
-	sf::Vector2i map[1000][1000];
+	bool hitWall;
+	sf::Vector2i map[2000][2000];
 	sf::Vector2i loadCounter;
 
 	Game *m_game;

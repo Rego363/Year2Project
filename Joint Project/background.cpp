@@ -62,14 +62,22 @@ void Background::draw(sf::RenderWindow &window)
 		{
 			spr.setPosition(i * 200, j * 200);
 			spr.setTextureRect(sf::IntRect(map[i][j].x * 200, map[i][j].y * 200, 200, 200));
-			if (map[i][j].x == 1 && map[i][j].y == 0|| map[i][j].x == 2 && map[i][j].y == 0)
+
+			if (map[i][j].x == 1 && map[i][j].y == 0)
 			{
 				isOnTrack = true;
+				hitWall = false;
 			}
-			else
+			else if (map[i][j].x == 0 && map[i][j].y == 0)
 			{
 				isOnTrack = false;
+				hitWall = false;
 			}
+			else if (map[i][j].x == 2 && map[i][j].y == 0)
+			{
+				hitWall = true;
+			}
+			
 
 			if (spr.getGlobalBounds().intersects(m_game->m_player->m_car.getSprite().getGlobalBounds())&& isOnTrack==true)
 			{
@@ -77,7 +85,12 @@ void Background::draw(sf::RenderWindow &window)
 			}
 			else if (spr.getGlobalBounds().intersects(m_game->m_player->m_car.getSprite().getGlobalBounds()) && isOnTrack == false)
 			{
-				m_game->m_player->m_car.setMaxSpeed(2);
+				m_game->m_player->m_car.setMaxSpeed(4);
+			}
+			if (spr.getGlobalBounds().intersects(m_game->m_player->m_car.getSprite().getGlobalBounds()) && hitWall == true)
+			{
+				m_game->m_player->m_car.collision();
+
 			}
 
 			if (m_game->isInView(spr))

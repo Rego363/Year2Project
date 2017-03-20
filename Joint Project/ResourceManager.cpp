@@ -12,6 +12,12 @@ void operator >> (const YAML::Node& lamboNode, LamboData& lambo)
 	lambo.m_fileName = lamboNode["file"].as<std::string>();
 }
 
+//find the car texture
+void operator >> (const YAML::Node& lamboNode, blueLamboData& lambo)
+{
+	lambo.m_fileName = lamboNode["file"].as<std::string>();
+}
+
 //find the tile map texture
 void operator >> (const YAML::Node& tileNode, TileData& maptile)
 {
@@ -46,6 +52,7 @@ void operator >> (const YAML::Node& trackNode, TrackData& track)
 //all levelData
 void operator >> (const YAML::Node& levelNode, LevelData& level)
 {
+	levelNode["bluelambo"] >> level.m_aiLambo;
 	levelNode["lambo"] >> level.m_lambo;
 	levelNode["font"] >> level.m_Font;
 	levelNode["maptile"] >> level.m_Tiles;

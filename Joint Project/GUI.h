@@ -48,7 +48,9 @@ public:
 	bool vertical; //when true use vert controls
 	bool horizontal; //use horizontal
 	bool both; //use mixture
-	
+	static bool useAnim;
+	static sf::Clock m_timeBetweenClicks;
+
 	sf::SoundBuffer m_buffer;
 	sf::Sound m_guiSound; //gui soundeffect that plays when moving through elements
 

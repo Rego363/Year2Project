@@ -2,13 +2,22 @@
 
 //Dylan
 //set textures in here for each level
-Levels::Levels(LevelData &level, Player &player, worldSquares &squares, Game &game) : m_currentLevel(&level),
+Levels::Levels(LevelData &level, Player &player, worldSquares &squares, Ai &ai, Game &game) : m_currentLevel(&level),
 										m_currentPlayer(&player),
 										m_squares(&squares),
+										m_ai(&ai),
 										m_game(&game)
 {
 	loadImages();
+	loadFont();
 	m_currentPlayer->m_car.setCurrentTexture(m_lambo);
+	setupTexts();
+
+	m_startLine.setPosition(m_currentPlayer->m_car.getPos().x + 40, m_currentPlayer->m_car.getPos().y - 100);
+	m_startLine.setSize(sf::Vector2f(5, 200));
+	m_startLine.setFillColor(sf::Color::Red);
+
+	m_ai->m_car.scaleAi();
 }
 
 Levels::~Levels()
@@ -18,8 +27,52 @@ Levels::~Levels()
 //update game
 void Levels::update(float dt, sf::View &view)
 {
-	m_squares->update();
-	m_currentPlayer->update(dt, view);
+	if (m_raceStarted == false)
+	{
+		m_squares->update();
+		m_currentPlayer->update(dt, view);
+
+		m_startRace.restart();
+		m_raceStarted = true;
+	}
+
+	startTimes();
+
+	if (m_startRace.getElapsedTime().asSeconds() > 3 && m_startRace.getElapsedTime().asSeconds())
+	{
+		m_squares->update();
+		m_currentPlayer->update(dt, view);
+		m_ai->update();
+
+		m_currentLapTime.setPosition(m_currentPlayer->m_car.getPos().x + 300, m_currentPlayer->m_car.getPos().y - 350);
+		m_currentLapTime.setString("Time: " + to_string(m_raceTime.getElapsedTime().asSeconds()));
+		m_bestLap.setPosition(m_currentPlayer->m_car.getPos().x - 620, m_currentPlayer->m_car.getPos().y - 350);
+		m_lastLap.setPosition(m_currentPlayer->m_car.getPos().x - 620, m_currentPlayer->m_car.getPos().y - 310);
+	}
+
+	if ((sf::IntRect(m_currentPlayer->m_car.getSprite().getPosition().x, m_currentPlayer->m_car.getSprite().getPosition().y -20,
+		60, 60))
+		.intersects(sf::IntRect(m_startLine.getPosition().x, m_startLine.getPosition().y, 5, 200)))
+	{
+		if (m_raceTime.getElapsedTime().asSeconds() > 10)
+		{
+			
+			if (m_raceTime.getElapsedTime().asSeconds() < tempTime)
+			{
+				tempTime = m_raceTime.getElapsedTime().asSeconds();
+				m_bestLap.setString("Best Lap Time: " + to_string(m_raceTime.getElapsedTime().asSeconds()));
+			}
+			else if (tempTime == 0)
+			{
+				tempTime = m_raceTime.getElapsedTime().asSeconds();
+				m_bestLap.setString("Best Lap Time: " + to_string(m_raceTime.getElapsedTime().asSeconds()));
+			}
+
+			m_lastLap.setString("Last Lap Time: " + to_string(m_raceTime.getElapsedTime().asSeconds()));
+
+			m_raceTime.restart();
+		}
+	}
 }
 
 //draw game
@@ -27,6 +80,16 @@ void Levels::render(sf::RenderWindow & window)
 {
 	//m_squares->render(window);
 	m_currentPlayer->m_car.draw(window);
+	m_ai->render(window);
+	window.draw(m_currentLapTime);
+	window.draw(m_startLine);
+	window.draw(m_bestLap);
+	window.draw(m_lastLap);
+	window.draw(easterEgg);
+	if (m_countDown)
+	{
+		window.draw(m_countDownNumber);
+	}
 }
 
 //load images in for cars/background/etc..
@@ -45,4 +108,69 @@ void Levels::loadFont()
 	{
 		std::cout << "failed to load font" << std::endl;
 	}
+}
+
+//Funtion for timers
+void Levels::startTimes()
+{
+	if (m_countDown)
+	{
+		if (m_startRace.getElapsedTime().asSeconds() > 1 && m_startRace.getElapsedTime().asSeconds() < 3)
+		{
+			m_countDownNumber.setString("Race Starts in \n        2");
+		}
+
+		if (m_startRace.getElapsedTime().asSeconds() > 2 && m_startRace.getElapsedTime().asSeconds() < 4)
+		{
+			m_countDownNumber.setString("Race Starts in \n        1");
+		}
+
+		if (m_startRace.getElapsedTime().asSeconds() > 3 && m_startRace.getElapsedTime().asSeconds() < 6)
+		{
+			m_countDownNumber.setString("Go!!");
+		}
+	}
+
+	if (m_startRace.getElapsedTime().asSeconds() > 6)
+	{
+		m_countDown = false;
+	}
+
+
+	if (m_startRace.getElapsedTime().asSeconds() < 3)
+	{
+		m_raceTime.restart();
+	}
+
+}
+
+//Function to set up text
+void Levels::setupTexts()
+{
+	m_countDownNumber.setPosition(m_currentPlayer->m_car.getPos().x + 100, m_currentPlayer->m_car.getPos().y);
+	m_countDownNumber.setCharacterSize(100);
+	m_countDownNumber.setString("Race Starts in \n        3");
+	m_countDownNumber.setFont(m_Font);
+
+	m_currentLapTime.setPosition(m_currentPlayer->m_car.getPos().x + 300, m_currentPlayer->m_car.getPos().y - 350);
+	m_currentLapTime.setCharacterSize(50);
+	m_currentLapTime.setString("Time: ");
+	m_currentLapTime.setFont(m_Font);
+
+	m_bestLap.setPosition(m_currentPlayer->m_car.getPos().x - 620, m_currentPlayer->m_car.getPos().y - 350);
+	m_bestLap.setCharacterSize(50);
+	m_bestLap.setString("Best Lap Time: ");
+	m_bestLap.setFont(m_Font);
+
+	m_lastLap.setPosition(m_currentPlayer->m_car.getPos().x - 620, m_currentPlayer->m_car.getPos().y - 310);
+	m_lastLap.setCharacterSize(50);
+	m_lastLap.setString("Last Lap Time: ");
+	m_lastLap.setFont(m_Font);
+
+	easterEgg.setPosition(5700, 215);
+	easterEgg.setCharacterSize(50);
+	easterEgg.setString("Pete is cool");
+	easterEgg.setFont(m_Font);
+	easterEgg.setColor(sf::Color::Red);
+	
 }

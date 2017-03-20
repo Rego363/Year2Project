@@ -79,8 +79,8 @@ void CheckBox::update()
 {
 	if (m_hasFocus == true)
 	{
-		m_text.setColor(sf::Color::Magenta);
-		m_rect.setOutlineColor(sf::Color::Magenta);
+		m_text.setColor(sf::Color::Red);
+		m_rect.setOutlineColor(sf::Color::Red);
 	}
 	else {
 		m_text.setColor(sf::Color::White);

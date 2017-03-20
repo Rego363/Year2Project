@@ -25,7 +25,7 @@ public:
 	void decreaseAiRotation(); //turning/rotating ai car
 
 	void drift(float rotation);
-
+	void setRotation(float rotation);
 
 	sf::Vector2f getPos(); //returns player position
 	float getRot(); //returns player rotation
@@ -35,6 +35,9 @@ public:
 	void offTrack();
 	void setMaxSpeed(float i);
 	void setCurrentTexture(sf::Texture carTex);
+	void collision();
+	void setAiPosition(sf::Vector2f);
+	void scaleAi();
 	sf::Sprite getSprite() const;
 private:
 	
@@ -48,6 +51,7 @@ private:
 	sf::Vector2f m_position; //cars position on screen
 	bool isMoving;
 	float m_acceleration;
+	float m_deacceleration;
 
 	Label *currentPos;
 

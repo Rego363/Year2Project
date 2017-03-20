@@ -7,7 +7,7 @@ Car::Car(sf::Texture const & texture, sf::Vector2f const & pos):
 	m_texture(texture), m_position(pos)
 {
 
-
+	m_position = sf::Vector2f(760, 1100);
 	m_sprite.setTexture(m_texture); //set texture
 	m_sprite.setPosition(m_position); //set pos
 	//m_sprite.setScale(0.10, 0.10); //scale texture down
@@ -17,8 +17,9 @@ Car::Car(sf::Texture const & texture, sf::Vector2f const & pos):
 
 	m_speed = 0; 
 	m_rotation = 0;
-	m_acceleration = 0.25;
-	m_maxSpeed = 10;
+	m_acceleration = 2.25;
+	m_deacceleration = 0.45;
+	m_maxSpeed = 200;
 	isMoving = false;
 
 	//currentPos = new Label("x = " + std::to_string(m_sprite.getPosition().x) + "\n Y = " + std::to_string(m_sprite.getPosition().y), 0, 0);
@@ -77,6 +78,8 @@ void Car::increaseSpeed()
 	if (m_speed < m_maxSpeed)
 	{
 		m_speed += m_acceleration;
+		
+
 	}
 }
 
@@ -85,7 +88,7 @@ void Car::decreaseSpeed()
 {
 	if (m_speed > -(m_maxSpeed))
 	{
-		m_speed -= m_acceleration;
+		m_speed -= m_deacceleration;
 	}
 }
 
@@ -128,6 +131,13 @@ void Car::drift(float rotation)
 	m_sprite.rotate(rotation);
 }
 
+//set permenant rotation of the car
+void Car::setRotation(float rotation)
+{
+	m_rotation = m_rotation + rotation;
+	m_sprite.setRotation(m_rotation);
+}
+
 //return the vector that represents the cars position on screen
 sf::Vector2f Car::getPos()
 {
@@ -140,15 +150,16 @@ float Car::getRot()
 	return m_sprite.getRotation();
 }
 
+//slows down the car
 void Car::slowDown()
 {
 	if(m_speed > 0.0)
 	{
-		m_speed -= m_acceleration;
+		m_speed -= m_deacceleration;
 	} 
 	else if (m_speed < 0.0)
 	{
-		m_speed += m_acceleration;
+		m_speed += m_deacceleration;
 	}
 	
 }
@@ -160,7 +171,7 @@ bool Car::isCarMoving()
 
 void Car::breaks()
 {
-	m_speed /= 1.08;
+	m_speed *= 0.8;
 	if (m_speed < 0.0&& m_speed>-0.8)
 	{
 		m_speed = 0;
@@ -170,8 +181,14 @@ void Car::breaks()
 void Car::offTrack()
 {
 	m_speed /= 1.2;
+	/*if (m_speed < 0.0&& m_speed>-0.8)
+	{
+		m_speed = 0;
+	}*/
+
 }
 
+//sets max speed
 void Car::setMaxSpeed(float i)
 {
 	m_maxSpeed = i;
@@ -183,6 +200,27 @@ void Car::setCurrentTexture(sf::Texture carTex)
 	m_sprite.setTexture(m_texture);
 }
 
+//Function for when car collides with brick wall
+void Car::collision()
+{
+	m_rotation -= 180;
+	m_sprite.setRotation(m_rotation);
+
+
+}
+
+// sets the ai position on startup
+void Car::setAiPosition(sf::Vector2f position)
+{
+	m_sprite.setPosition(position);
+}
+
+void Car::scaleAi()
+{
+	m_sprite.scale(2.25, 2.25);
+}
+
+//gets the sprite
 sf::Sprite Car::getSprite() const
 {
 	return m_sprite;

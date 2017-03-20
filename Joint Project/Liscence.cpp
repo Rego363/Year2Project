@@ -6,6 +6,7 @@ Liscence::Liscence(Game & game) : m_game(&game)
 	m_title = new Label("Team C \n Racing \n 2k17", 100, 50);
 	m_title->changeTextSize(200);
 	m_gui.addLabel(m_title);
+
 }
 
 //destructor

@@ -231,6 +231,7 @@ void Player::update(float dt, sf::View &view)
 	carTurningLeft = false;
 	breaks = false;
 	carMoving = false;
+	cout << to_string(m_car.getPos().x) + ", " + to_string(m_car.getPos().y) << endl;
 
 	view.setCenter(m_car.getPos()); //follow the player car
 	m_window->setView(view);
@@ -319,16 +320,21 @@ void Player::update(float dt, sf::View &view)
 	{
 		if (currentDrift > -47 && currentDrift < 0)
 		{
-			currentDrift += 0.5;
+			currentDrift += 1;
 			m_car.drift(currentDrift);
 		}
 
 		if (currentDrift < 47 && currentDrift > 0)
 		{
-			currentDrift -= 0.5;
+			currentDrift -= 1;
 			m_car.drift(currentDrift);
 		}
 
+	}
+	else 
+	{
+		m_car.setRotation(currentDrift);
+		currentDrift = 0;
 	}
 }
 

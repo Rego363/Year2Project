@@ -23,6 +23,11 @@ Game::Game() :
 		cout << "car setup" << endl;
 	}
 
+	if (!m_aistartCar.loadFromFile(m_currentLevel.m_aiLambo.m_fileName))
+	{
+		cout << "car setup" << endl;
+	}
+
 	m_text.setFont(m_font);
 	m_text.setString("RACING GAME");
 	m_text.setPosition(m_window.getSize().x / 4, m_window.getSize().y / 2);
@@ -49,16 +54,18 @@ Game::Game() :
 
 	m_startPos = sf::Vector2f(m_window.getSize().x / 2, m_window.getSize().y / 4);
 	m_car = new Car(m_startCar, m_startPos);
-	m_shagginWaggin = new Car(m_startCar, sf::Vector2f(0.0f, 0.0f));
+	m_aiCar = new Car(m_startCar, sf::Vector2f(0.0f, 0.0f));
 	m_player = new Player(0, 0, m_startCar, m_window);
 
-	if(!m_buffer.loadFromFile("hobbits.wav"))
+	if(!m_buffer.loadFromFile("music.wav"))
 	{
-
+		std::cout << "NO MUSIC" << std::endl;
 	}
+
 	music.setBuffer(m_buffer);
 	music.setLoop(true);
-	//music.play();
+	music.setVolume(100);
+	music.play();
 
 	/*  FOR TESTING*/
 	/*******************************************************************************/
@@ -82,11 +89,6 @@ Game::Game() :
 	m_accelerationScreen = new AccelerationScreen(*this);
 	m_changeProfile = new changeProfile(*this);
 
-
-	
-	m_level = new Levels(m_currentLevel, *m_player, *m_worldSquares, *this);
-
-
 	for (int i = 0; i < m_currentLevel.m_track.size(); i++)
 	{
 		sf::CircleShape circle(0,30);		
@@ -94,18 +96,19 @@ Game::Game() :
 		circle.setPosition(m_currentLevel.m_track[i].m_position);
 		m_track.push_back(circle);
 	}
-	m_ai = new Ai(0.0f, 0.0f, m_startCar, m_track);
 
-
-
-
-	
-
-	//color = image.getPixel(m_player->m_car.getPos().x, m_player->m_car.getPos().y);
-	
+	m_ai = new Ai(m_car->getPos().x, m_car->getPos().y + 100, m_aistartCar, m_track);
 
 	m_background = new Background( *this);
 	
+	m_level = new Levels(m_currentLevel, *m_player, *m_worldSquares, *m_ai, *this);
+
+	if (!m_backgroundImage.loadFromFile("backgroundBlue.png"))
+	{
+
+	}
+	sprBack.setTexture(m_backgroundImage);
+	sprBack.setPosition(0, 0);
 
 }
 
@@ -259,10 +262,6 @@ void Game::update(sf::Time time)
 	case GameState::Racing:
 		m_window.setView(m_view);
 		m_level->update(time.asSeconds(), m_view);
-		m_ai->update();
-		
-		//color2 = m_background->getPixelColor(m_player->m_car.getPos());
-
 
 		//////if the pixel is green slow down!!
 		if (color2.g>100&&color2.r<80&& color.b<80)
@@ -300,81 +299,97 @@ void Game::render()
 
 	case GameState::TheOptions:
 		m_window.clear(sf::Color(0, 0, 0, 255));
+		m_window.draw(sprBack);
 		m_optionsScreen->render(m_window);
 		m_window.display();
 		break;
 	case GameState::TheMenu:
 		m_window.clear(sf::Color(0, 0, 0, 255));
+		m_window.draw(sprBack);
 		m_MainMenu->render(m_window);
 		m_window.display();
 		break;
 	case GameState::Difficulty:
 		m_window.clear(sf::Color(0, 0, 0, 255));
+		m_window.draw(sprBack);
 		m_diffScreen->render(m_window);
 		m_window.display();
 		break;
 	case GameState::Garage:
 		m_window.clear(sf::Color(0, 0, 0, 255));
+		m_window.draw(sprBack);
 		m_garageScreen->draw(m_window);
 		m_window.display();
 		break;
 	case GameState::TheLicense:
 		m_window.clear(sf::Color(0, 0, 0, 255));
+		m_window.draw(sprBack);
 		m_Liscence->render(m_window);
 		m_window.display();
 		break;
 	case GameState::TheSplash:
 		m_window.clear(sf::Color(0, 0, 0, 255));
+		m_window.draw(sprBack);
 		m_Splash->render(m_window);
 		m_window.display();
 		break;
 	case GameState::Sound:
 		m_window.clear(sf::Color(0, 0, 0, 255));
+		m_window.draw(sprBack);
 		m_soundScreen->render(m_window);
 		m_window.display();
 		break;
 	case GameState::Display:
 		m_window.clear(sf::Color(0, 0, 0, 255));
+		m_window.draw(sprBack);
 		m_displayScreen->render(m_window);
 		m_window.display();
 		break;
 	case GameState::MapSelect:
 		m_window.clear(sf::Color(0, 0, 0, 255));
+		m_window.draw(sprBack);
 		m_mapSelect->render(m_window);
 		m_window.display();
 		break;
 	case GameState::Help:
 		m_window.clear(sf::Color(0, 0, 0, 255));
+		m_window.draw(sprBack);
 		m_helpScreen->draw(m_window);
 		m_window.display();
 		break;
 	case GameState::Thespecs:
 		m_window.clear(sf::Color(0, 0, 0, 255));
+		m_window.draw(sprBack);
 		m_specs->render(m_window);
 		m_window.display();
 		break;
 	case GameState::Acceleration:
 		m_window.clear(sf::Color(0, 0, 0, 255));
+		m_window.draw(sprBack);
 		m_accelerationScreen->draw(m_window);
 		m_window.display();
 		break;
 	case GameState::Braking:
 		m_window.clear(sf::Color(0, 0, 0, 255));
+		m_window.draw(sprBack);
 		m_brakingScreen->draw(m_window);
 		m_window.display();
 		break;
 	case GameState::Speed:
 		m_window.clear(sf::Color(0, 0, 0, 255));
+		m_window.draw(sprBack);
 		m_speedScreen->draw(m_window);
 		m_window.display();
 		break;
 	case GameState::Steering:
 		m_window.clear(sf::Color(0, 0, 0, 255));
+		m_window.draw(sprBack);
 		m_steeringScreen->draw(m_window);
 		m_window.display();
 		break;
 	case GameState::Turbo:
 		m_window.clear(sf::Color(0, 0, 0, 255));
+		m_window.draw(sprBack);
 		m_turboScreen->draw(m_window);
 		m_window.display();
 		break;
@@ -382,11 +397,11 @@ void Game::render()
 		m_window.clear(sf::Color(0, 0, 0, 255));
 		m_background->draw(m_window);
 		m_level->render(m_window);
-		m_ai->render(m_window);
 		m_window.display();
 		break;
 	case GameState::ChangeP:
 		m_window.clear(sf::Color(0, 0, 0, 255));
+		m_window.draw(sprBack);
 		//nameDisplay(m_currentName);
 		m_changeProfile->render(m_window);
 	//	m_player->getName(m_name);
@@ -395,6 +410,7 @@ void Game::render()
 		break;
 	case GameState::EnterName:
 		m_window.clear(sf::Color(0, 0, 0, 255));
+		m_window.draw(sprBack);
 		m_enterName->draw(m_window);
 		m_window.display();
 		break;

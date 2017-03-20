@@ -113,6 +113,7 @@ public:
 	sf::RenderWindow m_window;
 	Player *m_player;
 	string nameDisplay();
+	sf::Sound music;
 
 
 	bool isInView(sf::Sprite sprite);
@@ -130,11 +131,7 @@ private:
 	sf::Text m_text;
 	
 
-
-	GameState m_currentGameState = GameState::TheMenu;
-
-
-
+	GameState m_currentGameState = GameState::TheLicense;
 	playGame * m_mapSelect;
 	
 	GameDifficulty m_currentDifficulty = GameDifficulty::Medium;
@@ -146,7 +143,6 @@ private:
 	MainMenu *m_MainMenu;
 	HelpScreen *m_helpScreen;
 	
-	Ai *m_ai;
 	specs *m_specs;
 	Liscence *m_Liscence;
 	Splash *m_Splash;
@@ -165,10 +161,13 @@ private:
 	/**********************/
 
 	Car *m_car;
-	Car *m_shagginWaggin;
+	Car *m_aiCar;
+	Ai *m_ai;
+
 	sf::View m_view;
 	sf::View m_view2;
 	sf::Texture m_startCar;
+	sf::Texture m_aistartCar;
 	sf::Vector2f m_startPos;
 
 	std::vector<sf::CircleShape> m_track;
@@ -187,12 +186,10 @@ private:
 	LevelLoader m_levelLoader;
 	bool hasName=false;
 	sf::SoundBuffer m_buffer;
-	sf::Sound music;
-
-
 	sf::Clock clock;
 	sf::Time timeSinceLastUpdate;
 	sf::Time timePerFrame;
+
 
 
 	/******************************/
@@ -209,6 +206,8 @@ private:
 	sf::Texture m_textureTest2;
 
 	sf::FloatRect rect;
+	sf::Texture m_backgroundImage;
+	sf::Sprite sprBack;
 };
 
 #endif

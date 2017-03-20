@@ -6,7 +6,7 @@ Ai::Ai(float carX, float carY, sf::Texture &carTexture, std::vector<sf::CircleSh
 	m_car(carTexture, sf::Vector2f(carX, carY)), 
 	m_track(track)
 {
-
+	m_car.setAiPosition(sf::Vector2f(760, 1050));
 }
 
 

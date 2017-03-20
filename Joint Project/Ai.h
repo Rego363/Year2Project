@@ -12,9 +12,9 @@ public:
 	~Ai();
 	void update();	// Update loop
 	void render(sf::RenderWindow &window);	// Draw loop
+	Car m_car;
 
 private:
-	Car m_car; 
 	sf::Vector2f trackDisVector;
 	sf::Vector2f aiDisVector;
 	sf::Vector2f vectorToNode;
