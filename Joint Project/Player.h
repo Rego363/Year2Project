@@ -1,5 +1,6 @@
 #pragma once
-
+#ifndef PLAYER
+#define PLAYER
 #include "game.h"
 #include <fstream>
 #include <sstream>
@@ -7,11 +8,14 @@
 #include <cmath>
 #include "Car.h"
 #include "XBOX360CONTROLLER.h"
+#include "background.h"
+
+class Game;
 
 class Player
 {
 public:
-	Player(float carX, float carY, sf::Texture &carTexture, sf::RenderWindow &window);
+	Player(float carX, float carY, sf::Texture &carTexture, sf::RenderWindow &window, Game &game);
 	
 	~Player();
 	void load(std::string name);
@@ -49,5 +53,8 @@ private:
 	bool breaks = false;
 	bool carMoving = false;
 	float currentDrift = 0.0f;
+	sf::Clock m_turboTimer;
+	Game *m_game;
 };
 
+#endif

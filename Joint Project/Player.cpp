@@ -1,8 +1,9 @@
 #include "Player.h"
 
-Player::Player(float carX, float carY, sf::Texture &carTexture, sf::RenderWindow &window):
+Player::Player(float carX, float carY, sf::Texture &carTexture, sf::RenderWindow &window, Game &game):
 	m_car(carTexture, sf::Vector2f(carX,carY)),
-	m_window(&window)
+	m_window(&window),
+	m_game(&game)
 {
 	m_money = 100;
 	m_carSelect = 0;
@@ -337,6 +338,31 @@ void Player::update(float dt, sf::View &view)
 		m_car.setRotation(currentDrift);
 		currentDrift = 0;
 	}
+
+
+
+	//press Y to use the cars turbo
+	if (m_xbox.m_currentState.Y && !m_xbox.m_previousState.Y&&m_car.useTurbo == false)
+	{
+		m_car.useTurbo = true;
+		m_game->m_background->activateTheShader(); //activate blur effect
+		m_turboTimer.restart(); //restart timer
+	}
+
+
+	if (m_car.useTurbo == true)
+	{
+		if (m_turboTimer.getElapsedTime().asSeconds() > 2) //turbo for limited time
+		{
+
+			m_car.useTurbo = false;
+			m_game->m_background->activateTheShader(); //reset blur
+		}
+	}
+
+
+
+
 }
 
 void Player::draw(sf::RenderWindow & window)

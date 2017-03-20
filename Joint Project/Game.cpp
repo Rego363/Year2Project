@@ -55,7 +55,7 @@ Game::Game() :
 	m_startPos = sf::Vector2f(m_window.getSize().x / 2, m_window.getSize().y / 4);
 	m_car = new Car(m_startCar, m_startPos);
 	m_aiCar = new Car(m_startCar, sf::Vector2f(0.0f, 0.0f));
-	m_player = new Player(0, 0, m_startCar, m_window);
+	m_player = new Player(0, 0, m_startCar, m_window, *this);
 
 	if(!m_buffer.loadFromFile("music.wav"))
 	{
@@ -110,6 +110,8 @@ Game::Game() :
 	sprBack.setTexture(m_backgroundImage);
 	sprBack.setPosition(0, 0);
 
+
+	
 }
 
 /// <summary>
@@ -266,16 +268,14 @@ void Game::update(sf::Time time)
 		m_window.setView(m_view);
 		m_level->update(time.asSeconds(), m_view);
 
-		//////if the pixel is green slow down!!
-		if (color2.g>100&&color2.r<80&& color.b<80)
-		{
-			m_player->m_car.setMaxSpeed(2);
-		}
 		
-		else
+		m_xbox.update();
+		if (m_xbox.m_currentState.Back&& !m_xbox.m_previousState.Back)
 		{
-			m_player->m_car.setMaxSpeed(10);
+			m_background->activateTheShader();
 		}
+
+		
 		break;
 	case GameState::ChangeP:
 		m_changeProfile->update();

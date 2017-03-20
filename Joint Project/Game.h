@@ -66,6 +66,7 @@ class worldSquares;
 class Levels;
 class EnterNameScreen;
 class Background;
+class Player;
 
 
 enum GameState {
@@ -114,7 +115,7 @@ public:
 	Player *m_player;
 	string nameDisplay();
 	sf::Sound music;
-
+	Background *m_background;
 
 	bool isInView(sf::Sprite sprite);
 
@@ -201,12 +202,14 @@ private:
 
 	/*******************************/
 
-	Background *m_background;
 	sf::Texture m_textureTest;
 	sf::Texture m_textureTest2;
 
 	sf::Texture m_backgroundImage;
 	sf::Sprite sprBack;
+	
+
+	sf::Clock m_turboTimer;
 };
 
 #endif
