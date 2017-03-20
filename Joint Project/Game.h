@@ -113,6 +113,7 @@ public:
 	sf::RenderWindow m_window;
 	Player *m_player;
 	string nameDisplay();
+	sf::Sound music;
 
 
 	bool isInView(sf::Sprite sprite);
@@ -129,11 +130,7 @@ private:
 	sf::Font m_font;
 	sf::Text m_text;
 	
-
-
 	GameState m_currentGameState = GameState::TheLicense;
-
-
 
 	playGame * m_mapSelect;
 	
@@ -164,7 +161,7 @@ private:
 	/**********************/
 
 	Car *m_car;
-	Car *m_shagginWaggin;
+	Car *m_aiCar;
 	Ai *m_ai;
 
 	sf::View m_view;
@@ -189,7 +186,6 @@ private:
 	LevelLoader m_levelLoader;
 	bool hasName=false;
 	sf::SoundBuffer m_buffer;
-	sf::Sound music;
 	sf::Clock clock;
 	sf::Time timeSinceLastUpdate;
 	sf::Time timePerFrame;
@@ -208,6 +204,9 @@ private:
 	Background *m_background;
 	sf::Texture m_textureTest;
 	sf::Texture m_textureTest2;
+
+	sf::Texture m_backgroundImage;
+	sf::Sprite sprBack;
 };
 
 #endif

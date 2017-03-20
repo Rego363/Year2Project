@@ -14,23 +14,16 @@ public:
 	~SoundScreen();
 	void render(sf::RenderWindow & window);
 	void update();
+	void increaseMusicVol();
+	void decreaseMusicVol();
 
 private:
 	Game *m_game;
 	GUI m_gui;
 	Label *m_title;
-
-	// Background
 	RadioButton *m_musicOn;
 	Slider *m_musicVolume;
 
-	// Sound for when 
-	RadioButton *m_soundEffectOn;
-	Slider *m_soundEffectVolume;
-
-	// Car engine noises
-	RadioButton *m_carSoundOn;
-	Slider *m_carSoundVolume;
 
 	Button *m_backButton;
 

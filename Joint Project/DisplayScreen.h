@@ -22,13 +22,14 @@ private:
 
 	//Text animations
 	CheckBox *m_animeOn;
-	Slider *m_animeSpeed;
+	//Slider *m_animeSpeed;
 
 	Button *m_backButton;
 
 	float m_speed;
 	int m_currentSelect;
 	void setStateBack();
+	void animationOn();
 };
 
 #endif

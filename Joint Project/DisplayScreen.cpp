@@ -17,14 +17,16 @@ DisplayScreen::DisplayScreen(Game & game) :
 	m_gui.addLabel(m_title);	// Add to gui array
 
 	// Animation on/off Checkbox
-	m_animeOn = new CheckBox("Animations On/Off", 50, 150);	// Constructor
+	m_animeOn = new CheckBox("Animations Off", 50, 150);	// Constructor
 	m_animeOn->getFocus();	// Makes this button highlighted when the screen starts up
-	m_animeOn->getActive();	// Makes this button checked when the screen starts up
+	//m_animeOn->getActive();	// Makes this button checked when the screen starts up
 	m_gui.addCheckBox(m_animeOn);	// Add to gui array
+
+	m_animeOn->Enter = std::bind(&DisplayScreen::animationOn, this);
 	
 	// Animation speed slider
-	m_animeSpeed = new Slider(75.0f, 225.0f, m_speed, "Animation speed");	// Constructor
-	m_gui.addSlider(m_animeSpeed);	// Add to gui array
+	//m_animeSpeed = new Slider(75.0f, 225.0f, m_speed, "Animation speed");	// Constructor
+	//m_gui.addSlider(m_animeSpeed);	// Add to gui array
 
 	// Back button
 	m_backButton = new Button("Back", 50, 600);	// Constructor
@@ -47,7 +49,7 @@ DisplayScreen::~DisplayScreen()
 /// </summary>
 void DisplayScreen::update()
 {
-	m_gui.update(m_currentSelect, 3);
+	m_gui.update(m_currentSelect, 2);
 }
 
 /// <summary>
@@ -66,4 +68,9 @@ void DisplayScreen::render(sf::RenderWindow & window)
 void DisplayScreen::setStateBack()
 {
 	m_game->changeGameState(GameState::TheOptions);
+}
+
+void DisplayScreen::animationOn()
+{
+	m_gui.useAnim =!(m_gui.useAnim);
 }

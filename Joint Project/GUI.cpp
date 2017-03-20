@@ -6,7 +6,8 @@ Date: 02/03/2017
 Hours Spent: ~15hours
 Summary: A simple sfml game with menu, options that use the common UI elements
 */
-
+bool GUI::useAnim = true;
+sf::Clock GUI::m_timeBetweenClicks = sf::Clock::Clock();
 //constructor for gui
 GUI::GUI()
 {
@@ -14,6 +15,7 @@ GUI::GUI()
 	horizontal = false;
 	both = false;
 	animating = false;	
+	
 	if (!m_buffer.loadFromFile("Gui transition.wav"))
 	{
 	}
@@ -245,7 +247,6 @@ void GUI::activate(int &index)
 			try
 			{
 				m_elements[index]->Enter();
-
 			}
 			catch (std::bad_function_call)
 			{
@@ -254,6 +255,14 @@ void GUI::activate(int &index)
 		}
 		else {
 			m_elements[index]->loseActive();
+			try
+			{
+				m_elements[index]->Enter();
+			}
+			catch (std::bad_function_call)
+			{
+				std::cout << "Bad Function Call" << std::endl;
+			}
 		}
 	}
 
@@ -322,6 +331,7 @@ void GUI::decreaseSliderValue(int &index)
 //vertical control scheme for xbox controller, dpad vertical use only
 void GUI::verticalControls(int &index, int maxItems)
 {
+	
 	if (m_xbox.m_currentState.DpadUp == true && !m_xbox.m_previousState.DpadUp || sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 	{
 		moveUp(index);
@@ -332,9 +342,18 @@ void GUI::verticalControls(int &index, int maxItems)
 	}
 	if (m_xbox.m_currentState.A == true && !m_xbox.m_previousState.A || sf::Keyboard::isKeyPressed(sf::Keyboard::Return))
 	{
-		if (m_elements[index]->getID() == "button")
+		if (m_elements[index]->getID() == "button"&& useAnim==true)
 		{
 			animating = true;
+		}
+		else if(m_elements[index]->getID() == "button"&& useAnim == false) {
+
+			m_timeBetweenClicks.getElapsedTime().asSeconds();
+			if (m_timeBetweenClicks.getElapsedTime().asSeconds() > 1)
+			{
+				activate(index);
+				m_timeBetweenClicks.restart();
+			}
 		}
 		if (m_elements[index]->getID() == "radiobutton"|| m_elements[index]->getID() == "checkbox")
 		{

@@ -10,6 +10,7 @@ changeProfile::changeProfile(Game &game) :
 
 	m_profileOne = new Button("Profile One", 450, 100);
 	m_profileOne->Enter = std::bind(&changeProfile::goToMenu, this);
+	m_profileOne->getFocus();
 	m_profileTwo = new Button("Profile Two", 450, 150);
 	m_profileTwo->Enter = std::bind(&changeProfile::goToMenu, this);
 	m_profileThree = new Button("Profile Three", 450, 200);
