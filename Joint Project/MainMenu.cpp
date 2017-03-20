@@ -16,7 +16,9 @@ MainMenu::MainMenu(Game &game):
 	m_Options->Enter = std::bind(&MainMenu::goToOptions, this);
 	m_Help = new Button("Help", 550, 450);
 	m_Help->Enter = std::bind(&MainMenu::goToHelp, this);
-	m_Exit = new Button("Quit", 550, 500);
+	m_Credits = new Button("Credits", 550, 500);
+	m_Credits->Enter = std::bind(&MainMenu::goToCredits, this);
+	m_Exit = new Button("Quit", 550, 550);
 	m_Exit->Enter = std::bind(&MainMenu::quit, this);
 
 	m_gui.addButton(m_Play);
@@ -24,6 +26,7 @@ MainMenu::MainMenu(Game &game):
 	m_gui.addButton(m_ChangeProfile);
 	m_gui.addButton(m_Options);
 	m_gui.addButton(m_Help);
+	m_gui.addButton(m_Credits);
 	m_gui.addButton(m_Exit);
 
 	m_currentSelect = 0;
@@ -45,7 +48,7 @@ void MainMenu::render(sf::RenderWindow & window)
 
 void MainMenu::update()
 {
-	m_gui.update(m_currentSelect, 6);
+	m_gui.update(m_currentSelect, 7);
 }
 
 void MainMenu::GotoGarage()
@@ -85,4 +88,9 @@ void MainMenu::goToChangeP()
 
 	m_game->changeGameState(GameState::ChangeP);
 
+}
+
+void MainMenu::goToCredits()
+{
+	m_game->changeGameState(GameState::TheCredits);
 }

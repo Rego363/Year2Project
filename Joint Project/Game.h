@@ -1,6 +1,9 @@
 #ifndef GAME
 #define GAME
 
+#include <sfeMovie\Movie.hpp>
+#include <sfeMovie\StreamSelection.hpp>
+#include <sfeMovie\Visibility.hpp>
 #include <SFML\Graphics.hpp>
 #include <SFML\Audio.hpp>
 #include <iostream>
@@ -40,6 +43,7 @@
 #include "EnterNameScreen.h"
 #include <SFML\Audio.hpp>
 #include "background.h"
+#include "Credits.h"
 
 using namespace std;
 
@@ -66,6 +70,7 @@ class worldSquares;
 class Levels;
 class EnterNameScreen;
 class Background;
+class Credits;
 
 
 enum GameState {
@@ -88,7 +93,8 @@ enum GameState {
 	Racing,
 	ChangeP,
 	ThewSquares,
-	EnterName
+	EnterName, 
+	TheCredits
 };
 
 enum GameDifficulty {
@@ -156,6 +162,7 @@ private:
 	Levels *m_level;
 	worldSquares * m_worldSquares;
 	EnterNameScreen *m_enterName;
+	Credits *m_credits;
 
 	/*For testing*/
 	/**********************/

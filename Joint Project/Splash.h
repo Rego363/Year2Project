@@ -14,7 +14,7 @@ public:
 	~Splash();
 	void update();
 	void render(sf::RenderWindow & window);
-
+	void load();
 	void setStateBack();
 
 private:
@@ -24,6 +24,9 @@ private:
 
 	int m_currentSelect = 0;
 	sf::Time m_CumulativeTime;
+
+	sfe::Movie m_animation;
+	bool m_play = true;
 
 };
 
