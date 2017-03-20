@@ -7,12 +7,11 @@ namespace Math
 		return std::sqrt((v1.x - v2.x) * (v1.x - v2.x) + (v1.y - v2.y) * (v1.y - v2.y));
 	}
 
-	sf::Vector2f truncate(sf::Vector2f v, float const num)
+	sf::Vector2f truncate(sf::Vector2f v, float num)
 	{
-		float i;
-		i = num / thor::length(v);
-		i = i < 1.0 ? i : 1.0;
-		v *= i;
+		num = num / thor::length(v);
+		num = num < 1.0 ? num : 1.0;
+		v *= num;
 		return v;
 	}
 

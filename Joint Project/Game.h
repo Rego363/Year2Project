@@ -73,7 +73,6 @@ enum GameState {
 	TheSplash,
 	TheMenu,
 	TheOptions,
-	Playing,
 	Display,
 	Difficulty,
 	Sound,
@@ -110,6 +109,7 @@ public:
 	void run();
 	void changeGameState(GameState gameState);
 	void changeGameDifficulty(GameDifficulty gameDiff);
+	void deleteScreen(GameState gameState); // Method to delete screen objects once they are finished with
 	sf::RenderWindow m_window;
 	Player *m_player;
 	string nameDisplay();
@@ -207,6 +207,8 @@ private:
 	Background *m_background;
 	sf::Texture m_textureTest;
 	sf::Texture m_textureTest2;
+
+	sf::FloatRect rect;
 };
 
 #endif

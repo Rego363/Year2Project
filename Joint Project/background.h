@@ -20,6 +20,8 @@ private:
 
 	std::ifstream openFile;
 
+	std::string tileLocation;
+	int visible;
 	
 	sf::Texture m_tileTexture;
 	sf::Sprite spr;
