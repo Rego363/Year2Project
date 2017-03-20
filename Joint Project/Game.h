@@ -1,8 +1,9 @@
 #ifndef GAME
 #define GAME
 
-#include <sfeMovie\Movie.hpp>
-#include <sfeMovie\StreamSelection.hpp>
+#include "include\sfeMovie\Movie.hpp"
+#include "include\sfeMovie\Visibility.hpp"
+#include "include\sfeMovie\StreamSelection.hpp"
 #include <sfeMovie\Visibility.hpp>
 #include <SFML\Graphics.hpp>
 #include <SFML\Audio.hpp>
@@ -139,7 +140,7 @@ private:
 	sf::Text m_text;
 	
 
-	GameState m_currentGameState = GameState::TheLicense;
+	GameState m_currentGameState = GameState::Racing;
 	playGame * m_mapSelect;
 	
 	GameDifficulty m_currentDifficulty = GameDifficulty::Medium;

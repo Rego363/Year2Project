@@ -77,7 +77,6 @@ Game::Game() :
 
 	/*******************************************************************************/
 
-	m_specs = new specs(*this);
 	m_diffScreen = new DifficultyScreen(*this);
 
 	m_steeringScreen = new SteeringScreen(*this);
@@ -100,6 +99,8 @@ Game::Game() :
 	m_background = new Background( *this);
 	
 	m_level = new Levels(m_currentLevel, *m_player, *m_worldSquares, *m_ai, *this);
+
+	m_specs = new specs(*this, *m_level);
 
 	if (!m_backgroundImage.loadFromFile("backgroundBlue.png"))
 	{
