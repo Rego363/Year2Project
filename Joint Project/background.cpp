@@ -5,6 +5,7 @@
 
 bool Background::activateShader = false;
 
+//constructor
 Background::Background( Game &game):
 	m_game(&game)
 {
@@ -13,14 +14,13 @@ Background::Background( Game &game):
 
 	loadCounter = sf::Vector2i(0, 0);
 
-	openFile = std::ifstream("Map1.txt");
+	openFile = std::ifstream("Map1.txt"); //file with the tile coords
 	if (openFile.is_open())
 	{
 		openFile >> tileLocation;
-		m_tileTexture.loadFromFile(tileLocation);
-		spr.setTexture(m_tileTexture);
+		m_tileTexture.loadFromFile(tileLocation); //load texture from file
 
-		//m_image = m_tileTexture.copyToImage();
+		spr.setTexture(m_tileTexture); //set texture for the sprite
 
 		while (!openFile.eof())
 		{
@@ -33,7 +33,7 @@ Background::Background( Game &game):
 			}
 			else
 			{
-				map[loadCounter.x][loadCounter.y] = sf::Vector2i(x - '0', y - '0');
+				map[loadCounter.x][loadCounter.y] = sf::Vector2i(x - '0', y - '0'); //minus ascii value of 0
 			}
 			if (openFile.peek() == '\n')
 			{
@@ -49,72 +49,47 @@ Background::Background( Game &game):
 
 
 
-
-
-
-
-
-	/*if (!m_texture.loadFromFile("blankTile.png"))
-	{
-
-	}
-	m_blankSprite.setTexture(m_texture);*/
-
 	if (!m_shader.loadFromFile("blur.frag", sf::Shader::Fragment))
 	{
-		std::cout << "shader failed to load" << std::endl;
+		std::cout << "shader failed to load" << std::endl;         //load shader
 	}
 
-	//m_shader.setParameter("texture", sf::Shader::CurrentTexture);
 	m_shader.setParameter("texture", m_tileTexture);
-	m_shader.setParameter("blur_radius", 0.008f);
-
-	if (!m_shader2.loadFromFile("edge.frag", sf::Shader::Fragment))
-	{
-		std::cout << "shader failed to load" << std::endl;
-	}
-
-	//m_shader.setParameter("texture", sf::Shader::CurrentTexture);
-	m_shader2.setParameter("texture", m_tileTexture);
-	m_shader2.setParameter("edge_threshold", 500);
-
+	m_shader.setParameter("blur_radius", 0.008f); //set radius variable
 }
 
-sf::Color Background::getPixelColor(sf::Vector2f pos)
-{
-		//m_image = tiles.getTexture()->copyToImage();
-		return m_image.getPixel(pos.x, pos.y);
-}
 
+//draw function where the texture to be drawn is set 
 void Background::draw(sf::RenderWindow &window)
 {
-	visible = 0;
+	visible = 0; //amount of tiles visible on screen
 
 	for (int i = 0; i < loadCounter.x; i++)
 	{
 		for (int j = 0; j<loadCounter.y; j++)
 		{
-			spr.setPosition(i * 200, j * 200);
-			//m_blankSprite.setPosition(spr.getPosition());
-			spr.setTextureRect(sf::IntRect(map[i][j].x * 225, map[i][j].y * 220, 200, 200));
-			//m_blankSprite.setTextureRect(sf::IntRect(map[i][j].x * 200, map[i][j].y * 200, 200, 200));
-
+			spr.setPosition(i * 200, j * 200); //set position of each tile
+			spr.setTextureRect(sf::IntRect(map[i][j].x * 225, map[i][j].y * 220, 200, 200)); //texture rectangle
+			
+			//if its the road texture 
 			if (map[i][j].x == 1 && map[i][j].y == 0)
 			{
 				isOnTrack = true;
 				hitWall = false;
 			}
+			//if its the grass texture
 			else if (map[i][j].x == 0 && map[i][j].y == 0)
 			{
 				isOnTrack = false;
 				hitWall = false;
 			}
+			//if its the brick texture
 			else if (map[i][j].x == 2 && map[i][j].y == 0)
 			{
 				hitWall = true;
 			}
 			
-
+			//full speed if on road
 			if (spr.getGlobalBounds().intersects(m_game->m_player->m_car.getSprite().getGlobalBounds())&& isOnTrack==true)
 			{
 				if (m_game->m_player->m_car.useTurbo == false)
@@ -126,6 +101,7 @@ void Background::draw(sf::RenderWindow &window)
 					m_game->m_player->m_car.setMaxSpeed(20);
 				}
 			}
+			//slow down if on grass
 			else if (spr.getGlobalBounds().intersects(m_game->m_player->m_car.getSprite().getGlobalBounds()) && isOnTrack == false)
 			{
 				if (m_game->m_player->m_car.useTurbo == false)
@@ -137,16 +113,16 @@ void Background::draw(sf::RenderWindow &window)
 					m_game->m_player->m_car.setMaxSpeed(10);
 				}
 			}
+			//collision occurs with bricks
 			if (spr.getGlobalBounds().intersects(m_game->m_player->m_car.getSprite().getGlobalBounds()) && hitWall == true)
 			{
 				m_game->m_player->m_car.collision();
 
 			}
 
+			//only draw if the tile is in the windows view
 			if (m_game->isInView(spr))
 			{
-				
-				//window.draw(spr, &m_shader);
 				if (activateShader==true)
 				{
 					window.draw(spr, &m_shader);
@@ -154,8 +130,6 @@ void Background::draw(sf::RenderWindow &window)
 				else {
 					window.draw(spr);
 				}
-				//window.draw(m_blankSprite, &m_shader2);
-				
 				visible++;
 			}
 		}
@@ -165,7 +139,7 @@ void Background::draw(sf::RenderWindow &window)
 	system("cls");
 
 }
-
+//flip the bool for activating the shader
 void Background::activateTheShader()
 {
 	activateShader = !(activateShader);
