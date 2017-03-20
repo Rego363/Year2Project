@@ -73,8 +73,7 @@ void Player::save(std::string replace)
 	fileInput.open(filename);			// Old file to be copied
 	fileOutput.open("temp.txt");		// Temp file to work as middle man
 
-	std::string strTemp;				// String to hold the data of each player before putting it in the output file
-
+	
 	while (fileInput.is_open())			// While player.txt is open
 	{
 		fileInput >> fileLine;			// Get next line (name)
@@ -229,11 +228,11 @@ std::string Player::getName()
 // updated to handle drift
 void Player::update(float dt, sf::View &view)
 {
+	carTurning = false;
+	carTurningLeft = false;
+	breaks = false;
+	carMoving = false;
 	cout << to_string(m_car.getPos().x) + ", " + to_string(m_car.getPos().y) << endl;
-	bool carTurning = false;
-	bool carTurningLeft = false;
-	bool breaks = false;
-	bool carMoving = false;
 
 	view.setCenter(m_car.getPos()); //follow the player car
 	m_window->setView(view);

@@ -52,6 +52,21 @@ struct TrackData
 	float m_size;
 };
 
+struct CreditsData
+{
+	std::string m_fileName;
+};
+
+struct LisenceData
+{
+	std::string m_fileName;
+};
+
+struct SplashData
+{
+	std::string m_fileName;
+};
+
 
 //contains all the levels data
 struct LevelData
@@ -63,6 +78,9 @@ struct LevelData
 	SandData m_sand;
 	blueLamboData m_aiLambo;
 	std::vector<TrackData> m_track;
+	CreditsData m_credits;
+	LisenceData m_lisence;
+	SplashData m_splash;
 };
 
 //class to load in the level details

@@ -3,6 +3,10 @@
 //constructs the splash screen
 Splash::Splash(Game & game) : m_game(&game)
 {
+	load();
+	m_animation.fit(sf::FloatRect(0, 0, 1280, 720), true);
+	m_animation.setVolume(100);
+
 	m_currentSelect = 0;
 	m_button = new Button("Start Game", 560, 600);
 	m_button->getFocus();
@@ -21,13 +25,35 @@ Splash::~Splash()
 //updates screen
 void Splash::update()
 {
-	m_gui.update(m_currentSelect, 1);
+	if (m_play == true)
+	{
+		m_animation.play();
+	}
+
+	m_animation.update();
+	m_play = false;
+
+
+	if (m_animation.getPlayingOffset().asSeconds() >= 7)
+	{
+		m_animation.pause();
+		m_gui.update(m_currentSelect, 1);
+	}
 }
 
 //draws window
 void Splash::render(sf::RenderWindow & window)
 {
-	m_gui.draw(window);
+		window.draw(m_animation);
+		m_gui.draw(window);
+}
+
+void Splash::load()
+{
+	if (!m_animation.openFromFile("SplashScreenS.mp4"))
+	{
+		cout << "splash not loaded" << endl;
+	}
 }
 
 //sets gamestate

@@ -16,7 +16,6 @@ Background::Background( Game &game):
 	openFile = std::ifstream("Map1.txt");
 	if (openFile.is_open())
 	{
-		std::string tileLocation;
 		openFile >> tileLocation;
 		m_tileTexture.loadFromFile(tileLocation);
 		spr.setTexture(m_tileTexture);
@@ -89,7 +88,7 @@ sf::Color Background::getPixelColor(sf::Vector2f pos)
 
 void Background::draw(sf::RenderWindow &window)
 {
-	static int visible = 0;
+	visible = 0;
 
 	for (int i = 0; i < loadCounter.x; i++)
 	{

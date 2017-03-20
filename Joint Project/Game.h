@@ -1,6 +1,9 @@
 #ifndef GAME
 #define GAME
 
+#include <sfeMovie\Movie.hpp>
+#include <sfeMovie\StreamSelection.hpp>
+#include <sfeMovie\Visibility.hpp>
 #include <SFML\Graphics.hpp>
 #include <SFML\Audio.hpp>
 #include <iostream>
@@ -40,6 +43,7 @@
 #include "EnterNameScreen.h"
 #include <SFML\Audio.hpp>
 #include "background.h"
+#include "Credits.h"
 
 using namespace std;
 
@@ -67,6 +71,8 @@ class Levels;
 class EnterNameScreen;
 class Background;
 class Player;
+class Credits;
+
 
 
 enum GameState {
@@ -74,7 +80,6 @@ enum GameState {
 	TheSplash,
 	TheMenu,
 	TheOptions,
-	Playing,
 	Display,
 	Difficulty,
 	Sound,
@@ -90,7 +95,8 @@ enum GameState {
 	Racing,
 	ChangeP,
 	ThewSquares,
-	EnterName
+	EnterName, 
+	TheCredits
 };
 
 enum GameDifficulty {
@@ -111,6 +117,7 @@ public:
 	void run();
 	void changeGameState(GameState gameState);
 	void changeGameDifficulty(GameDifficulty gameDiff);
+	void deleteScreen(GameState gameState); // Method to delete screen objects once they are finished with
 	sf::RenderWindow m_window;
 	Player *m_player;
 	string nameDisplay();
@@ -131,8 +138,8 @@ private:
 	sf::Font m_font;
 	sf::Text m_text;
 	
-	GameState m_currentGameState = GameState::TheLicense;
 
+	GameState m_currentGameState = GameState::TheLicense;
 	playGame * m_mapSelect;
 	
 	GameDifficulty m_currentDifficulty = GameDifficulty::Medium;
@@ -157,6 +164,7 @@ private:
 	Levels *m_level;
 	worldSquares * m_worldSquares;
 	EnterNameScreen *m_enterName;
+	Credits *m_credits;
 
 	/*For testing*/
 	/**********************/
@@ -205,11 +213,10 @@ private:
 	sf::Texture m_textureTest;
 	sf::Texture m_textureTest2;
 
+	sf::FloatRect rect;
 	sf::Texture m_backgroundImage;
 	sf::Sprite sprBack;
-	
 
-	sf::Clock m_turboTimer;
 };
 
 #endif

@@ -40,7 +40,6 @@ Game::Game() :
 	m_garageScreen = new GarageScreen(m_window.getSize().x / 4, m_window.getSize().y / 2, *this);
 	m_MainMenu = new MainMenu(*this);
 	m_helpScreen = new HelpScreen(*this);
-	m_Liscence = new Liscence(*this);
 	m_Splash = new Splash(*this);
 	m_diffScreen = new DifficultyScreen(*this);
 
@@ -50,7 +49,9 @@ Game::Game() :
 	m_speedScreen = new SpeedScreen(*this);
 	m_accelerationScreen = new AccelerationScreen(*this);
 	m_worldSquares = new worldSquares(*this, m_currentLevel);
+	m_Liscence = new Liscence(*this);
 	m_enterName = new EnterNameScreen(*this);
+	m_credits = new Credits(*this, m_currentLevel);
 
 	m_startPos = sf::Vector2f(m_window.getSize().x / 2, m_window.getSize().y / 4);
 	m_car = new Car(m_startCar, m_startPos);
@@ -77,9 +78,6 @@ Game::Game() :
 	/*******************************************************************************/
 
 	m_specs = new specs(*this);
-
-	m_Liscence = new Liscence(*this);
-	m_Splash = new Splash(*this);
 	m_diffScreen = new DifficultyScreen(*this);
 
 	m_steeringScreen = new SteeringScreen(*this);
@@ -151,7 +149,7 @@ void Game::run()
 bool Game::isInView(sf::Sprite sprite)
 {
 
-	sf::FloatRect rect(m_view.getCenter().x - (m_view.getSize().x/2), m_view.getCenter().y - (m_view.getSize().y/2), m_view.getSize().x, m_view.getSize().y);
+	rect = sf::FloatRect(m_view.getCenter().x - (m_view.getSize().x/2), m_view.getCenter().y - (m_view.getSize().y/2), m_view.getSize().x, m_view.getSize().y);
 	if (rect.intersects(sprite.getGlobalBounds()))
 	{
 		return true;
@@ -207,9 +205,6 @@ void Game::update(sf::Time time)
 		m_garageScreen->update();
 		m_window.setView(m_view2);
 		break;
-	case GameState::Playing:
-		m_window.setView(m_view2);
-		break;
 	case GameState::TheLicense:
 		if (hasName == false)
 		{
@@ -217,7 +212,7 @@ void Game::update(sf::Time time)
 			//m_player->save("Dave");
 			hasName = true;
 		}
-		m_Liscence->update(time);
+		m_Liscence->update();
 		m_window.setView(m_view2);
 		break;
 	case GameState::TheSplash:
@@ -285,6 +280,9 @@ void Game::update(sf::Time time)
 	case GameState::EnterName:
 		m_enterName->update();
 		break;
+	case GameState::TheCredits:
+		m_credits->update();
+		break;
 	default:
 		break;
 
@@ -324,14 +322,8 @@ void Game::render()
 		m_garageScreen->draw(m_window);
 		m_window.display();
 		break;
-	case GameState::Playing:
-		m_window.clear(sf::Color(0, 0, 0, 255));
-		//m_optionsScreen->render(m_window);
-		m_window.display();
-		break;
 	case GameState::TheLicense:
-		m_window.clear(sf::Color(0, 0, 0, 255));
-		m_window.draw(sprBack);
+		m_window.clear();
 		m_Liscence->render(m_window);
 		m_window.display();
 		break;
@@ -422,6 +414,11 @@ void Game::render()
 		m_enterName->draw(m_window);
 		m_window.display();
 		break;
+	case GameState::TheCredits:
+		m_window.clear();
+		m_credits->render(m_window);
+		m_window.display();
+		break;
 	default:
 		break;
 	}
@@ -429,11 +426,13 @@ void Game::render()
 
 }
 
+//function to change the games current gamestate
 void Game::changeGameState(GameState gameState)
 {
 	m_currentGameState = gameState;
 }
 
+//function to change the difficulty of the game
 void Game::changeGameDifficulty(GameDifficulty gameDiff)
 {
 	m_currentDifficulty = gameDiff;
@@ -444,4 +443,111 @@ string Game::nameDisplay()
 {
 	return m_player->getName();
 	/*m_name.setString("Profile");*/
+}
+
+void Game::deleteScreen(GameState gameState)
+{
+	// Delete license screen
+	if (gameState == GameState::TheLicense)
+	{
+		delete m_Liscence;
+	}
+
+	// Delete splash screen
+	if (gameState == GameState::TheSplash)
+	{
+		delete m_Splash;
+	}
+
+	// Delete options screen
+	if (gameState == GameState::TheOptions)
+	{
+		delete m_optionsScreen;
+	}
+
+	// Delete garage screen
+	if (gameState == GameState::Garage)
+	{
+		delete m_garageScreen;
+	}
+
+	// Delete menu screen
+	if (gameState == GameState::TheMenu)
+	{
+		delete m_MainMenu;
+	}
+
+	// Delete display screen
+	if (gameState == GameState::Display)
+	{
+		delete m_displayScreen;
+	}
+
+	// Delete difficulty screen
+	if (gameState == GameState::Difficulty)
+	{
+		delete m_diffScreen;
+	}
+	
+	// Delete sound screen
+	if (gameState == GameState::Sound)
+	{
+		delete m_soundScreen;
+	}
+
+	// Delete map select screen
+	if (gameState == GameState::MapSelect)
+	{
+		delete m_mapSelect;
+	}
+
+	// Delete help screen
+	if (gameState == GameState::Help)
+	{
+		delete m_helpScreen;
+	}
+
+	// Delete acceleration upgrade screen
+	if (gameState == GameState::Acceleration)
+	{
+		delete m_accelerationScreen;
+	}
+
+	// Delete Speed upgrade screen
+	if (gameState == GameState::Speed)
+	{
+		delete m_speedScreen;
+	}
+
+	// Delete Braking upgrade screen
+	if (gameState == GameState::Braking)
+	{
+		delete m_brakingScreen;
+	}
+
+	// Delete Turbo upgrade screen
+	if (gameState == GameState::Turbo)
+	{
+		delete m_turboScreen;
+	}
+
+	// Delete steering upgrade screen
+	if (gameState == GameState::Steering)
+	{
+		delete m_steeringScreen;
+	}
+
+	// Delete racing screen
+	if (gameState == GameState::Racing)
+	{
+		delete m_background;
+		delete m_level;
+		delete m_ai;
+	}
+	
+	// Delete change profile screen
+	if (gameState == GameState::ChangeP)
+	{
+		delete m_changeProfile;
+	}
 }

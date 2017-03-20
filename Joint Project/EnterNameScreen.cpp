@@ -8,6 +8,7 @@ EnterNameScreen::EnterNameScreen(Game &game):
 	m_label = new Label("Your Name:  "+ m_enteredName, 450, 100);
 	m_gui.addLabel(m_label);
 
+	// Top line
 	m_widgets[0] = new Button("Q", 450, 300, 50);
 	m_widgets[0]->getFocus();
 	m_widgets[0]->Enter = std::bind(&EnterNameScreen::addQ, this);
@@ -30,6 +31,7 @@ EnterNameScreen::EnterNameScreen(Game &game):
 	m_widgets[9] = new Button("P", 900, 300, 50);
 	m_widgets[9]->Enter = std::bind(&EnterNameScreen::addP, this);
 
+	// Middle line
 	m_widgets[10] = new Button("A", 450, 350, 50);
 	m_widgets[10]->Enter = std::bind(&EnterNameScreen::addA, this);
 	m_widgets[11] = new Button("S", 500, 350, 50);
@@ -51,6 +53,7 @@ EnterNameScreen::EnterNameScreen(Game &game):
 	m_widgets[19] = new Button("Enter", 900, 350, 50);
 	m_widgets[19]->Enter = std::bind(&EnterNameScreen::changeGameState, this);
 
+	// Bottom line
 	m_widgets[20] = new Button("Z", 450, 400, 50);
 	m_widgets[20]->Enter = std::bind(&EnterNameScreen::addZ, this);
 	m_widgets[21] = new Button("X", 500, 400, 50);

@@ -52,9 +52,14 @@ private:
 	bool carTurningLeft = false;
 	bool breaks = false;
 	bool carMoving = false;
+
 	float currentDrift = 0.0f;
 	sf::Clock m_turboTimer;
 	Game *m_game;
+
+	std::string strTemp;				// String to hold the data of each player before putting it in the output file
+
+
 };
 
 #endif
