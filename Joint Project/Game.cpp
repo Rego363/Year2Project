@@ -431,7 +431,6 @@ void Game::changeGameDifficulty(GameDifficulty gameDiff)
 	m_currentDifficulty = gameDiff;
 }
 
-
 string Game::nameDisplay()
 {
 	return m_player->getName();
@@ -543,4 +542,19 @@ void Game::deleteScreen(GameState gameState)
 	{
 		delete m_changeProfile;
 	}
+}
+
+int Game::playerMoney()
+{
+	return m_player->getMoney();
+}
+
+void Game::chargePlayer(int amount)
+{
+	m_player->cost(amount);
+}
+
+std::string Game::getGarageTexture()
+{
+	return m_currentLevel.m_garage.m_fileName;
 }

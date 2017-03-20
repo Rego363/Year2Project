@@ -4,7 +4,7 @@ Player::Player(float carX, float carY, sf::Texture &carTexture, sf::RenderWindow
 	m_car(carTexture, sf::Vector2f(carX,carY)),
 	m_window(&window)
 {
-	m_money = 100;
+	m_money = 100000;
 	m_carSelect = 0;
 	m_secHighScore = 0;
 	m_minHighScore = 0;

@@ -110,12 +110,14 @@ public:
 	void changeGameState(GameState gameState);
 	void changeGameDifficulty(GameDifficulty gameDiff);
 	void deleteScreen(GameState gameState); // Method to delete screen objects once they are finished with
+	std::string getGarageTexture();
 	sf::RenderWindow m_window;
 	Player *m_player;
 	string nameDisplay();
 	sf::Sound music;
 
-
+	int playerMoney();
+	void chargePlayer(int amount);
 	bool isInView(sf::Sprite sprite);
 
 private:

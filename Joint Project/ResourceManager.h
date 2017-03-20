@@ -52,6 +52,11 @@ struct TrackData
 	float m_size;
 };
 
+struct GarageData
+{
+	std::string m_fileName;
+};
+
 
 //contains all the levels data
 struct LevelData
@@ -62,6 +67,7 @@ struct LevelData
 	GroundData m_ground;
 	SandData m_sand;
 	blueLamboData m_aiLambo;
+	GarageData m_garage;
 	std::vector<TrackData> m_track;
 };
 

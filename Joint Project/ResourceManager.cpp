@@ -36,6 +36,11 @@ void operator >> (const YAML::Node& sandNode, SandData& sand)
 	sand.m_fileName = sandNode["sandfile"].as<std::string>();
 }
 
+void operator >> (const YAML::Node& garageNode, GarageData& garage)
+{
+	garage.m_fileName = garageNode["garagefile"].as<std::string>();
+}
+
 /// <summary>
 /// Loading data for the track
 /// </summary>
@@ -58,6 +63,7 @@ void operator >> (const YAML::Node& levelNode, LevelData& level)
 	levelNode["maptile"] >> level.m_Tiles;
 	levelNode["ground"] >> level.m_ground;
 	levelNode["sand"] >> level.m_sand;
+	levelNode["garage"] >> level.m_garage;
 
 	// For loop to load track data into m_track 
 	const YAML::Node& trackNode = levelNode["track"].as<YAML::Node>();

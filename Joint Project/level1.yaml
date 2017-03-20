@@ -10,6 +10,8 @@ ground:
   groundfile: ground.png
 sand:
   sandfile: sand1.png
+garage:
+  garagefile: all.png
 track:
    - type: checkpoint
      position: {x: 4708, y: 1106}
