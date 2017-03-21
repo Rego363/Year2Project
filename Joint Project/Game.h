@@ -44,6 +44,7 @@
 #include "EnterNameScreen.h"
 #include <SFML\Audio.hpp>
 #include "background.h"
+#include "NightMode.h"
 #include "Credits.h"
 #include <memory>
 #include "gameOverScreen.h"
@@ -74,8 +75,8 @@ class EnterNameScreen;
 class Background;
 class Player;
 class Credits;
+class NightMode;
 class GameOverScreen;
-
 
 enum GameState {
 	TheLicense,
@@ -129,6 +130,7 @@ public:
 	int playerMoney();
 	void chargePlayer(int amount);
 	std::unique_ptr<Background> m_background;
+	std::unique_ptr<NightMode> m_nightMode;
 	bool isInView(sf::Sprite sprite);
 	std::string getBestLapTime();
 	void resetMap();
@@ -196,7 +198,7 @@ private:
 	sf::Clock clock;
 	sf::Time timeSinceLastUpdate;
 	sf::Time timePerFrame;
-
+	float totalTime;
 
 
 	/******************************/
