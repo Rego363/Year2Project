@@ -4,17 +4,19 @@
 
 #include<SFML\Graphics.hpp>
 #include"Button.h"
-#include"Widget.h"
+#include "Widget.h"
 #include "GUI.h"
-#include"Game.h"
+#include "Game.h"
+#include "levels.h"
 
 class Game;
+class Levels;
 
 class specs {
 
 public :
 
-	specs(Game &game);
+	specs(Game &game, Levels &level);
 	~specs();
 
 	void render(sf::RenderWindow & window);
@@ -37,6 +39,7 @@ private:
 
 
 	Game *m_game;
+	Levels *m_currentLevel;
 	void goToMapSelect();
 	void goToMapRacing();
 	int m_currentSelect;

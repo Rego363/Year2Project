@@ -77,7 +77,7 @@ Game::Game() :
 
 	/*******************************************************************************/
 
-	m_specs = make_unique< specs>(*this);
+
 	m_diffScreen = make_unique<DifficultyScreen>(*this);
 
 	m_steeringScreen = make_unique<SteeringScreen>(*this);
@@ -108,7 +108,7 @@ Game::Game() :
 	sprBack.setTexture(m_backgroundImage);
 	sprBack.setPosition(0, 0);
 
-
+	m_specs = make_unique< specs>(*this, *m_level);
 	
 }
 
