@@ -18,7 +18,7 @@ public :
 	~specs();
 
 	void render(sf::RenderWindow & window);
-	void update();
+	void update(float time);
 
 
 private:
@@ -42,5 +42,9 @@ private:
 	int m_currentSelect;
 
 	float m_EnemiesNum;
+	sf::Texture m_blankTexture;
+	sf::Sprite m_shaderSprite;
+	sf::Shader m_shader; // Shader for triangle affect
+	std::string fragmentShader;
 };
 #endif

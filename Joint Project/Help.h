@@ -12,7 +12,7 @@ class HelpScreen {
 
 public:
 	HelpScreen(Game &game);
-	void update();
+	void update(float time);
 	void draw(sf::RenderWindow &window);
 	void goBack();
 
@@ -22,5 +22,9 @@ private:
 	Button* m_backButton;
 	Label* m_label;
 	int m_selectedItem = 0;
+	sf::Texture m_blankTexture;
+	sf::Sprite m_shaderSprite;
+	sf::Shader m_shader; // Shader for triangle affect
+	std::string fragmentShader;
 };
 #endif // !HELPSCREEN

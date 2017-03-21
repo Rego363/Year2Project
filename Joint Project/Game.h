@@ -201,7 +201,7 @@ private:
 	sf::Clock clock;
 	sf::Time timeSinceLastUpdate;
 	sf::Time timePerFrame;
-
+	float totalTime;
 
 
 	/******************************/

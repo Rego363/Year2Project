@@ -33,6 +33,21 @@ specs::specs(Game &game):
 	m_currentSelect = 0;
 	m_gui.vertical = true;
 
+	if (!m_blankTexture.loadFromFile("blankBackground.png"))	// Load blank texture
+	{
+		std::cout << "blankTile failed to load" << std::endl;	//Error message
+	}
+
+	m_shaderSprite.setTexture(m_blankTexture);	// Set texture for the blank sprite
+
+	if (!m_shader.loadFromFile("Shaders/Smoke.frag", sf::Shader::Fragment)) //Load shader
+	{
+		std::cout << "shader failed to load" << std::endl;	// Error message
+	}
+
+	m_shader.setParameter("time", 0.0f);
+	m_shader.setParameter("resolution", 1280.0f, 720.0f);
+	m_shaderSprite.setPosition(0.0f, 0.0f);
 
 }
 
@@ -44,12 +59,13 @@ specs::~specs()
 
 void specs::render(sf::RenderWindow & window)
 {
+	window.draw(m_shaderSprite, &m_shader);
 	m_gui.draw(window);
 }
 
-void specs::update()
+void specs::update(float dt)
 {
-
+	m_shader.setParameter("time", dt);
 	m_gui.update(m_currentSelect, 7);
 }
 

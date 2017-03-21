@@ -49,7 +49,7 @@ Background::Background( Game &game):
 
 
 
-	if (!m_shader.loadFromFile("blur.frag", sf::Shader::Fragment))
+	if (!m_shader.loadFromFile("Shaders/blur.frag", sf::Shader::Fragment))
 	{
 		std::cout << "shader failed to load" << std::endl;         //load shader
 	}

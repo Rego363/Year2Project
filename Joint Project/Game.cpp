@@ -185,24 +185,25 @@ void Game::processInput()
 /// </summary>
 void Game::update(sf::Time time)
 {
+	totalTime += timeSinceLastUpdate.asSeconds();
 
 	switch (m_currentGameState)
 	{
 
 	case GameState::TheOptions:
-		m_optionsScreen->update();
+		m_optionsScreen->update(totalTime);
 		m_window.setView(m_view2);
 		break;
 	case GameState::TheMenu:
-		m_MainMenu->update();
+		m_MainMenu->update(totalTime);
 		m_window.setView(m_view2);
 		break;
 	case GameState::Difficulty:
-		m_diffScreen->update();
+		m_diffScreen->update(totalTime);
 		m_window.setView(m_view2);
 		break;
 	case GameState::Garage:
-		m_garageScreen->update();
+		m_garageScreen->update(totalTime);
 		m_window.setView(m_view2);
 		break;
 	case GameState::TheLicense:
@@ -220,43 +221,43 @@ void Game::update(sf::Time time)
 		m_window.setView(m_view2);
 		break;
 	case GameState::Sound:
-		m_soundScreen->update();
+		m_soundScreen->update(totalTime);
 		m_window.setView(m_view2);
 		break;
 	case GameState::Display:
-		m_displayScreen->update();
+		m_displayScreen->update(totalTime);
 		m_window.setView(m_view2);
 		break;
 	case GameState::MapSelect:
-		m_mapSelect->update();
+		m_mapSelect->update(totalTime);
 		m_window.setView(m_view2);
 		break;
 	case GameState::Help:
-		m_helpScreen->update();
+		m_helpScreen->update(totalTime);
 		m_window.setView(m_view2);
 		break;
 	case GameState::Thespecs:
-		m_specs->update();
+		m_specs->update(totalTime);
 		m_window.setView(m_view2);
 		break;
 	case GameState::Acceleration:
-		m_accelerationScreen->update();
+		m_accelerationScreen->update(totalTime);
 		m_window.setView(m_view2);
 		break;
 	case GameState::Braking:
-		m_brakingScreen->update();
+		m_brakingScreen->update(totalTime);
 		m_window.setView(m_view2);
 		break;
 	case GameState::Speed:
-		m_speedScreen->update();
+		m_speedScreen->update(totalTime);
 		m_window.setView(m_view2);
 		break;
 	case GameState::Steering:
-		m_steeringScreen->update();
+		m_steeringScreen->update(totalTime);
 		m_window.setView(m_view2);
 		break;
 	case GameState::Turbo:
-		m_turboScreen->update();
+		m_turboScreen->update(totalTime);
 		m_window.setView(m_view2);
 		break;
 	case GameState::Racing:
@@ -273,12 +274,12 @@ void Game::update(sf::Time time)
 		
 		break;
 	case GameState::ChangeP:
-		m_changeProfile->update();
+		m_changeProfile->update(totalTime);
 	
 	//	m_player->update();
 		break;
 	case GameState::EnterName:
-		m_enterName->update();
+		m_enterName->update(totalTime);
 		break;
 	case GameState::TheCredits:
 		m_credits->update();

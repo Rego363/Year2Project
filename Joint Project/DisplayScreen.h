@@ -12,7 +12,7 @@ class DisplayScreen
 public:
 	DisplayScreen(Game &game);
 	~DisplayScreen();
-	void update();
+	void update(float time);
 	void render(sf::RenderWindow & window);
 
 private:
@@ -30,6 +30,10 @@ private:
 	int m_currentSelect;
 	void setStateBack();
 	void animationOn();
+	sf::Texture m_blankTexture;
+	sf::Sprite m_shaderSprite;
+	sf::Shader m_shader; // Shader for triangle affect
+	std::string fragmentShader;
 };
 
 #endif
