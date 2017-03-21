@@ -44,6 +44,7 @@
 #include <SFML\Audio.hpp>
 #include "background.h"
 #include "Credits.h"
+#include <memory>
 
 using namespace std;
 
@@ -117,16 +118,16 @@ public:
 	void run();
 	void changeGameState(GameState gameState);
 	void changeGameDifficulty(GameDifficulty gameDiff);
-	void deleteScreen(GameState gameState); // Method to delete screen objects once they are finished with
 	std::string getGarageTexture();
 	sf::RenderWindow m_window;
-	Player *m_player;
+	std::unique_ptr< Player> m_player;
+	//static auto m_player;
 	string nameDisplay();
 	sf::Sound music;
 
 	int playerMoney();
 	void chargePlayer(int amount);
-	Background *m_background;
+	std::unique_ptr<Background> m_background;
 	bool isInView(sf::Sprite sprite);
 
 private:
@@ -143,38 +144,37 @@ private:
 	
 
 	GameState m_currentGameState = GameState::TheLicense;
-	playGame * m_mapSelect;
+	std::unique_ptr<playGame> m_mapSelect;
 	
 	GameDifficulty m_currentDifficulty = GameDifficulty::Medium;
 
-	OptionsScreen* m_optionsScreen;
-	SoundScreen* m_soundScreen;
-	DisplayScreen* m_displayScreen;
-	GarageScreen* m_garageScreen;
-	MainMenu *m_MainMenu;
-	HelpScreen *m_helpScreen;
-	
-	specs *m_specs;
-	Liscence *m_Liscence;
-	Splash *m_Splash;
-	DifficultyScreen *m_diffScreen;
-	SteeringScreen *m_steeringScreen;
-	TurboScreen *m_turboScreen;
-	BrakingScreen *m_brakingScreen;
-	SpeedScreen *m_speedScreen;
-	AccelerationScreen *m_accelerationScreen;
-	changeProfile * m_changeProfile;
-	Levels *m_level;
-	worldSquares * m_worldSquares;
-	EnterNameScreen *m_enterName;
-	Credits *m_credits;
+	std::unique_ptr<OptionsScreen> m_optionsScreen;
+	std::unique_ptr<SoundScreen> m_soundScreen;
+	std::unique_ptr<DisplayScreen> m_displayScreen;
+	std::unique_ptr<GarageScreen> m_garageScreen;
+	std::unique_ptr<MainMenu>m_MainMenu;
+	std::unique_ptr<HelpScreen>m_helpScreen;
+	std::unique_ptr<specs>m_specs;
+	std::unique_ptr<Liscence>m_Liscence;
+	std::unique_ptr<Splash>m_Splash;
+	std::unique_ptr<DifficultyScreen>m_diffScreen;
+	std::unique_ptr<SteeringScreen>m_steeringScreen;
+	std::unique_ptr<TurboScreen>m_turboScreen;
+	std::unique_ptr<BrakingScreen>m_brakingScreen;
+	std::unique_ptr<SpeedScreen>m_speedScreen;
+	std::unique_ptr<AccelerationScreen>m_accelerationScreen;
+	std::unique_ptr<changeProfile> m_changeProfile;
+	std::unique_ptr<Levels>m_level;
+	std::unique_ptr<EnterNameScreen>m_enterName;
+	std::unique_ptr<Credits>m_credits;
 
-	/*For testing*/
+	/*Cars*/
+	/**********************/
+	std::unique_ptr<Car>m_car;
+	std::unique_ptr<Car>m_aiCar;
+	std::unique_ptr<Ai>m_ai;
 	/**********************/
 
-	Car *m_car;
-	Car *m_aiCar;
-	Ai *m_ai;
 
 	sf::View m_view;
 	sf::View m_view2;
@@ -188,11 +188,6 @@ private:
 	Xbox360Controller m_xbox;
 
 
-	/*For testing*/
-	/**********************/
-
-
-	/**********************/
 
 	LevelData m_currentLevel;
 	LevelLoader m_levelLoader;
