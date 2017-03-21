@@ -121,6 +121,9 @@
     <ClCompile Include="XBOX360CONTROLLER.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="gameOverScreen.cpp">
+      <Filter>Source Files\Screens</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Ai.h">
@@ -232,6 +235,9 @@
       <Filter>Headers\Screens</Filter>
     </ClInclude>
     <ClInclude Include="Credits.h">
+      <Filter>Headers\Screens</Filter>
+    </ClInclude>
+    <ClInclude Include="gameOverScreen.h">
       <Filter>Headers\Screens</Filter>
     </ClInclude>
   </ItemGroup>

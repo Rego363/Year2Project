@@ -45,7 +45,7 @@
 #include "background.h"
 #include "Credits.h"
 #include <memory>
-
+#include "gameOverScreen.h"
 using namespace std;
 
 class SoundScreen;
@@ -73,7 +73,7 @@ class EnterNameScreen;
 class Background;
 class Player;
 class Credits;
-
+class GameOverScreen;
 
 
 enum GameState {
@@ -97,7 +97,8 @@ enum GameState {
 	ChangeP,
 	ThewSquares,
 	EnterName, 
-	TheCredits
+	TheCredits,
+	GameOver
 };
 
 enum GameDifficulty {
@@ -145,7 +146,7 @@ private:
 
 
 
-	GameState m_currentGameState = GameState::TheLicense;
+	GameState m_currentGameState = GameState::GameOver;
 	std::unique_ptr<playGame> m_mapSelect;
 
 	
@@ -170,7 +171,7 @@ private:
 	std::unique_ptr<Levels>m_level;
 	std::unique_ptr<EnterNameScreen>m_enterName;
 	std::unique_ptr<Credits>m_credits;
-
+	std::unique_ptr<GameOverScreen>m_gameOverScreen;
 	/*Cars*/
 	/**********************/
 	std::unique_ptr<Car>m_car;
@@ -186,8 +187,6 @@ private:
 	sf::Vector2f m_startPos;
 
 	std::vector<sf::CircleShape> m_track;
-	sf::Texture m_ground;
-	sf::Sprite m_groundSprite[70];
 	Xbox360Controller m_xbox;
 
 

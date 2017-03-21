@@ -140,6 +140,7 @@
     <ClCompile Include="DisplayScreen.cpp" />
     <ClCompile Include="EnterNameScreen.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="gameOverScreen.cpp" />
     <ClCompile Include="GarageScreen.cpp" />
     <ClCompile Include="GUI.cpp" />
     <ClCompile Include="Help.cpp" />
@@ -180,6 +181,7 @@
     <ClInclude Include="DisplayScreen.h" />
     <ClInclude Include="EnterNameScreen.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="gameOverScreen.h" />
     <ClInclude Include="GarageScreen.h" />
     <ClInclude Include="GUI.h" />
     <ClInclude Include="Help.h" />

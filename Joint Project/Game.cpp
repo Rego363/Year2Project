@@ -51,6 +51,7 @@ Game::Game() :
 	m_Liscence = make_unique<Liscence>(*this);
 	m_enterName = make_unique<EnterNameScreen>(*this);
 	m_credits = make_unique<Credits>(*this, m_currentLevel);
+	m_gameOverScreen = make_unique<GameOverScreen>(*this);
 
 	m_startPos = sf::Vector2f(m_window.getSize().x / 2, m_window.getSize().y / 4);
 	m_car = make_unique<Car>(m_startCar, m_startPos);
@@ -271,6 +272,10 @@ void Game::update(sf::Time time)
 
 		
 		break;
+	case GameState::GameOver:
+		m_gameOverScreen->update();
+		m_window.setView(m_view2);
+		break;
 	case GameState::ChangeP:
 		m_changeProfile->update();
 	
@@ -399,6 +404,13 @@ void Game::render()
 		m_level->render(m_window);
 		m_window.display();
 		break;
+	case GameState::GameOver:
+		m_window.clear(sf::Color(0, 0, 0, 255));
+		m_window.draw(sprBack);
+		m_gameOverScreen->draw(m_window);
+		m_window.display();
+		break;
+
 	case GameState::ChangeP:
 		m_window.clear(sf::Color(0, 0, 0, 255));
 		m_window.draw(sprBack);
