@@ -44,6 +44,7 @@
 #include "EnterNameScreen.h"
 #include <SFML\Audio.hpp>
 #include "background.h"
+#include "NightMode.h"
 #include "Credits.h"
 #include <memory>
 
@@ -74,6 +75,7 @@ class EnterNameScreen;
 class Background;
 class Player;
 class Credits;
+class NightMode;
 
 
 
@@ -129,6 +131,7 @@ public:
 	int playerMoney();
 	void chargePlayer(int amount);
 	std::unique_ptr<Background> m_background;
+	std::unique_ptr<NightMode> m_nightMode;
 	bool isInView(sf::Sprite sprite);
 
 private:
@@ -143,7 +146,7 @@ private:
 	sf::Font m_font;
 	sf::Text m_text;
 
-	GameState m_currentGameState = GameState::TheLicense;
+	GameState m_currentGameState = GameState::Racing;
 	std::unique_ptr<playGame> m_mapSelect;
 	
 	GameDifficulty m_currentDifficulty = GameDifficulty::Medium;

@@ -149,6 +149,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="Math.cpp" />
+    <ClCompile Include="NightMode.cpp" />
     <ClCompile Include="OptionsScreen.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="playGame.cpp" />
@@ -188,6 +189,7 @@
     <ClInclude Include="Liscence.h" />
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="Math.h" />
+    <ClInclude Include="NightMode.h" />
     <ClInclude Include="OptionsScreen.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="playGame.h" />

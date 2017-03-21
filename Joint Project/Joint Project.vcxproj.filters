@@ -121,6 +121,9 @@
     <ClCompile Include="XBOX360CONTROLLER.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="NightMode.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Ai.h">
@@ -233,6 +236,9 @@
     </ClInclude>
     <ClInclude Include="Credits.h">
       <Filter>Headers\Screens</Filter>
+    </ClInclude>
+    <ClInclude Include="NightMode.h">
+      <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
