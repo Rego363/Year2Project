@@ -17,7 +17,7 @@ class Ai;
 class Levels
 {
 public:
-	Levels(LevelData &level, Player &player, worldSquares &squares, Ai &ai, Game &game);
+	Levels(LevelData &level, Player &player,  Ai &ai, Game &game);
 	~Levels();
 
 	void update(float dt, sf::View &view);
@@ -34,7 +34,7 @@ private:
 	Ai *m_ai;
 	LevelData *m_currentLevel;
 	Player *m_currentPlayer;
-	worldSquares *m_squares;
+	
 	sf::Texture m_lambo;
 	sf::Font m_Font;
 	Game *m_game;
