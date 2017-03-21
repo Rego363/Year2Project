@@ -2,9 +2,8 @@
 
 //Dylan
 //set textures in here for each level
-Levels::Levels(LevelData &level, Player &player, worldSquares &squares, Ai &ai, Game &game) : m_currentLevel(&level),
+Levels::Levels(LevelData &level, Player &player,  Ai &ai, Game &game) : m_currentLevel(&level),
 										m_currentPlayer(&player),
-										m_squares(&squares),
 										m_ai(&ai),
 										m_game(&game)
 {
@@ -18,6 +17,14 @@ Levels::Levels(LevelData &level, Player &player, worldSquares &squares, Ai &ai, 
 	m_startLine.setFillColor(sf::Color::Red);
 
 	m_ai->m_car.scaleAi();
+
+	m_currentSelect = 0;
+	m_credits = new Button("Press A to end", m_currentPlayer->m_car.getPos().x , m_currentPlayer->m_car.getPos().y -300);
+	m_credits->getFocus();
+	m_credits->Enter = std::bind(&Levels::setStateBack, this);
+	m_gui.addButton(m_credits);
+
+	m_gui.vertical = true;
 }
 
 Levels::~Levels()
@@ -27,68 +34,96 @@ Levels::~Levels()
 //update game
 void Levels::update(float dt, sf::View &view)
 {
-	if (m_raceStarted == false)
+	if (game_on)
 	{
-		m_squares->update();
-		m_currentPlayer->update(dt, view);
-
-		m_startRace.restart();
-		m_raceStarted = true;
-	}
-
-	startTimes();
-
-	if (m_startRace.getElapsedTime().asSeconds() > 3 && m_startRace.getElapsedTime().asSeconds())
-	{
-		m_squares->update();
-		m_currentPlayer->update(dt, view);
-		m_ai->update();
-
-		m_currentLapTime.setPosition(m_currentPlayer->m_car.getPos().x + 300, m_currentPlayer->m_car.getPos().y - 350);
-		m_currentLapTime.setString("Time: " + to_string(m_raceTime.getElapsedTime().asSeconds()));
-		m_bestLap.setPosition(m_currentPlayer->m_car.getPos().x - 620, m_currentPlayer->m_car.getPos().y - 350);
-		m_lastLap.setPosition(m_currentPlayer->m_car.getPos().x - 620, m_currentPlayer->m_car.getPos().y - 310);
-	}
-
-	if ((sf::IntRect(m_currentPlayer->m_car.getSprite().getPosition().x, m_currentPlayer->m_car.getSprite().getPosition().y -20,
-		60, 60))
-		.intersects(sf::IntRect(m_startLine.getPosition().x, m_startLine.getPosition().y, 5, 200)))
-	{
-		if (m_raceTime.getElapsedTime().asSeconds() > 10)
+		if (m_raceStarted == false)
 		{
-			
-			if (m_raceTime.getElapsedTime().asSeconds() < tempTime)
-			{
-				tempTime = m_raceTime.getElapsedTime().asSeconds();
-				m_bestLap.setString("Best Lap Time: " + to_string(m_raceTime.getElapsedTime().asSeconds()));
-			}
-			else if (tempTime == 0)
-			{
-				tempTime = m_raceTime.getElapsedTime().asSeconds();
-				m_bestLap.setString("Best Lap Time: " + to_string(m_raceTime.getElapsedTime().asSeconds()));
-			}
+		m_currentPlayer->update(dt, view);
 
-			m_lastLap.setString("Last Lap Time: " + to_string(m_raceTime.getElapsedTime().asSeconds()));
-
-			m_raceTime.restart();
+			m_startRace.restart();
+			m_raceStarted = true;
 		}
+
+		startTimes();
+
+		if (m_startRace.getElapsedTime().asSeconds() > 3 && m_startRace.getElapsedTime().asSeconds())
+		{
+			m_currentPlayer->update(dt, view);
+			m_ai->update();
+
+			m_currentLapTime.setPosition(m_currentPlayer->m_car.getPos().x + 300, m_currentPlayer->m_car.getPos().y - 350);
+			m_currentLapTime.setString("Time: " + to_string(m_raceTime.getElapsedTime().asSeconds()));
+			m_bestLap.setPosition(m_currentPlayer->m_car.getPos().x - 620, m_currentPlayer->m_car.getPos().y - 350);
+			m_lastLap.setPosition(m_currentPlayer->m_car.getPos().x - 620, m_currentPlayer->m_car.getPos().y - 310);
+			m_Lap.setPosition(m_currentPlayer->m_car.getPos().x - 620, m_currentPlayer->m_car.getPos().y - 270);
+			m_Lap.setString("Lap: " + to_string(currentlap) + "/" + to_string(m_maxLaps));
+		}
+
+		if ((sf::IntRect(m_currentPlayer->m_car.getSprite().getPosition().x, m_currentPlayer->m_car.getSprite().getPosition().y - 20,
+			60, 60))
+			.intersects(sf::IntRect(m_startLine.getPosition().x, m_startLine.getPosition().y, 5, 200)))
+		{
+			if (m_raceTime.getElapsedTime().asSeconds() > 10)
+			{
+
+				if (m_raceTime.getElapsedTime().asSeconds() < tempTime)
+				{
+					tempTime = m_raceTime.getElapsedTime().asSeconds();
+					m_bestLap.setString("Best Lap Time: " + to_string(m_raceTime.getElapsedTime().asSeconds()));
+				}
+				else if (tempTime == 0)
+				{
+					tempTime = m_raceTime.getElapsedTime().asSeconds();
+					m_bestLap.setString("Best Lap Time: " + to_string(m_raceTime.getElapsedTime().asSeconds()));
+				}
+
+				m_lastLap.setString("Last Lap Time: " + to_string(m_raceTime.getElapsedTime().asSeconds()));
+				currentlap += 1;
+
+				if (currentlap > m_maxLaps)
+				{
+					game_on = false;
+				}
+
+				m_raceTime.restart();
+			}
+		}
+	}
+	else
+	{
+		m_gui.update(m_currentSelect, 1);
 	}
 }
 
 //draw game
 void Levels::render(sf::RenderWindow & window)
 {
-	//m_squares->render(window);
-	m_currentPlayer->m_car.draw(window);
-	m_ai->render(window);
-	window.draw(m_currentLapTime);
-	window.draw(m_startLine);
-	window.draw(m_bestLap);
-	window.draw(m_lastLap);
-	window.draw(easterEgg);
-	if (m_countDown)
+	if (game_on)
 	{
-		window.draw(m_countDownNumber);
+		//m_squares->render(window);
+		m_currentPlayer->m_car.draw(window);
+		m_ai->render(window);
+		window.draw(m_currentLapTime);
+		window.draw(m_startLine);
+		window.draw(m_bestLap);
+		window.draw(m_lastLap);
+		window.draw(easterEgg);
+		window.draw(m_Lap);
+		if (m_countDown)
+		{
+			window.draw(m_countDownNumber);
+		}
+	}
+	else
+	{
+		m_currentPlayer->m_car.draw(window);
+		m_ai->render(window);
+		window.draw(m_currentLapTime);
+		window.draw(m_startLine);
+		window.draw(m_bestLap);
+		window.draw(m_lastLap);
+		window.draw(m_Lap);
+		m_gui.draw(window);
 	}
 }
 
@@ -167,10 +202,22 @@ void Levels::setupTexts()
 	m_lastLap.setString("Last Lap Time: ");
 	m_lastLap.setFont(m_Font);
 
+	m_Lap.setPosition(m_currentPlayer->m_car.getPos().x - 620, m_currentPlayer->m_car.getPos().y - 270);
+	m_Lap.setCharacterSize(50);
+	m_Lap.setString("Lap: " + to_string(currentlap) + "/" + to_string(m_maxLaps));
+	m_Lap.setFont(m_Font);
+
 	easterEgg.setPosition(5700, 215);
 	easterEgg.setCharacterSize(50);
 	easterEgg.setString("Pete is cool");
 	easterEgg.setFont(m_Font);
 	easterEgg.setColor(sf::Color::Red);
 	
+}
+
+// sets gamestate
+void Levels::setStateBack()
+{
+	m_game->m_window.setPosition(sf::Vector2i(0.0f, 0.0f));
+	m_game->changeGameState(GameState::TheCredits);
 }

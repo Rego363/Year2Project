@@ -58,7 +58,10 @@ private:
 	Game *m_game;
 
 	std::string strTemp;				// String to hold the data of each player before putting it in the output file
-
+	int currentSkid;
+	std::vector<sf::Sprite> m_skidmarkSprite;
+	sf::Texture m_skidmarkText;
+	sf::Vector2f m_position;
 
 };
 

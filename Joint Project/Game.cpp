@@ -33,31 +33,31 @@ Game::Game() :
 	m_text.setPosition(m_window.getSize().x / 4, m_window.getSize().y / 2);
 	m_text.setCharacterSize(70);
 
-	m_optionsScreen = new OptionsScreen(*this);
-	m_mapSelect = new playGame(*this);
-	m_soundScreen = new SoundScreen(*this);
-	m_displayScreen = new DisplayScreen(*this);
-	m_garageScreen = new GarageScreen(m_window.getSize().x / 4, m_window.getSize().y / 2, *this);
-	m_MainMenu = new MainMenu(*this);
-	m_helpScreen = new HelpScreen(*this);
-	m_Splash = new Splash(*this);
-	m_diffScreen = new DifficultyScreen(*this);
+	m_optionsScreen = make_unique<OptionsScreen>(*this);
+	m_mapSelect = make_unique<playGame>(*this);
+	m_soundScreen = make_unique<SoundScreen>(*this);
+	m_displayScreen = make_unique<DisplayScreen>(*this);
+	m_garageScreen = make_unique<GarageScreen>(m_window.getSize().x / 4, m_window.getSize().y / 2, *this);
+	m_MainMenu = make_unique<MainMenu>(*this);
+	m_helpScreen = make_unique<HelpScreen>(*this);
+	m_Splash = make_unique<Splash>(*this);
+	m_diffScreen = make_unique<DifficultyScreen>(*this);
 
-	m_steeringScreen = new SteeringScreen(*this);
-	m_turboScreen = new TurboScreen(*this);
-	m_brakingScreen = new BrakingScreen(*this);
-	m_speedScreen = new SpeedScreen(*this);
-	m_accelerationScreen = new AccelerationScreen(*this);
-	m_worldSquares = new worldSquares(*this, m_currentLevel);
-	m_Liscence = new Liscence(*this);
-	m_enterName = new EnterNameScreen(*this);
-	m_credits = new Credits(*this, m_currentLevel);
+	m_steeringScreen = make_unique<SteeringScreen>(*this);
+	m_turboScreen = make_unique<TurboScreen>(*this);
+	m_brakingScreen = make_unique<BrakingScreen>(*this);
+	m_speedScreen = make_unique<SpeedScreen>(*this);
+	m_accelerationScreen = make_unique<AccelerationScreen>(*this);
+	m_Liscence = make_unique<Liscence>(*this);
+	m_enterName = make_unique<EnterNameScreen>(*this);
+	m_credits = make_unique<Credits>(*this, m_currentLevel);
+	m_gameOverScreen = make_unique<GameOverScreen>(*this);
 
 	m_startPos = sf::Vector2f(m_window.getSize().x / 2, m_window.getSize().y / 4);
-	m_car = new Car(m_startCar, m_startPos);
-	m_aiCar = new Car(m_startCar, sf::Vector2f(0.0f, 0.0f));
-	m_player = new Player(0, 0, m_startCar, m_window, *this);
-
+	m_car = make_unique<Car>(m_startCar, m_startPos);
+	m_aiCar = make_unique<Car>(m_startCar, sf::Vector2f(0.0f, 0.0f));
+	
+	m_player = make_unique<Player>(0, 0, m_startCar, m_window, *this);
 	if(!m_buffer.loadFromFile("music.wav"))
 	{
 		std::cout << "NO MUSIC" << std::endl;
@@ -66,7 +66,7 @@ Game::Game() :
 	music.setBuffer(m_buffer);
 	music.setLoop(true);
 	music.setVolume(100);
-	music.play();
+	//music.play();
 
 	/*  FOR TESTING*/
 	/*******************************************************************************/
@@ -77,15 +77,15 @@ Game::Game() :
 
 	/*******************************************************************************/
 
-	m_specs = new specs(*this);
-	m_diffScreen = new DifficultyScreen(*this);
 
-	m_steeringScreen = new SteeringScreen(*this);
-	m_turboScreen = new TurboScreen(*this);
-	m_brakingScreen = new BrakingScreen(*this);
-	m_speedScreen = new SpeedScreen(*this);
-	m_accelerationScreen = new AccelerationScreen(*this);
-	m_changeProfile = new changeProfile(*this);
+	m_diffScreen = make_unique<DifficultyScreen>(*this);
+
+	m_steeringScreen = make_unique<SteeringScreen>(*this);
+	m_turboScreen = make_unique<TurboScreen>(*this);
+	m_brakingScreen = make_unique<BrakingScreen>(*this);
+	m_speedScreen = make_unique<SpeedScreen>(*this);
+	m_accelerationScreen = make_unique<AccelerationScreen>(*this);
+	m_changeProfile = make_unique<changeProfile>(*this);
 
 	for (int i = 0; i < m_currentLevel.m_track.size(); i++)
 	{
@@ -95,11 +95,11 @@ Game::Game() :
 		m_track.push_back(circle);
 	}
 
-	m_ai = new Ai(m_car->getPos().x, m_car->getPos().y + 100, m_aistartCar, m_track);
+	m_ai = make_unique< Ai>(m_car->getPos().x, m_car->getPos().y + 100, m_aistartCar, m_track);
 
-	m_background = new Background( *this);
+	m_background = make_unique<Background>( *this);
 	
-	m_level = new Levels(m_currentLevel, *m_player, *m_worldSquares, *m_ai, *this);
+	m_level = make_unique< Levels>(m_currentLevel, *m_player, *m_ai, *this);
 
 	if (!m_backgroundImage.loadFromFile("backgroundBlue.png"))
 	{
@@ -108,7 +108,7 @@ Game::Game() :
 	sprBack.setTexture(m_backgroundImage);
 	sprBack.setPosition(0, 0);
 
-
+	m_specs = make_unique< specs>(*this, *m_level);
 	
 }
 
@@ -273,6 +273,10 @@ void Game::update(sf::Time time)
 
 		
 		break;
+	case GameState::GameOver:
+		m_gameOverScreen->update();
+		m_window.setView(m_view2);
+		break;
 	case GameState::ChangeP:
 		m_changeProfile->update(totalTime);
 	
@@ -397,9 +401,17 @@ void Game::render()
 	case GameState::Racing:   //put in levels
 		m_window.clear(sf::Color(0, 0, 0, 255));
 		m_background->draw(m_window);
+		m_player->draw(m_window);
 		m_level->render(m_window);
 		m_window.display();
 		break;
+	case GameState::GameOver:
+		m_window.clear(sf::Color(0, 0, 0, 255));
+		m_window.draw(sprBack);
+		m_gameOverScreen->draw(m_window);
+		m_window.display();
+		break;
+
 	case GameState::ChangeP:
 		m_window.clear(sf::Color(0, 0, 0, 255));
 		m_window.draw(sprBack);
@@ -445,112 +457,6 @@ string Game::nameDisplay()
 	/*m_name.setString("Profile");*/
 }
 
-void Game::deleteScreen(GameState gameState)
-{
-	// Delete license screen
-	if (gameState == GameState::TheLicense)
-	{
-		delete m_Liscence;
-	}
-
-	// Delete splash screen
-	if (gameState == GameState::TheSplash)
-	{
-		delete m_Splash;
-	}
-
-	// Delete options screen
-	if (gameState == GameState::TheOptions)
-	{
-		delete m_optionsScreen;
-	}
-
-	// Delete garage screen
-	if (gameState == GameState::Garage)
-	{
-		delete m_garageScreen;
-	}
-
-	// Delete menu screen
-	if (gameState == GameState::TheMenu)
-	{
-		delete m_MainMenu;
-	}
-
-	// Delete display screen
-	if (gameState == GameState::Display)
-	{
-		delete m_displayScreen;
-	}
-
-	// Delete difficulty screen
-	if (gameState == GameState::Difficulty)
-	{
-		delete m_diffScreen;
-	}
-	
-	// Delete sound screen
-	if (gameState == GameState::Sound)
-	{
-		delete m_soundScreen;
-	}
-
-	// Delete map select screen
-	if (gameState == GameState::MapSelect)
-	{
-		delete m_mapSelect;
-	}
-
-	// Delete help screen
-	if (gameState == GameState::Help)
-	{
-		delete m_helpScreen;
-	}
-
-	// Delete acceleration upgrade screen
-	if (gameState == GameState::Acceleration)
-	{
-		delete m_accelerationScreen;
-	}
-
-	// Delete Speed upgrade screen
-	if (gameState == GameState::Speed)
-	{
-		delete m_speedScreen;
-	}
-
-	// Delete Braking upgrade screen
-	if (gameState == GameState::Braking)
-	{
-		delete m_brakingScreen;
-	}
-
-	// Delete Turbo upgrade screen
-	if (gameState == GameState::Turbo)
-	{
-		delete m_turboScreen;
-	}
-
-	// Delete steering upgrade screen
-	if (gameState == GameState::Steering)
-	{
-		delete m_steeringScreen;
-	}
-
-	// Delete racing screen
-	if (gameState == GameState::Racing)
-	{
-		delete m_background;
-		delete m_level;
-		delete m_ai;
-	}
-	
-	// Delete change profile screen
-	if (gameState == GameState::ChangeP)
-	{
-		delete m_changeProfile;
-	}
-}
 
 int Game::playerMoney()
 {

@@ -1,8 +1,9 @@
 #include "Specs.h"
 #include "playGame.h"
 
-specs::specs(Game &game):
-	m_game(&game)
+specs::specs(Game &game, Levels &level):
+	m_game(&game),
+	m_currentLevel(&level)
 {
 	m_EnemiesNum = 100.0f;
 	m_title = new Label("Specifications", 400, 30);
@@ -77,6 +78,18 @@ void specs::goToMapSelect()
 
 void specs::goToMapRacing()
 {
+	if (m_3)
+	{
+		m_currentLevel->m_maxLaps = 3;
+	}
+	else if (m_5)
+	{
+		m_currentLevel->m_maxLaps = 5;
+	}
+	else if (m_7)
+	{
+		m_currentLevel->m_maxLaps = 7;
+	}
 	m_game->changeGameState(GameState::Racing);
 
 }

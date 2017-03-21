@@ -17,7 +17,7 @@ class Ai;
 class Levels
 {
 public:
-	Levels(LevelData &level, Player &player, worldSquares &squares, Ai &ai, Game &game);
+	Levels(LevelData &level, Player &player,  Ai &ai, Game &game);
 	~Levels();
 
 	void update(float dt, sf::View &view);
@@ -25,6 +25,8 @@ public:
 	void loadImages();
 	void loadFont();
 	sf::Clock m_startRace;
+	int m_maxLaps = 3;
+	void setStateBack();
 
 private:
 
@@ -34,7 +36,7 @@ private:
 	Ai *m_ai;
 	LevelData *m_currentLevel;
 	Player *m_currentPlayer;
-	worldSquares *m_squares;
+	
 	sf::Texture m_lambo;
 	sf::Font m_Font;
 	Game *m_game;
@@ -46,8 +48,14 @@ private:
 	sf::Text m_currentLapTime;
 	sf::Text m_bestLap;
 	sf::Text m_lastLap;
+	sf::Text m_Lap;;
 	sf::Text easterEgg;
 	float tempTime = 0;
+	int currentlap = 1;
+	GUI m_gui;
+	int m_currentSelect = 0;
+	Button *m_credits;
+	bool game_on = true;
 
 	sf::RectangleShape m_startLine;
 
