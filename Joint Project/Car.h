@@ -42,6 +42,8 @@ public:
 	void setAiPosition(sf::Vector2f);
 	void scaleAi();
 	sf::Sprite getSprite() const;
+	float m_speed; //speed of car
+	float m_rotation; //rotation of car
 private:
 	
 	float m_maxSpeed;
@@ -51,8 +53,7 @@ private:
 	sf::Sprite m_sprite2;
 	sf::Vector2u textureSize;
 	sf::Sprite m_sprite; //car sprite
-	float m_speed; //speed of car
-	float m_rotation; //rotation of car
+	
 	sf::Vector2f m_position; //cars position on screen
 	bool isMoving;
 	float m_acceleration;
