@@ -13,7 +13,7 @@ public:
 	SoundScreen(Game &game);
 	~SoundScreen();
 	void render(sf::RenderWindow & window);
-	void update();
+	void update(float time);
 	void increaseMusicVol();
 	void decreaseMusicVol();
 
@@ -30,6 +30,10 @@ private:
 	float m_volume;
 	int m_currentSelect;
 	void setStateBack();
+	sf::Texture m_blankTexture;
+	sf::Sprite m_shaderSprite;
+	sf::Shader m_shader; // Shader for triangle affect
+	std::string fragmentShader;
 	
 };
 

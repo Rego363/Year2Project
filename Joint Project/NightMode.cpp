@@ -9,7 +9,6 @@ bool NightMode::activateShader = false;
 NightMode::NightMode(Game &game) :
 	m_game(&game)
 {
-
 	elapsedTime.restart();
 	loadCounter = sf::Vector2i(0, 0);
 
@@ -61,9 +60,9 @@ NightMode::NightMode(Game &game) :
 		std::cout << "mask failed to load" << std::endl;         //load shader
 	}
 
-	m_shader.setParameter("sceneBuffer",m_tileTexture);
+	m_shader.setParameter("sceneBuffer", m_tileTexture);
 	m_shader.setParameter("noiseTex", m_noiseTexture);
-	m_shader.setParameter("maskTex", m_mask);
+	//m_shader.setParameter("maskTex", m_mask);
 	m_shader.setParameter("elapsedTime", elapsedTime.getElapsedTime().asSeconds());
 	m_shader.setParameter("luminanceThreshold", 0.2);
 	m_shader.setParameter("colorAmplification", 4.0);
@@ -140,9 +139,7 @@ void NightMode::draw(sf::RenderWindow &window)
 					m_shader.setParameter("elapsedTime", elapsedTime.getElapsedTime().asSeconds() * 10 );
 					window.draw(spr, &m_shader);
 				}
-				else {
-					window.draw(spr);
-				}
+				
 				visible++;
 			}
 		}

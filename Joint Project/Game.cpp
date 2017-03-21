@@ -51,6 +51,7 @@ Game::Game() :
 	m_Liscence = make_unique<Liscence>(*this);
 	m_enterName = make_unique<EnterNameScreen>(*this);
 	m_credits = make_unique<Credits>(*this, m_currentLevel);
+	m_gameOverScreen = make_unique<GameOverScreen>(*this);
 
 	m_startPos = sf::Vector2f(m_window.getSize().x / 2, m_window.getSize().y / 4);
 	m_car = make_unique<Car>(m_startCar, m_startPos);
@@ -185,24 +186,25 @@ void Game::processInput()
 /// </summary>
 void Game::update(sf::Time time)
 {
+	totalTime += timeSinceLastUpdate.asSeconds();
 
 	switch (m_currentGameState)
 	{
 
 	case GameState::TheOptions:
-		m_optionsScreen->update();
+		m_optionsScreen->update(totalTime);
 		m_window.setView(m_view2);
 		break;
 	case GameState::TheMenu:
-		m_MainMenu->update();
+		m_MainMenu->update(totalTime);
 		m_window.setView(m_view2);
 		break;
 	case GameState::Difficulty:
-		m_diffScreen->update();
+		m_diffScreen->update(totalTime);
 		m_window.setView(m_view2);
 		break;
 	case GameState::Garage:
-		m_garageScreen->update();
+		m_garageScreen->update(totalTime);
 		m_window.setView(m_view2);
 		break;
 	case GameState::TheLicense:
@@ -220,43 +222,43 @@ void Game::update(sf::Time time)
 		m_window.setView(m_view2);
 		break;
 	case GameState::Sound:
-		m_soundScreen->update();
+		m_soundScreen->update(totalTime);
 		m_window.setView(m_view2);
 		break;
 	case GameState::Display:
-		m_displayScreen->update();
+		m_displayScreen->update(totalTime);
 		m_window.setView(m_view2);
 		break;
 	case GameState::MapSelect:
-		m_mapSelect->update();
+		m_mapSelect->update(totalTime);
 		m_window.setView(m_view2);
 		break;
 	case GameState::Help:
-		m_helpScreen->update();
+		m_helpScreen->update(totalTime);
 		m_window.setView(m_view2);
 		break;
 	case GameState::Thespecs:
-		m_specs->update();
+		m_specs->update(totalTime);
 		m_window.setView(m_view2);
 		break;
 	case GameState::Acceleration:
-		m_accelerationScreen->update();
+		m_accelerationScreen->update(totalTime);
 		m_window.setView(m_view2);
 		break;
 	case GameState::Braking:
-		m_brakingScreen->update();
+		m_brakingScreen->update(totalTime);
 		m_window.setView(m_view2);
 		break;
 	case GameState::Speed:
-		m_speedScreen->update();
+		m_speedScreen->update(totalTime);
 		m_window.setView(m_view2);
 		break;
 	case GameState::Steering:
-		m_steeringScreen->update();
+		m_steeringScreen->update(totalTime);
 		m_window.setView(m_view2);
 		break;
 	case GameState::Turbo:
-		m_turboScreen->update();
+		m_turboScreen->update(totalTime);
 		m_window.setView(m_view2);
 		break;
 	case GameState::Racing:
@@ -267,18 +269,26 @@ void Game::update(sf::Time time)
 		m_xbox.update();
 		if (m_xbox.m_currentState.Back&& !m_xbox.m_previousState.Back)
 		{
+			m_background->activateTheShader();
+		}
+		
+		if(m_xbox.m_currentState.LB && !m_xbox.m_previousState.LB)
+		{
 			m_nightMode->activateTheShader();
 		}
-
 		
 		break;
+	case GameState::GameOver:
+		m_gameOverScreen->update();
+		m_window.setView(m_view2);
+		break;
 	case GameState::ChangeP:
-		m_changeProfile->update();
+		m_changeProfile->update(totalTime);
 	
 	//	m_player->update();
 		break;
 	case GameState::EnterName:
-		m_enterName->update();
+		m_enterName->update(totalTime);
 		break;
 	case GameState::TheCredits:
 		m_credits->update();
@@ -395,12 +405,19 @@ void Game::render()
 		break;
 	case GameState::Racing:   //put in levels
 		m_window.clear(sf::Color(0, 0, 0, 255));
-		//m_background->draw(m_window);
+		m_background->draw(m_window);
 		m_nightMode->draw(m_window);
 		m_player->draw(m_window);
 		m_level->render(m_window);
 		m_window.display();
 		break;
+	case GameState::GameOver:
+		m_window.clear(sf::Color(0, 0, 0, 255));
+		m_window.draw(sprBack);
+		m_gameOverScreen->draw(m_window);
+		m_window.display();
+		break;
+
 	case GameState::ChangeP:
 		m_window.clear(sf::Color(0, 0, 0, 255));
 		m_window.draw(sprBack);

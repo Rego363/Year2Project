@@ -23,7 +23,6 @@ private:
 	std::string tileLocation; //texture name
 	int visible;
 
-	sf::Texture m_screen;
 	sf::Texture m_tileTexture; //texture
 	sf::Texture m_noiseTexture; //blurryness of nightvision
 	sf::Texture m_mask; //goggles effect

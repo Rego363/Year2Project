@@ -10,7 +10,7 @@ class EnterNameScreen {
 public:
 	EnterNameScreen(Game &game);
 	std::string getEnteredName();
-	void update();
+	void update(float time);
 	void draw(sf::RenderWindow &window);
 
 	void addQ();
@@ -52,5 +52,9 @@ private:
 	int m_selectedItem = 0;
 	Game *m_game;
 	Xbox360Controller m_xbox;
+	sf::Texture m_blankTexture;
+	sf::Sprite m_shaderSprite;
+	sf::Shader m_shader; // Shader for triangle affect
+	std::string fragmentShader;
 };
 #endif // !ENTERNAME

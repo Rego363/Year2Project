@@ -11,7 +11,7 @@ class SpeedScreen {
 public:
 	SpeedScreen(Game &game);
 	void draw(sf::RenderWindow &window);
-	void update();
+	void update(float time);
 	void goToGarage();
 private:
 	sf::Texture m_texture;
@@ -35,5 +35,9 @@ private:
 	const int SMALL_PRICE = 500;
 	const int MEDIUM_PRICE = 2500;
 	const int LARGE_PRICE = 5000;
+	sf::Texture m_blankTexture;
+	sf::Sprite m_shaderSprite;
+	sf::Shader m_shader; // Shader for triangle affect
+	std::string fragmentShader;
 };
 #endif
