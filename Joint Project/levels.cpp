@@ -2,9 +2,8 @@
 
 //Dylan
 //set textures in here for each level
-Levels::Levels(LevelData &level, Player &player, worldSquares &squares, Ai &ai, Game &game) : m_currentLevel(&level),
+Levels::Levels(LevelData &level, Player &player,  Ai &ai, Game &game) : m_currentLevel(&level),
 										m_currentPlayer(&player),
-										m_squares(&squares),
 										m_ai(&ai),
 										m_game(&game)
 {
@@ -39,8 +38,7 @@ void Levels::update(float dt, sf::View &view)
 	{
 		if (m_raceStarted == false)
 		{
-			m_squares->update();
-			m_currentPlayer->update(dt, view);
+		m_currentPlayer->update(dt, view);
 
 			m_startRace.restart();
 			m_raceStarted = true;
@@ -50,7 +48,6 @@ void Levels::update(float dt, sf::View &view)
 
 		if (m_startRace.getElapsedTime().asSeconds() > 3 && m_startRace.getElapsedTime().asSeconds())
 		{
-			m_squares->update();
 			m_currentPlayer->update(dt, view);
 			m_ai->update();
 

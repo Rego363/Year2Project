@@ -52,6 +52,11 @@ struct TrackData
 	float m_size;
 };
 
+struct GarageData
+{
+	std::string m_fileName;
+};
+
 struct CreditsData
 {
 	std::string m_fileName;
@@ -77,6 +82,7 @@ struct LevelData
 	GroundData m_ground;
 	SandData m_sand;
 	blueLamboData m_aiLambo;
+	GarageData m_garage;
 	std::vector<TrackData> m_track;
 	CreditsData m_credits;
 	LisenceData m_lisence;
