@@ -5,6 +5,9 @@
 #include "Label.h"
 #include <iostream>
 
+#ifndef CAR
+#define CAR
+
 /*
 Cars to be used by both the player and the Ai racers
 */
@@ -47,13 +50,15 @@ public:
 private:
 	
 	float m_maxSpeed;
-
+	sf::Clock shaderclock;
 	sf::Texture m_texture; //car texture
 	sf::Texture m_blankTexture;
 	sf::Sprite m_sprite2;
 	sf::Vector2u textureSize;
 	sf::Sprite m_sprite; //car sprite
-	
+	sf::Texture m_blankTexture2;
+	sf::Texture m_Icar;
+	sf::Sprite m_IcarS;
 	sf::Vector2f m_position; //cars position on screen
 	bool isMoving;
 	float m_acceleration;
@@ -65,5 +70,6 @@ private:
 	Animation *animation;
 
 	sf::Shader m_shader;
-
+	sf::Shader m_Nshader;
 };
+#endif

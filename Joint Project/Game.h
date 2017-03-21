@@ -145,7 +145,7 @@ private:
 
 
 
-	GameState m_currentGameState = GameState::TheLicense;
+	GameState m_currentGameState = GameState::Racing;
 	std::unique_ptr<playGame> m_mapSelect;
 
 	
