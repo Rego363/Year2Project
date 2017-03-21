@@ -13,10 +13,13 @@ specs::specs(Game &game, Levels &level):
 	m_Race->Enter = std::bind(&specs::goToMapRacing, this);
 	m_Back = new Button("Back", 100, 500);
 	m_Back->Enter = std::bind(&specs::goToMapSelect, this);
-
 	m_3 = new RadioButton("3 Laps", 300, 150,"music");
+	m_3->getActive();
+	m_3->Enter = std::bind(&specs::goToLapSelect3, this);
 	m_5 = new RadioButton("5 Laps", 300, 200,"music");
+	m_5->Enter = std::bind(&specs::goToLapSelect5, this);
 	m_7 = new RadioButton("7 Laps", 300, 250,"music");
+	m_7->Enter = std::bind(&specs::goToLapSelect7, this);
 
 
 	m_EnemiesNo = new Slider(300.0f, 100.0f, m_EnemiesNum, "Enemies");
@@ -78,21 +81,23 @@ void specs::goToMapSelect()
 
 void specs::goToMapRacing()
 {
-	if (m_3)
-	{
-		m_currentLevel->m_maxLaps = 3;
-	}
-	else if (m_5)
-	{
-		m_currentLevel->m_maxLaps = 5;
-	}
-	else if (m_7)
-	{
-		m_currentLevel->m_maxLaps = 7;
-	}
 	m_game->resetMap();
 	m_game->changeGameState(GameState::Racing);
+}
 
+void specs::goToLapSelect3()
+{
+	m_currentLevel->m_maxLaps = 3;
+}
+
+void specs::goToLapSelect5()
+{
+	m_currentLevel->m_maxLaps = 5;
+}
+
+void specs::goToLapSelect7()
+{
+	m_currentLevel->m_maxLaps = 7;
 }
 
 

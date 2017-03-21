@@ -12,6 +12,7 @@ public:
 	~Ai();
 	void update();	// Update loop
 	void render(sf::RenderWindow &window);	// Draw loop
+	void resetNode();
 	Car m_car;
 
 private:

@@ -52,6 +52,11 @@ void Ai::render(sf::RenderWindow &window)
 	m_car.draw(window);
 }
 
+void Ai::resetNode()
+{
+	m_target = 0;
+}
+
 sf::Vector2f Ai::seekTrack(std::vector<sf::CircleShape> track, sf::Vector2f pos)
 {
 	trackDisVector = track[m_target].getPosition();

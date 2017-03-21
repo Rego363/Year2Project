@@ -19,7 +19,7 @@ Levels::Levels(LevelData &level, Player &player,  Ai &ai, Game &game) : m_curren
 	m_ai->m_car.scaleAi();
 
 	m_currentSelect = 0;
-	m_credits = new Button("Press A to end", m_currentPlayer->m_car.getPos().x , m_currentPlayer->m_car.getPos().y -300);
+	m_credits = new Button("Press A to end", m_currentPlayer->m_car.getPos().x , m_currentPlayer->m_car.getPos().y +300);
 	m_credits->getFocus();
 	m_credits->Enter = std::bind(&Levels::setStateBack, this);
 	m_gui.addButton(m_credits);
@@ -48,6 +48,7 @@ void Levels::update(float dt, sf::View &view)
 		}
 
 		startTimes();
+		m_Lap.setString("Lap: " + to_string(currentlap) + "/" + to_string(m_maxLaps));
 
 		if (m_startRace.getElapsedTime().asSeconds() > 3 && m_startRace.getElapsedTime().asSeconds())
 		{
@@ -59,7 +60,6 @@ void Levels::update(float dt, sf::View &view)
 			m_bestLap.setPosition(m_currentPlayer->m_car.getPos().x - 620, m_currentPlayer->m_car.getPos().y - 350);
 			m_lastLap.setPosition(m_currentPlayer->m_car.getPos().x - 620, m_currentPlayer->m_car.getPos().y - 310);
 			m_Lap.setPosition(m_currentPlayer->m_car.getPos().x - 620, m_currentPlayer->m_car.getPos().y - 270);
-			m_Lap.setString("Lap: " + to_string(currentlap) + "/" + to_string(m_maxLaps));
 		}
 
 		if ((sf::IntRect(m_currentPlayer->m_car.getSprite().getPosition().x, m_currentPlayer->m_car.getSprite().getPosition().y - 20,
@@ -235,6 +235,9 @@ void Levels::resetLevel()
 	loadImages();
 	loadFont();
 	m_currentPlayer->m_car.setCurrentTexture(m_lambo);
+	m_currentPlayer->m_car.resetPosition();
+	m_currentPlayer->m_car.m_rotation = 0;
+	m_currentPlayer->m_car.setRotation(0);
 	setupTexts();
 	m_startLine.setPosition(m_currentPlayer->m_car.getPos().x + 40, m_currentPlayer->m_car.getPos().y - 100);
 	m_startLine.setSize(sf::Vector2f(5, 200));
@@ -245,6 +248,8 @@ void Levels::resetLevel()
 	game_on = true;
 	m_countDown = true;
 	m_raceStarted = false;
-	m_currentPlayer->m_car.setAiPosition(sf::Vector2f(760, 1100));
-	m_currentPlayer->m_car.m_rotation = 0;
+	currentlap = 1;
+	m_ai->m_car.setAiPosition(sf::Vector2f(760, 1050));
+	m_ai->m_car.setRotation(0);
+	m_ai->resetNode();
 }

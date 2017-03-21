@@ -41,6 +41,7 @@ public:
 	void collision();
 	void setAiPosition(sf::Vector2f);
 	void scaleAi();
+	void resetPosition();
 	sf::Sprite getSprite() const;
 	float m_speed; //speed of car
 	float m_rotation; //rotation of car

@@ -25,7 +25,7 @@ public:
 	void loadImages();
 	void loadFont();
 	sf::Clock m_startRace;
-	int m_maxLaps = 3;
+	int m_maxLaps;
 	void setStateBack();
 	std::string getBestLapTime();
 	void resetLevel();

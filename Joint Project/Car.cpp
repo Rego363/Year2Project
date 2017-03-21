@@ -254,6 +254,11 @@ void Car::scaleAi()
 	m_sprite.scale(2.25, 2.25);
 }
 
+void Car::resetPosition()
+{
+	m_sprite.setPosition(sf::Vector2f(760, 1100));
+}
+
 //gets the sprite
 sf::Sprite Car::getSprite() const
 {
