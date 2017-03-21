@@ -1,8 +1,9 @@
 #ifndef GAME
 #define GAME
 
-#include <sfeMovie\Movie.hpp>
-#include <sfeMovie\StreamSelection.hpp>
+#include "include\sfeMovie\Movie.hpp"
+#include "include\sfeMovie\Visibility.hpp"
+#include "include\sfeMovie\StreamSelection.hpp"
 #include <sfeMovie\Visibility.hpp>
 #include <SFML\Graphics.hpp>
 #include <SFML\Audio.hpp>
@@ -43,9 +44,10 @@
 #include "EnterNameScreen.h"
 #include <SFML\Audio.hpp>
 #include "background.h"
+#include "NightMode.h"
 #include "Credits.h"
 #include <memory>
-
+#include "gameOverScreen.h"
 using namespace std;
 
 class SoundScreen;
@@ -73,8 +75,8 @@ class EnterNameScreen;
 class Background;
 class Player;
 class Credits;
-
-
+class NightMode;
+class GameOverScreen;
 
 enum GameState {
 	TheLicense,
@@ -97,7 +99,8 @@ enum GameState {
 	ChangeP,
 	ThewSquares,
 	EnterName, 
-	TheCredits
+	TheCredits,
+	GameOver
 };
 
 enum GameDifficulty {
@@ -120,15 +123,17 @@ public:
 	void changeGameDifficulty(GameDifficulty gameDiff);
 	std::string getGarageTexture();
 	sf::RenderWindow m_window;
-	std::unique_ptr< Player> m_player;
-	//static auto m_player;
+	std::unique_ptr<Player> m_player;
 	string nameDisplay();
 	sf::Sound music;
 
 	int playerMoney();
 	void chargePlayer(int amount);
 	std::unique_ptr<Background> m_background;
+	std::unique_ptr<NightMode> m_nightMode;
 	bool isInView(sf::Sprite sprite);
+	std::string getBestLapTime();
+	void resetMap();
 
 private:
 	void processInput();
@@ -141,13 +146,14 @@ private:
 
 	sf::Font m_font;
 	sf::Text m_text;
-	
 
 
 
 	GameState m_currentGameState = GameState::Racing;
-	std::unique_ptr<playGame> m_mapSelect;
 
+	
+
+	std::unique_ptr<playGame> m_mapSelect;
 	
 	GameDifficulty m_currentDifficulty = GameDifficulty::Medium;
 
@@ -170,7 +176,7 @@ private:
 	std::unique_ptr<Levels>m_level;
 	std::unique_ptr<EnterNameScreen>m_enterName;
 	std::unique_ptr<Credits>m_credits;
-
+	std::unique_ptr<GameOverScreen>m_gameOverScreen;
 	/*Cars*/
 	/**********************/
 	std::unique_ptr<Car>m_car;
@@ -186,8 +192,6 @@ private:
 	sf::Vector2f m_startPos;
 
 	std::vector<sf::CircleShape> m_track;
-	sf::Texture m_ground;
-	sf::Sprite m_groundSprite[70];
 	Xbox360Controller m_xbox;
 
 
@@ -199,7 +203,7 @@ private:
 	sf::Clock clock;
 	sf::Time timeSinceLastUpdate;
 	sf::Time timePerFrame;
-
+	float totalTime;
 
 
 	/******************************/
@@ -217,7 +221,7 @@ private:
 	sf::FloatRect rect;
 	sf::Texture m_backgroundImage;
 	sf::Sprite sprBack;
-
+	bool levelReset = true;
 };
 
 #endif

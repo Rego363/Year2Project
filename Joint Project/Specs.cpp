@@ -1,8 +1,9 @@
 #include "Specs.h"
 #include "playGame.h"
 
-specs::specs(Game &game):
-	m_game(&game)
+specs::specs(Game &game, Levels &level):
+	m_game(&game),
+	m_currentLevel(&level)
 {
 	m_EnemiesNum = 100.0f;
 	m_title = new Label("Specifications", 400, 30);
@@ -12,10 +13,13 @@ specs::specs(Game &game):
 	m_Race->Enter = std::bind(&specs::goToMapRacing, this);
 	m_Back = new Button("Back", 100, 500);
 	m_Back->Enter = std::bind(&specs::goToMapSelect, this);
-
 	m_3 = new RadioButton("3 Laps", 300, 150,"music");
+	m_3->getActive();
+	m_3->Enter = std::bind(&specs::goToLapSelect3, this);
 	m_5 = new RadioButton("5 Laps", 300, 200,"music");
+	m_5->Enter = std::bind(&specs::goToLapSelect5, this);
 	m_7 = new RadioButton("7 Laps", 300, 250,"music");
+	m_7->Enter = std::bind(&specs::goToLapSelect7, this);
 
 
 	m_EnemiesNo = new Slider(300.0f, 100.0f, m_EnemiesNum, "Enemies");
@@ -33,6 +37,21 @@ specs::specs(Game &game):
 	m_currentSelect = 0;
 	m_gui.vertical = true;
 
+	if (!m_blankTexture.loadFromFile("blankBackground.png"))	// Load blank texture
+	{
+		std::cout << "blankTile failed to load" << std::endl;	//Error message
+	}
+
+	m_shaderSprite.setTexture(m_blankTexture);	// Set texture for the blank sprite
+
+	if (!m_shader.loadFromFile("Shaders/Smoke.frag", sf::Shader::Fragment)) //Load shader
+	{
+		std::cout << "shader failed to load" << std::endl;	// Error message
+	}
+
+	m_shader.setParameter("time", 0.0f);
+	m_shader.setParameter("resolution", 1280.0f, 720.0f);
+	m_shaderSprite.setPosition(0.0f, 0.0f);
 
 }
 
@@ -44,12 +63,13 @@ specs::~specs()
 
 void specs::render(sf::RenderWindow & window)
 {
+	window.draw(m_shaderSprite, &m_shader);
 	m_gui.draw(window);
 }
 
-void specs::update()
+void specs::update(float dt)
 {
-
+	m_shader.setParameter("time", dt);
 	m_gui.update(m_currentSelect, 7);
 }
 
@@ -61,8 +81,23 @@ void specs::goToMapSelect()
 
 void specs::goToMapRacing()
 {
+	m_game->resetMap();
 	m_game->changeGameState(GameState::Racing);
+}
 
+void specs::goToLapSelect3()
+{
+	m_currentLevel->m_maxLaps = 3;
+}
+
+void specs::goToLapSelect5()
+{
+	m_currentLevel->m_maxLaps = 5;
+}
+
+void specs::goToLapSelect7()
+{
+	m_currentLevel->m_maxLaps = 7;
 }
 
 

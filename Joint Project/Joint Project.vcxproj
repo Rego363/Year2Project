@@ -140,6 +140,7 @@
     <ClCompile Include="DisplayScreen.cpp" />
     <ClCompile Include="EnterNameScreen.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="gameOverScreen.cpp" />
     <ClCompile Include="GarageScreen.cpp" />
     <ClCompile Include="GUI.cpp" />
     <ClCompile Include="Help.cpp" />
@@ -149,6 +150,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="Math.cpp" />
+    <ClCompile Include="NightMode.cpp" />
     <ClCompile Include="OptionsScreen.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="playGame.cpp" />
@@ -180,6 +182,7 @@
     <ClInclude Include="DisplayScreen.h" />
     <ClInclude Include="EnterNameScreen.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="gameOverScreen.h" />
     <ClInclude Include="GarageScreen.h" />
     <ClInclude Include="GUI.h" />
     <ClInclude Include="Help.h" />
@@ -188,6 +191,7 @@
     <ClInclude Include="Liscence.h" />
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="Math.h" />
+    <ClInclude Include="NightMode.h" />
     <ClInclude Include="OptionsScreen.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="playGame.h" />

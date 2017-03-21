@@ -25,7 +25,7 @@ public:
 		~playGame();
 
 		void render(sf::RenderWindow & window);
-		void update();
+		void update(float dt);
 
 private:
 
@@ -52,6 +52,10 @@ private:
 	void goToMenu();
 	void goToSpecs();
 
+	sf::Texture m_blankTexture;
+	sf::Sprite m_shaderSprite;
+	sf::Shader m_shader; // Shader for triangle affect
+	std::string fragmentShader;
 };
 
 #endif // !PLAYGAME

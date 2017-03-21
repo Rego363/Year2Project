@@ -4,21 +4,23 @@
 
 #include<SFML\Graphics.hpp>
 #include"Button.h"
-#include"Widget.h"
+#include "Widget.h"
 #include "GUI.h"
-#include"Game.h"
+#include "Game.h"
+#include "levels.h"
 
 class Game;
+class Levels;
 
 class specs {
 
 public :
 
-	specs(Game &game);
+	specs(Game &game, Levels &level);
 	~specs();
 
 	void render(sf::RenderWindow & window);
-	void update();
+	void update(float time);
 
 
 private:
@@ -37,10 +39,18 @@ private:
 
 
 	Game *m_game;
+	Levels *m_currentLevel;
 	void goToMapSelect();
 	void goToMapRacing();
+	void goToLapSelect3();
+	void goToLapSelect5();
+	void goToLapSelect7();
 	int m_currentSelect;
 
 	float m_EnemiesNum;
+	sf::Texture m_blankTexture;
+	sf::Sprite m_shaderSprite;
+	sf::Shader m_shader; // Shader for triangle affect
+	std::string fragmentShader;
 };
 #endif
