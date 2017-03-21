@@ -122,8 +122,7 @@ public:
 	void changeGameDifficulty(GameDifficulty gameDiff);
 	std::string getGarageTexture();
 	sf::RenderWindow m_window;
-	std::unique_ptr< Player> m_player;
-	//static auto m_player;
+	std::unique_ptr<Player> m_player;
 	string nameDisplay();
 	sf::Sound music;
 
@@ -131,6 +130,8 @@ public:
 	void chargePlayer(int amount);
 	std::unique_ptr<Background> m_background;
 	bool isInView(sf::Sprite sprite);
+	std::string getBestLapTime();
+	void resetMap();
 
 private:
 	void processInput();
@@ -144,7 +145,7 @@ private:
 	sf::Font m_font;
 	sf::Text m_text;
 
-	GameState m_currentGameState = GameState::GameOver;
+	GameState m_currentGameState = GameState::TheMenu;
 	std::unique_ptr<playGame> m_mapSelect;
 	
 	GameDifficulty m_currentDifficulty = GameDifficulty::Medium;
@@ -213,7 +214,7 @@ private:
 	sf::FloatRect rect;
 	sf::Texture m_backgroundImage;
 	sf::Sprite sprBack;
-
+	bool levelReset = true;
 };
 
 #endif

@@ -157,6 +157,16 @@ bool Game::isInView(sf::Sprite sprite)
 	return false;
 }
 
+std::string Game::getBestLapTime()
+{
+	return m_level->getBestLapTime();
+}
+
+void Game::resetMap()
+{
+	m_level->resetLevel();
+}
+
 
 
 
@@ -460,6 +470,7 @@ string Game::nameDisplay()
 int Game::playerMoney()
 {
 	return m_player->getMoney();
+	
 }
 
 void Game::chargePlayer(int amount)

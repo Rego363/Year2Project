@@ -74,6 +74,7 @@ void specs::goToMapRacing()
 	{
 		m_currentLevel->m_maxLaps = 7;
 	}
+	m_game->resetMap();
 	m_game->changeGameState(GameState::Racing);
 
 }

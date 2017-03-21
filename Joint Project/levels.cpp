@@ -25,6 +25,9 @@ Levels::Levels(LevelData &level, Player &player,  Ai &ai, Game &game) : m_curren
 	m_gui.addButton(m_credits);
 
 	m_gui.vertical = true;
+	game_on = true;
+	m_countDown = true;
+	m_raceStarted = false;
 }
 
 Levels::~Levels()
@@ -69,15 +72,15 @@ void Levels::update(float dt, sf::View &view)
 				if (m_raceTime.getElapsedTime().asSeconds() < tempTime)
 				{
 					tempTime = m_raceTime.getElapsedTime().asSeconds();
-					m_bestLap.setString("Best Lap Time: " + to_string(m_raceTime.getElapsedTime().asSeconds()));
+					m_bestLap.setString("Best Lap Time: " + to_string((int)m_raceTime.getElapsedTime().asSeconds()));
 				}
 				else if (tempTime == 0)
 				{
 					tempTime = m_raceTime.getElapsedTime().asSeconds();
-					m_bestLap.setString("Best Lap Time: " + to_string(m_raceTime.getElapsedTime().asSeconds()));
+					m_bestLap.setString("Best Lap Time: " + to_string((int)m_raceTime.getElapsedTime().asSeconds()));
 				}
 
-				m_lastLap.setString("Last Lap Time: " + to_string(m_raceTime.getElapsedTime().asSeconds()));
+				m_lastLap.setString("Last Lap Time: " + to_string((int)m_raceTime.getElapsedTime().asSeconds()));
 				currentlap += 1;
 
 				if (currentlap > m_maxLaps)
@@ -218,6 +221,30 @@ void Levels::setupTexts()
 // sets gamestate
 void Levels::setStateBack()
 {
-	m_game->m_window.setPosition(sf::Vector2i(0.0f, 0.0f));
-	m_game->changeGameState(GameState::TheCredits);
+	//m_game->m_window.setPosition(sf::Vector2i(0.0f, 0.0f));
+	m_game->changeGameState(GameState::GameOver);
+}
+
+std::string Levels::getBestLapTime()
+{
+	return m_bestLap.getString();
+}
+
+void Levels::resetLevel()
+{
+	loadImages();
+	loadFont();
+	m_currentPlayer->m_car.setCurrentTexture(m_lambo);
+	setupTexts();
+	m_startLine.setPosition(m_currentPlayer->m_car.getPos().x + 40, m_currentPlayer->m_car.getPos().y - 100);
+	m_startLine.setSize(sf::Vector2f(5, 200));
+	m_startLine.setFillColor(sf::Color::Red);
+	//m_ai->m_car.scaleAi();
+	m_currentSelect = 0;
+	m_gui.vertical = true;
+	game_on = true;
+	m_countDown = true;
+	m_raceStarted = false;
+	m_currentPlayer->m_car.setAiPosition(sf::Vector2f(760, 1100));
+	m_currentPlayer->m_car.m_rotation = 0;
 }
