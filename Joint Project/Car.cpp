@@ -41,7 +41,9 @@ Car::Car(sf::Texture const & texture, sf::Vector2f const & pos):
 		std::cout << "sprite failed to load" << std::endl;
 
 	}
-	m_blankTexture.setSmooth(true);	
+	
+	m_blankTexture.setSmooth(true);
+
 }
 
 //in this update loop the movement formula is implemented and also the cars rotation is set
