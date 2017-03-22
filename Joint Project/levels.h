@@ -17,7 +17,7 @@ class Ai;
 class Levels
 {
 public:
-	Levels(LevelData &level, Player &player,  Ai &ai, Game &game);
+	Levels(LevelData &level, Player &player,  Ai &ai, Ai &aiTwo, Ai &aiThree,  Game &game);
 	~Levels();
 
 	void update(float dt, sf::View &view);
@@ -35,6 +35,8 @@ private:
 	void setupTexts();
 
 	Ai *m_ai;
+	Ai *m_aiTwo;
+	Ai *m_aiThree;
 	LevelData *m_currentLevel;
 	Player *m_currentPlayer;
 	
@@ -47,6 +49,7 @@ private:
 	bool m_countDown;
 	sf::Text m_countDownNumber;
 	sf::Text m_currentLapTime;
+	sf::Text m_currentSpeed;
 	sf::Text m_bestLap;
 	sf::Text m_lastLap;
 	sf::Text m_Lap;;

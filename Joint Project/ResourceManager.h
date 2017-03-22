@@ -88,7 +88,9 @@ struct LevelData
 	SandData m_sand;
 	blueLamboData m_aiLambo;
 	GarageData m_garage;
-	std::vector<TrackData> m_track;
+	std::vector<TrackData> m_mediumTrack;
+	std::vector<TrackData> m_easyTrack;
+	std::vector<TrackData> m_hardTrack;
 	CreditsData m_credits;
 	LisenceData m_lisence;
 	SplashData m_splash;
