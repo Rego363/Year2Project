@@ -85,7 +85,7 @@ Game::Game() :
 	m_brakingScreen = make_unique<BrakingScreen>(*this);
 	m_speedScreen = make_unique<SpeedScreen>(*this);
 	m_accelerationScreen = make_unique<AccelerationScreen>(*this);
-	m_changeProfile = make_unique<changeProfile>(*this);
+	m_changeProfile = make_unique<changeProfile>(*this, *m_player);
 
 	for (int i = 0; i < m_currentLevel.m_track.size(); i++)
 	{

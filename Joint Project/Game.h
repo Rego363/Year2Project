@@ -144,7 +144,7 @@ private:
 	sf::Font m_font;
 	sf::Text m_text;
 
-	GameState m_currentGameState = GameState::GameOver;
+	GameState m_currentGameState = GameState::ChangeP;
 	std::unique_ptr<playGame> m_mapSelect;
 	
 	GameDifficulty m_currentDifficulty = GameDifficulty::Medium;

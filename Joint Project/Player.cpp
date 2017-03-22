@@ -5,10 +5,10 @@ Player::Player(float carX, float carY, sf::Texture &carTexture, sf::RenderWindow
 	m_window(&window),
 	m_game(&game)
 {
-	m_money = 100000;
+	m_money = 1000;
 	m_carSelect = 0;
-	m_secHighScore = 0;
-	m_minHighScore = 0;
+	m_secHighScore = 1000;
+	m_minHighScore = 1000;
 	m_name = "Guest";
 	filename = "players.txt";
 
@@ -227,6 +227,18 @@ void Player::setHighScore(int min, int sec)
 void Player::setName(std::string name)
 {
 	m_name = name;
+}
+
+/// <summary>
+/// Method to create a new player
+/// </summary>
+/// <param name="name"></param>
+void Player::newPlayer(std::string name)
+{
+	m_name = name;
+	m_money = 1000;
+	m_secHighScore = 1000;
+	m_minHighScore = 1000;
 }
 
 /// <summary>

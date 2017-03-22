@@ -23,6 +23,7 @@ public:
 	void cost(int amount);
 	void earned(int amount);
 	int getMoney();
+	void newPlayer(std::string name);
 	void setHighScore(int min, int sec);
 	void setName(std::string name);
 	int getMinHighScore();

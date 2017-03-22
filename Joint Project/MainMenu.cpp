@@ -40,31 +40,6 @@ MainMenu::MainMenu(Game &game):
 
 	m_shaderSprite.setTexture(m_blankTexture);	// Set texture for the blank sprite
 
-	fragmentShader = \
-		"#ifdef GL_ES" \
-		"precision mediump float;" \
-		"#endif" \
-
-		"#extension GL_OES_standard_derivatives : enable" \
-		"uniform float time;" \
-		"uniform vec2 mouse;" \
-		"uniform vec2 resolution;" \
-
-		"varying vec2 surfacePosition;" \
-
-		"void main() {" \
-
-		"	vec2 g = surfacePosition  2.0;"\
-
-		"	float d = pow(abs(0.3 - max(abs(g.x) + g.y, -g.y)), 0.2);"\
-
-		"	g += d;"\
-		"	g = g;"\
-
-		"	gl_FragColor = d  vec4(g, d, 1)  (0.8 + 0.2  cos(1000.0  d + time  10.0));" \
-
-		"}";
-
 	if (!m_shader.loadFromFile("Shaders/Smoke.frag", sf::Shader::Fragment)) //Load shader
 	{
 		std::cout << "shader failed to load" << std::endl;	// Error message

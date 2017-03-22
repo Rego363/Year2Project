@@ -38,6 +38,5 @@ private:
 	sf::Texture m_blankTexture;
 	sf::Sprite m_shaderSprite;
 	sf::Shader m_shader; // Shader for triangle affect
-	std::string fragmentShader;
 };
 #endif

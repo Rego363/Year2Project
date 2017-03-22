@@ -1,7 +1,8 @@
 #include "EnterNameScreen.h"
 
-EnterNameScreen::EnterNameScreen(Game &game):
-	m_game(&game)
+EnterNameScreen::EnterNameScreen(Game &game, Player &player):
+	m_game(&game),
+	m_player(&player)
 {
 	m_enteredName = "";
 
@@ -299,5 +300,6 @@ void EnterNameScreen::deleteLetter()
 
 void EnterNameScreen::changeGameState()
 {
+	m_player->newPlayer(m_enteredName);
 	m_game->changeGameState(GameState::TheLicense);
 }
