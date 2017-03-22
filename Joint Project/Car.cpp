@@ -17,8 +17,11 @@ Car::Car(sf::Texture  & texture, sf::Vector2f const & pos):
 	m_Nshader.setParameter("resolution", 50, 70); //set radius variable
 	//m_Nshader.setParameter("mouse", m_position);
 
+
 	m_position = sf::Vector2f(760, 1100);
 	m_sprite.setTexture(*m_texture); //set texture
+
+	m_position = sf::Vector2f(pos.x, pos.y);
 	m_sprite.setPosition(m_position); //set pos
 
 	
@@ -38,17 +41,18 @@ Car::Car(sf::Texture  & texture, sf::Vector2f const & pos):
 		std::cout << "sprite failed to load" << std::endl;
 
 	}
+	
 	m_blankTexture.setSmooth(true);
 
-	m_IcarS.setOrigin(m_sprite.getScale().x / 2 , m_sprite.getScale().y /2);
-	m_IcarS.setPosition(m_position.x - 25, m_position.y -10);
+
+	/*m_IcarS.setOrigin(m_sprite.getScale().x / 2 , m_sprite.getScale().y /2);
+	m_IcarS.setPosition(m_position.x - 25, m_position.y -10);*/
 	//m_IcarS.setTexture(m_blankTexture);
 
 	//m_sprite.setTexture(m_Icar);*/
 
 
 
-	
 }
 
 //in this update loop the movement formula is implemented and also the cars rotation is set
@@ -76,11 +80,6 @@ void Car::update(float dt)
 		}
 	}
 	
-	//currentPos->updateText("x = " + std::to_string(m_sprite.getPosition().x) + "\n Y = " + std::to_string(m_sprite.getPosition().y));
-	/*m_sprite2.setPosition(m_sprite.getPosition());
-	m_sprite2.setRotation(m_sprite.getRotation());*/
-
-	//m_IcarS.setPosition(m_position);
 }
 
 
@@ -95,11 +94,16 @@ void Car::aiUpdate(sf::Vector2f velocity)
 //draw the car to the screen
 void Car::draw(sf::RenderWindow & window)
 {
+
+
 	//window.draw(m_sprite2, &m_shader);
 	window.draw(m_sprite);
 
-	
-	window.draw(m_sprite, &m_Nshader);
+	if (useTurbo == true)
+	{
+		window.draw(m_sprite, &m_Nshader);
+	}
+
 	//currentPos->draw(window);
 }
 
@@ -183,6 +187,8 @@ void Car::turbo(float MaxturboSpeed)
 	{
 		m_speed += m_acceleration;
 	}
+
+	turboFlame = true;
 }
 
 //return the vector that represents the cars position on screen

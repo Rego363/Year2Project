@@ -2,9 +2,11 @@
 
 //Dylan
 //set textures in here for each level
-Levels::Levels(LevelData &level, Player &player,  Ai &ai, Game &game) : m_currentLevel(&level),
+Levels::Levels(LevelData &level, Player &player,  Ai &ai, Ai &aiTwo, Ai &aiThree, Game &game) : m_currentLevel(&level),
 										m_currentPlayer(&player),
 										m_ai(&ai),
+										m_aiTwo(&aiTwo),
+										m_aiThree(&aiThree),
 										m_game(&game)
 {
 	loadImages();
@@ -16,7 +18,12 @@ Levels::Levels(LevelData &level, Player &player,  Ai &ai, Game &game) : m_curren
 	m_startLine.setSize(sf::Vector2f(5, 200));
 	m_startLine.setFillColor(sf::Color::Red);
 
+
 	//m_ai->m_car.scaleAi();
+	/*m_ai->m_car.scaleAi();
+	m_aiTwo->m_car.scaleAi();
+	m_aiThree->m_car.scaleAi();*/
+
 
 	m_currentSelect = 0;
 	m_credits = new Button("Press A to end", m_currentPlayer->m_car.getPos().x , m_currentPlayer->m_car.getPos().y +300);
@@ -54,9 +61,14 @@ void Levels::update(float dt, sf::View &view)
 		{
 			m_currentPlayer->update(dt, view);
 			m_ai->update();
+			m_aiTwo->update();
+			m_aiThree->update();
+			
 
 			m_currentLapTime.setPosition(m_currentPlayer->m_car.getPos().x + 300, m_currentPlayer->m_car.getPos().y - 350);
 			m_currentLapTime.setString("Time: " + to_string(m_raceTime.getElapsedTime().asSeconds()));
+			m_currentSpeed.setPosition(m_currentPlayer->m_car.getPos().x - 620, m_currentPlayer->m_car.getPos().y - 230);
+			m_currentSpeed.setString("Speed: " + to_string((int)m_currentPlayer->m_car.m_speed));
 			m_bestLap.setPosition(m_currentPlayer->m_car.getPos().x - 620, m_currentPlayer->m_car.getPos().y - 350);
 			m_lastLap.setPosition(m_currentPlayer->m_car.getPos().x - 620, m_currentPlayer->m_car.getPos().y - 310);
 			m_Lap.setPosition(m_currentPlayer->m_car.getPos().x - 620, m_currentPlayer->m_car.getPos().y - 270);
@@ -106,12 +118,15 @@ void Levels::render(sf::RenderWindow & window)
 		//m_squares->render(window);
 		m_currentPlayer->draw(window);
 		m_ai->render(window);
+		m_aiTwo->render(window);
+		m_aiThree->render(window);
 		window.draw(m_currentLapTime);
 		window.draw(m_startLine);
 		window.draw(m_bestLap);
 		window.draw(m_lastLap);
 		window.draw(easterEgg);
 		window.draw(m_Lap);
+		window.draw(m_currentSpeed);
 		if (m_countDown)
 		{
 			window.draw(m_countDownNumber);
@@ -121,11 +136,14 @@ void Levels::render(sf::RenderWindow & window)
 	{
 		m_currentPlayer->m_car.draw(window);
 		m_ai->render(window);
+		m_aiTwo->render(window);
+		m_aiThree->render(window);
 		window.draw(m_currentLapTime);
 		window.draw(m_startLine);
 		window.draw(m_bestLap);
 		window.draw(m_lastLap);
 		window.draw(m_Lap);
+		window.draw(m_currentSpeed);
 		m_gui.draw(window);
 	}
 }
@@ -216,6 +234,10 @@ void Levels::setupTexts()
 	easterEgg.setFont(m_Font);
 	easterEgg.setColor(sf::Color::Red);
 	
+	m_currentSpeed.setPosition(m_currentPlayer->m_car.getPos().x - 620, m_currentPlayer->m_car.getPos().y - 230);
+	m_currentSpeed.setCharacterSize(50);
+	m_currentSpeed.setString("Speed: " + to_string(m_currentPlayer->m_car.m_speed));
+	m_currentSpeed.setFont(m_Font);
 }
 
 // sets gamestate
@@ -251,5 +273,9 @@ void Levels::resetLevel()
 	currentlap = 1;
 	m_ai->m_car.setAiPosition(sf::Vector2f(760, 1050));
 	m_ai->m_car.setRotation(0);
+	m_aiTwo->m_car.setRotation(0);
+	m_aiThree->m_car.setRotation(0);
 	m_ai->resetNode();
+	m_aiTwo->resetNode();
+	m_aiThree->resetNode();
 }

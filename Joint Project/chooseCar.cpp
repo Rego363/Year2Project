@@ -147,5 +147,5 @@ sf::Texture ChooseCar::getCar()
 void ChooseCar::chooseCar()
 {
 	m_game->m_player->m_car.setTexture(m_textures[m_selectedItem], m_spr.getScale().x, m_spr.getScale().y);
-	m_game->changeGameState(GameState::TheMenu);
+	m_game->changeGameState(GameState::Garage);
 }
