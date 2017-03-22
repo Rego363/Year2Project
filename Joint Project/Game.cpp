@@ -28,6 +28,23 @@ Game::Game() :
 		cout << "car setup" << endl;
 	}
 
+	// Shader
+	if (!m_blankTexture.loadFromFile("blankBackground.png"))	// Load blank texture
+	{
+		std::cout << "blankTile failed to load" << std::endl;	//Error message
+	}
+
+	m_shaderSprite.setTexture(m_blankTexture);	// Set texture for the blank sprite
+
+	if (!m_smokeShader.loadFromFile("Shaders/Smoke.frag", sf::Shader::Fragment)) //Load shader
+	{
+		std::cout << "shader failed to load" << std::endl;	// Error message
+	}
+
+	m_smokeShader.setParameter("time", 0.0f);
+	m_smokeShader.setParameter("resolution", 1280.0f, 720.0f);
+	m_shaderSprite.setPosition(0.0f, 0.0f);
+
 	m_text.setFont(m_font);
 	m_text.setString("RACING GAME");
 	m_text.setPosition(m_window.getSize().x / 4, m_window.getSize().y / 2);
@@ -49,7 +66,7 @@ Game::Game() :
 	m_speedScreen = make_unique<SpeedScreen>(*this);
 	m_accelerationScreen = make_unique<AccelerationScreen>(*this);
 	m_Liscence = make_unique<Liscence>(*this);
-	m_enterName = make_unique<EnterNameScreen>(*this);
+	m_enterName = make_unique<EnterNameScreen>(*this, *m_player);
 	m_credits = make_unique<Credits>(*this, m_currentLevel);
 	m_gameOverScreen = make_unique<GameOverScreen>(*this);
 
@@ -85,7 +102,8 @@ Game::Game() :
 	m_brakingScreen = make_unique<BrakingScreen>(*this);
 	m_speedScreen = make_unique<SpeedScreen>(*this);
 	m_accelerationScreen = make_unique<AccelerationScreen>(*this);
-	m_changeProfile = make_unique<changeProfile>(*this);
+	m_changeProfile = make_unique<changeProfile>(*this, *m_player);
+	m_saveProfile = make_unique<SaveScreen>(*this, *m_player);
 
 	for (int i = 0; i < m_currentLevel.m_track.size(); i++)
 	{
@@ -191,19 +209,23 @@ void Game::update(sf::Time time)
 	{
 
 	case GameState::TheOptions:
-		m_optionsScreen->update(totalTime);
+		m_optionsScreen->update();
+		m_smokeShader.setParameter("time", totalTime);
 		m_window.setView(m_view2);
 		break;
 	case GameState::TheMenu:
-		m_MainMenu->update(totalTime);
+		m_MainMenu->update();
+		m_smokeShader.setParameter("time", totalTime);
 		m_window.setView(m_view2);
 		break;
 	case GameState::Difficulty:
-		m_diffScreen->update(totalTime);
+		m_diffScreen->update();
+		m_smokeShader.setParameter("time", totalTime);
 		m_window.setView(m_view2);
 		break;
 	case GameState::Garage:
-		m_garageScreen->update(totalTime);
+		m_garageScreen->update();
+		m_smokeShader.setParameter("time", totalTime);
 		m_window.setView(m_view2);
 		break;
 	case GameState::TheLicense:
@@ -221,43 +243,53 @@ void Game::update(sf::Time time)
 		m_window.setView(m_view2);
 		break;
 	case GameState::Sound:
-		m_soundScreen->update(totalTime);
+		m_soundScreen->update();
+		m_smokeShader.setParameter("time", totalTime);
 		m_window.setView(m_view2);
 		break;
 	case GameState::Display:
-		m_displayScreen->update(totalTime);
+		m_displayScreen->update();
+		m_smokeShader.setParameter("time", totalTime);
 		m_window.setView(m_view2);
 		break;
 	case GameState::MapSelect:
-		m_mapSelect->update(totalTime);
+		m_mapSelect->update();
+		m_smokeShader.setParameter("time", totalTime);
 		m_window.setView(m_view2);
 		break;
 	case GameState::Help:
-		m_helpScreen->update(totalTime);
+		m_helpScreen->update();
+		m_smokeShader.setParameter("time", totalTime);
 		m_window.setView(m_view2);
 		break;
 	case GameState::Thespecs:
-		m_specs->update(totalTime);
+		m_specs->update();
+		m_smokeShader.setParameter("time", totalTime);
 		m_window.setView(m_view2);
 		break;
 	case GameState::Acceleration:
-		m_accelerationScreen->update(totalTime);
+		m_accelerationScreen->update();
+		m_smokeShader.setParameter("time", totalTime);
 		m_window.setView(m_view2);
 		break;
 	case GameState::Braking:
-		m_brakingScreen->update(totalTime);
+		m_brakingScreen->update();
+		m_smokeShader.setParameter("time", totalTime);
 		m_window.setView(m_view2);
 		break;
 	case GameState::Speed:
-		m_speedScreen->update(totalTime);
+		m_speedScreen->update();
+		m_smokeShader.setParameter("time", totalTime);
 		m_window.setView(m_view2);
 		break;
 	case GameState::Steering:
-		m_steeringScreen->update(totalTime);
+		m_steeringScreen->update();
+		m_smokeShader.setParameter("time", totalTime);
 		m_window.setView(m_view2);
 		break;
 	case GameState::Turbo:
-		m_turboScreen->update(totalTime);
+		m_turboScreen->update();
+		m_smokeShader.setParameter("time", totalTime);
 		m_window.setView(m_view2);
 		break;
 	case GameState::Racing:
@@ -278,12 +310,16 @@ void Game::update(sf::Time time)
 		m_window.setView(m_view2);
 		break;
 	case GameState::ChangeP:
-		m_changeProfile->update(totalTime);
-	
-	//	m_player->update();
+		m_changeProfile->update();
+		m_smokeShader.setParameter("time", totalTime);
+		break;
+	case GameState::Save:
+		m_saveProfile->update();
+		m_smokeShader.setParameter("time", totalTime);
 		break;
 	case GameState::EnterName:
-		m_enterName->update(totalTime);
+		m_enterName->update();
+		m_smokeShader.setParameter("time", totalTime);
 		break;
 	case GameState::TheCredits:
 		m_credits->update();
@@ -300,30 +336,32 @@ void Game::update(sf::Time time)
 /// </summary>
 void Game::render()
 {
+
+
 	switch (m_currentGameState)
 	{
 
 	case GameState::TheOptions:
 		m_window.clear(sf::Color(0, 0, 0, 255));
-		m_window.draw(sprBack);
+		m_window.draw(m_shaderSprite, &m_smokeShader);
 		m_optionsScreen->render(m_window);
 		m_window.display();
 		break;
 	case GameState::TheMenu:
 		m_window.clear(sf::Color(0, 0, 0, 255));
-		m_window.draw(sprBack);
+		m_window.draw(m_shaderSprite, &m_smokeShader);
 		m_MainMenu->render(m_window);
 		m_window.display();
 		break;
 	case GameState::Difficulty:
 		m_window.clear(sf::Color(0, 0, 0, 255));
-		m_window.draw(sprBack);
+		m_window.draw(m_shaderSprite, &m_smokeShader);
 		m_diffScreen->render(m_window);
 		m_window.display();
 		break;
 	case GameState::Garage:
 		m_window.clear(sf::Color(0, 0, 0, 255));
-		m_window.draw(sprBack);
+		m_window.draw(m_shaderSprite, &m_smokeShader);
 		m_garageScreen->draw(m_window);
 		m_window.display();
 		break;
@@ -334,67 +372,66 @@ void Game::render()
 		break;
 	case GameState::TheSplash:
 		m_window.clear(sf::Color(0, 0, 0, 255));
-		m_window.draw(sprBack);
 		m_Splash->render(m_window);
 		m_window.display();
 		break;
 	case GameState::Sound:
 		m_window.clear(sf::Color(0, 0, 0, 255));
-		m_window.draw(sprBack);
+		m_window.draw(m_shaderSprite, &m_smokeShader);
 		m_soundScreen->render(m_window);
 		m_window.display();
 		break;
 	case GameState::Display:
 		m_window.clear(sf::Color(0, 0, 0, 255));
-		m_window.draw(sprBack);
+		m_window.draw(m_shaderSprite, &m_smokeShader);
 		m_displayScreen->render(m_window);
 		m_window.display();
 		break;
 	case GameState::MapSelect:
 		m_window.clear(sf::Color(0, 0, 0, 255));
-		m_window.draw(sprBack);
+		m_window.draw(m_shaderSprite, &m_smokeShader);
 		m_mapSelect->render(m_window);
 		m_window.display();
 		break;
 	case GameState::Help:
 		m_window.clear(sf::Color(0, 0, 0, 255));
-		m_window.draw(sprBack);
+		m_window.draw(m_shaderSprite, &m_smokeShader);
 		m_helpScreen->draw(m_window);
 		m_window.display();
 		break;
 	case GameState::Thespecs:
 		m_window.clear(sf::Color(0, 0, 0, 255));
-		m_window.draw(sprBack);
+		m_window.draw(m_shaderSprite, &m_smokeShader);
 		m_specs->render(m_window);
 		m_window.display();
 		break;
 	case GameState::Acceleration:
 		m_window.clear(sf::Color(0, 0, 0, 255));
-		m_window.draw(sprBack);
+		m_window.draw(m_shaderSprite, &m_smokeShader);
 		m_accelerationScreen->draw(m_window);
 		m_window.display();
 		break;
 	case GameState::Braking:
 		m_window.clear(sf::Color(0, 0, 0, 255));
-		m_window.draw(sprBack);
+		m_window.draw(m_shaderSprite, &m_smokeShader);
 		m_brakingScreen->draw(m_window);
 		m_window.display();
 		break;
 	case GameState::Speed:
 		m_window.clear(sf::Color(0, 0, 0, 255));
-		m_window.draw(sprBack);
+		m_window.draw(m_shaderSprite, &m_smokeShader);
 		m_speedScreen->draw(m_window);
 		m_window.display();
 		break;
 	case GameState::Steering:
 		m_window.clear(sf::Color(0, 0, 0, 255));
-		m_window.draw(sprBack);
+		m_window.draw(m_shaderSprite, &m_smokeShader);
 		m_steeringScreen->draw(m_window);
 		m_window.display();
 		break;
 	case GameState::Turbo:
 		m_window.clear(sf::Color(0, 0, 0, 255));
-		m_window.draw(sprBack);
+		m_window.draw(m_shaderSprite, &m_smokeShader);
 		m_turboScreen->draw(m_window);
 		m_window.display();
 		break;
@@ -407,23 +444,29 @@ void Game::render()
 		break;
 	case GameState::GameOver:
 		m_window.clear(sf::Color(0, 0, 0, 255));
-		m_window.draw(sprBack);
+		m_window.draw(m_shaderSprite, &m_smokeShader);
 		m_gameOverScreen->draw(m_window);
 		m_window.display();
 		break;
 
 	case GameState::ChangeP:
 		m_window.clear(sf::Color(0, 0, 0, 255));
-		m_window.draw(sprBack);
+		m_window.draw(m_shaderSprite, &m_smokeShader);
 		//nameDisplay(m_currentName);
 		m_changeProfile->render(m_window);
 	//	m_player->getName(m_name);
 
 		m_window.display();
 		break;
+	case GameState::Save:
+		m_window.clear(sf::Color(0, 0, 0, 255));
+		m_window.draw(m_shaderSprite, &m_smokeShader);
+		m_saveProfile->render(m_window);
+		m_window.display();
+		break;
 	case GameState::EnterName:
 		m_window.clear(sf::Color(0, 0, 0, 255));
-		m_window.draw(sprBack);
+		m_window.draw(m_shaderSprite, &m_smokeShader);
 		m_enterName->draw(m_window);
 		m_window.display();
 		break;

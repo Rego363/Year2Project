@@ -15,7 +15,7 @@ public:
 	OptionsScreen(Game &game);
 	~OptionsScreen();
 	void render(sf::RenderWindow & window);
-	void update(float time);
+	void update();
 
 private:
 	Game *m_game;
@@ -32,10 +32,6 @@ private:
 	void setStateSound();
 	void setStateDisplay();
 	void setStateBack();
-	sf::Texture m_blankTexture;
-	sf::Sprite m_shaderSprite;
-	sf::Shader m_shader; // Shader for triangle affect
-	std::string fragmentShader;
 };
 
 #endif // !OPTIONSSCREEN

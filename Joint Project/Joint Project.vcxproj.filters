@@ -124,6 +124,9 @@
     <ClCompile Include="gameOverScreen.cpp">
       <Filter>Source Files\Screens</Filter>
     </ClCompile>
+    <ClCompile Include="SaveScreen.cpp">
+      <Filter>Source Files\Screens</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Ai.h">
@@ -238,6 +241,9 @@
       <Filter>Headers\Screens</Filter>
     </ClInclude>
     <ClInclude Include="gameOverScreen.h">
+      <Filter>Headers\Screens</Filter>
+    </ClInclude>
+    <ClInclude Include="SaveScreen.h">
       <Filter>Headers\Screens</Filter>
     </ClInclude>
   </ItemGroup>

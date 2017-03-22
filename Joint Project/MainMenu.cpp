@@ -32,48 +32,6 @@ MainMenu::MainMenu(Game &game):
 	m_currentSelect = 0;
 	m_gui.vertical = true;
 	m_title->changeTextSize(100);
-
-	if (!m_blankTexture.loadFromFile("blankBackground.png"))	// Load blank texture
-	{
-		std::cout << "blankTile failed to load" << std::endl;	//Error message
-	}
-
-	m_shaderSprite.setTexture(m_blankTexture);	// Set texture for the blank sprite
-
-	fragmentShader = \
-		"#ifdef GL_ES" \
-		"precision mediump float;" \
-		"#endif" \
-
-		"#extension GL_OES_standard_derivatives : enable" \
-		"uniform float time;" \
-		"uniform vec2 mouse;" \
-		"uniform vec2 resolution;" \
-
-		"varying vec2 surfacePosition;" \
-
-		"void main() {" \
-
-		"	vec2 g = surfacePosition  2.0;"\
-
-		"	float d = pow(abs(0.3 - max(abs(g.x) + g.y, -g.y)), 0.2);"\
-
-		"	g += d;"\
-		"	g = g;"\
-
-		"	gl_FragColor = d  vec4(g, d, 1)  (0.8 + 0.2  cos(1000.0  d + time  10.0));" \
-
-		"}";
-
-	if (!m_shader.loadFromFile("Shaders/Smoke.frag", sf::Shader::Fragment)) //Load shader
-	{
-		std::cout << "shader failed to load" << std::endl;	// Error message
-	}
-
-	m_shader.setParameter("time", 0.0f);
-	m_shader.setParameter("resolution", 1280.0f, 720.0f);
-	m_shaderSprite.setPosition(0.0f, 0.0f);
-
 };
 
 
@@ -84,14 +42,11 @@ MainMenu::~MainMenu()
 
 void MainMenu::render(sf::RenderWindow & window)
 {
-	window.draw(m_shaderSprite, &m_shader);
 	m_gui.draw(window);
 }
 
-void MainMenu::update(float dt)
+void MainMenu::update()
 {
-
-	m_shader.setParameter("time", dt);
 	m_gui.update(m_currentSelect, 7);
 }
 
