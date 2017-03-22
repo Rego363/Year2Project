@@ -49,6 +49,7 @@
 #include <memory>
 #include "gameOverScreen.h"
 #include "SaveScreen.h"
+#include "PhysicsBalls.h"
 
 using namespace std;
 
@@ -80,6 +81,7 @@ class Credits;
 class NightMode;
 class GameOverScreen;
 class SaveScreen;
+class PhysicsBalls;
 
 enum GameState {
 	TheLicense,
@@ -152,12 +154,7 @@ private:
 	sf::Text m_text;
 
 
-	GameState m_currentGameState = GameState::TheLicense;
-
-
-
-	
-
+	GameState m_currentGameState = GameState::Racing;
 
 	std::unique_ptr<playGame> m_mapSelect;
 	
@@ -184,6 +181,8 @@ private:
 	std::unique_ptr<Credits>m_credits;
 	std::unique_ptr<GameOverScreen>m_gameOverScreen;
 	std::unique_ptr<SaveScreen>m_saveProfile;
+	std::unique_ptr<PhysicsBalls>m_physicsBalls;
+
 	/*Cars*/
 	/**********************/
 	std::unique_ptr<Car>m_car;

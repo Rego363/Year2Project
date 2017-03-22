@@ -69,6 +69,7 @@ Game::Game() :
 	m_enterName = make_unique<EnterNameScreen>(*this, *m_player);
 	m_credits = make_unique<Credits>(*this, m_currentLevel);
 	m_gameOverScreen = make_unique<GameOverScreen>(*this);
+	m_physicsBalls = make_unique<PhysicsBalls>(*this);
 
 	m_startPos = sf::Vector2f(m_window.getSize().x / 2, m_window.getSize().y / 4);
 	m_car = make_unique<Car>(m_startCar, m_startPos);
@@ -306,7 +307,6 @@ void Game::update(sf::Time time)
 	case GameState::Racing:
 		m_window.setView(m_view);
 		m_level->update(time.asSeconds(), m_view);
-
 		
 		m_xbox.update();
 		if (m_xbox.m_currentState.Back&& !m_xbox.m_previousState.Back)
@@ -454,8 +454,9 @@ void Game::render()
 		m_window.clear(sf::Color(0, 0, 0, 255));
 		m_background->draw(m_window);
 		m_nightMode->draw(m_window);
-		m_player->draw(m_window);
 		m_level->render(m_window);
+		m_player->draw(m_window);
+		m_physicsBalls->render(m_window);
 		m_window.display();
 		break;
 	case GameState::GameOver:

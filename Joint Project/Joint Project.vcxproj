@@ -152,6 +152,7 @@
     <ClCompile Include="Math.cpp" />
     <ClCompile Include="NightMode.cpp" />
     <ClCompile Include="OptionsScreen.cpp" />
+    <ClCompile Include="PhysicsBalls.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="playGame.cpp" />
     <ClCompile Include="RadioButton.cpp" />
@@ -194,6 +195,7 @@
     <ClInclude Include="Math.h" />
     <ClInclude Include="NightMode.h" />
     <ClInclude Include="OptionsScreen.h" />
+    <ClInclude Include="PhysicsBalls.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="playGame.h" />
     <ClInclude Include="RadioButton.h" />
