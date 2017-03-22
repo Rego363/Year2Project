@@ -1,13 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="Animation.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Ai.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="background.cpp">
+    <ClCompile Include="Animation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Car.cpp">
@@ -25,10 +22,19 @@
     <ClCompile Include="Math.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="NightMode.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="playGame.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="ResourceManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SteeringScreen.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="WorldSquares.cpp">
@@ -37,34 +43,25 @@
     <ClCompile Include="XBOX360CONTROLLER.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Button.cpp">
-      <Filter>Source Files\Widgets</Filter>
-    </ClCompile>
-    <ClCompile Include="CheckBox.cpp">
-      <Filter>Source Files\Widgets</Filter>
-    </ClCompile>
-    <ClCompile Include="GUI.cpp">
-      <Filter>Source Files\Widgets</Filter>
-    </ClCompile>
-    <ClCompile Include="Widget.cpp">
-      <Filter>Source Files\Widgets</Filter>
-    </ClCompile>
-    <ClCompile Include="RadioButton.cpp">
-      <Filter>Source Files\Widgets</Filter>
-    </ClCompile>
-    <ClCompile Include="Label.cpp">
-      <Filter>Source Files\Widgets</Filter>
-    </ClCompile>
-    <ClCompile Include="Slider.cpp">
-      <Filter>Source Files\Widgets</Filter>
-    </ClCompile>
     <ClCompile Include="AccelerationScreen.cpp">
+      <Filter>Source Files\Screens</Filter>
+    </ClCompile>
+    <ClCompile Include="background.cpp">
       <Filter>Source Files\Screens</Filter>
     </ClCompile>
     <ClCompile Include="BrakingScreen.cpp">
       <Filter>Source Files\Screens</Filter>
     </ClCompile>
+    <ClCompile Include="Button.cpp">
+      <Filter>Source Files\Widgets</Filter>
+    </ClCompile>
     <ClCompile Include="changeProfile.cpp">
+      <Filter>Source Files\Screens</Filter>
+    </ClCompile>
+    <ClCompile Include="CheckBox.cpp">
+      <Filter>Source Files\Widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="Credits.cpp">
       <Filter>Source Files\Screens</Filter>
     </ClCompile>
     <ClCompile Include="DifficultyScreen.cpp">
@@ -76,52 +73,52 @@
     <ClCompile Include="EnterNameScreen.cpp">
       <Filter>Source Files\Screens</Filter>
     </ClCompile>
+    <ClCompile Include="gameOverScreen.cpp">
+      <Filter>Source Files\Screens</Filter>
+    </ClCompile>
     <ClCompile Include="GarageScreen.cpp">
       <Filter>Source Files\Screens</Filter>
     </ClCompile>
-    <ClCompile Include="Credits.cpp">
-      <Filter>Source Files\Screens</Filter>
+    <ClCompile Include="GUI.cpp">
+      <Filter>Source Files\Widgets</Filter>
     </ClCompile>
     <ClCompile Include="Help.cpp">
       <Filter>Source Files\Screens</Filter>
     </ClCompile>
-    <ClCompile Include="Liscence.cpp">
-      <Filter>Source Files\Screens</Filter>
+    <ClCompile Include="Label.cpp">
+      <Filter>Source Files\Widgets</Filter>
     </ClCompile>
     <ClCompile Include="MainMenu.cpp">
       <Filter>Source Files\Screens</Filter>
     </ClCompile>
-    <ClCompile Include="OptionsScreen.cpp">
-      <Filter>Source Files\Screens</Filter>
+    <ClCompile Include="RadioButton.cpp">
+      <Filter>Source Files\Widgets</Filter>
     </ClCompile>
-    <ClCompile Include="SoundScreen.cpp">
-      <Filter>Source Files\Screens</Filter>
-    </ClCompile>
-    <ClCompile Include="Specs.cpp">
+    <ClCompile Include="TurboScreen.cpp">
       <Filter>Source Files\Screens</Filter>
     </ClCompile>
     <ClCompile Include="SpeedScreen.cpp">
       <Filter>Source Files\Screens</Filter>
     </ClCompile>
-    <ClCompile Include="playGame.cpp">
-      <Filter>Source Files\Screens</Filter>
-    </ClCompile>
-    <ClCompile Include="TurboScreen.cpp">
-      <Filter>Source Files\Screens</Filter>
-    </ClCompile>
-    <ClCompile Include="SteeringScreen.cpp">
+    <ClCompile Include="SoundScreen.cpp">
       <Filter>Source Files\Screens</Filter>
     </ClCompile>
     <ClCompile Include="Splash.cpp">
       <Filter>Source Files\Screens</Filter>
     </ClCompile>
-    <ClCompile Include="Button.cpp">
+    <ClCompile Include="Specs.cpp">
+      <Filter>Source Files\Screens</Filter>
+    </ClCompile>
+    <ClCompile Include="Slider.cpp">
+      <Filter>Source Files\Screens</Filter>
+    </ClCompile>
+    <ClCompile Include="Widget.cpp">
       <Filter>Source Files\Widgets</Filter>
     </ClCompile>
-    <ClCompile Include="XBOX360CONTROLLER.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="OptionsScreen.cpp">
+      <Filter>Source Files\Screens</Filter>
     </ClCompile>
-    <ClCompile Include="gameOverScreen.cpp">
+    <ClCompile Include="Liscence.cpp">
       <Filter>Source Files\Screens</Filter>
     </ClCompile>
     <ClCompile Include="SaveScreen.cpp">
@@ -150,10 +147,16 @@
     <ClInclude Include="Math.h">
       <Filter>Headers</Filter>
     </ClInclude>
+    <ClInclude Include="NightMode.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="ResourceManager.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="SteeringScreen.h">
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="WorldSquares.h">
@@ -162,27 +165,6 @@
     <ClInclude Include="XBOX360CONTROLLER.h">
       <Filter>Headers</Filter>
     </ClInclude>
-    <ClInclude Include="Button.h">
-      <Filter>Headers\Widgets</Filter>
-    </ClInclude>
-    <ClInclude Include="CheckBox.h">
-      <Filter>Headers\Widgets</Filter>
-    </ClInclude>
-    <ClInclude Include="GUI.h">
-      <Filter>Headers\Widgets</Filter>
-    </ClInclude>
-    <ClInclude Include="Label.h">
-      <Filter>Headers\Widgets</Filter>
-    </ClInclude>
-    <ClInclude Include="Slider.h">
-      <Filter>Headers\Widgets</Filter>
-    </ClInclude>
-    <ClInclude Include="Widget.h">
-      <Filter>Headers\Widgets</Filter>
-    </ClInclude>
-    <ClInclude Include="RadioButton.h">
-      <Filter>Headers\Widgets</Filter>
-    </ClInclude>
     <ClInclude Include="AccelerationScreen.h">
       <Filter>Headers\Screens</Filter>
     </ClInclude>
@@ -190,6 +172,12 @@
       <Filter>Headers\Screens</Filter>
     </ClInclude>
     <ClInclude Include="changeProfile.h">
+      <Filter>Headers\Screens</Filter>
+    </ClInclude>
+    <ClInclude Include="CheckBox.h">
+      <Filter>Headers\Widgets</Filter>
+    </ClInclude>
+    <ClInclude Include="Credits.h">
       <Filter>Headers\Screens</Filter>
     </ClInclude>
     <ClInclude Include="DifficultyScreen.h">
@@ -201,46 +189,58 @@
     <ClInclude Include="EnterNameScreen.h">
       <Filter>Headers\Screens</Filter>
     </ClInclude>
+    <ClInclude Include="gameOverScreen.h">
+      <Filter>Headers\Screens</Filter>
+    </ClInclude>
     <ClInclude Include="GarageScreen.h">
       <Filter>Headers\Screens</Filter>
     </ClInclude>
-    <ClInclude Include="Liscence.h">
+    <ClInclude Include="Button.h">
+      <Filter>Headers\Widgets</Filter>
+    </ClInclude>
+    <ClInclude Include="GUI.h">
+      <Filter>Headers\Widgets</Filter>
+    </ClInclude>
+    <ClInclude Include="Help.h">
       <Filter>Headers\Screens</Filter>
     </ClInclude>
-    <ClInclude Include="MainMenu.h">
+    <ClInclude Include="Label.h">
+      <Filter>Headers\Widgets</Filter>
+    </ClInclude>
+    <ClInclude Include="Liscence.h">
       <Filter>Headers\Screens</Filter>
     </ClInclude>
     <ClInclude Include="OptionsScreen.h">
       <Filter>Headers\Screens</Filter>
     </ClInclude>
-    <ClInclude Include="SteeringScreen.h">
+    <ClInclude Include="RadioButton.h">
+      <Filter>Headers\Widgets</Filter>
+    </ClInclude>
+    <ClInclude Include="Slider.h">
+      <Filter>Headers\Widgets</Filter>
+    </ClInclude>
+    <ClInclude Include="Specs.h">
       <Filter>Headers\Screens</Filter>
     </ClInclude>
     <ClInclude Include="SpeedScreen.h">
       <Filter>Headers\Screens</Filter>
     </ClInclude>
-    <ClInclude Include="TurboScreen.h">
-      <Filter>Headers\Screens</Filter>
-    </ClInclude>
     <ClInclude Include="SoundScreen.h">
-      <Filter>Headers\Screens</Filter>
-    </ClInclude>
-    <ClInclude Include="Help.h">
-      <Filter>Headers\Screens</Filter>
-    </ClInclude>
-    <ClInclude Include="playGame.h">
-      <Filter>Headers\Screens</Filter>
-    </ClInclude>
-    <ClInclude Include="Specs.h">
       <Filter>Headers\Screens</Filter>
     </ClInclude>
     <ClInclude Include="Splash.h">
       <Filter>Headers\Screens</Filter>
     </ClInclude>
-    <ClInclude Include="Credits.h">
+    <ClInclude Include="Widget.h">
+      <Filter>Headers\Widgets</Filter>
+    </ClInclude>
+    <ClInclude Include="MainMenu.h">
       <Filter>Headers\Screens</Filter>
     </ClInclude>
-    <ClInclude Include="gameOverScreen.h">
+    <ClInclude Include="playGame.h">
+      <Filter>Headers\Screens</Filter>
+    </ClInclude>
+    <ClInclude Include="TurboScreen.h">
       <Filter>Headers\Screens</Filter>
     </ClInclude>
     <ClInclude Include="SaveScreen.h">
@@ -249,22 +249,22 @@
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Headers">
-      <UniqueIdentifier>{f68a108d-8334-4070-8569-7884be99baed}</UniqueIdentifier>
+      <UniqueIdentifier>{0a3e0d54-3dcc-4f3a-8fb3-471ee0a42fbe}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files">
-      <UniqueIdentifier>{f290518d-95ca-4b4a-88d4-edbf86cd4628}</UniqueIdentifier>
+      <UniqueIdentifier>{431ab7b6-8599-4925-8b92-9beb13b5b414}</UniqueIdentifier>
     </Filter>
     <Filter Include="Headers\Widgets">
-      <UniqueIdentifier>{00f56b45-0486-4387-ab5a-d27c69179dc7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Widgets">
-      <UniqueIdentifier>{007eb369-b54e-4f64-a0c3-ab8dc1fc778f}</UniqueIdentifier>
+      <UniqueIdentifier>{32bc063a-cb1f-4ac3-8979-ee17b2627987}</UniqueIdentifier>
     </Filter>
     <Filter Include="Headers\Screens">
-      <UniqueIdentifier>{47ac2b58-c1af-4520-b3e5-031d3abbbc72}</UniqueIdentifier>
+      <UniqueIdentifier>{dcd7f838-8c07-42fb-b41b-606894b62c47}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Widgets">
+      <UniqueIdentifier>{289bb8fd-c103-4ba5-971c-408f6977acb3}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\Screens">
-      <UniqueIdentifier>{740bcaaa-20e3-4d6c-ae20-467367a424bf}</UniqueIdentifier>
+      <UniqueIdentifier>{af8a5ce9-91c0-4d03-861b-50711adf99ee}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

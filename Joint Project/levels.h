@@ -25,9 +25,10 @@ public:
 	void loadImages();
 	void loadFont();
 	sf::Clock m_startRace;
-	int m_maxLaps = 3;
+	int m_maxLaps;
 	void setStateBack();
-
+	std::string getBestLapTime();
+	void resetLevel();
 private:
 
 	void startTimes();
@@ -42,8 +43,8 @@ private:
 	Game *m_game;
 
 	sf::Clock m_raceTime;
-	bool m_raceStarted = false;
-	bool m_countDown = true;
+	bool m_raceStarted;
+	bool m_countDown;
 	sf::Text m_countDownNumber;
 	sf::Text m_currentLapTime;
 	sf::Text m_bestLap;
@@ -55,9 +56,10 @@ private:
 	GUI m_gui;
 	int m_currentSelect = 0;
 	Button *m_credits;
-	bool game_on = true;
+	bool game_on;
 
 	sf::RectangleShape m_startLine;
+	
 
 };
 

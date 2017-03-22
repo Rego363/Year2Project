@@ -83,7 +83,7 @@ Game::Game() :
 	music.setBuffer(m_buffer);
 	music.setLoop(true);
 	music.setVolume(100);
-	//music.play();
+	music.play();
 
 	/*  FOR TESTING*/
 	/*******************************************************************************/
@@ -116,6 +116,7 @@ Game::Game() :
 	m_ai = make_unique< Ai>(m_car->getPos().x, m_car->getPos().y + 100, m_aistartCar, m_track);
 
 	m_background = make_unique<Background>( *this);
+	m_nightMode = make_unique<NightMode>(*this);
 	
 	m_level = make_unique< Levels>(m_currentLevel, *m_player, *m_ai, *this);
 
@@ -173,6 +174,16 @@ bool Game::isInView(sf::Sprite sprite)
 		return true;
 	}
 	return false;
+}
+
+std::string Game::getBestLapTime()
+{
+	return m_level->getBestLapTime();
+}
+
+void Game::resetMap()
+{
+	m_level->resetLevel();
 }
 
 
@@ -302,7 +313,11 @@ void Game::update(sf::Time time)
 		{
 			m_background->activateTheShader();
 		}
-
+		
+		if(m_xbox.m_currentState.LB && !m_xbox.m_previousState.LB)
+		{
+			m_nightMode->activateTheShader();
+		}
 		
 		break;
 	case GameState::GameOver:
@@ -438,6 +453,7 @@ void Game::render()
 	case GameState::Racing:   //put in levels
 		m_window.clear(sf::Color(0, 0, 0, 255));
 		m_background->draw(m_window);
+		m_nightMode->draw(m_window);
 		m_player->draw(m_window);
 		m_level->render(m_window);
 		m_window.display();
@@ -504,6 +520,7 @@ string Game::nameDisplay()
 int Game::playerMoney()
 {
 	return m_player->getMoney();
+	
 }
 
 void Game::chargePlayer(int amount)

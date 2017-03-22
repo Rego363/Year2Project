@@ -433,9 +433,10 @@ void Player::draw(sf::RenderWindow & window)
 	for (int i = 0; i < 200; i++)
 
 	{
-		if (currentDrift > 2 || currentDrift < 2)
-		window.draw(m_skidmarkSprite[i]);
-
+			if (currentDrift > 10 || currentDrift < 10)
+			{
+				window.draw(m_skidmarkSprite[i]);
+			}
 	}
 
 

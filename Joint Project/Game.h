@@ -44,6 +44,7 @@
 #include "EnterNameScreen.h"
 #include <SFML\Audio.hpp>
 #include "background.h"
+#include "NightMode.h"
 #include "Credits.h"
 #include <memory>
 #include "gameOverScreen.h"
@@ -76,9 +77,9 @@ class EnterNameScreen;
 class Background;
 class Player;
 class Credits;
+class NightMode;
 class GameOverScreen;
 class SaveScreen;
-
 
 enum GameState {
 	TheLicense,
@@ -126,15 +127,17 @@ public:
 	void changeGameDifficulty(GameDifficulty gameDiff);
 	std::string getGarageTexture();
 	sf::RenderWindow m_window;
-	std::unique_ptr< Player> m_player;
-	//static auto m_player;
+	std::unique_ptr<Player> m_player;
 	string nameDisplay();
 	sf::Sound music;
 
 	int playerMoney();
 	void chargePlayer(int amount);
 	std::unique_ptr<Background> m_background;
+	std::unique_ptr<NightMode> m_nightMode;
 	bool isInView(sf::Sprite sprite);
+	std::string getBestLapTime();
+	void resetMap();
 
 private:
 	void processInput();
@@ -148,7 +151,10 @@ private:
 	sf::Font m_font;
 	sf::Text m_text;
 
-	GameState m_currentGameState = GameState::ChangeP;
+
+	GameState m_currentGameState = GameState::TheLicense;
+
+
 	std::unique_ptr<playGame> m_mapSelect;
 	
 	GameDifficulty m_currentDifficulty = GameDifficulty::Medium;
@@ -219,12 +225,12 @@ private:
 	sf::Texture m_backgroundImage;
 	sf::Sprite sprBack;
 
-
 	// Shader 
 	sf::Texture m_blankTexture;
 	sf::Sprite m_shaderSprite;
 	sf::Shader m_smokeShader;
 
+	bool levelReset = true;
 };
 
 #endif
