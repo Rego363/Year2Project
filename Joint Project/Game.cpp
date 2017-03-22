@@ -12,7 +12,6 @@ Game::Game() :
 	m_window(sf::VideoMode(1280, 720), "Joint Project, Team C")
 {
 
-
 	if (!LevelLoader::load(m_currentLevel))
 	{
 		return;
@@ -72,9 +71,11 @@ Game::Game() :
 
 	m_startPos = sf::Vector2f(m_window.getSize().x / 2, m_window.getSize().y / 4);
 	m_car = make_unique<Car>(m_startCar, m_startPos);
-	m_aiCar = make_unique<Car>(m_startCar, sf::Vector2f(0.0f, 0.0f));
+	m_aiCar = make_unique<Car>(m_startCar, sf::Vector2f(760.0f, 1050.0f));
+	m_aiCarTwo = make_unique<Car>(m_startCar, sf::Vector2f(660.0f, 1050.0f));
+	m_aiCarThree = make_unique<Car>(m_startCar, sf::Vector2f(660.0f, 1100.0f));
 	
-	m_player = make_unique<Player>(0, 0, m_startCar, m_window, *this);
+	m_player = make_unique<Player>(760.0f, 1100.0f, m_startCar, m_window, *this);
 	if(!m_buffer.loadFromFile("music.wav"))
 	{
 		std::cout << "NO MUSIC" << std::endl;
@@ -105,20 +106,38 @@ Game::Game() :
 	m_changeProfile = make_unique<changeProfile>(*this, *m_player);
 	m_saveProfile = make_unique<SaveScreen>(*this, *m_player);
 
-	for (int i = 0; i < m_currentLevel.m_track.size(); i++)
+	for (int i = 0; i < m_currentLevel.m_mediumTrack.size(); i++)
 	{
-		sf::CircleShape circle(0,30);		
-		circle.setRadius(m_currentLevel.m_track[i].m_size);
-		circle.setPosition(m_currentLevel.m_track[i].m_position);
-		m_track.push_back(circle);
+		sf::CircleShape circle(0, 30);
+		circle.setRadius(m_currentLevel.m_mediumTrack[i].m_size);
+		circle.setPosition(m_currentLevel.m_mediumTrack[i].m_position);
+		m_mediumTrack.push_back(circle);
+	}
+	
+	for (int i = 0; i < m_currentLevel.m_easyTrack.size(); i++)
+	{
+		sf::CircleShape circle(0, 30);
+		circle.setRadius(m_currentLevel.m_easyTrack[i].m_size);
+		circle.setPosition(m_currentLevel.m_easyTrack[i].m_position);
+		m_easyTrack.push_back(circle);
 	}
 
-	m_ai = make_unique< Ai>(m_car->getPos().x, m_car->getPos().y + 100, m_aistartCar, m_track);
+	for (int i = 0; i < m_currentLevel.m_hardTrack.size(); i++)
+	{
+		sf::CircleShape circle(0, 30);
+		circle.setRadius(m_currentLevel.m_hardTrack[i].m_size);
+		circle.setPosition(m_currentLevel.m_hardTrack[i].m_position);
+		m_hardTrack.push_back(circle);
+	}
+
+	m_ai = make_unique< Ai>(m_aiCar->getPos().x, m_aiCar->getPos().y, m_aistartCar, m_easyTrack);
+	m_aiTwo = make_unique< Ai>(m_aiCarTwo->getPos().x, m_aiCarTwo->getPos().y, m_aistartCar, m_mediumTrack);
+	m_aiThree = make_unique< Ai>(m_aiCarThree->getPos().x, m_aiCarThree->getPos().y, m_aistartCar, m_hardTrack);
 
 	m_background = make_unique<Background>( *this);
 	m_nightMode = make_unique<NightMode>(*this);
 	
-	m_level = make_unique< Levels>(m_currentLevel, *m_player, *m_ai, *this);
+	m_level = make_unique<Levels>(m_currentLevel, *m_player, *m_ai, *m_aiTwo, *m_aiThree, *this);
 
 	if (!m_backgroundImage.loadFromFile("backgroundBlue.png"))
 	{

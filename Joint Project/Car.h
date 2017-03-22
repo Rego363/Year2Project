@@ -58,8 +58,6 @@ private:
 	sf::Vector2u textureSize;
 	sf::Sprite m_sprite; //car sprite
 	sf::Texture m_blankTexture2;
-	sf::Texture m_Icar;
-	sf::Sprite m_IcarS;
 	sf::Vector2f m_position; //cars position on screen
 	bool isMoving;
 	float m_acceleration;

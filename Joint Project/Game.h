@@ -152,7 +152,7 @@ private:
 	sf::Text m_text;
 
 
-	GameState m_currentGameState = GameState::TheLicense;
+	GameState m_currentGameState = GameState::Racing;
 
 
 	std::unique_ptr<playGame> m_mapSelect;
@@ -184,7 +184,11 @@ private:
 	/**********************/
 	std::unique_ptr<Car>m_car;
 	std::unique_ptr<Car>m_aiCar;
+	std::unique_ptr<Car>m_aiCarTwo;
+	std::unique_ptr<Car>m_aiCarThree;
 	std::unique_ptr<Ai>m_ai;
+	std::unique_ptr<Ai>m_aiTwo;
+	std::unique_ptr<Ai>m_aiThree;
 	/**********************/
 
 
@@ -194,7 +198,9 @@ private:
 	sf::Texture m_aistartCar;
 	sf::Vector2f m_startPos;
 
-	std::vector<sf::CircleShape> m_track;
+	std::vector<sf::CircleShape> m_easyTrack;
+	std::vector<sf::CircleShape> m_mediumTrack;
+	std::vector<sf::CircleShape> m_hardTrack;
 	Xbox360Controller m_xbox;
 
 

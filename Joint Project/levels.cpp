@@ -2,9 +2,11 @@
 
 //Dylan
 //set textures in here for each level
-Levels::Levels(LevelData &level, Player &player,  Ai &ai, Game &game) : m_currentLevel(&level),
+Levels::Levels(LevelData &level, Player &player,  Ai &ai, Ai &aiTwo, Ai &aiThree, Game &game) : m_currentLevel(&level),
 										m_currentPlayer(&player),
 										m_ai(&ai),
+										m_aiTwo(&aiTwo),
+										m_aiThree(&aiThree),
 										m_game(&game)
 {
 	loadImages();
@@ -17,6 +19,8 @@ Levels::Levels(LevelData &level, Player &player,  Ai &ai, Game &game) : m_curren
 	m_startLine.setFillColor(sf::Color::Red);
 
 	m_ai->m_car.scaleAi();
+	m_aiTwo->m_car.scaleAi();
+	m_aiThree->m_car.scaleAi();
 
 	m_currentSelect = 0;
 	m_credits = new Button("Press A to end", m_currentPlayer->m_car.getPos().x , m_currentPlayer->m_car.getPos().y +300);
@@ -54,6 +58,9 @@ void Levels::update(float dt, sf::View &view)
 		{
 			m_currentPlayer->update(dt, view);
 			m_ai->update();
+			m_aiTwo->update();
+			m_aiThree->update();
+			
 
 			m_currentLapTime.setPosition(m_currentPlayer->m_car.getPos().x + 300, m_currentPlayer->m_car.getPos().y - 350);
 			m_currentLapTime.setString("Time: " + to_string(m_raceTime.getElapsedTime().asSeconds()));
@@ -106,6 +113,8 @@ void Levels::render(sf::RenderWindow & window)
 		//m_squares->render(window);
 		m_currentPlayer->m_car.draw(window);
 		m_ai->render(window);
+		m_aiTwo->render(window);
+		m_aiThree->render(window);
 		window.draw(m_currentLapTime);
 		window.draw(m_startLine);
 		window.draw(m_bestLap);
@@ -121,6 +130,8 @@ void Levels::render(sf::RenderWindow & window)
 	{
 		m_currentPlayer->m_car.draw(window);
 		m_ai->render(window);
+		m_aiTwo->render(window);
+		m_aiThree->render(window);
 		window.draw(m_currentLapTime);
 		window.draw(m_startLine);
 		window.draw(m_bestLap);
@@ -251,5 +262,9 @@ void Levels::resetLevel()
 	currentlap = 1;
 	m_ai->m_car.setAiPosition(sf::Vector2f(760, 1050));
 	m_ai->m_car.setRotation(0);
+	m_aiTwo->m_car.setRotation(0);
+	m_aiThree->m_car.setRotation(0);
 	m_ai->resetNode();
+	m_aiTwo->resetNode();
+	m_aiThree->resetNode();
 }

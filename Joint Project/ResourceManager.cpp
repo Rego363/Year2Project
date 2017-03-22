@@ -87,12 +87,30 @@ void operator >> (const YAML::Node& levelNode, LevelData& level)
 	levelNode["splash"] >> level.m_splash;
 
 	// For loop to load track data into m_track 
-	const YAML::Node& trackNode = levelNode["track"].as<YAML::Node>();
-	for (unsigned i = 0; i < trackNode.size(); ++i)
+	const YAML::Node& mediumTrackNode = levelNode["trackMedium"].as<YAML::Node>();
+	for (unsigned i = 0; i < mediumTrackNode.size(); ++i)
 	{
 		TrackData track;
-		trackNode[i] >> track;
-		level.m_track.push_back(track);
+		mediumTrackNode[i] >> track;
+		level.m_mediumTrack.push_back(track);
+	}
+
+	// For loop to load track data into m_track 
+	const YAML::Node& easyTrackNode = levelNode["trackEasy"].as<YAML::Node>();
+	for (unsigned i = 0; i < easyTrackNode.size(); ++i)
+	{
+		TrackData track;
+		easyTrackNode[i] >> track;
+		level.m_easyTrack.push_back(track);
+	}
+	
+	// For loop to load track data into m_track 
+	const YAML::Node& hardTrackNode = levelNode["trackHard"].as<YAML::Node>();
+	for (unsigned i = 0; i < hardTrackNode.size(); ++i)
+	{
+		TrackData track;
+		hardTrackNode[i] >> track;
+		level.m_hardTrack.push_back(track);
 	}
 }
 
