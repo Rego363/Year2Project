@@ -5,6 +5,7 @@ specs::specs(Game &game, Levels &level):
 	m_game(&game),
 	m_currentLevel(&level)
 {
+	m_currentLevel->m_maxLaps = 3;
 	m_EnemiesNum = 100.0f;
 	m_title = new Label("Specifications", 400, 30);
 	m_Time = new Button("Duration of Race", 300, 400);

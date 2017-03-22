@@ -37,7 +37,6 @@ private:
 
 
 
-
 	
 	static bool activateShader; //turn on the blur shader
 

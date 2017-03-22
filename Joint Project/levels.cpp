@@ -39,6 +39,7 @@ void Levels::update(float dt, sf::View &view)
 {
 	if (game_on)
 	{
+		m_game->m_physicsBalls->update();
 		if (m_raceStarted == false)
 		{
 		m_currentPlayer->update(dt, view);
@@ -103,15 +104,16 @@ void Levels::render(sf::RenderWindow & window)
 {
 	if (game_on)
 	{
-		//m_squares->render(window);
-		m_currentPlayer->m_car.draw(window);
+		m_currentPlayer->draw(window);
 		m_ai->render(window);
+		m_game->m_physicsBalls->render(window);
 		window.draw(m_currentLapTime);
 		window.draw(m_startLine);
 		window.draw(m_bestLap);
 		window.draw(m_lastLap);
 		window.draw(easterEgg);
 		window.draw(m_Lap);
+		m_currentPlayer->draw(window);
 		if (m_countDown)
 		{
 			window.draw(m_countDownNumber);
@@ -230,6 +232,9 @@ std::string Levels::getBestLapTime()
 	return m_bestLap.getString();
 }
 
+/// <summary>
+/// resets everything in the level so it can ber replayed
+/// </summary>
 void Levels::resetLevel()
 {
 	loadImages();

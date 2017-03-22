@@ -455,8 +455,6 @@ void Game::render()
 		m_background->draw(m_window);
 		m_nightMode->draw(m_window);
 		m_level->render(m_window);
-		m_player->draw(m_window);
-		m_physicsBalls->render(m_window);
 		m_window.display();
 		break;
 	case GameState::GameOver:

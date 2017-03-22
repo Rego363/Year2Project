@@ -41,6 +41,11 @@ void operator >> (const YAML::Node& garageNode, GarageData& garage)
 	garage.m_fileName = garageNode["garagefile"].as<std::string>();
 }
 
+void operator >> (const YAML::Node& ballNode, BallData& ball)
+{
+	ball.m_fileName = ballNode["file"].as<std::string>();
+}
+
 /// <summary>
 /// Loading data for the track
 /// </summary>
@@ -85,6 +90,7 @@ void operator >> (const YAML::Node& levelNode, LevelData& level)
 	levelNode["credits"] >> level.m_credits;
 	levelNode["lisence"] >> level.m_lisence;
 	levelNode["splash"] >> level.m_splash;
+	levelNode["ball"] >> level.m_ball;
 
 	// For loop to load track data into m_track 
 	const YAML::Node& trackNode = levelNode["track"].as<YAML::Node>();

@@ -9,9 +9,6 @@ bool Background::activateShader = false;
 Background::Background( Game &game):
 	m_game(&game)
 {
-	
-	
-
 	loadCounter = sf::Vector2i(0, 0);
 
 	openFile = std::ifstream("Map1.txt"); //file with the tile coords
@@ -57,10 +54,10 @@ Background::Background( Game &game):
 	m_shader.setParameter("texture", m_tileTexture);
 	m_shader.setParameter("blur_radius", 0.008f); //set radius variable
 
-
 	m_renderTexture.create(27 * 200, 25 * 200);
 	m_renderSprite.setTexture(m_renderTexture.getTexture());
 	m_image = m_renderTexture.getTexture().copyToImage();
+
 
 }
 
@@ -96,10 +93,11 @@ void Background::draw(sf::RenderWindow &window)
 			}
 			
 			//full speed if on road
-			if (spr.getGlobalBounds().intersects(m_game->m_player->m_car.getSprite().getGlobalBounds()) && isOnTrack == true)
+			if (spr.getGlobalBounds().intersects(m_game->m_player->m_car.getSprite().getGlobalBounds()))
 			{
 				color = m_image.getPixel(m_game->m_player->m_car.getPos().x, m_game->m_player->m_car.getPos().y);
 			}
+
 			if(color.r<70&&color.b<70&&color.g<70 || color.r>230)
 			{
 				if (m_game->m_player->m_car.useTurbo == false)
@@ -127,6 +125,10 @@ void Background::draw(sf::RenderWindow &window)
 			if (color.r==202&& color.g==202 && color.b==202)
 			{
 				m_game->m_player->m_car.collision();
+			}
+			if (color.b >0)
+			{
+				m_game->m_player->m_car.setMaxSpeed(0);
 			}
 
 			//only draw if the tile is in the windows view

@@ -1,26 +1,83 @@
 #include "PhysicsBalls.h"
 
+/// <summary>
+/// Creates balls
+/// </summary>
+/// <param name="game"></param>
 PhysicsBalls::PhysicsBalls(Game &game) : m_game(&game)
 {
-	m_ball.setFillColor(sf::Color(sf::Color::Blue));
-	m_ball.setRadius(20);
-	m_ball.setPosition(850, 1150);
-}
+	if (!m_ballTex.loadFromFile(m_game->m_currentLevel.m_ball.m_fileName))
+	{
+		cout << "blue ball problems" << endl;
+	}
 
+	m_Position = sf::Vector2f(1600, 1100);
+
+	for (int i = 0; i < 5; i++)
+	{
+		m_Position.x = m_Position.x + 300 * i;
+
+		if (i == 1 || i == 3 || i == 5)
+		{
+			m_Position.y = 1000;
+		}
+		else
+		{
+			m_Position.y = 1100;
+		}
+
+		sf::Sprite m_tempBall;
+		m_tempBall.setTexture(m_ballTex);
+		m_tempBall.setPosition(m_Position);
+		m_tempBall.setScale(0.5, 0.5);
+		m_ballSprite.push_back(m_tempBall);
+	}
+
+}
+/// <summary>
+/// destructor
+/// </summary>
 PhysicsBalls::~PhysicsBalls()
 {
 }
 
+/// <summary>
+/// updates check for collisions
+/// </summary>
 void PhysicsBalls::update()
 {
-	
+	collision();
 }
 
+/// <summary>
+/// draws each ball
+/// </summary>
+/// <param name="window"></param>
 void PhysicsBalls::render(sf::RenderWindow &window)
 {
-	window.draw(m_ball);
+	for (int i = 0; i < 5; i++)
+	{
+		window.draw(m_ballSprite[i]);
+	}
 }
 
+/// <summary>
+/// Checks for collision with each ball
+/// Slows player down
+/// </summary>
 void PhysicsBalls::collision()
 {
+	for (int i = 0; i < 5; i++)
+	{
+		if (m_ballSprite[i].getGlobalBounds().intersects(m_game->m_player->m_car.getSprite().getGlobalBounds()))
+		{
+			m_collision = true;
+			if (m_collision)
+			{
+				m_game->m_player->m_car.setMaxSpeed(6);
+				/*m_ballSprite[i].setPosition((m_ballSprite[i].getPosition().x + cos(m_game->m_player->m_car.m_rotation * 3.14 / 180) * m_game->m_player->m_car.m_speed * 2),
+					(m_ballSprite[i].getPosition().y + sin(m_game->m_player->m_car.m_rotation * 3.14 / 180) * m_game->m_player->m_car.m_speed * 2));*/
+			}
+		}
+	}
 }

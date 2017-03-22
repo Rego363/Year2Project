@@ -8,6 +8,7 @@ class Game;
 
 /// <summary>
 /// Class to create physics balls
+/// Dylan.
 /// </summary>
 class PhysicsBalls
 {
@@ -18,12 +19,13 @@ public:
 	void update();
 	void render(sf::RenderWindow &window);
 	void collision();
+	std::vector<sf::Sprite> m_ballSprite;
 
 private:
 	Game *m_game;
-	sf::CircleShape m_ball;
 	sf::Vector2f m_velocity;
 	sf::Vector2f m_Position;
+	sf::Texture m_ballTex;
 
 	bool m_collision;
 

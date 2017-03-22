@@ -253,7 +253,6 @@ void Player::update(float dt, sf::View &view)
 	carTurningLeft = false;
 	breaks = false;
 	carMoving = false;
-	cout << to_string(m_car.getPos().x) + ", " + to_string(m_car.getPos().y) << endl;
 
 	view.setCenter(m_car.getPos()); //follow the player car
 	m_window->setView(view);
@@ -428,8 +427,6 @@ void Player::update(float dt, sf::View &view)
 
 void Player::draw(sf::RenderWindow & window)
 {
-	m_car.draw(window);
-
 	for (int i = 0; i < 200; i++)
 
 	{
@@ -438,7 +435,7 @@ void Player::draw(sf::RenderWindow & window)
 				window.draw(m_skidmarkSprite[i]);
 			}
 	}
-
+	m_car.draw(window);
 
 }
 

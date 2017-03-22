@@ -25,7 +25,7 @@ Car::Car(sf::Texture const & texture, sf::Vector2f const & pos):
 
 	m_sprite.setScale(0.10, 0.10); //scale texture down
 	m_sprite.setScale(0.05, 0.05); //scale texture down
-	m_sprite.setOrigin(m_sprite.getTextureRect().width/2.0, m_sprite.getTextureRect().height / 2.0); //origin set to centre for rotations
+	m_sprite.setOrigin(m_sprite.getTextureRect().width/1.5, m_sprite.getTextureRect().height / 2.0); //origin set to centre for rotations
 
 
 	m_speed = 0; 

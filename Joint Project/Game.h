@@ -135,11 +135,13 @@ public:
 
 	int playerMoney();
 	void chargePlayer(int amount);
+	std::unique_ptr<PhysicsBalls>m_physicsBalls;
 	std::unique_ptr<Background> m_background;
 	std::unique_ptr<NightMode> m_nightMode;
 	bool isInView(sf::Sprite sprite);
 	std::string getBestLapTime();
 	void resetMap();
+	LevelData m_currentLevel;
 
 private:
 	void processInput();
@@ -181,7 +183,6 @@ private:
 	std::unique_ptr<Credits>m_credits;
 	std::unique_ptr<GameOverScreen>m_gameOverScreen;
 	std::unique_ptr<SaveScreen>m_saveProfile;
-	std::unique_ptr<PhysicsBalls>m_physicsBalls;
 
 	/*Cars*/
 	/**********************/
@@ -202,7 +203,6 @@ private:
 
 
 
-	LevelData m_currentLevel;
 	LevelLoader m_levelLoader;
 	bool hasName=false;
 	sf::SoundBuffer m_buffer;

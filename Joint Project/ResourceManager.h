@@ -72,6 +72,11 @@ struct SplashData
 	std::string m_fileName;
 };
 
+struct BallData
+{
+	std::string m_fileName;
+};
+
 
 //contains all the levels data
 struct LevelData
@@ -87,6 +92,7 @@ struct LevelData
 	CreditsData m_credits;
 	LisenceData m_lisence;
 	SplashData m_splash;
+	BallData m_ball;
 };
 
 //class to load in the level details
