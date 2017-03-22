@@ -46,9 +46,6 @@
     <ClCompile Include="AccelerationScreen.cpp">
       <Filter>Source Files\Screens</Filter>
     </ClCompile>
-    <ClCompile Include="background.cpp">
-      <Filter>Source Files\Screens</Filter>
-    </ClCompile>
     <ClCompile Include="BrakingScreen.cpp">
       <Filter>Source Files\Screens</Filter>
     </ClCompile>
@@ -121,8 +118,13 @@
     <ClCompile Include="Liscence.cpp">
       <Filter>Source Files\Screens</Filter>
     </ClCompile>
+<<<<<<< HEAD
+    <ClCompile Include="background.cpp">
+      <Filter>Source Files</Filter>
+=======
     <ClCompile Include="SaveScreen.cpp">
       <Filter>Source Files\Screens</Filter>
+>>>>>>> 13096b93abf5b964952583690d59accf02ccea3f
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

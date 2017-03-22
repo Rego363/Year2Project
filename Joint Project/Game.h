@@ -152,7 +152,11 @@ private:
 	sf::Text m_text;
 
 
-	GameState m_currentGameState = GameState::Racing;
+	GameState m_currentGameState = GameState::TheLicense;
+
+
+
+	
 
 
 	std::unique_ptr<playGame> m_mapSelect;

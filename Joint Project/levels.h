@@ -49,6 +49,7 @@ private:
 	bool m_countDown;
 	sf::Text m_countDownNumber;
 	sf::Text m_currentLapTime;
+	sf::Text m_currentSpeed;
 	sf::Text m_bestLap;
 	sf::Text m_lastLap;
 	sf::Text m_Lap;;
