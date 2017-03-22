@@ -14,7 +14,7 @@ Cars to be used by both the player and the Ai racers
 class Car {
 public:
 	
-	Car(sf::Texture const &texture, sf::Vector2f const & pos); //constructor
+	Car(sf::Texture  &texture, sf::Vector2f const & pos); //constructor
 	void update(float dt); //update loop
 	void aiUpdate(sf::Vector2f velocity);	// Ai update loop
 	void draw(sf::RenderWindow &window); //draw loop
@@ -40,7 +40,7 @@ public:
 	void breaks();
 	void offTrack();
 	void setMaxSpeed(float i);
-	void setCurrentTexture(sf::Texture carTex);
+	
 	void collision();
 	void setAiPosition(sf::Vector2f);
 	void scaleAi();
@@ -48,11 +48,12 @@ public:
 	sf::Sprite getSprite() const;
 	float m_speed; //speed of car
 	float m_rotation; //rotation of car
+	void setTexture(sf::Texture &texture,float scaleX, float scaleY);
 private:
 	
 	float m_maxSpeed;
 	sf::Clock shaderclock;
-	sf::Texture m_texture; //car texture
+	sf::Texture *m_texture; //car texture
 	sf::Texture m_blankTexture;
 	sf::Sprite m_sprite2;
 	sf::Vector2u textureSize;

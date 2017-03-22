@@ -3,8 +3,8 @@
 double const DEG_TO_RAD = 3.14 / 180.0f;  //calculation for angle degrees to radians
 
 //constructor for car object
-Car::Car(sf::Texture const & texture, sf::Vector2f const & pos):
-	m_texture(texture), m_position(pos)
+Car::Car(sf::Texture  & texture, sf::Vector2f const & pos):
+	m_texture(&texture), m_position(pos)
 {
 	shaderclock.restart();
 
@@ -18,14 +18,11 @@ Car::Car(sf::Texture const & texture, sf::Vector2f const & pos):
 	//m_Nshader.setParameter("mouse", m_position);
 
 	m_position = sf::Vector2f(760, 1100);
-	m_sprite.setTexture(m_texture); //set texture
+	m_sprite.setTexture(*m_texture); //set texture
 	m_sprite.setPosition(m_position); //set pos
 
-	//m_sprite.setTexture(m_Icar);
-
-	m_sprite.setScale(0.10, 0.10); //scale texture down
-	m_sprite.setScale(0.05, 0.05); //scale texture down
-	m_sprite.setOrigin(m_sprite.getTextureRect().width/2.0, m_sprite.getTextureRect().height / 2.0); //origin set to centre for rotations
+	
+	m_sprite.setOrigin(m_sprite.getTextureRect().width / 1.4, m_sprite.getTextureRect().height / 2.0);
 
 
 	m_speed = 0; 
@@ -51,25 +48,7 @@ Car::Car(sf::Texture const & texture, sf::Vector2f const & pos):
 
 
 
-	//currentPos = new Label("x = " + std::to_string(m_sprite.getPosition().x) + "\n Y = " + std::to_string(m_sprite.getPosition().y), 0, 0);
-
-	//if (!m_blankTexture.loadFromFile("blankLambo.png"))
-	//{
-
-	//}
-	//m_sprite2.setTexture(m_texture); //set texture
-	//m_sprite2.setPosition(m_position); //set pos
-	//								  //m_sprite.setScale(0.10, 0.10); //scale texture down
-	////m_sprite2.setScale(0.05, 0.05); //scale texture down
-	//m_sprite2.setOrigin(m_sprite.getTextureRect().width / 2.0, m_sprite.getTextureRect().height / 2.0); //origin set to centre for rotations
-
-	//if (!m_shader.loadFromFile("blur.frag", sf::Shader::Fragment))
-	//{
-	//	std::cout << "shader failed to load" << std::endl;
-	//}
-
-	////m_shader.setParameter("texture", sf::Shader::CurrentTexture);
-	//m_shader.setParameter("texture", m_blankTexture);
+	
 }
 
 //in this update loop the movement formula is implemented and also the cars rotation is set
@@ -262,11 +241,7 @@ void Car::setMaxSpeed(float i)
 	m_maxSpeed = i;
 }
 
-void Car::setCurrentTexture(sf::Texture carTex)
-{
-	m_texture = carTex;
-	m_sprite.setTexture(m_texture);
-}
+
 
 //Function for when car collides with brick wall
 void Car::collision()
@@ -297,5 +272,14 @@ void Car::resetPosition()
 sf::Sprite Car::getSprite() const
 {
 	return m_sprite;
+}
+
+void Car::setTexture(sf::Texture & texture, float scaleX, float scaleY)
+{
+	m_texture = &texture;
+	m_sprite.setTexture(*m_texture);
+	m_sprite.setPosition(m_position); //set pos
+	m_sprite.setOrigin(m_sprite.getTextureRect().width / 1.4, m_sprite.getTextureRect().height / 2.0);
+	m_sprite.setScale(scaleX, scaleY);
 }
 

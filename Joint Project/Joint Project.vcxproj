@@ -135,6 +135,7 @@
     <ClCompile Include="Car.cpp" />
     <ClCompile Include="changeProfile.cpp" />
     <ClCompile Include="CheckBox.cpp" />
+    <ClCompile Include="chooseCar.cpp" />
     <ClCompile Include="Credits.cpp" />
     <ClCompile Include="DifficultyScreen.cpp" />
     <ClCompile Include="DisplayScreen.cpp" />
@@ -178,6 +179,7 @@
     <ClInclude Include="Car.h" />
     <ClInclude Include="changeProfile.h" />
     <ClInclude Include="CheckBox.h" />
+    <ClInclude Include="chooseCar.h" />
     <ClInclude Include="Credits.h" />
     <ClInclude Include="DifficultyScreen.h" />
     <ClInclude Include="DisplayScreen.h" />

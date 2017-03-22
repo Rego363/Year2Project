@@ -9,14 +9,14 @@ Levels::Levels(LevelData &level, Player &player,  Ai &ai, Game &game) : m_curren
 {
 	loadImages();
 	loadFont();
-	m_currentPlayer->m_car.setCurrentTexture(m_lambo);
+	//m_currentPlayer->m_car.setCurrentTexture(m_lambo);
 	setupTexts();
 
 	m_startLine.setPosition(m_currentPlayer->m_car.getPos().x + 40, m_currentPlayer->m_car.getPos().y - 100);
 	m_startLine.setSize(sf::Vector2f(5, 200));
 	m_startLine.setFillColor(sf::Color::Red);
 
-	m_ai->m_car.scaleAi();
+	//m_ai->m_car.scaleAi();
 
 	m_currentSelect = 0;
 	m_credits = new Button("Press A to end", m_currentPlayer->m_car.getPos().x , m_currentPlayer->m_car.getPos().y +300);
@@ -104,7 +104,7 @@ void Levels::render(sf::RenderWindow & window)
 	if (game_on)
 	{
 		//m_squares->render(window);
-		m_currentPlayer->m_car.draw(window);
+		m_currentPlayer->draw(window);
 		m_ai->render(window);
 		window.draw(m_currentLapTime);
 		window.draw(m_startLine);
@@ -234,7 +234,7 @@ void Levels::resetLevel()
 {
 	loadImages();
 	loadFont();
-	m_currentPlayer->m_car.setCurrentTexture(m_lambo);
+	
 	m_currentPlayer->m_car.resetPosition();
 	m_currentPlayer->m_car.m_rotation = 0;
 	m_currentPlayer->m_car.setRotation(0);

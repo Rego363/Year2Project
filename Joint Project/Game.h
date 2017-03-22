@@ -49,6 +49,7 @@
 #include <memory>
 #include "gameOverScreen.h"
 #include "SaveScreen.h"
+#include"chooseCar.h"
 
 using namespace std;
 
@@ -80,6 +81,7 @@ class Credits;
 class NightMode;
 class GameOverScreen;
 class SaveScreen;
+class ChooseCar;
 
 enum GameState {
 	TheLicense,
@@ -104,7 +106,8 @@ enum GameState {
 	EnterName, 
 	TheCredits,
 	GameOver,
-	Save
+	Save,
+	PickCar
 };
 
 enum GameDifficulty {
@@ -152,7 +155,7 @@ private:
 	sf::Text m_text;
 
 
-	GameState m_currentGameState = GameState::TheLicense;
+	GameState m_currentGameState = GameState::PickCar;
 
 
 
@@ -184,6 +187,7 @@ private:
 	std::unique_ptr<Credits>m_credits;
 	std::unique_ptr<GameOverScreen>m_gameOverScreen;
 	std::unique_ptr<SaveScreen>m_saveProfile;
+	std::unique_ptr<ChooseCar>m_chooseCarScreen;
 	/*Cars*/
 	/**********************/
 	std::unique_ptr<Car>m_car;
