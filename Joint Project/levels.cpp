@@ -57,6 +57,8 @@ void Levels::update(float dt, sf::View &view)
 
 			m_currentLapTime.setPosition(m_currentPlayer->m_car.getPos().x + 300, m_currentPlayer->m_car.getPos().y - 350);
 			m_currentLapTime.setString("Time: " + to_string(m_raceTime.getElapsedTime().asSeconds()));
+			m_currentSpeed.setPosition(m_currentPlayer->m_car.getPos().x - 620, m_currentPlayer->m_car.getPos().y - 230);
+			m_currentSpeed.setString("Speed: " + to_string((int)m_currentPlayer->m_car.m_speed));
 			m_bestLap.setPosition(m_currentPlayer->m_car.getPos().x - 620, m_currentPlayer->m_car.getPos().y - 350);
 			m_lastLap.setPosition(m_currentPlayer->m_car.getPos().x - 620, m_currentPlayer->m_car.getPos().y - 310);
 			m_Lap.setPosition(m_currentPlayer->m_car.getPos().x - 620, m_currentPlayer->m_car.getPos().y - 270);
@@ -112,6 +114,7 @@ void Levels::render(sf::RenderWindow & window)
 		window.draw(m_lastLap);
 		window.draw(easterEgg);
 		window.draw(m_Lap);
+		window.draw(m_currentSpeed);
 		if (m_countDown)
 		{
 			window.draw(m_countDownNumber);
@@ -126,6 +129,7 @@ void Levels::render(sf::RenderWindow & window)
 		window.draw(m_bestLap);
 		window.draw(m_lastLap);
 		window.draw(m_Lap);
+		window.draw(m_currentSpeed);
 		m_gui.draw(window);
 	}
 }
@@ -216,6 +220,10 @@ void Levels::setupTexts()
 	easterEgg.setFont(m_Font);
 	easterEgg.setColor(sf::Color::Red);
 	
+	m_currentSpeed.setPosition(m_currentPlayer->m_car.getPos().x - 620, m_currentPlayer->m_car.getPos().y - 230);
+	m_currentSpeed.setCharacterSize(50);
+	m_currentSpeed.setString("Speed: " + to_string(m_currentPlayer->m_car.m_speed));
+	m_currentSpeed.setFont(m_Font);
 }
 
 // sets gamestate

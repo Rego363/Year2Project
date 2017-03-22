@@ -48,6 +48,7 @@ public:
 	sf::Sprite getSprite() const;
 	float m_speed; //speed of car
 	float m_rotation; //rotation of car
+	bool turboFlame = false;
 private:
 	
 	float m_maxSpeed;
