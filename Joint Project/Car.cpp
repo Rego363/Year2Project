@@ -41,7 +41,9 @@ Car::Car(sf::Texture const & texture, sf::Vector2f const & pos):
 		std::cout << "sprite failed to load" << std::endl;
 
 	}
-	m_blankTexture.setSmooth(true);	
+
+	m_blankTexture.setSmooth(true);
+
 }
 
 //in this update loop the movement formula is implemented and also the cars rotation is set
@@ -83,11 +85,16 @@ void Car::aiUpdate(sf::Vector2f velocity)
 //draw the car to the screen
 void Car::draw(sf::RenderWindow & window)
 {
+
+
 	//window.draw(m_sprite2, &m_shader);
 	window.draw(m_sprite);
 
-	
-	window.draw(m_sprite, &m_Nshader);
+	if (useTurbo == true)
+	{
+		window.draw(m_sprite, &m_Nshader);
+	}
+
 	//currentPos->draw(window);
 }
 
@@ -171,6 +178,8 @@ void Car::turbo(float MaxturboSpeed)
 	{
 		m_speed += m_acceleration;
 	}
+
+	turboFlame = true;
 }
 
 //return the vector that represents the cars position on screen

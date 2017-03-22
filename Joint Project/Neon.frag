@@ -35,5 +35,5 @@ void main( void ){
 	
 	float  col2 = iterate(c2);//-0.123*vec2(col1,0.));
                 
-        gl_FragColor = exp(col2)*.01 * vec4(0.9,0.4,1.,0.6);         
+        gl_FragColor = exp(col2)*.01 * vec4(0.9,.1,.0,.2);         
 }
