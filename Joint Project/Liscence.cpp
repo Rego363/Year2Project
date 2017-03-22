@@ -30,7 +30,9 @@ void Liscence::update()
 
 	if (m_animation.getStatus() == 0)
 	{
+
 		m_game->music.play();
+		m_animation.~Movie();
 		m_game->changeGameState(GameState::TheSplash);
 	}
 }

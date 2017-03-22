@@ -48,6 +48,8 @@
 #include "Credits.h"
 #include <memory>
 #include "gameOverScreen.h"
+#include "SaveScreen.h"
+
 using namespace std;
 
 class SoundScreen;
@@ -77,6 +79,7 @@ class Player;
 class Credits;
 class NightMode;
 class GameOverScreen;
+class SaveScreen;
 
 enum GameState {
 	TheLicense,
@@ -100,7 +103,8 @@ enum GameState {
 	ThewSquares,
 	EnterName, 
 	TheCredits,
-	GameOver
+	GameOver,
+	Save
 };
 
 enum GameDifficulty {
@@ -148,10 +152,12 @@ private:
 	sf::Text m_text;
 
 
+	GameState m_currentGameState = GameState::TheLicense;
 
-	GameState m_currentGameState = GameState::Racing;
+
 
 	
+
 
 	std::unique_ptr<playGame> m_mapSelect;
 	
@@ -177,6 +183,7 @@ private:
 	std::unique_ptr<EnterNameScreen>m_enterName;
 	std::unique_ptr<Credits>m_credits;
 	std::unique_ptr<GameOverScreen>m_gameOverScreen;
+	std::unique_ptr<SaveScreen>m_saveProfile;
 	/*Cars*/
 	/**********************/
 	std::unique_ptr<Car>m_car;
@@ -221,6 +228,12 @@ private:
 	sf::FloatRect rect;
 	sf::Texture m_backgroundImage;
 	sf::Sprite sprBack;
+
+	// Shader 
+	sf::Texture m_blankTexture;
+	sf::Sprite m_shaderSprite;
+	sf::Shader m_smokeShader;
+
 	bool levelReset = true;
 };
 

@@ -13,7 +13,7 @@ class DifficultyScreen {
 public:
 	DifficultyScreen(Game &game);
 	void render(sf::RenderWindow & window);
-	void update(float time);
+	void update();
 	void goToOptions();
 	void setEasy();
 	void setMedium();
@@ -26,10 +26,6 @@ private:
 	Widget* m_widgets[MAX_ITEMS];
 	int m_selectedItem;
 
-	sf::Texture m_blankTexture;
-	sf::Sprite m_shaderSprite;
-	sf::Shader m_shader; // Shader for triangle affect
-	std::string fragmentShader;
 
 
 };

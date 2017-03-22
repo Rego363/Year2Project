@@ -6,11 +6,12 @@
 #include "GUI.h"
 class Game;
 
+
 class EnterNameScreen {
 public:
-	EnterNameScreen(Game &game);
+	EnterNameScreen(Game &game, Player &player);
 	std::string getEnteredName();
-	void update(float time);
+	void update();
 	void draw(sf::RenderWindow &window);
 
 	void addQ();
@@ -51,10 +52,7 @@ private:
 	std::string m_enteredName;
 	int m_selectedItem = 0;
 	Game *m_game;
+	Player *m_player;
 	Xbox360Controller m_xbox;
-	sf::Texture m_blankTexture;
-	sf::Sprite m_shaderSprite;
-	sf::Shader m_shader; // Shader for triangle affect
-	std::string fragmentShader;
 };
 #endif // !ENTERNAME
