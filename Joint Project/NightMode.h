@@ -32,6 +32,7 @@ private:
 	bool hitWall; //bool to indicate if wall is hit
 	sf::Vector2i map[2000][2000]; //the map size
 	sf::Vector2i loadCounter; //the amount of tiles
+	sf::Texture m_blankTexture;
 
 	Game *m_game; //pointer to game class
 
