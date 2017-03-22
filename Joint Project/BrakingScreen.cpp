@@ -34,6 +34,7 @@ BrakingScreen::BrakingScreen(Game & game):
 		m_gui.addWidget(var);
 	}
 	m_gui.vertical = true;
+
 }
 
 void BrakingScreen::draw(sf::RenderWindow &window)

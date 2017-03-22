@@ -42,6 +42,9 @@ private:
 	Levels *m_currentLevel;
 	void goToMapSelect();
 	void goToMapRacing();
+	void goToLapSelect3();
+	void goToLapSelect5();
+	void goToLapSelect7();
 	int m_currentSelect;
 
 	float m_EnemiesNum;

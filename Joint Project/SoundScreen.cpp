@@ -29,8 +29,7 @@ SoundScreen::SoundScreen(Game & game) :
 	
 	m_gui.addButton(m_backButton);
 	m_currentSelect = 0;
-	m_gui.vertical = true;
-	
+	m_gui.vertical = true;	
 }
 
 /// <summary>

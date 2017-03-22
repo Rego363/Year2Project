@@ -68,6 +68,7 @@ playGame::playGame(Game &game):
 	m_rect.setOutlineColor(sf::Color::Blue); //set to transparent
 	m_rect.setOutlineThickness(2);
 //	posX = 0;
+
 }
 
 playGame::~playGame()
@@ -80,12 +81,7 @@ playGame::~playGame()
 
 void playGame::render(sf::RenderWindow & window)
  {
-
-	
-	
-		window.draw(m_rect);
-	
-
+	window.draw(m_rect);
 	m_gui.draw(window);
 
 

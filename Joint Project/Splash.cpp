@@ -59,5 +59,6 @@ void Splash::load()
 //sets gamestate
 void Splash::setStateBack()
 {
+	m_animation.~Movie();
 	m_game->changeGameState(GameState::TheMenu);
 }

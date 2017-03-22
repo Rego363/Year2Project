@@ -20,12 +20,15 @@ GarageScreen::GarageScreen(float x, float y, Game &game):
 	m_widgets[4]->Enter = std::bind(&GarageScreen::goSteer, this);
 	m_widgets[5] = new Button("Back", (x / 2), float(y / MAX_ITEMS + 0.2f)*7.5f);
 	m_widgets[5]->Enter = std::bind(&GarageScreen::goBack, this);
-
+	
 	for each (Widget* var in m_widgets)
 	{
 		m_gui.addWidget(var);
 	}
 	m_gui.vertical = true;
+
+
+	
 }
 
 void GarageScreen::update()

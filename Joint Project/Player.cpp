@@ -5,10 +5,10 @@ Player::Player(float carX, float carY, sf::Texture &carTexture, sf::RenderWindow
 	m_window(&window),
 	m_game(&game)
 {
-	m_money = 100000;
+	m_money = 1000;
 	m_carSelect = 0;
-	m_secHighScore = 0;
-	m_minHighScore = 0;
+	m_secHighScore = 1000;
+	m_minHighScore = 1000;
 	m_name = "Guest";
 	filename = "players.txt";
 
@@ -82,20 +82,17 @@ void Player::load(std::string name)
 void Player::save(std::string replace)
 {
 
-	int numOfPlayers = 0;				// Variable to keep track of the number of players in the text file
 
 	fileInput.open(filename);			// Old file to be copied
 	fileOutput.open("temp.txt");		// Temp file to work as middle man
 
 	
-	while (fileInput.is_open())			// While player.txt is open
+	for (int i = 0; i < NUM_OF_PLAYERS; i++)
 	{
 		fileInput >> fileLine;			// Get next line (name)
 
 		if (fileLine == replace)		// If the name is the same as the one we are looking to overwrite
 		{
-			numOfPlayers++;				// Add player
-
 			strTemp += m_name.c_str();	// Add name
 			strTemp += "\n";			// Add a new line
 
@@ -113,7 +110,6 @@ void Player::save(std::string replace)
 		}
 		else							// If it not the player we are looking for leave it unchanged
 		{
-			numOfPlayers++;				// Add a player
 
 			strTemp += fileLine;		// Add the name of the player to the temp string
 			strTemp += "\n";			// Add a new line
@@ -135,12 +131,11 @@ void Player::save(std::string replace)
 		fileOutput << strTemp;			// Assign everything in strTemp to the output file
 		strTemp = "";					// Clear strTemp
 
-		if (fileInput.eof())			// If at the end of the input file
-		{
-			fileInput.close();			// Close the input file
-			fileOutput.close();			// Close the output file
-		}
+	
 	}
+	
+	fileInput.close();			// Close the input file
+	fileOutput.close();			// Close the output file
 
 
 	// Writing the temp file to the player file
@@ -148,7 +143,7 @@ void Player::save(std::string replace)
 	fileInput.open("temp.txt");		// Open temp file to read from
 	fileOutput.open(filename);		// Open player file to write to
 
-	for (int i = 0; i < numOfPlayers; i++)
+	for (int i = 0; i < NUM_OF_PLAYERS; i++)
 	{
 		// Player Name
 		fileInput >> fileLine;		// Read a line
@@ -230,6 +225,18 @@ void Player::setName(std::string name)
 }
 
 /// <summary>
+/// Method to create a new player
+/// </summary>
+/// <param name="name"></param>
+void Player::newPlayer(std::string name)
+{
+	m_name = name;
+	m_money = 1000;
+	m_secHighScore = 1000;
+	m_minHighScore = 1000;
+}
+
+/// <summary>
 /// Method to return the name of the player
 /// </summary>
 /// <returns></returns>
@@ -246,7 +253,6 @@ void Player::update(float dt, sf::View &view)
 	carTurningLeft = false;
 	breaks = false;
 	carMoving = false;
-	cout << to_string(m_car.getPos().x) + ", " + to_string(m_car.getPos().y) << endl;
 
 	view.setCenter(m_car.getPos()); //follow the player car
 	m_window->setView(view);
@@ -421,17 +427,17 @@ void Player::update(float dt, sf::View &view)
 
 void Player::draw(sf::RenderWindow & window)
 {
-	m_car.draw(window);
 
 	for (int i = 0; i < 200; i++)
 
 	{
-		if (currentDrift > 2 || currentDrift < 2)
-		window.draw(m_skidmarkSprite[i]);
-
+			if (currentDrift > 10 || currentDrift < 10)
+			{
+				window.draw(m_skidmarkSprite[i]);
+			}
 	}
 
-
+	m_car.draw(window);
 }
 
 

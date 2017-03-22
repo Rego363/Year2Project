@@ -23,15 +23,15 @@ public:
 	void cost(int amount);
 	void earned(int amount);
 	int getMoney();
+	void newPlayer(std::string name);
 	void setHighScore(int min, int sec);
 	void setName(std::string name);
 	int getMinHighScore();
 	int getSecHighScore(); 
 	std::string getName();
-
 	void update(float dt, sf::View &view);
 	void draw(sf::RenderWindow & window);
-
+	std::vector<sf::Sprite> m_skidmarkSprite;
 	Car m_car; //the players car
 
 private:
@@ -57,9 +57,10 @@ private:
 	sf::Clock m_turboTimer;
 	Game *m_game;
 
+	const int NUM_OF_PLAYERS = 10;				// Variable for the number of players in the text file 
+
 	std::string strTemp;				// String to hold the data of each player before putting it in the output file
-	int currentSkid;
-	std::vector<sf::Sprite> m_skidmarkSprite;
+	int currentSkid = 1;
 	sf::Texture m_skidmarkText;
 	sf::Vector2f m_position;
 

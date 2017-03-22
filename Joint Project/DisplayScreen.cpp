@@ -34,7 +34,6 @@ DisplayScreen::DisplayScreen(Game & game) :
 	m_gui.addButton(m_backButton);	// Add to gui array
 
 	m_gui.vertical = true;		// Enables vertical controls
-
 }
 
 /// <summary>

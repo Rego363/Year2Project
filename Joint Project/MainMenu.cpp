@@ -42,7 +42,6 @@ MainMenu::~MainMenu()
 
 void MainMenu::render(sf::RenderWindow & window)
 {
-
 	m_gui.draw(window);
 }
 
@@ -53,7 +52,7 @@ void MainMenu::update()
 
 void MainMenu::GotoGarage()
 {
-	m_game->changeGameState(GameState::Garage);
+	m_game->changeGameState(GameState::PickCar);
 }
 
 void MainMenu::quit()

@@ -31,6 +31,8 @@ DifficultyScreen::DifficultyScreen(Game & game):
 
 	// Enables vertical controls
 	m_gui.vertical = true;
+
+	
 }
 
 /// <summary>

@@ -9,9 +9,6 @@ bool Background::activateShader = false;
 Background::Background( Game &game):
 	m_game(&game)
 {
-	
-	
-
 	loadCounter = sf::Vector2i(0, 0);
 
 	openFile = std::ifstream("Map1.txt"); //file with the tile coords
@@ -49,13 +46,17 @@ Background::Background( Game &game):
 
 
 
-	if (!m_shader.loadFromFile("blur.frag", sf::Shader::Fragment))
+	if (!m_shader.loadFromFile("Shaders/blur.frag", sf::Shader::Fragment))
 	{
 		std::cout << "shader failed to load" << std::endl;         //load shader
 	}
 
 	m_shader.setParameter("texture", m_tileTexture);
 	m_shader.setParameter("blur_radius", 0.008f); //set radius variable
+
+	m_renderTexture.create(27 * 200, 25 * 200);
+	m_renderSprite.setTexture(m_renderTexture.getTexture());
+	m_image = m_renderTexture.getTexture().copyToImage();
 }
 
 
@@ -70,8 +71,8 @@ void Background::draw(sf::RenderWindow &window)
 		{
 			spr.setPosition(i * 200, j * 200); //set position of each tile
 			spr.setTextureRect(sf::IntRect(map[i][j].x * 225, map[i][j].y * 220, 200, 200)); //texture rectangle
-			
-			//if its the road texture 
+
+																							 //if its the road texture 
 			if (map[i][j].x == 1 && map[i][j].y == 0)
 			{
 				isOnTrack = true;
@@ -88,9 +89,9 @@ void Background::draw(sf::RenderWindow &window)
 			{
 				hitWall = true;
 			}
-			
+
 			//full speed if on road
-			if (spr.getGlobalBounds().intersects(m_game->m_player->m_car.getSprite().getGlobalBounds())&& isOnTrack==true)
+			if (spr.getGlobalBounds().intersects(m_game->m_player->m_car.getSprite().getGlobalBounds()))
 			{
 				if (m_game->m_player->m_car.useTurbo == false)
 				{
@@ -119,15 +120,20 @@ void Background::draw(sf::RenderWindow &window)
 				m_game->m_player->m_car.collision();
 
 			}
+			if (color.b >0)
+			{
+				m_game->m_player->m_car.setMaxSpeed(0);
+			}
 
 			//only draw if the tile is in the windows view
 			if (m_game->isInView(spr))
 			{
-				if (activateShader==true)
+				if (activateShader == true)
 				{
 					window.draw(spr, &m_shader);
 				}
-				else {
+				else
+				{
 					window.draw(spr);
 				}
 				visible++;

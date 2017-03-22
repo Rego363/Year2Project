@@ -41,7 +41,6 @@ OptionsScreen::~OptionsScreen()
 /// <param name="window"></param>
 void OptionsScreen::render(sf::RenderWindow & window)
 {
-
 	m_gui. draw(window);
 }
 

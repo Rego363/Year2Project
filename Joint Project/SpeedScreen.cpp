@@ -1,6 +1,6 @@
 #include "SpeedScreen.h"
 
-SpeedScreen::SpeedScreen(Game & game):
+SpeedScreen::SpeedScreen(Game & game) :
 	m_game(&game)
 {
 	if (!m_texture.loadFromFile(m_game->getGarageTexture()))
@@ -35,6 +35,7 @@ SpeedScreen::SpeedScreen(Game & game):
 	}
 	m_gui.vertical = true;
 }
+
 
 void SpeedScreen::draw(sf::RenderWindow &window)
 {
