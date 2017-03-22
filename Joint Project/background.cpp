@@ -57,8 +57,6 @@ Background::Background( Game &game):
 	m_renderTexture.create(27 * 200, 25 * 200);
 	m_renderSprite.setTexture(m_renderTexture.getTexture());
 	m_image = m_renderTexture.getTexture().copyToImage();
-
-
 }
 
 
@@ -73,8 +71,8 @@ void Background::draw(sf::RenderWindow &window)
 		{
 			spr.setPosition(i * 200, j * 200); //set position of each tile
 			spr.setTextureRect(sf::IntRect(map[i][j].x * 225, map[i][j].y * 220, 200, 200)); //texture rectangle
-			
-			//if its the road texture 
+
+																							 //if its the road texture 
 			if (map[i][j].x == 1 && map[i][j].y == 0)
 			{
 				isOnTrack = true;
@@ -91,14 +89,9 @@ void Background::draw(sf::RenderWindow &window)
 			{
 				hitWall = true;
 			}
-			
+
 			//full speed if on road
 			if (spr.getGlobalBounds().intersects(m_game->m_player->m_car.getSprite().getGlobalBounds()))
-			{
-				color = m_image.getPixel(m_game->m_player->m_car.getPos().x, m_game->m_player->m_car.getPos().y);
-			}
-
-			if(color.r<70&&color.b<70&&color.g<70 || color.r>230)
 			{
 				if (m_game->m_player->m_car.useTurbo == false)
 				{
@@ -110,7 +103,7 @@ void Background::draw(sf::RenderWindow &window)
 				}
 			}
 			//slow down if on grass
-			else if (color.g>100)
+			else if (spr.getGlobalBounds().intersects(m_game->m_player->m_car.getSprite().getGlobalBounds()) && isOnTrack == false)
 			{
 				if (m_game->m_player->m_car.useTurbo == false)
 				{
@@ -122,9 +115,10 @@ void Background::draw(sf::RenderWindow &window)
 				}
 			}
 			//collision occurs with bricks
-			if (color.r==202&& color.g==202 && color.b==202)
+			if (spr.getGlobalBounds().intersects(m_game->m_player->m_car.getSprite().getGlobalBounds()) && hitWall == true)
 			{
 				m_game->m_player->m_car.collision();
+
 			}
 			if (color.b >0)
 			{
@@ -134,14 +128,13 @@ void Background::draw(sf::RenderWindow &window)
 			//only draw if the tile is in the windows view
 			if (m_game->isInView(spr))
 			{
-				if (activateShader==true)
+				if (activateShader == true)
 				{
-					//window.draw(spr, &m_shader);
-					m_renderTexture.draw(spr, &m_shader);
+					window.draw(spr, &m_shader);
 				}
-				else {
-					//window.draw(spr); 
-					m_renderTexture.draw(spr);
+				else
+				{
+					window.draw(spr);
 				}
 				visible++;
 			}
@@ -150,9 +143,6 @@ void Background::draw(sf::RenderWindow &window)
 	std::cout << "Total visible tiles: " << visible << std::endl;
 	visible = 0;
 	system("cls");
-	m_renderTexture.display();
-	
-	window.draw(m_renderSprite);
 
 }
 //flip the bool for activating the shader

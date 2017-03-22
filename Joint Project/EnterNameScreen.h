@@ -43,16 +43,19 @@ public:
 	void addChar();
 	void Space();
 	void deleteLetter();
-	void changeGameState();
+	void add$();
 private:
 	static const int MAX_ITEMS = 30;
 	GUI m_gui;
 	Widget* m_widgets[MAX_ITEMS];
 	Label *m_label;
+	Label *m_enter;
 	std::string m_enteredName;
 	int m_selectedItem = 0;
 	Game *m_game;
 	Player *m_player;
 	Xbox360Controller m_xbox;
+	sf::Clock m_clock;
+	bool startClock = false;
 };
 #endif // !ENTERNAME

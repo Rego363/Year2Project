@@ -69,6 +69,7 @@ Game::Game() :
 	m_credits = make_unique<Credits>(*this, m_currentLevel);
 	m_gameOverScreen = make_unique<GameOverScreen>(*this);
 	m_physicsBalls = make_unique<PhysicsBalls>(*this);
+	m_chooseCarScreen = make_unique<ChooseCar>(*this);
 
 	m_startPos = sf::Vector2f(m_window.getSize().x / 2, m_window.getSize().y / 4);
 	m_car = make_unique<Car>(m_startCar, m_startPos);
@@ -358,6 +359,9 @@ void Game::update(sf::Time time)
 	case GameState::TheCredits:
 		m_credits->update();
 		break;
+	case GameState::PickCar:
+		m_chooseCarScreen->update();
+		break;
 	default:
 		break;
 
@@ -507,6 +511,12 @@ void Game::render()
 	case GameState::TheCredits:
 		m_window.clear();
 		m_credits->render(m_window);
+		m_window.display();
+		break;
+	case GameState::PickCar:
+		m_window.clear();
+		m_window.draw(m_shaderSprite, &m_smokeShader);
+		m_chooseCarScreen->draw(m_window);
 		m_window.display();
 		break;
 	default:

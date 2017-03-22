@@ -99,7 +99,6 @@ void NightMode::draw(sf::RenderWindow &window)
 			}
 		}
 	}
-
 }
 //flip the bool for activating the shader
 void NightMode::activateTheShader()

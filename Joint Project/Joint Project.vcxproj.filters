@@ -42,7 +42,11 @@
     <ClCompile Include="Widget.cpp" />
     <ClCompile Include="WorldSquares.cpp" />
     <ClCompile Include="XBOX360CONTROLLER.cpp" />
+<<<<<<< HEAD
     <ClCompile Include="PhysicsBalls.cpp" />
+=======
+    <ClCompile Include="chooseCar.cpp" />
+>>>>>>> 2bcb3a19dc0eb53d33dc6e4e8dbba74c8cc27ecb
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AccelerationScreen.h" />
@@ -85,6 +89,10 @@
     <ClInclude Include="Widget.h" />
     <ClInclude Include="WorldSquares.h" />
     <ClInclude Include="XBOX360CONTROLLER.h" />
+<<<<<<< HEAD
     <ClInclude Include="PhysicsBalls.h" />
+=======
+    <ClInclude Include="chooseCar.h" />
+>>>>>>> 2bcb3a19dc0eb53d33dc6e4e8dbba74c8cc27ecb
   </ItemGroup>
 </Project>

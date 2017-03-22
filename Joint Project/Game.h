@@ -50,6 +50,7 @@
 #include "gameOverScreen.h"
 #include "SaveScreen.h"
 #include "PhysicsBalls.h"
+#include"chooseCar.h"
 
 using namespace std;
 
@@ -82,6 +83,7 @@ class NightMode;
 class GameOverScreen;
 class SaveScreen;
 class PhysicsBalls;
+class ChooseCar;
 
 enum GameState {
 	TheLicense,
@@ -106,7 +108,8 @@ enum GameState {
 	EnterName, 
 	TheCredits,
 	GameOver,
-	Save
+	Save,
+	PickCar
 };
 
 enum GameDifficulty {
@@ -155,9 +158,7 @@ private:
 	sf::Font m_font;
 	sf::Text m_text;
 
-
-	GameState m_currentGameState = GameState::Racing;
-
+	GameState m_currentGameState = GameState::TheMenu;
 	std::unique_ptr<playGame> m_mapSelect;
 	
 	GameDifficulty m_currentDifficulty = GameDifficulty::Medium;
@@ -183,7 +184,7 @@ private:
 	std::unique_ptr<Credits>m_credits;
 	std::unique_ptr<GameOverScreen>m_gameOverScreen;
 	std::unique_ptr<SaveScreen>m_saveProfile;
-
+	std::unique_ptr<ChooseCar>m_chooseCarScreen;
 	/*Cars*/
 	/**********************/
 	std::unique_ptr<Car>m_car;

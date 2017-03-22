@@ -427,6 +427,7 @@ void Player::update(float dt, sf::View &view)
 
 void Player::draw(sf::RenderWindow & window)
 {
+
 	for (int i = 0; i < 200; i++)
 
 	{
@@ -435,8 +436,8 @@ void Player::draw(sf::RenderWindow & window)
 				window.draw(m_skidmarkSprite[i]);
 			}
 	}
-	m_car.draw(window);
 
+	m_car.draw(window);
 }
 
 
