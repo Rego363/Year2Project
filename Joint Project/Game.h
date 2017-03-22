@@ -149,7 +149,7 @@ private:
 
 
 
-	GameState m_currentGameState = GameState::Racing;
+	GameState m_currentGameState = GameState::TheLicense;
 
 	
 
