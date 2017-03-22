@@ -476,8 +476,8 @@ void Game::render()
 	case GameState::Racing:   //put in levels
 		m_window.clear(sf::Color(0, 0, 0, 255));
 		m_background->draw(m_window);
-		m_nightMode->draw(m_window);
 		m_level->render(m_window);
+		m_nightMode->draw(m_window);
 		m_window.display();
 		break;
 	case GameState::GameOver:
