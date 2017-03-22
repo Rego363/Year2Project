@@ -118,8 +118,13 @@
     <ClCompile Include="Liscence.cpp">
       <Filter>Source Files\Screens</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="background.cpp">
       <Filter>Source Files</Filter>
+=======
+    <ClCompile Include="SaveScreen.cpp">
+      <Filter>Source Files\Screens</Filter>
+>>>>>>> 13096b93abf5b964952583690d59accf02ccea3f
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -238,6 +243,9 @@
       <Filter>Headers\Screens</Filter>
     </ClInclude>
     <ClInclude Include="TurboScreen.h">
+      <Filter>Headers\Screens</Filter>
+    </ClInclude>
+    <ClInclude Include="SaveScreen.h">
       <Filter>Headers\Screens</Filter>
     </ClInclude>
   </ItemGroup>

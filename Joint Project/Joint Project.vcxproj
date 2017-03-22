@@ -156,6 +156,7 @@
     <ClCompile Include="playGame.cpp" />
     <ClCompile Include="RadioButton.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
+    <ClCompile Include="SaveScreen.cpp" />
     <ClCompile Include="Slider.cpp" />
     <ClCompile Include="SoundScreen.cpp" />
     <ClCompile Include="Specs.cpp" />
@@ -197,6 +198,7 @@
     <ClInclude Include="playGame.h" />
     <ClInclude Include="RadioButton.h" />
     <ClInclude Include="ResourceManager.h" />
+    <ClInclude Include="SaveScreen.h" />
     <ClInclude Include="Slider.h" />
     <ClInclude Include="SoundScreen.h" />
     <ClInclude Include="Specs.h" />
