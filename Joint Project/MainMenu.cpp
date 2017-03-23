@@ -3,7 +3,8 @@
 MainMenu::MainMenu(Game &game):
 	m_game(&game)
 {
-	m_title = new Label("Main Menu", 475, 50);
+	m_title = new Label("Team C Racing", 180, 50, "menuPic.png", "menuPic.png");
+	m_title->setUnderLined();
 	m_gui.addLabel(m_title);
 	m_Play = new Button("Play", 550, 250);
 	m_Play->getFocus();

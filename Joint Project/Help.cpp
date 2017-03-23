@@ -5,15 +5,22 @@ HelpScreen::HelpScreen(Game & game):
 	m_game(&game)
 {
 	//setup widgets
-	m_label = new Label("You will get no help!", 1280 / 2, 720 / 4);
-
-	m_backButton = new Button("Back", 1280 / 2, 720 / 2);
+	m_label = new Label("Drift", 50, 50, "a button.png");
+	m_label2 = new Label("Turbo", 50, 100, "y button.png");
+	m_label3 = new Label("Steer", 50, 150, "left analog.png");
+	m_label4 = new Label("Accelerate", 50, 200, "right trigger.png");
+	m_label5 = new Label("Reverse", 50, 250, "left trigger.png");
+	m_backButton = new Button("Back", 50, 720 / 2);
 	m_backButton->getFocus();
 	m_backButton->Enter = std::bind(&HelpScreen::goBack, this); //bind function
 	
 	//add widgets to gui
 	m_gui.addButton(m_backButton);
 	m_gui.addLabel(m_label);
+	m_gui.addLabel(m_label2);
+	m_gui.addLabel(m_label3);
+	m_gui.addLabel(m_label4);
+	m_gui.addLabel(m_label5);
 	m_gui.vertical = true;
 }
 

@@ -24,5 +24,10 @@ private:
 	Button* m_backButton;
 	Label* m_label;
 	int m_selectedItem = 0;
+
+	Label *m_label2;
+	Label *m_label3;
+	Label *m_label4;
+	Label *m_label5;
 };
 #endif // !HELPSCREEN
