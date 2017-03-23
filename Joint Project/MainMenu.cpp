@@ -22,8 +22,8 @@ MainMenu::MainMenu(Game &game):
 	m_Exit = new Button("Quit", 550, 550);
 	m_Exit->Enter = std::bind(&MainMenu::quit, this);
 
-	m_icons[0] = new Label("Select", 20, 680, "a button.png");
-	m_icons[1] = new Label("Move", 170, 680, "d pad.png");
+	m_icons[0] = new Label("Select", 20, 650, "a button.png");
+	m_icons[1] = new Label("Move", 170, 650, "d pad.png");
 
 	m_gui.addButton(m_Play);
 	m_gui.addButton(m_Garage);

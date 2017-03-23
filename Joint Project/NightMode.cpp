@@ -50,6 +50,11 @@ NightMode::NightMode(Game &game) :
 		loadCounter.y++;
 	}
 
+	if (!m_blankTexture.loadFromFile("blank.png"))
+	{
+		std::cout << "background failed to load" << std::endl;
+	}
+
 	if (!m_shader.loadFromFile("nightVision.frag", sf::Shader::Fragment))
 	{
 		std::cout << "frag shader failed to load" << std::endl;         //load shader
@@ -65,13 +70,18 @@ NightMode::NightMode(Game &game) :
 		std::cout << "mask failed to load" << std::endl;         //load shader
 	}
 
-	m_shader.setParameter("sceneBuffer", m_tileTexture);
+	m_shaderSprite.setTexture(m_blankTexture);
+	m_shaderSprite.scale(1.4, 1.4);
+	m_shaderSprite.setOrigin(sf::Vector2f(640, 360));
+	m_shaderSprite.setPosition(m_game->m_player->m_car.getPos());
+
+	m_shader.setParameter("sceneBuffer", m_blankTexture);
 	m_shader.setParameter("noiseTex", m_noiseTexture);
 	m_shader.setParameter("maskTex", m_mask);
 	m_shader.setParameter("elapsedTime", elapsedTime.getElapsedTime().asSeconds());
-	m_shader.setParameter("luminanceThreshold", 0.2);
-	m_shader.setParameter("colorAmplification", 4.0);
-	m_shader.setParameter("effectCoverage", 1.0);
+	m_shader.setParameter("luminanceThreshold", 0.1);
+	m_shader.setParameter("colorAmplification", 0.6);
+	m_shader.setParameter("effectCoverage", 1.1);
 }
 
 
@@ -79,6 +89,8 @@ NightMode::NightMode(Game &game) :
 void NightMode::draw(sf::RenderWindow &window)
 {
 	visible = 0; //amount of tiles visible on screen
+
+	m_shaderSprite.setPosition(m_game->m_player->m_car.getPos());
 
 	for (int i = 0; i < loadCounter.x; i++)
 	{
@@ -92,16 +104,24 @@ void NightMode::draw(sf::RenderWindow &window)
 			{
 				if (activateShader == true)
 				{
-					m_shader.setParameter("elapsedTime", elapsedTime.getElapsedTime().asSeconds() * 10 );
-					window.draw(spr, &m_shader);
+					m_shader.setParameter("elapsedTime", elapsedTime.getElapsedTime().asSeconds());
+					window.draw(m_shaderSprite, &m_shader);
 				}
 				
 			}
 		}
 	}
+
 }
 //flip the bool for activating the shader
-void NightMode::activateTheShader()
+void NightMode::activateTheShader(bool activateshader1)
 {
-	activateShader = !(activateShader);
+	if (activateshader1 == true)
+	{
+		activateShader = true;
+	}
+	else if (activateshader1 == false)
+	{
+		activateShader = false;
+	}
 }
