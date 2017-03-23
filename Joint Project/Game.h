@@ -147,6 +147,7 @@ public:
 	void resetMap();
 	LevelData m_currentLevel;
 	std::unique_ptr<TurboScreen>m_turboScreen;
+	Xbox360Controller m_xbox;
 
 private:
 	void processInput();
@@ -160,7 +161,7 @@ private:
 	sf::Font m_font;
 	sf::Text m_text;
 
-	GameState m_currentGameState = GameState::TheLicense;
+	GameState m_currentGameState = GameState::MapSelect;
 	std::unique_ptr<playGame> m_mapSelect;
 	
 	GameDifficulty m_currentDifficulty = GameDifficulty::Medium;
@@ -207,7 +208,6 @@ private:
 	std::vector<sf::CircleShape> m_easyTrack;
 	std::vector<sf::CircleShape> m_mediumTrack;
 	std::vector<sf::CircleShape> m_hardTrack;
-	Xbox360Controller m_xbox;
 
 
 

@@ -55,12 +55,13 @@ private:
 	sf::Text m_Lap;;
 	sf::Text m_turbos;
 	sf::Text easterEgg;
+	sf::Text m_pauseText;
 	float tempTime = 0;
 	int currentlap = 1;
 	GUI m_gui;
 	int m_currentSelect = 0;
-	Button *m_credits;
 	bool game_on;
+	bool m_pause;
 
 	sf::RectangleShape m_startLine;
 	
