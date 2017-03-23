@@ -64,7 +64,7 @@ void TurboScreen::smallBuy()
 		m_largeEquipped = false;
 		m_sprite.setScale(1.25, 1.25);
 	}
-
+	currentUpgrade();
 }
 
 void TurboScreen::mediumBuy()
@@ -82,6 +82,7 @@ void TurboScreen::mediumBuy()
 		m_largeEquipped = false;
 		m_sprite.setScale(1.5, 1.5);
 	}
+	currentUpgrade();
 }
 
 void TurboScreen::largeBuy()
@@ -99,9 +100,26 @@ void TurboScreen::largeBuy()
 		m_largeEquipped = true;
 		m_sprite.setScale(1.75, 1.75);
 	}
+	currentUpgrade();
 }
 
 void TurboScreen::goToGarage()
 {
 	m_game->changeGameState(GameState::Garage);
+}
+
+void TurboScreen::currentUpgrade()
+{
+	if (m_smallEquipped)
+	{
+		m_game->m_player->m_car.setTurbo(1);
+	}
+	else if (m_mediumEquipped)
+	{
+		m_game->m_player->m_car.setTurbo(2);
+	}
+	else if (m_largeEquipped)
+	{
+		m_game->m_player->m_car.setTurbo(3);
+	}
 }

@@ -14,14 +14,13 @@ GarageScreen::GarageScreen(float x, float y, Game &game):
 	m_widgets[0]->Enter = std::bind(&GarageScreen::goAccel, this);
 	m_widgets[1] = new Button("Speed", (x / 2), float(y / MAX_ITEMS + 0.2f)*3.5f);
 	m_widgets[1]->Enter = std::bind(&GarageScreen::goSpeed, this);
-	m_widgets[2] = new Button("Braking", (x / 2), float(y / MAX_ITEMS + 0.2f)*4.5f);
-	m_widgets[2]->Enter = std::bind(&GarageScreen::goBrake, this);
-	m_widgets[3] = new Button("Turbo", (x / 2), float(y / MAX_ITEMS + 0.2f)*5.5f);
-	m_widgets[3]->Enter = std::bind(&GarageScreen::goTurbo, this);
-	m_widgets[4] = new Button("Steering", (x / 2), float(y / MAX_ITEMS + 0.2f)*6.5f);
-	m_widgets[4]->Enter = std::bind(&GarageScreen::goSteer, this);
-	m_widgets[5] = new Button("Back", (x / 2), float(y / MAX_ITEMS + 0.2f)*7.5f);
-	m_widgets[5]->Enter = std::bind(&GarageScreen::goBack, this);
+	
+	m_widgets[2] = new Button("Turbo", (x / 2), float(y / MAX_ITEMS + 0.2f)*4.5f);
+	m_widgets[2]->Enter = std::bind(&GarageScreen::goTurbo, this);
+	m_widgets[3] = new Button("Steering", (x / 2), float(y / MAX_ITEMS + 0.2f)*5.5f);
+	m_widgets[3]->Enter = std::bind(&GarageScreen::goSteer, this);
+	m_widgets[4] = new Button("Back", (x / 2), float(y / MAX_ITEMS + 0.2f)*6.5f);
+	m_widgets[4]->Enter = std::bind(&GarageScreen::goBack, this);
 	
 	//add widgets to the gui
 	for each (Widget* var in m_widgets)
@@ -62,12 +61,6 @@ void GarageScreen::goAccel()
 void GarageScreen::goTurbo()
 {
 	m_game->changeGameState(GameState::Turbo);
-}
-
-//go to brakes
-void GarageScreen::goBrake()
-{
-	m_game->changeGameState(GameState::Braking);
 }
 //go to speed
 void GarageScreen::goSpeed()

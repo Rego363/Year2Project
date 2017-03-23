@@ -27,5 +27,6 @@ private:
 	sf::Texture m_textures[9]; //the textures of the cars
 	sf::Sprite m_spr; //sprite to draw them to the screen
 	float m_rotation = 0;
+	Label *m_label;
 };
 #endif

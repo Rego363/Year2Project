@@ -53,6 +53,7 @@ private:
 	sf::Text m_bestLap;
 	sf::Text m_lastLap;
 	sf::Text m_Lap;;
+	sf::Text m_turbos;
 	sf::Text easterEgg;
 	float tempTime = 0;
 	int currentlap = 1;

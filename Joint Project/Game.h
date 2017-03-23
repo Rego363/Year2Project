@@ -146,6 +146,7 @@ public:
 	std::string getBestLapTime();
 	void resetMap();
 	LevelData m_currentLevel;
+	std::unique_ptr<TurboScreen>m_turboScreen;
 
 private:
 	void processInput();
@@ -176,7 +177,6 @@ private:
 	std::unique_ptr<Splash>m_Splash;
 	std::unique_ptr<DifficultyScreen>m_diffScreen;
 	std::unique_ptr<SteeringScreen>m_steeringScreen;
-	std::unique_ptr<TurboScreen>m_turboScreen;
 	std::unique_ptr<BrakingScreen>m_brakingScreen;
 	std::unique_ptr<SpeedScreen>m_speedScreen;
 	std::unique_ptr<AccelerationScreen>m_accelerationScreen;
