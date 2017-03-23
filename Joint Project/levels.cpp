@@ -122,7 +122,6 @@ void Levels::render(sf::RenderWindow & window)
 {
 	if (game_on)
 	{
-		m_currentPlayer->draw(window);
 		m_ai->render(window);
 		m_game->m_physicsBalls->render(window);
 		m_aiTwo->render(window);

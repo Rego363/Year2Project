@@ -7,7 +7,11 @@
 
 #ifndef NIGHTMODE
 #define NIGHTMODE
-
+///<summary>
+/// Dylan Murphy
+/// class to use the night vision shader
+/// file: nightvision.frag
+///<summary>
 class NightMode {
 
 public:

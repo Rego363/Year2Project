@@ -75,13 +75,14 @@ NightMode::NightMode(Game &game) :
 	m_shaderSprite.setOrigin(sf::Vector2f(640, 360));
 	m_shaderSprite.setPosition(m_game->m_player->m_car.getPos());
 
-	m_shader.setParameter("sceneBuffer", m_blankTexture);
-	m_shader.setParameter("noiseTex", m_noiseTexture);
-	m_shader.setParameter("maskTex", m_mask);
-	m_shader.setParameter("elapsedTime", elapsedTime.getElapsedTime().asSeconds());
-	m_shader.setParameter("luminanceThreshold", 0.1);
-	m_shader.setParameter("colorAmplification", 0.6);
-	m_shader.setParameter("effectCoverage", 1.1);
+	//sets shaders variables
+	m_shader.setParameter("sceneBuffer", m_blankTexture); // blank texture to follow window
+	m_shader.setParameter("noiseTex", m_noiseTexture); // movement part which makes it look blurry
+	m_shader.setParameter("maskTex", m_mask); //black effect around screen
+	m_shader.setParameter("elapsedTime", elapsedTime.getElapsedTime().asSeconds()); //movement of noise texture
+	m_shader.setParameter("luminanceThreshold", 4.0);
+	m_shader.setParameter("colorAmplification", 0.5); // brightness of light
+	m_shader.setParameter("effectCoverage", 1.1);  //how much of screen
 }
 
 
