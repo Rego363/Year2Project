@@ -86,7 +86,17 @@ Game::Game() :
 	music.setBuffer(m_buffer);
 	music.setLoop(true);
 	music.setVolume(100);
-	music.play();
+	//music.play();
+
+	if (!m_buffer2.loadFromFile("playing music.wav"))
+	{
+		std::cout << "NO MUSIC" << std::endl;
+	}
+
+	m_gameMusic.setBuffer(m_buffer2);
+	m_gameMusic.setLoop(true);
+	m_gameMusic.setVolume(100);
+	//m_gameMusic.play();
 
 	/*  FOR TESTING*/
 	/*******************************************************************************/
@@ -236,6 +246,12 @@ void Game::processInput()
 void Game::update(sf::Time time)
 {
 	totalTime += timeSinceLastUpdate.asSeconds();
+
+	if (!m_currentGameState == GameState::Racing)
+	{
+		m_player->m_car.m_soundEffect.stop();
+		m_player->m_car.m_speed = 0;
+	}
 
 	switch (m_currentGameState)
 	{

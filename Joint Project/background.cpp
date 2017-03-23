@@ -3,14 +3,13 @@
 
 
 
-bool Background::activateShader = false;
+bool Background::activateShader = false; //shader off
 
-//constructor
+//constructor for the background and the tiles
 Background::Background( Game &game):
 	m_game(&game)
 {
 	loadCounter = sf::Vector2i(0, 0);
-
 	openFile = std::ifstream("Map1.txt"); //file with the tile coords
 	if (openFile.is_open())
 	{
@@ -53,14 +52,10 @@ Background::Background( Game &game):
 
 	m_shader.setParameter("texture", m_tileTexture);
 	m_shader.setParameter("blur_radius", 0.008f); //set radius variable
-
-	m_renderTexture.create(27 * 200, 25 * 200);
-	m_renderSprite.setTexture(m_renderTexture.getTexture());
-	m_image = m_renderTexture.getTexture().copyToImage();
 }
 
 
-//draw function where the texture to be drawn is set 
+//draw function where the texture to be drawn is set and there coordinates are also set
 void Background::draw(sf::RenderWindow &window)
 {
 	visible = 0; //amount of tiles visible on screen
@@ -91,17 +86,18 @@ void Background::draw(sf::RenderWindow &window)
 			}
 
 			//full speed if on road
-			if (spr.getGlobalBounds().intersects(m_game->m_player->m_car.getSprite().getGlobalBounds()))
+			if (spr.getGlobalBounds().intersects(m_game->m_player->m_car.getSprite().getGlobalBounds())&&isOnTrack==true)
 			{
 				if (m_game->m_player->m_car.useTurbo == false)
 				{
-					m_game->m_player->m_car.setMaxSpeed(10);
+					m_game->m_player->m_car.setMaxSpeed(10); //normal speed
 				}
 				else
 				{
-					m_game->m_player->m_car.setMaxSpeed(20);
+					m_game->m_player->m_car.setMaxSpeed(20); //turbo speed
 				}
 			}
+
 			//slow down if on grass
 			else if (spr.getGlobalBounds().intersects(m_game->m_player->m_car.getSprite().getGlobalBounds()) && isOnTrack == false)
 			{
@@ -120,11 +116,7 @@ void Background::draw(sf::RenderWindow &window)
 				m_game->m_player->m_car.collision();
 
 			}
-			if (color.b >0)
-			{
-				m_game->m_player->m_car.setMaxSpeed(0);
-			}
-
+			
 			//only draw if the tile is in the windows view
 			if (m_game->isInView(spr))
 			{

@@ -167,7 +167,6 @@
     <ClCompile Include="SteeringScreen.cpp" />
     <ClCompile Include="TurboScreen.cpp" />
     <ClCompile Include="Widget.cpp" />
-    <ClCompile Include="WorldSquares.cpp" />
     <ClCompile Include="XBOX360CONTROLLER.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -211,7 +210,6 @@
     <ClInclude Include="SteeringScreen.h" />
     <ClInclude Include="TurboScreen.h" />
     <ClInclude Include="Widget.h" />
-    <ClInclude Include="WorldSquares.h" />
     <ClInclude Include="XBOX360CONTROLLER.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

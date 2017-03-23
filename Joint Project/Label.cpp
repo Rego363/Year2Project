@@ -39,7 +39,7 @@ Label::Label(std::string s, float x, float y, std::string textureName):
 
 	hasTexture = true;
 	m_id = "label";
-	if (!m_font.loadFromFile("Figurativative.ttf"))
+	if (!m_font.loadFromFile("Fonts/AmericanCaptain.ttf"))
 	{
 		//error message
 	}

@@ -4,7 +4,7 @@
 #include "Animation.h"
 #include "Label.h"
 #include <iostream>
-
+#include<SFML\Audio.hpp>
 #ifndef CAR
 #define CAR
 
@@ -27,10 +27,10 @@ public:
 	void increaseAiRotation();
 	void decreaseAiRotation(); //turning/rotating ai car
 
-	void drift(float rotation);
+	void drift(float rotation); //drifting 
 	void setRotation(float rotation);
 
-	void turbo(float MaxturboSpeed);
+	void turbo(float MaxturboSpeed); //turbo
 	bool useTurbo = false;
 
 	sf::Vector2f getPos(); //returns player position
@@ -38,7 +38,6 @@ public:
 	void slowDown();
 	bool isCarMoving();
 	void breaks();
-	void offTrack();
 	void setMaxSpeed(float i);
 	
 	void collision();
@@ -52,7 +51,8 @@ public:
 	void setTexture(sf::Texture &texture,float scaleX, float scaleY);
 
 	bool turboFlame = false;
-
+	bool isMoving;
+	sf::Sound m_soundEffect;
 private:
 	
 	float m_maxSpeed;
@@ -64,16 +64,19 @@ private:
 	sf::Sprite m_sprite; //car sprite
 	sf::Texture m_blankTexture2;
 	sf::Vector2f m_position; //cars position on screen
-	bool isMoving;
+//	bool isMoving;
 	float m_acceleration;
 	float m_deacceleration;
 
 	Label *currentPos;
 
 
+
 	Animation *animation;
 
 	sf::Shader m_shader;
 	sf::Shader m_Nshader;
+	sf::SoundBuffer m_buffer;
+	
 };
 #endif

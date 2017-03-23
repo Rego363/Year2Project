@@ -22,10 +22,12 @@ public:
 
 private:
 	int m_selectedItem = 0;
+	//widgets
 	static const int MAX_ITEMS = 6;
 	Widget* m_widgets[MAX_ITEMS];
 	Label* m_label;
-	GUI m_gui;
+	GUI m_gui; //gui
+
 	Game *m_game;
 
 };

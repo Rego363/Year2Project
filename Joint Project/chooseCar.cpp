@@ -1,8 +1,10 @@
 #include "chooseCar.h"
 
+//construct the choosecar screen
 ChooseCar::ChooseCar(Game & game):
 	m_game(&game)
 {
+	//setup the buttons
 	m_cars[0] = new Button("Lambo Yellow", 100, 50);
 	m_cars[0]->getFocus();
 	m_cars[0]->Enter = std::bind(&ChooseCar::chooseCar, this);
@@ -26,9 +28,10 @@ ChooseCar::ChooseCar(Game & game):
 
 	for each  (Button* var in m_cars)
 	{
-		m_gui.addButton(var);
+		m_gui.addButton(var);     //add them to the gui
 	}
 
+	//load all of the textures
 	if (!m_textures[0].loadFromFile("lambo.png"))
 	{
 
@@ -65,6 +68,7 @@ ChooseCar::ChooseCar(Game & game):
 	{
 
 	}
+	//setup the sprite
 	m_spr.setTexture(m_textures[0]);
 	m_spr.setPosition(700, 300);
 	m_spr.setOrigin(m_spr.getTextureRect().width / 2.0, m_spr.getTextureRect().height / 2.0);
@@ -73,17 +77,18 @@ ChooseCar::ChooseCar(Game & game):
 	
 }
 
+//draw the sprite and the gui to the window
 void ChooseCar::draw(sf::RenderWindow & window)
 {
 	m_gui.draw(window);
 	window.draw(m_spr);
-
 }
 
+//update the sprites texture and the gui object
 void ChooseCar::update()
 {
 	m_gui.update(m_selectedItem, 9);
-	if (m_cars[0]->checkFocus() == true)
+	if (m_cars[0]->checkFocus() == true) //if button is highlighted show the approriate car
 	{
 		m_spr.setTexture(m_textures[0]);
 		m_spr.setScale(1, 1);
@@ -130,6 +135,7 @@ void ChooseCar::update()
 		
 	}
 
+	//spin the car so it looks nicer
 	m_rotation += 0.5;
 	if (m_rotation >= 360)
 	{
@@ -139,11 +145,13 @@ void ChooseCar::update()
 
 }
 
+//return the texture
 sf::Texture ChooseCar::getCar()
 {
-	return sf::Texture();
+	return *m_spr.getTexture();
 }
 
+//set the car texture then go to the garage screen
 void ChooseCar::chooseCar()
 {
 	m_game->m_player->m_car.setTexture(m_textures[m_selectedItem], m_spr.getScale().x, m_spr.getScale().y);
