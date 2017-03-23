@@ -12,11 +12,11 @@ void main ()
   if (gl_TexCoord[0].x < effectCoverage) 
   {
     vec2 uv;           
-    uv.x = 5.0*sin(elapsedTime*0.01);                                 
+    uv.x = 5.0*sin(elapsedTime*1000.01);                                 
     uv.y = 0.0*cos(elapsedTime*1.0);                                 
     float m = texture2D(maskTex, gl_TexCoord[0].st).r;
     vec3 n = texture2D(noiseTex, 
-                 (gl_TexCoord[0].st*3.5) * uv).rgb;
+                 (gl_TexCoord[0].st* 5.5) - uv).rgb;
     vec3 c = texture2D(sceneBuffer, gl_TexCoord[0].st 
                                * (n.xy*0.005)).rgb;
   
@@ -33,5 +33,5 @@ void main ()
                    gl_TexCoord[0].st);
    }
   gl_FragColor.rgb = finalColor.rgb;
-  gl_FragColor.a = 0.1;
+  gl_FragColor.a = 0.05;
 }			

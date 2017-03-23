@@ -79,8 +79,8 @@ NightMode::NightMode(Game &game) :
 	m_shader.setParameter("noiseTex", m_noiseTexture);
 	m_shader.setParameter("maskTex", m_mask);
 	m_shader.setParameter("elapsedTime", elapsedTime.getElapsedTime().asSeconds());
-	m_shader.setParameter("luminanceThreshold", 4.0);
-	m_shader.setParameter("colorAmplification", 0.5);
+	m_shader.setParameter("luminanceThreshold", 0.1);
+	m_shader.setParameter("colorAmplification", 0.6);
 	m_shader.setParameter("effectCoverage", 1.1);
 }
 
