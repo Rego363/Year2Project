@@ -9,19 +9,22 @@ Levels::Levels(LevelData &level, Player &player,  Ai &ai, Ai &aiTwo, Ai &aiThree
 										m_aiThree(&aiThree),
 										m_game(&game)
 {
-	loadImages();
 	loadFont();
+
+	m_countDownNumber.setFont(m_font);	
+	m_currentLapTime.setFont(m_font);
+	m_bestLap.setFont(m_font);
+	m_lastLap.setFont(m_font);
+	m_Lap.setFont(m_font);
+	easterEgg.setFont(m_font);
+	m_currentSpeed.setFont(m_font);
+	m_turbos.setFont(m_font);
 	setupTexts();
 
 	m_startLine.setPosition(m_currentPlayer->m_car.getPos().x + 40, m_currentPlayer->m_car.getPos().y - 100);
 	m_startLine.setSize(sf::Vector2f(5, 200));
 	m_startLine.setFillColor(sf::Color::Red);
 
-
-	//m_ai->m_car.scaleAi();
-	/*m_ai->m_car.scaleAi();
-	m_aiTwo->m_car.scaleAi();
-	m_aiThree->m_car.scaleAi();*/
 
 	game_on = true;
 	m_countDown = true;
@@ -166,19 +169,11 @@ void Levels::render(sf::RenderWindow & window)
 	}
 }
 
-//load images in for cars/background/etc..
-void Levels::loadImages()
-{
-	if (!m_lambo.loadFromFile(m_currentLevel->m_lambo.m_fileName))
-	{
-		std::cout << "failed to load font" << std::endl;
-	}
-}
-
 //load in fonts
 void Levels::loadFont()
 {
-	if (!m_Font.loadFromFile(m_currentLevel->m_Font.m_fileNameFont))
+	//m_font = m_game->m_manager->m_fontHolder["americanCap"];
+	if (!m_font.loadFromFile(m_currentLevel->m_Font.m_fileNameFont))
 	{
 		std::cout << "failed to load font" << std::endl;
 	}
@@ -224,50 +219,45 @@ void Levels::setupTexts()
 	m_countDownNumber.setPosition(m_currentPlayer->m_car.getPos().x + 100, m_currentPlayer->m_car.getPos().y);
 	m_countDownNumber.setCharacterSize(100);
 	m_countDownNumber.setString("Race Starts in \n        3");
-	m_countDownNumber.setFont(m_Font);
 
 	m_currentLapTime.setPosition(m_currentPlayer->m_car.getPos().x + 300, m_currentPlayer->m_car.getPos().y - 350);
 	m_currentLapTime.setCharacterSize(50);
 	m_currentLapTime.setString("Time: ");
-	m_currentLapTime.setFont(m_Font);
 
 	m_bestLap.setPosition(m_currentPlayer->m_car.getPos().x - 620, m_currentPlayer->m_car.getPos().y - 350);
 	m_bestLap.setCharacterSize(50);
 	m_bestLap.setString("Best Lap Time: ");
-	m_bestLap.setFont(m_Font);
 
 	m_lastLap.setPosition(m_currentPlayer->m_car.getPos().x - 620, m_currentPlayer->m_car.getPos().y - 310);
 	m_lastLap.setCharacterSize(50);
 	m_lastLap.setString("Last Lap Time: ");
-	m_lastLap.setFont(m_Font);
 
 	m_Lap.setPosition(m_currentPlayer->m_car.getPos().x - 620, m_currentPlayer->m_car.getPos().y - 270);
 	m_Lap.setCharacterSize(50);
 	m_Lap.setString("Lap: " + to_string(currentlap) + "/" + to_string(m_maxLaps));
-	m_Lap.setFont(m_Font);
 
 	m_turbos.setPosition(m_currentPlayer->m_car.getPos().x - 620, m_currentPlayer->m_car.getPos().y - 190);
 	m_turbos.setCharacterSize(50);
 	m_turbos.setString("turbos: " + to_string((int)m_game->m_player->m_car.getTurbos()));
-	m_turbos.setFont(m_Font);
 
 	easterEgg.setPosition(5700, 215);
 	easterEgg.setCharacterSize(50);
 	easterEgg.setString("Pete is cool");
-	easterEgg.setFont(m_Font);
 	easterEgg.setColor(sf::Color::Red);
 	
 	m_currentSpeed.setPosition(m_currentPlayer->m_car.getPos().x - 620, m_currentPlayer->m_car.getPos().y - 230);
 	m_currentSpeed.setCharacterSize(50);
 	m_currentSpeed.setString("Speed: " + to_string(m_currentPlayer->m_car.m_speed));
-	m_currentSpeed.setFont(m_Font);
+	m_currentSpeed.setFont(m_font);
 
 	m_pauseText.setPosition(m_currentPlayer->m_car.getPos().x, m_currentPlayer->m_car.getPos().y - 300);
 	m_pauseText.setCharacterSize(100);
 	m_pauseText.setString("Game Paused");
-	m_pauseText.setFont(m_Font);
+	m_pauseText.setFont(m_font);
 	m_pauseText.setColor(sf::Color::Red);
+
 }
+
 
 // sets gamestate
 void Levels::setStateBack()
@@ -286,15 +276,17 @@ std::string Levels::getBestLapTime()
 /// </summary>
 void Levels::resetLevel()
 {
-	loadImages();
+
+	m_startRace.restart();
+	m_raceTime.restart();
 	loadFont();
 	m_currentPlayer->m_car.resetPosition();
 	m_currentPlayer->m_car.m_rotation = 0;
 	m_currentPlayer->m_car.setRotation(0);
-	setupTexts();
 	m_startLine.setPosition(m_currentPlayer->m_car.getPos().x + 40, m_currentPlayer->m_car.getPos().y - 100);
 	m_startLine.setSize(sf::Vector2f(5, 200));
 	m_startLine.setFillColor(sf::Color::Red);
+	setupTexts();
 	m_currentSelect = 0;
 	m_gui.vertical = true;
 	game_on = true;
@@ -313,16 +305,19 @@ void Levels::resetLevel()
 	m_ai->resetNode();
 	m_aiTwo->resetNode();
 	m_aiThree->resetNode();
+	tempTime = 1000000;
 
 	if (m_game->m_turboScreen->m_smallEquipped == true)
 	{
 		m_currentPlayer->m_car.setTurbo(1);
 	}
-	else if (m_game->m_turboScreen->m_mediumEquipped == true)
+
+   if (m_game->m_turboScreen->m_mediumEquipped == true)
 	{
 		m_currentPlayer->m_car.setTurbo(2);
 	}
-	else if (m_game->m_turboScreen->m_largeEquipped == true)
+
+	if (m_game->m_turboScreen->m_largeEquipped == true)
 	{
 		m_currentPlayer->m_car.setTurbo(3);
 	}

@@ -4,13 +4,9 @@
 AccelerationScreen::AccelerationScreen(Game & game):
 	m_game(&game)
 {
-	if (!m_texture.loadFromFile(m_game->getGarageTexture()))
-	{
-		cout << "Error loading Braking texture" << endl;
-	} //load
-
-	//setup sprite
-	m_sprite.setTexture(m_texture);
+	sf::Texture& texture = m_game->m_manager->m_textureHolder["garage"];
+	m_sprite.setTexture(texture);
+	
 	m_sprite.setTextureRect(sf::IntRect(1113, 764, 146, 145));
 	m_sprite.setPosition(600, 300);
 

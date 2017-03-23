@@ -9,9 +9,10 @@ namespace Math
 
 	sf::Vector2f truncate(sf::Vector2f v, float num)
 	{
-		num = num / thor::length(v);
-		num = num < 1.0 ? num : 1.0;
-		v *= num;
+		float i;
+		i = num / thor::length(v);
+		i = i < 1.0 ? i : 1.0;
+		v *= i;
 		return v;
 	}
 
@@ -23,5 +24,14 @@ namespace Math
 	float length(sf::Vector2f a)
 	{
 		return std::sqrt((a.x * a.x) + (a.y * a.y));
+	}
+
+
+
+	bool lineIntersectsCircle(sf::Vector2f ahead, sf::Vector2f halfAhead, sf::Sprite sprite)
+	{
+		return distance(sprite.getPosition(), ahead) < sprite.getGlobalBounds().width ||
+			distance(sprite.getPosition(), halfAhead) < sprite.getGlobalBounds().width;
+		
 	}
 }

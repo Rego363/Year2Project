@@ -38,16 +38,13 @@ private:
 	Button *moveDowner;
 	Button *moveDownest;
 	Button *goBack;
-	sf::Texture m_texture;
-	sf::Sprite m_sprite; 
-	sf::Texture m_texture2;
-	sf::Sprite m_sprite2;
 	int m_currentSelect;
 	//void setRectColor(sf::Color color);
 	sf::RectangleShape m_rect;
 	bool maptrue = false;
 
-
+	sf::Sprite dayMapSprite;
+	sf::Sprite nightMapSprite;
 	Game *m_game;
 	void goToMenu();
 	void goToSpecs();

@@ -1,10 +1,13 @@
-#pragma once
 #include<SFML\Graphics.hpp>
 #include<math.h>
 #include "Animation.h"
 #include "Label.h"
 #include <iostream>
+#include "Thor\Particles.hpp"
+#include "Thor\Animations.hpp"
+#include "Game.h"
 #include<SFML\Audio.hpp>
+
 #ifndef CAR
 #define CAR
 
@@ -14,7 +17,7 @@ Cars to be used by both the player and the Ai racers
 class Car {
 public:
 	
-	Car(sf::Texture  &texture, sf::Vector2f const & pos); //constructor
+	Car(Game &game,sf::Texture  &texture, sf::Vector2f const & pos); //constructor
 	void update(float dt); //update loop
 	void aiUpdate(sf::Vector2f velocity);	// Ai update loop
 	void draw(sf::RenderWindow &window); //draw loop
@@ -72,7 +75,7 @@ public:
 	float getTurbos();
 
 private:
-	
+	Game *m_game;
 	float m_maxSpeed;
 	float OriginalMaxSpeed;
 	sf::Clock shaderclock;
@@ -88,6 +91,13 @@ private:
 	float m_deacceleration;
 
 	Label *currentPos;
+
+	//Skid mark variables
+	sf::Texture skidTexture;
+	thor::ParticleSystem system;
+	sf::Clock clock;
+	thor::UniversalEmitter emitter;
+	thor::FadeAnimation fader;
 
 
 

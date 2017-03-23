@@ -1,6 +1,7 @@
 #ifndef GAME
 #define GAME
 
+#include <Thor\Resources.hpp>
 #include "include\sfeMovie\Movie.hpp"
 #include "include\sfeMovie\Visibility.hpp"
 #include "include\sfeMovie\StreamSelection.hpp"
@@ -37,9 +38,9 @@
 #include "SpeedScreen.h"
 #include "AccelerationScreen.h"
 #include "changeProfile.h"
+#include "LevelLoad.h"
 #include "ResourceManager.h"
 #include "levels.h"
-#include "WorldSquares.h"
 #include "Ai.h"
 #include "EnterNameScreen.h"
 #include <SFML\Audio.hpp>
@@ -53,7 +54,6 @@
 #include"chooseCar.h"
 
 using namespace std;
-
 class SoundScreen;
 class DisplayScreen;
 class OptionsScreen;
@@ -73,7 +73,6 @@ class AccelerationScreen;
 class specs;
 class playGame;
 class changeProfile;
-class worldSquares;
 class Levels;
 class EnterNameScreen;
 class Background;
@@ -133,6 +132,7 @@ public:
 	std::string getGarageTexture();
 	sf::RenderWindow m_window;
 	std::unique_ptr<Player> m_player;
+	std::unique_ptr<ResourceManager> m_manager;
 	string nameDisplay();
 	sf::Sound music;
 	sf::Sound m_gameMusic;
@@ -201,8 +201,6 @@ private:
 
 	sf::View m_view;
 	sf::View m_view2;
-	sf::Texture m_startCar;
-	sf::Texture m_aistartCar;
 	sf::Vector2f m_startPos;
 
 	std::vector<sf::CircleShape> m_easyTrack;
@@ -230,15 +228,10 @@ private:
 
 	/*******************************/
 
-	sf::Texture m_textureTest;
-	sf::Texture m_textureTest2;
-
 	sf::FloatRect rect;
-	sf::Texture m_backgroundImage;
 	sf::Sprite sprBack;
 
 	// Shader 
-	sf::Texture m_blankTexture;
 	sf::Sprite m_shaderSprite;
 	sf::Shader m_smokeShader;
 

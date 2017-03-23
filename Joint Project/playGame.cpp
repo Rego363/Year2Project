@@ -19,19 +19,14 @@ playGame::playGame(Game &game):
 	goBack->Enter = std::bind(&playGame::goToMenu, this);
 
 
-	if (!m_texture.loadFromFile(m_game->m_currentLevel.m_map1.m_fileName))
-	{
-		//handle
-	}
-	m_sprite.setTexture(m_texture);
-	m_sprite.setPosition(0, 0);
+	sf::Texture& dayMapTexture = m_game->m_manager->m_textureHolder["dayLightMap"];
+	dayMapSprite.setTexture(dayMapTexture);
+	dayMapSprite.setPosition(0, 0);
 	
-	if (!m_texture2.loadFromFile(m_game->m_currentLevel.m_map2.m_fileName))
-	{
-		//handle
-	}
-	m_sprite2.setTexture(m_texture2);
-	m_sprite2.setPosition(0, 0);
+
+	sf::Texture& nightMapTexture = m_game->m_manager->m_textureHolder["nightVisionMap"];
+	nightMapSprite.setTexture(nightMapTexture);
+	nightMapSprite.setPosition(0, 0);
 
 
 	m_gui.addButton(moveRight);
@@ -41,10 +36,10 @@ playGame::playGame(Game &game):
 	m_currentSelect = 0;
 	m_gui.vertical = true;
 	m_title->changeTextSize(100);
-	m_sprite.setPosition(400, 200);
-	m_sprite.setScale(0.5, 0.5);
-	m_sprite2.setPosition(400, 200);
-	m_sprite2.setScale(0.5, 0.5);
+	dayMapSprite.setPosition(400, 200);
+	dayMapSprite.setScale(0.5, 0.5);
+	nightMapSprite.setPosition(400, 200);
+	nightMapSprite.setScale(0.5, 0.5);
 
 }
 
@@ -61,12 +56,12 @@ void playGame::render(sf::RenderWindow & window)
 
 	if (m_currentSelect == 0)
 	{
-		window.draw(m_sprite);
+		window.draw(dayMapSprite);
 	}
 
 	if (m_currentSelect == 1)
 	{
-		window.draw(m_sprite2);
+		window.draw(nightMapSprite);
 	}
 
 	m_gui.draw(window);

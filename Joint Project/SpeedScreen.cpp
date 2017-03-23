@@ -3,11 +3,8 @@
 SpeedScreen::SpeedScreen(Game & game) :
 	m_game(&game)
 {
-	if (!m_texture.loadFromFile(m_game->getGarageTexture()))
-	{
-		cout << "Error loading steering texture" << endl;
-	}
-	m_sprite.setTexture(m_texture);
+	sf::Texture& texture = m_game->m_manager->m_textureHolder["garage"];
+	m_sprite.setTexture(texture);
 	m_sprite.setTextureRect(sf::IntRect(507, 535, 200, 200));
 	m_sprite.setPosition(600, 300);
 

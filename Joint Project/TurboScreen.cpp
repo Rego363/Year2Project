@@ -3,11 +3,9 @@
 TurboScreen::TurboScreen(Game & game):
 	m_game(&game)
 {
-	if (!m_texture.loadFromFile(m_game->getGarageTexture()))
-	{
-		cout << "Error loading steering texture" << endl;
-	}
-	m_sprite.setTexture(m_texture);
+	sf::Texture& texture = m_game->m_manager->m_textureHolder["garage"];
+	m_sprite.setTexture(texture);
+
 	m_sprite.setTextureRect(sf::IntRect(1096, 313, 179, 160));
 	m_sprite.setPosition(600, 300);
 
@@ -34,7 +32,6 @@ TurboScreen::TurboScreen(Game & game):
 		m_gui.addWidget(var);
 	}
 	m_gui.vertical = true;
-
 	m_smallEquipped = true;
 }
 

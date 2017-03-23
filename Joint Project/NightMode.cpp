@@ -1,7 +1,4 @@
 #include "NightMode.h"
-#include <iostream>
-
-
 
 bool NightMode::activateShader = false;
 
@@ -50,39 +47,29 @@ NightMode::NightMode(Game &game) :
 		loadCounter.y++;
 	}
 
-	if (!m_blankTexture.loadFromFile("blank.png"))
-	{
-		std::cout << "background failed to load" << std::endl;
-	}
-
 	if (!m_shader.loadFromFile("nightVision.frag", sf::Shader::Fragment))
 	{
 		std::cout << "frag shader failed to load" << std::endl;         //load shader
 	}
 
-	if (!m_noiseTexture.loadFromFile("noisetexture.jpg"))
-	{
-		std::cout << "noise failed to load" << std::endl;         //load shader
-	}
+	sf::Texture& blankTexture = m_game->m_manager->m_textureHolder["blankBackground"];
+	sf::Texture& noiseTexture = m_game->m_manager->m_textureHolder["noise"]; //blurryness of nightvision
+	sf::Texture& mask = m_game->m_manager->m_textureHolder["mask"]; //goggles effect
 
-	if (!m_mask.loadFromFile("mask.png"))
-	{
-		std::cout << "mask failed to load" << std::endl;         //load shader
-	}
+	//sets shaders variables
+	m_shader.setParameter("sceneBuffer", m_blankTexture); // blank texture to follow window
+	m_shader.setParameter("noiseTex", noiseTexture);// movement part which makes it look blurry
+	m_shader.setParameter("maskTex", mask); //black effect around screen
+	m_shader.setParameter("elapsedTime", elapsedTime.getElapsedTime().asSeconds());//movement of noise texture
+	m_shader.setParameter("luminanceThreshold", 4.0);
+	m_shader.setParameter("colorAmplification", 0.5); // brightness of light
+	m_shader.setParameter("effectCoverage", 1.1);//how much of screen
 
 	m_shaderSprite.setTexture(m_blankTexture);
 	m_shaderSprite.scale(1.4, 1.4);
 	m_shaderSprite.setOrigin(sf::Vector2f(640, 360));
 	m_shaderSprite.setPosition(m_game->m_player->m_car.getPos());
 
-	//sets shaders variables
-	m_shader.setParameter("sceneBuffer", m_blankTexture); // blank texture to follow window
-	m_shader.setParameter("noiseTex", m_noiseTexture); // movement part which makes it look blurry
-	m_shader.setParameter("maskTex", m_mask); //black effect around screen
-	m_shader.setParameter("elapsedTime", elapsedTime.getElapsedTime().asSeconds()); //movement of noise texture
-	m_shader.setParameter("luminanceThreshold", 4.0);
-	m_shader.setParameter("colorAmplification", 0.5); // brightness of light
-	m_shader.setParameter("effectCoverage", 1.1);  //how much of screen
 }
 
 

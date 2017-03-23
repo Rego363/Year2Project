@@ -19,7 +19,6 @@ public:
 	bool m_mediumEquipped;
 	bool m_largeEquipped;
 private:
-	sf::Texture m_texture;
 	sf::Sprite m_sprite;
 	Label *m_label;
 	Label *m_playerMoney;

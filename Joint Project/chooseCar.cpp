@@ -34,43 +34,24 @@ ChooseCar::ChooseCar(Game & game):
 		m_gui.addButton(var);     //add them to the gui
 	}
 
-	//load all of the textures
-	if (!m_textures[0].loadFromFile("lambo.png"))
-	{
+	m_textures[0] = m_game->m_manager->m_textureHolder["yellowCar"];
 
-	}
-	if (!m_textures[1].loadFromFile("greenlambo.png"))
-	{
+	m_textures[1] = m_game->m_manager->m_textureHolder["greenCar"];
 
-	}
-	if (!m_textures[2].loadFromFile("bluelambo.png"))
-	{
+	m_textures[2] = m_game->m_manager->m_textureHolder["blueCar"];
 
-	}
-	if (!m_textures[3].loadFromFile("redlambo.png"))
-	{
+	m_textures[3] = m_game->m_manager->m_textureHolder["redCar"];
 
-	}
-	if (!m_textures[4].loadFromFile("greylambo.png"))
-	{
+	m_textures[4] = m_game->m_manager->m_textureHolder["greyCar"];
 
-	}
-	if (!m_textures[5].loadFromFile("whitelambo.png"))
-	{
+	m_textures[5] = m_game->m_manager->m_textureHolder["whiteCar"];
 
-	}
-	if (!m_textures[6].loadFromFile("police.png"))
-	{
+	m_textures[6] = m_game->m_manager->m_textureHolder["policeCar"];
 
-	}
-	if (!m_textures[7].loadFromFile("ambulance.png"))
-	{
+	m_textures[7] = m_game->m_manager->m_textureHolder["ambulance"];
 
-	}
-	if (!m_textures[8].loadFromFile("bus.png"))
-	{
+	m_textures[8] = m_game->m_manager->m_textureHolder["bus"];
 
-	}
 	//setup the sprite
 	m_spr.setTexture(m_textures[0]);
 	m_spr.setPosition(700, 300);

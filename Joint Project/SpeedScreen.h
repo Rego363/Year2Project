@@ -16,7 +16,6 @@ public:
 
 	void currentUpgrade();
 private:
-	sf::Texture m_texture;
 	sf::Sprite m_sprite;
 	Label *m_label;
 	Label *m_playerMoney;

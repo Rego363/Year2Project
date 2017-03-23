@@ -10,5 +10,6 @@ namespace Math
 	sf::Vector2f truncate(sf::Vector2f v, float num);
 	float dotProduct(sf::Vector2f a, sf::Vector2f b);
 	float length(sf::Vector2f a);
+	bool lineIntersectsCircle(sf::Vector2f ahead, sf::Vector2f halfAhead, sf::Sprite sprite);
 };
 
