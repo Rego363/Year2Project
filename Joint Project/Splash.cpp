@@ -8,7 +8,7 @@ Splash::Splash(Game & game) : m_game(&game)
 	m_animation.setVolume(100);
 
 	m_currentSelect = 0;
-	m_button = new Button("Start Game", 560, 600);
+	m_button = new Button("Press A", 560, 600);
 	m_button->getFocus();
 	m_button->Enter = std::bind(&Splash::setStateBack, this);
 	m_gui.addButton(m_button);
