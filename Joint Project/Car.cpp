@@ -242,10 +242,23 @@ void Car::setMaxSpeed(float i)
 //Function for when car collides with brick wall
 void Car::collision()
 {
-	m_rotation -= 180;
+
+	//m_position -= m_sprite.getPosition();
+
+	//m_rotation -= 180;
 	m_sprite.setRotation(m_rotation);
 
+	m_speed *= -1;
+	m_speed -= 0.4f;
 
+	/*if (m_rotation <= 178)
+		m_sprite.setPosition(m_sprite.getPosition().x - 20, m_sprite.getPosition().y + 20);
+	
+	if(m_rotation >= 182)
+		m_sprite.setPosition(m_sprite.getPosition().x  +20, m_sprite.getPosition().y - 20);
+	*/
+	//	m_sprite.setPosition(m_sprite.getPosition().x - 20, m_sprite.getPosition().y + 20);
+	
 }
 
 // sets the ai position on startup
