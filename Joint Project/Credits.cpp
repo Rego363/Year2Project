@@ -27,7 +27,7 @@ void Credits::update()
 
 	m_credits.update();
 	m_play = false;
-
+	
 	
 	if (m_credits.getStatus() == 0)
 	{
