@@ -98,6 +98,8 @@ void Levels::update(float dt, sf::View &view)
 
 				if (currentlap > m_maxLaps)
 				{
+					m_currentPlayer->m_car.m_speed = 0;
+					m_currentPlayer->m_car.m_soundEffect.stop();
 					game_on = false;
 				}
 
@@ -108,6 +110,7 @@ void Levels::update(float dt, sf::View &view)
 	else
 	{
 		m_gui.update(m_currentSelect, 1);
+		m_currentPlayer->m_car.m_speed = 0;
 	}
 }
 

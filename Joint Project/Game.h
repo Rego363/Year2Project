@@ -135,6 +135,7 @@ public:
 	std::unique_ptr<Player> m_player;
 	string nameDisplay();
 	sf::Sound music;
+	sf::Sound m_gameMusic;
 
 	int playerMoney();
 	void chargePlayer(int amount);
@@ -159,6 +160,7 @@ private:
 	sf::Text m_text;
 
 	GameState m_currentGameState = GameState::Racing;
+
 	std::unique_ptr<playGame> m_mapSelect;
 	
 	GameDifficulty m_currentDifficulty = GameDifficulty::Medium;
@@ -213,6 +215,7 @@ private:
 	LevelLoader m_levelLoader;
 	bool hasName=false;
 	sf::SoundBuffer m_buffer;
+	sf::SoundBuffer m_buffer2;
 	sf::Clock clock;
 	sf::Time timeSinceLastUpdate;
 	sf::Time timePerFrame;

@@ -1,8 +1,10 @@
 #include "GarageScreen.h"
 
+//construct the garage screen
 GarageScreen::GarageScreen(float x, float y, Game &game):
 	m_game(&game)
 {
+	//setup all the widgets
 	m_label = new Label("Garage", (x / 2), float(y / MAX_ITEMS + 0.2f)*0.1f);
 	m_label->changeTextSize(70);
 	m_label->setUnderLined();
@@ -21,6 +23,7 @@ GarageScreen::GarageScreen(float x, float y, Game &game):
 	m_widgets[5] = new Button("Back", (x / 2), float(y / MAX_ITEMS + 0.2f)*7.5f);
 	m_widgets[5]->Enter = std::bind(&GarageScreen::goBack, this);
 	
+	//add widgets to the gui
 	for each (Widget* var in m_widgets)
 	{
 		m_gui.addWidget(var);
@@ -31,41 +34,47 @@ GarageScreen::GarageScreen(float x, float y, Game &game):
 	
 }
 
+//update the gui object
 void GarageScreen::update()
 {
 	m_gui.update(m_selectedItem, MAX_ITEMS);
 }
 
+//draw the gui object
 void GarageScreen::draw(sf::RenderWindow &window)
 {
 	m_gui.draw(window);
 }
 
+//go to the menu
 void GarageScreen::goBack()
 {
 	m_game->changeGameState(GameState::TheMenu);
 }
 
+//go to acceleration
 void GarageScreen::goAccel()
 {
 	m_game->changeGameState(GameState::Acceleration);
 }
 
+//go to turbo
 void GarageScreen::goTurbo()
 {
 	m_game->changeGameState(GameState::Turbo);
 }
 
+//go to brakes
 void GarageScreen::goBrake()
 {
 	m_game->changeGameState(GameState::Braking);
 }
-
+//go to speed
 void GarageScreen::goSpeed()
 {
 	m_game->changeGameState(GameState::Speed);
 }
-
+//go to steer
 void GarageScreen::goSteer()
 {
 	m_game->changeGameState(GameState::Steering);

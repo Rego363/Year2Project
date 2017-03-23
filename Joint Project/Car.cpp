@@ -8,6 +8,15 @@ Car::Car(sf::Texture  & texture, sf::Vector2f const & pos):
 {
 	shaderclock.restart();
 
+	if (!m_buffer.loadFromFile("car driving.wav"))
+	{
+		                                             //load the sound effect
+	}
+	//setup SF
+	m_soundEffect.setBuffer(m_buffer);
+	m_soundEffect.setLoop(true);
+	m_soundEffect.setVolume(10);
+
 	if (!m_Nshader.loadFromFile("Neon.frag", sf::Shader::Fragment))
 	{
 		std::cout << "shader failed to load" << std::endl;         //load shader
@@ -15,17 +24,18 @@ Car::Car(sf::Texture  & texture, sf::Vector2f const & pos):
 
 	m_Nshader.setParameter("time", shaderclock.getElapsedTime().asSeconds());
 	m_Nshader.setParameter("resolution", 50, 70); //set radius variable
-	//m_Nshader.setParameter("mouse", m_position);
 
-
+	//setup car position and sprite
 	m_position = sf::Vector2f(760, 1100);
 	m_sprite.setTexture(*m_texture); //set texture
 
 	m_position = sf::Vector2f(pos.x, pos.y);
 	m_sprite.setPosition(m_position); //set pos
+
+	//set origin to the front of the car
 	m_sprite.setOrigin(m_sprite.getTextureRect().width / 1.4, m_sprite.getTextureRect().height / 2.0);
 
-
+	//init car variables
 	m_speed = 0; 
 	m_rotation = 0;
 	m_acceleration = 2.25;
@@ -42,15 +52,6 @@ Car::Car(sf::Texture  & texture, sf::Vector2f const & pos):
 	
 	m_blankTexture.setSmooth(true);
 
-
-	/*m_IcarS.setOrigin(m_sprite.getScale().x / 2 , m_sprite.getScale().y /2);
-	m_IcarS.setPosition(m_position.x - 25, m_position.y -10);*/
-	//m_IcarS.setTexture(m_blankTexture);
-
-	//m_sprite.setTexture(m_Icar);*/
-
-
-
 }
 
 //in this update loop the movement formula is implemented and also the cars rotation is set
@@ -60,10 +61,12 @@ void Car::update(float dt)
 	if (m_speed == 0.0f ||m_speed<0.9 &&m_speed>0.0)
 	{
 		isMoving = false;
+		m_soundEffect.stop(); //no sound if not moving
 	}
 	else
 	{
 		isMoving = true;
+		m_soundEffect.play(); //play when moving
 	}
 	
 
@@ -74,7 +77,7 @@ void Car::update(float dt)
 
 		if (m_speed < 0.0&& m_speed>-0.99)
 		{
-			m_speed = 0;
+			m_speed = 0;                  //just stop, as the car is already really slowing moving
 		}
 	}
 	
@@ -92,31 +95,27 @@ void Car::aiUpdate(sf::Vector2f velocity)
 //draw the car to the screen
 void Car::draw(sf::RenderWindow & window)
 {
-
-
-	//window.draw(m_sprite2, &m_shader);
 	window.draw(m_sprite);
 
+	//only draw when the player is using turbo
 	if (useTurbo == true)
 	{
 		window.draw(m_sprite, &m_Nshader);
 	}
 
-	//currentPos->draw(window);
 }
 
 //when called the speed of the car increases
 void Car::increaseSpeed()
 {
+	//for after turbo/ track changes to go back to normal speed
 	if (m_speed > m_maxSpeed)
 	{
-		m_speed = m_maxSpeed;
+		m_speed = m_maxSpeed; 
 	}
 	if (m_speed < m_maxSpeed)
 	{
-		m_speed += m_acceleration;
-		
-
+		m_speed += m_acceleration; //increase
 	}
 }
 
@@ -175,6 +174,7 @@ void Car::setRotation(float rotation)
 	m_sprite.setRotation(m_rotation);
 }
 
+//parameter will be the max speed for duration of the turbo
 void Car::turbo(float MaxturboSpeed)
 {
 	if (m_speed > MaxturboSpeed)
@@ -215,11 +215,13 @@ void Car::slowDown()
 	
 }
 
+//return bool to check for movement
 bool Car::isCarMoving()
 {
 	return isMoving;
 }
 
+//car breaks to slow the car down
 void Car::breaks()
 {
 	m_speed *= 0.8;
@@ -229,17 +231,7 @@ void Car::breaks()
 	}
 }
 
-void Car::offTrack()
-{
-	m_speed /= 1.2;
-	/*if (m_speed < 0.0&& m_speed>-0.8)
-	{
-		m_speed = 0;
-	}*/
-
-}
-
-//sets max speed
+//sets max speed of the car
 void Car::setMaxSpeed(float i)
 {
 	m_maxSpeed = i;
@@ -250,10 +242,23 @@ void Car::setMaxSpeed(float i)
 //Function for when car collides with brick wall
 void Car::collision()
 {
-	m_rotation -= 180;
+
+	//m_position -= m_sprite.getPosition();
+
+	//m_rotation -= 180;
 	m_sprite.setRotation(m_rotation);
 
+	m_speed *= -1;
+	m_speed -= 0.4f;
 
+	/*if (m_rotation <= 178)
+		m_sprite.setPosition(m_sprite.getPosition().x - 20, m_sprite.getPosition().y + 20);
+	
+	if(m_rotation >= 182)
+		m_sprite.setPosition(m_sprite.getPosition().x  +20, m_sprite.getPosition().y - 20);
+	*/
+	//	m_sprite.setPosition(m_sprite.getPosition().x - 20, m_sprite.getPosition().y + 20);
+	
 }
 
 // sets the ai position on startup
@@ -278,12 +283,13 @@ sf::Sprite Car::getSprite() const
 	return m_sprite;
 }
 
+//for use when a new car is selected by the player
 void Car::setTexture(sf::Texture & texture, float scaleX, float scaleY)
 {
-	m_texture = &texture;
-	m_sprite.setTexture(*m_texture);
+	m_texture = &texture; 
+	m_sprite.setTexture(*m_texture);// apply new texture
 	m_sprite.setPosition(m_position); //set pos
 	m_sprite.setOrigin(m_sprite.getTextureRect().width / 1.4, m_sprite.getTextureRect().height / 2.0);
-	m_sprite.setScale(scaleX, scaleY);
+	m_sprite.setScale(scaleX, scaleY); //scale the sprite
 }
 

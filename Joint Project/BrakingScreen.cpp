@@ -1,16 +1,19 @@
 #include "BrakingScreen.h"
 
+//construct the screen object
 BrakingScreen::BrakingScreen(Game & game):
 	m_game(&game)
 {
 	if (!m_texture.loadFromFile(m_game->getGarageTexture()))
 	{
-		cout << "Error loading Braking texture" << endl;
+		cout << "Error loading Braking texture" << endl; //load
 	}
+	//setup sprite
 	m_sprite.setTexture(m_texture);
 	m_sprite.setTextureRect(sf::IntRect(168, 521, 200, 200));
 	m_sprite.setPosition(600, 300);
 
+	//setup widgets
 	m_label = new Label("Braking", 100, 50);
 	m_label->setUnderLined();
 	m_label->changeTextSize(70);
@@ -27,28 +30,30 @@ BrakingScreen::BrakingScreen(Game & game):
 	m_widgets[2] = new Button("Large (5000)", 100, 350);
 	m_widgets[2]->Enter = std::bind(&BrakingScreen::largeBuy, this);
 	m_widgets[3] = new Button("Back", 100, 450);
-	m_widgets[3]->Enter = std::bind(&BrakingScreen::goToGarage, this);
+	m_widgets[3]->Enter = std::bind(&BrakingScreen::goToGarage, this); //bind the functions
 
 	for each (Widget* var in m_widgets)
 	{
-		m_gui.addWidget(var);
+		m_gui.addWidget(var); //add widgets to gui
 	}
 	m_gui.vertical = true;
 
 }
-
+//draw assets and gui to the screen
 void BrakingScreen::draw(sf::RenderWindow &window)
 {
 	m_gui.draw(window);
 	window.draw(m_sprite);
 }
 
+//update the players cash balance and the gui object
 void BrakingScreen::update()
 {
 	m_playerMoney->updateText("Money: " + std::to_string(m_game->playerMoney()));
 	m_gui.update(m_selectedItem, MAX_ITEMS);
 }
 
+//for purchasing small upgrade, charge applied and money removed from the player
 void BrakingScreen::smallBuy()
 {
 	if (m_game->playerMoney() >= SMALL_PRICE && !m_smallBought)
@@ -65,7 +70,7 @@ void BrakingScreen::smallBuy()
 		m_sprite.setScale(1.25, 1.25);
 	}
 }
-
+//for purchasing medium upgrade, charge applied and money removed from the player
 void BrakingScreen::mediumBuy()
 {
 	if (m_game->playerMoney() >= MEDIUM_PRICE && !m_mediumBought)
@@ -83,6 +88,7 @@ void BrakingScreen::mediumBuy()
 	}
 }
 
+//for purchasing large upgrade, charge applied and money removed from the player
 void BrakingScreen::largeBuy()
 {
 	if (m_game->playerMoney() >= LARGE_PRICE && !m_largeBought)
@@ -100,6 +106,7 @@ void BrakingScreen::largeBuy()
 	}
 }
 
+//go to garage gamestate
 void BrakingScreen::goToGarage()
 {
 	m_game->changeGameState(GameState::Garage);

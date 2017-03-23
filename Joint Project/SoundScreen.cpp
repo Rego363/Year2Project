@@ -53,7 +53,7 @@ void SoundScreen::increaseMusicVol()
 	{
 		m_volume+=2;
 	}
-	m_game->music.setVolume(m_volume);
+	m_game->m_gameMusic.setVolume(m_volume);
 }
 
 void SoundScreen::decreaseMusicVol()
@@ -62,7 +62,7 @@ void SoundScreen::decreaseMusicVol()
 	{
 		m_volume-=2;
 	}
-	m_game->music.setVolume(m_volume);
+	m_game->m_gameMusic.setVolume(m_volume);
 }
 
 /// <summary>

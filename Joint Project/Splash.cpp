@@ -60,5 +60,7 @@ void Splash::load()
 void Splash::setStateBack()
 {
 	m_animation.~Movie();
+	m_game->music.stop();
+	m_game->m_gameMusic.play();
 	m_game->changeGameState(GameState::TheMenu);
 }

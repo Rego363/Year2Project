@@ -6,7 +6,7 @@ Hours Spent: ~15hours
 Summary: A simple sfml game with menu, options that use the common UI elements
 */
 
-//radioButton
+//checkbox
 CheckBox::CheckBox(std::string s, float x, float y) :
 	Widget()
 {

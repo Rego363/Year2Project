@@ -8,17 +8,19 @@
 
 class Game;
 
+//this is the screen where additional info is displayed
 class HelpScreen {
 
 public:
-	HelpScreen(Game &game);
-	void update();
-	void draw(sf::RenderWindow &window);
-	void goBack();
+	HelpScreen(Game &game); //constructor
+	void update(); //update loop
+	void draw(sf::RenderWindow &window); //draw loop
+	void goBack(); //go to menu
 
 private:
+	//widgets
 	Game *m_game;
-	GUI m_gui;
+	GUI m_gui; //gui
 	Button* m_backButton;
 	Label* m_label;
 	int m_selectedItem = 0;
