@@ -23,19 +23,7 @@ playGame::playGame(Game &game):
 	goBack->Enter = std::bind(&playGame::goToMenu, this);
 
 
-	if (!m_texture.loadFromFile("09RoadCourseMap.jpg"))
-	{
-		//handle
-	}
-	m_sprite.setTexture(m_texture);
-	m_sprite.setPosition(0, 0);
-	
-	if (!m_texture2.loadFromFile("mapsmall.jpg"))
-	{
-		//handle
-	}
-	m_sprite2.setTexture(m_texture2);
-	m_sprite2.setPosition(0, 0);
+
 
 
 	
@@ -50,10 +38,6 @@ playGame::playGame(Game &game):
 	m_currentSelect = 0;
 	m_gui.vertical = true;
 	m_title->changeTextSize(100);
-	m_sprite.setPosition(360, 140);
-	m_sprite.setScale(0.5, 0.5);
-	m_sprite2.setPosition(360, 140);
-	m_sprite2.setScale(0.5, 0.5);
 
 	m_rect.setPosition(520, 140);
 	m_rect.setSize(sf::Vector2f(200,200));//dynamic rectangle sizing based on text
@@ -69,21 +53,6 @@ playGame::playGame(Game &game):
 	m_rect.setOutlineThickness(2);
 //	posX = 0;
 
-	if (!m_blankTexture.loadFromFile("blankBackground.png"))	// Load blank texture
-	{
-		std::cout << "blankTile failed to load" << std::endl;	//Error message
-	}
-
-	m_shaderSprite.setTexture(m_blankTexture);	// Set texture for the blank sprite
-
-	if (!m_shader.loadFromFile("Shaders/Smoke.frag", sf::Shader::Fragment)) //Load shader
-	{
-		std::cout << "shader failed to load" << std::endl;	// Error message
-	}
-
-	m_shader.setParameter("time", 0.0f);
-	m_shader.setParameter("resolution", 1280.0f, 720.0f);
-	m_shaderSprite.setPosition(0.0f, 0.0f);
 }
 
 playGame::~playGame()
@@ -96,16 +65,14 @@ playGame::~playGame()
 
 void playGame::render(sf::RenderWindow & window)
  {
-	window.draw(m_shaderSprite, &m_shader);
 	window.draw(m_rect);
 	m_gui.draw(window);
 
 
 }
 
-void playGame::update(float dt)
+void playGame::update()
 { 
-	m_shader.setParameter("time", dt);
 	// If the focus is on "Map Zero than the map window will change to red with a blue border"
 	if (m_currentSelect == 0)
 	{

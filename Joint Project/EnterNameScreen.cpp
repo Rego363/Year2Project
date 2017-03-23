@@ -51,8 +51,8 @@ EnterNameScreen::EnterNameScreen(Game &game, Player &player):
 	m_widgets[17]->Enter = std::bind(&EnterNameScreen::addK, this);
 	m_widgets[18] = new Button("L", 850, 350, 50);
 	m_widgets[18]->Enter = std::bind(&EnterNameScreen::addL, this);
-	m_widgets[19] = new Button("Enter", 900, 350, 50);
-	m_widgets[19]->Enter = std::bind(&EnterNameScreen::changeGameState, this);
+	m_widgets[19] = new Button("$", 900, 350, 50);
+	m_widgets[19]->Enter = std::bind(&EnterNameScreen::add$, this);
 
 	// Bottom line
 	m_widgets[20] = new Button("Z", 450, 400, 50);
@@ -76,8 +76,8 @@ EnterNameScreen::EnterNameScreen(Game &game, Player &player):
 	m_widgets[29] = new Button("Delete", 970, 400, 50);
 	m_widgets[29]->Enter = std::bind(&EnterNameScreen::deleteLetter, this);
 	
-
-
+	m_enter = new Label("Press START to enter your name", 500, 500);
+	m_gui.addLabel(m_enter);
 
 	for each (Widget* var in m_widgets)
 	{
@@ -85,23 +85,7 @@ EnterNameScreen::EnterNameScreen(Game &game, Player &player):
 		m_gui.addWidget(var);
 	}
 	m_gui.both = true;
-
-
-	if (!m_blankTexture.loadFromFile("blankBackground.png"))	// Load blank texture
-	{
-		std::cout << "blankTile failed to load" << std::endl;	//Error message
-	}
-
-	m_shaderSprite.setTexture(m_blankTexture);	// Set texture for the blank sprite
-
-	if (!m_shader.loadFromFile("Shaders/Smoke.frag", sf::Shader::Fragment)) //Load shader
-	{
-		std::cout << "shader failed to load" << std::endl;	// Error message
-	}
-
-	m_shader.setParameter("time", 0.0f);
-	m_shader.setParameter("resolution", 1280.0f, 720.0f);
-	m_shaderSprite.setPosition(0.0f, 0.0f);
+	m_clock.restart();
 }
 
 std::string EnterNameScreen::getEnteredName()
@@ -109,16 +93,20 @@ std::string EnterNameScreen::getEnteredName()
 	return m_enteredName;
 }
 
-void EnterNameScreen::update(float dt)
+void EnterNameScreen::update()
 {
-	m_shader.setParameter("time", dt);
 	m_gui.update(m_selectedItem, MAX_ITEMS);	
 }
 
 void EnterNameScreen::draw(sf::RenderWindow & window)
 {
-	window.draw(m_shaderSprite, &m_shader);
 	m_gui.draw(window);
+	m_xbox.update();
+	if (m_xbox.m_currentState.Start)
+	{
+		m_game->m_player->newPlayer(m_enteredName);
+		m_game->changeGameState(GameState::TheMenu);
+	}
 }
 
 void EnterNameScreen::addQ()
@@ -285,7 +273,7 @@ void EnterNameScreen::addChar()
 
 void EnterNameScreen::Space()
 {
-	m_enteredName += " ";
+	m_enteredName += "_";
 	m_label->updateText("Your Name:  " + m_enteredName);
 }
 
@@ -298,8 +286,9 @@ void EnterNameScreen::deleteLetter()
 	m_label->updateText("Your Name:  " + m_enteredName);
 }
 
-void EnterNameScreen::changeGameState()
+void EnterNameScreen::add$()
 {
-	m_player->newPlayer(m_enteredName);
-	m_game->changeGameState(GameState::TheLicense);
+	m_enteredName += "$";
+	m_label->updateText("Your Name:  " + m_enteredName);
+	
 }

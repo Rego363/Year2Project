@@ -1,99 +1,14 @@
 #pragma once
 
-#include <SFML/System/Vector2.hpp>
+#include <Thor\Resources.hpp>
 #include <SFML\Graphics.hpp>
-#include <vector>
-#include <sstream>
-#include <fstream>
-#include <iostream>
-#include "yaml-cpp/yaml.h"
-#include "ResourcePath.hpp"
 
-
-///<summary>
-/// Dylan
-/// loads information from yaml file
-/// images, music and font files
-///<summary>
-struct FontData
-{
-	std::string m_fileNameFont;
-};
-
-struct LamboData
-{
-	std::string m_fileName;
-};
-
-struct blueLamboData
-{
-	std::string m_fileName;
-};
-
-struct TileData
-{
-	std::string m_fileName;
-};
-
-struct GroundData
-{
-	std::string m_fileName;
-};
-
-struct SandData
-{
-	std::string m_fileName;
-};
-
-struct TrackData
-{
-	std::string m_type;
-	sf::Vector2f m_position;
-	float m_size;
-};
-
-struct GarageData
-{
-	std::string m_fileName;
-};
-
-struct CreditsData
-{
-	std::string m_fileName;
-};
-
-struct LisenceData
-{
-	std::string m_fileName;
-};
-
-struct SplashData
-{
-	std::string m_fileName;
-};
-
-
-//contains all the levels data
-struct LevelData
-{
-	LamboData m_lambo;
-	FontData m_Font;
-	TileData m_Tiles;
-	GroundData m_ground;
-	SandData m_sand;
-	blueLamboData m_aiLambo;
-	GarageData m_garage;
-	std::vector<TrackData> m_track;
-	CreditsData m_credits;
-	LisenceData m_lisence;
-	SplashData m_splash;
-};
-
-//class to load in the level details
-class LevelLoader
+class ResourceManager
 {
 public:
-	LevelLoader();
+	ResourceManager();
+	~ResourceManager();
 
-	static bool load(LevelData& level);
+	thor::ResourceHolder<sf::Texture, std::string> m_textureHolder;
+	thor::ResourceHolder<sf::Font, std::string> m_fontHolder;
 };

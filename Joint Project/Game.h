@@ -1,6 +1,7 @@
 #ifndef GAME
 #define GAME
 
+#include <Thor\Resources.hpp>
 #include "include\sfeMovie\Movie.hpp"
 #include "include\sfeMovie\Visibility.hpp"
 #include "include\sfeMovie\StreamSelection.hpp"
@@ -37,18 +38,22 @@
 #include "SpeedScreen.h"
 #include "AccelerationScreen.h"
 #include "changeProfile.h"
+#include "LevelLoad.h"
 #include "ResourceManager.h"
 #include "levels.h"
-#include "WorldSquares.h"
 #include "Ai.h"
 #include "EnterNameScreen.h"
 #include <SFML\Audio.hpp>
 #include "background.h"
+#include "NightMode.h"
 #include "Credits.h"
 #include <memory>
 #include "gameOverScreen.h"
-using namespace std;
+#include "SaveScreen.h"
+#include "PhysicsBalls.h"
+#include"chooseCar.h"
 
+using namespace std;
 class SoundScreen;
 class DisplayScreen;
 class OptionsScreen;
@@ -68,14 +73,16 @@ class AccelerationScreen;
 class specs;
 class playGame;
 class changeProfile;
-class worldSquares;
 class Levels;
 class EnterNameScreen;
 class Background;
 class Player;
 class Credits;
+class NightMode;
 class GameOverScreen;
-
+class SaveScreen;
+class PhysicsBalls;
+class ChooseCar;
 
 enum GameState {
 	TheLicense,
@@ -99,7 +106,9 @@ enum GameState {
 	ThewSquares,
 	EnterName, 
 	TheCredits,
-	GameOver
+	GameOver,
+	Save,
+	PickCar
 };
 
 enum GameDifficulty {
@@ -122,15 +131,20 @@ public:
 	void changeGameDifficulty(GameDifficulty gameDiff);
 	std::string getGarageTexture();
 	sf::RenderWindow m_window;
-	std::unique_ptr< Player> m_player;
-	//static auto m_player;
+	std::unique_ptr<Player> m_player;
+	std::unique_ptr<ResourceManager> m_manager;
 	string nameDisplay();
 	sf::Sound music;
 
 	int playerMoney();
 	void chargePlayer(int amount);
+	std::unique_ptr<PhysicsBalls>m_physicsBalls;
 	std::unique_ptr<Background> m_background;
+	std::unique_ptr<NightMode> m_nightMode;
 	bool isInView(sf::Sprite sprite);
+	std::string getBestLapTime();
+	void resetMap();
+	LevelData m_currentLevel;
 
 private:
 	void processInput();
@@ -144,7 +158,7 @@ private:
 	sf::Font m_font;
 	sf::Text m_text;
 
-	GameState m_currentGameState = GameState::ChangeP;
+	GameState m_currentGameState = GameState::TheMenu;
 	std::unique_ptr<playGame> m_mapSelect;
 	
 	GameDifficulty m_currentDifficulty = GameDifficulty::Medium;
@@ -169,26 +183,31 @@ private:
 	std::unique_ptr<EnterNameScreen>m_enterName;
 	std::unique_ptr<Credits>m_credits;
 	std::unique_ptr<GameOverScreen>m_gameOverScreen;
+	std::unique_ptr<SaveScreen>m_saveProfile;
+	std::unique_ptr<ChooseCar>m_chooseCarScreen;
 	/*Cars*/
 	/**********************/
 	std::unique_ptr<Car>m_car;
 	std::unique_ptr<Car>m_aiCar;
+	std::unique_ptr<Car>m_aiCarTwo;
+	std::unique_ptr<Car>m_aiCarThree;
 	std::unique_ptr<Ai>m_ai;
+	std::unique_ptr<Ai>m_aiTwo;
+	std::unique_ptr<Ai>m_aiThree;
 	/**********************/
 
 
 	sf::View m_view;
 	sf::View m_view2;
-	sf::Texture m_startCar;
-	sf::Texture m_aistartCar;
 	sf::Vector2f m_startPos;
 
-	std::vector<sf::CircleShape> m_track;
+	std::vector<sf::CircleShape> m_easyTrack;
+	std::vector<sf::CircleShape> m_mediumTrack;
+	std::vector<sf::CircleShape> m_hardTrack;
 	Xbox360Controller m_xbox;
 
 
 
-	LevelData m_currentLevel;
 	LevelLoader m_levelLoader;
 	bool hasName=false;
 	sf::SoundBuffer m_buffer;
@@ -207,13 +226,14 @@ private:
 
 	/*******************************/
 
-	sf::Texture m_textureTest;
-	sf::Texture m_textureTest2;
-
 	sf::FloatRect rect;
-	sf::Texture m_backgroundImage;
 	sf::Sprite sprBack;
 
+	// Shader 
+	sf::Sprite m_shaderSprite;
+	sf::Shader m_smokeShader;
+
+	bool levelReset = true;
 };
 
 #endif

@@ -25,7 +25,7 @@ public:
 		~playGame();
 
 		void render(sf::RenderWindow & window);
-		void update(float dt);
+		void update();
 
 private:
 
@@ -38,10 +38,6 @@ private:
 	Button *moveDowner;
 	Button *moveDownest;
 	Button *goBack;
-	sf::Texture m_texture;
-	sf::Sprite m_sprite; 
-	sf::Texture m_texture2;
-	sf::Sprite m_sprite2;
 	int m_currentSelect;
 	//void setRectColor(sf::Color color);
 	sf::RectangleShape m_rect;
@@ -52,9 +48,6 @@ private:
 	void goToMenu();
 	void goToSpecs();
 
-	sf::Texture m_blankTexture;
-	sf::Sprite m_shaderSprite;
-	sf::Shader m_shader; // Shader for triangle affect
 };
 
 #endif // !PLAYGAME

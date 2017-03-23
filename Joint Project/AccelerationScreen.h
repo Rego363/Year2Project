@@ -11,11 +11,11 @@ class AccelerationScreen {
 public:
 	AccelerationScreen(Game &game);
 	void draw(sf::RenderWindow &window);
-	void update(float time);
+	void update();
 	void goToGarage();
 
 private:
-	sf::Texture m_texture;
+	Game *m_game;
 	sf::Sprite m_sprite;
 	Label *m_label;
 	Label *m_playerMoney;
@@ -23,7 +23,6 @@ private:
 	Widget* m_widgets[MAX_ITEMS];
 	int m_selectedItem = 0;
 	GUI m_gui;
-	Game *m_game;
 	void smallBuy();
 	void mediumBuy();
 	void largeBuy();
@@ -36,8 +35,5 @@ private:
 	const int SMALL_PRICE = 500;
 	const int MEDIUM_PRICE = 2500;
 	const int LARGE_PRICE = 5000;
-	sf::Texture m_blankTexture;
-	sf::Sprite m_shaderSprite;
-	sf::Shader m_shader; // Shader for triangle affect
 };
 #endif

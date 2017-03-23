@@ -20,7 +20,7 @@ public :
 	~specs();
 
 	void render(sf::RenderWindow & window);
-	void update(float time);
+	void update();
 
 
 private:
@@ -42,11 +42,11 @@ private:
 	Levels *m_currentLevel;
 	void goToMapSelect();
 	void goToMapRacing();
+	void goToLapSelect3();
+	void goToLapSelect5();
+	void goToLapSelect7();
 	int m_currentSelect;
 
 	float m_EnemiesNum;
-	sf::Texture m_blankTexture;
-	sf::Sprite m_shaderSprite;
-	sf::Shader m_shader; // Shader for triangle affect
 };
 #endif

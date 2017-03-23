@@ -135,6 +135,7 @@
     <ClCompile Include="Car.cpp" />
     <ClCompile Include="changeProfile.cpp" />
     <ClCompile Include="CheckBox.cpp" />
+    <ClCompile Include="chooseCar.cpp" />
     <ClCompile Include="Credits.cpp" />
     <ClCompile Include="DifficultyScreen.cpp" />
     <ClCompile Include="DisplayScreen.cpp" />
@@ -145,16 +146,20 @@
     <ClCompile Include="GUI.cpp" />
     <ClCompile Include="Help.cpp" />
     <ClCompile Include="Label.cpp" />
+    <ClCompile Include="LevelLoad.cpp" />
     <ClCompile Include="levels.cpp" />
     <ClCompile Include="Liscence.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="Math.cpp" />
+    <ClCompile Include="NightMode.cpp" />
     <ClCompile Include="OptionsScreen.cpp" />
+    <ClCompile Include="PhysicsBalls.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="playGame.cpp" />
     <ClCompile Include="RadioButton.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
+    <ClCompile Include="SaveScreen.cpp" />
     <ClCompile Include="Slider.cpp" />
     <ClCompile Include="SoundScreen.cpp" />
     <ClCompile Include="Specs.cpp" />
@@ -163,7 +168,6 @@
     <ClCompile Include="SteeringScreen.cpp" />
     <ClCompile Include="TurboScreen.cpp" />
     <ClCompile Include="Widget.cpp" />
-    <ClCompile Include="WorldSquares.cpp" />
     <ClCompile Include="XBOX360CONTROLLER.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -176,6 +180,7 @@
     <ClInclude Include="Car.h" />
     <ClInclude Include="changeProfile.h" />
     <ClInclude Include="CheckBox.h" />
+    <ClInclude Include="chooseCar.h" />
     <ClInclude Include="Credits.h" />
     <ClInclude Include="DifficultyScreen.h" />
     <ClInclude Include="DisplayScreen.h" />
@@ -186,15 +191,19 @@
     <ClInclude Include="GUI.h" />
     <ClInclude Include="Help.h" />
     <ClInclude Include="Label.h" />
+    <ClInclude Include="LevelLoad.h" />
     <ClInclude Include="levels.h" />
     <ClInclude Include="Liscence.h" />
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="Math.h" />
+    <ClInclude Include="NightMode.h" />
     <ClInclude Include="OptionsScreen.h" />
+    <ClInclude Include="PhysicsBalls.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="playGame.h" />
     <ClInclude Include="RadioButton.h" />
     <ClInclude Include="ResourceManager.h" />
+    <ClInclude Include="SaveScreen.h" />
     <ClInclude Include="Slider.h" />
     <ClInclude Include="SoundScreen.h" />
     <ClInclude Include="Specs.h" />
@@ -203,7 +212,6 @@
     <ClInclude Include="SteeringScreen.h" />
     <ClInclude Include="TurboScreen.h" />
     <ClInclude Include="Widget.h" />
-    <ClInclude Include="WorldSquares.h" />
     <ClInclude Include="XBOX360CONTROLLER.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -19,7 +19,7 @@ public:
 	MainMenu(Game &game);
 	~MainMenu();
 	void render(sf::RenderWindow & window);
-	void update(float dt);
+	void update();
 	void GotoGarage();
 	void quit();
 	void goToOptions();
@@ -42,8 +42,5 @@ private:
 	Button *m_Credits;
 	int m_currentSelect;
 	Game *m_game;
-	sf::Texture m_blankTexture;
-	sf::Sprite m_shaderSprite;
-	sf::Shader m_shader; // Shader for triangle affect
 };
 #endif // !MAINMENU

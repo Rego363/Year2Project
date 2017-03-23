@@ -37,9 +37,13 @@ private:
 
 
 
-
 	
 	static bool activateShader; //turn on the blur shader
+
+	sf::RenderTexture m_renderTexture;
+	sf::Sprite m_renderSprite;
+	sf::Image m_image;
+	sf::Color color;
 	
 };
 #endif

@@ -2,11 +2,12 @@
 
 
 
-Ai::Ai(float carX, float carY, sf::Texture &carTexture, std::vector<sf::CircleShape> & track) :
-	m_car(carTexture, sf::Vector2f(carX, carY)), 
-	m_track(track)
+Ai::Ai(Game &game, float carX, float carY, sf::Texture &carTexture, std::vector<sf::CircleShape> & track) :
+	m_car(game, carTexture, sf::Vector2f(carX, carY)), 
+	m_track(track),
+	m_game(&game)
 {
-	m_car.setAiPosition(sf::Vector2f(760, 1050));
+	//m_car.setAiPosition(sf::Vector2f(carX, carY));
 }
 
 
@@ -50,6 +51,11 @@ void Ai::update()
 void Ai::render(sf::RenderWindow &window)
 {
 	m_car.draw(window);
+}
+
+void Ai::resetNode()
+{
+	m_target = 0;
 }
 
 sf::Vector2f Ai::seekTrack(std::vector<sf::CircleShape> track, sf::Vector2f pos)

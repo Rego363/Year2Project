@@ -11,12 +11,11 @@ class SteeringScreen {
 public:
 	SteeringScreen(Game &game);
 	void draw(sf::RenderWindow &window);
-	void update(float time);
+	void update();
 
 	void goToGarage();
 private:
 
-	sf::Texture m_texture;
 	sf::Sprite m_sprite;
 	Label *m_label;
 	Label *m_playerMoney;
@@ -37,8 +36,5 @@ private:
 	const int SMALL_PRICE = 500;
 	const int MEDIUM_PRICE = 2500;
 	const int LARGE_PRICE = 5000;
-	sf::Texture m_blankTexture;
-	sf::Sprite m_shaderSprite;
-	sf::Shader m_shader; // Shader for triangle affect
 };
 #endif

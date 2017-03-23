@@ -4,6 +4,7 @@
 #define CHANGEPROFILE
 
 class Game;
+class Player;
 
 #include<SFML\Graphics.hpp>
 #include<math.h>
@@ -17,9 +18,8 @@ class changeProfile {
 public:
 	changeProfile(Game &game, Player &player);
 	~changeProfile();
+	void update();
 	void render(sf::RenderWindow &  window);
-	void update(float time);
-	void getProfileName();
 
 private:
 
@@ -47,7 +47,8 @@ private:
 	Game *m_game;
 	Player *m_player;
 	void goToMenu();
-	void save();
+	void goToSave();
+	void getProfileName();
 	void goToNewProfile();
 	void loadFirstProfile();
 	void loadSecondProfile();
@@ -61,9 +62,6 @@ private:
 	void loadTenProfile();
 //	void goToSpecs();
 	std::string m_playerNames[10];
-	sf::Texture m_blankTexture;
-	sf::Sprite m_shaderSprite;
-	sf::Shader m_shader; // Shader for triangle affect
 };
 
 #endif // !CHANGEPROFILE
