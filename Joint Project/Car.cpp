@@ -15,7 +15,7 @@ Car::Car(sf::Texture  & texture, sf::Vector2f const & pos):
 	//setup SF
 	m_soundEffect.setBuffer(m_buffer);
 	m_soundEffect.setLoop(true);
-	m_soundEffect.setVolume(10);
+	m_soundEffect.setVolume(75);
 
 	if (!m_Nshader.loadFromFile("Neon.frag", sf::Shader::Fragment))
 	{
@@ -40,7 +40,7 @@ Car::Car(sf::Texture  & texture, sf::Vector2f const & pos):
 	m_rotation = 0;
 	m_acceleration = 2.25;
 	m_deacceleration = 0.45;
-	m_maxSpeed = 200;
+	m_maxSpeed = 10;
 	isMoving = false;
 
 	if (!m_blankTexture .loadFromFile("blankNeon.png"))
@@ -51,6 +51,10 @@ Car::Car(sf::Texture  & texture, sf::Vector2f const & pos):
 	}
 	
 	m_blankTexture.setSmooth(true);
+	tempMaxSpeed = 4;
+	m_turboAmount = 1;
+	OriginalMaxSpeed = 10;
+	m_steering = 2;
 
 }
 
@@ -128,10 +132,30 @@ void Car::decreaseSpeed()
 	}
 }
 
+void Car::increaseSpeed(float max)
+{
+	if (m_speed > max)
+	{
+		m_speed = max;
+	}
+	if (m_speed < max)
+	{
+		m_speed += m_acceleration; //increase
+	}
+}
+
+void Car::decreaseSpeed(float max)
+{
+	if (m_speed > -(max))
+	{
+		m_speed -= m_deacceleration;
+	}
+}
+
 //when called the rotation of the car increases
 void Car::increaseRotation()
 {
-	m_rotation += 2;
+	m_rotation += m_steering;
 	if (m_rotation == 360.0)
 	{
 		m_rotation = 0;
@@ -141,7 +165,7 @@ void Car::increaseRotation()
 //when called the rotation of the car decreases
 void Car::decreaseRotation()
 {
-	m_rotation -= 2;
+	m_rotation -= m_steering;
 	if (m_rotation == 0.0)
 	{
 		m_rotation = 359.0;
@@ -231,10 +255,58 @@ void Car::breaks()
 	}
 }
 
+void Car::setAcceleration(float newValue)
+{
+	m_acceleration = newValue;
+}
+
 //sets max speed of the car
 void Car::setMaxSpeed(float i)
 {
 	m_maxSpeed = i;
+}
+
+void Car::setSteering(float newValue)
+{
+	m_steering = newValue;
+}
+
+void Car::setTurbo(float newValue)
+{
+	m_turboAmount = newValue;
+}
+
+float Car::getMaxSpeed()
+{
+	return m_maxSpeed;
+}
+
+float Car::getSlowDownSpeed()
+{
+	return tempMaxSpeed;
+}
+
+float Car::getOriginalMaxSpeed()
+{
+	return OriginalMaxSpeed;
+}
+
+void Car::setOriginalMaxSpeed(float value)
+{
+	OriginalMaxSpeed = value;
+}
+
+void Car::useTurbos()
+{
+	if (m_turboAmount > 0)
+	{
+		m_turboAmount--;
+	}
+}
+
+float Car::getTurbos()
+{
+	return m_turboAmount;
 }
 
 

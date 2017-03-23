@@ -15,6 +15,8 @@ public:
 	void update(); //update loop 
 	void goToGarage(); //go to garage gamestate
 
+	void currentUpgrade();
+
 private:
 	sf::Texture m_texture; //car part image
 	sf::Sprite m_sprite; //sprite to display on screen

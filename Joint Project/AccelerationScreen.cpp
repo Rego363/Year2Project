@@ -70,6 +70,7 @@ void AccelerationScreen::smallBuy()
 		m_largeEquipped = false;
 		m_sprite.setScale(1.25, 1.25);
 	}
+	currentUpgrade();
 }
 //for purchasing medium upgrade, charge applied and money removed from the player
 void AccelerationScreen::mediumBuy()
@@ -87,6 +88,7 @@ void AccelerationScreen::mediumBuy()
 		m_largeEquipped = false;
 		m_sprite.setScale(1.5, 1.5);
 	}
+	currentUpgrade();
 }
 //for purchasing large upgrade, charge applied and money removed from the player
 void AccelerationScreen::largeBuy()
@@ -104,9 +106,26 @@ void AccelerationScreen::largeBuy()
 		m_largeEquipped = true;
 		m_sprite.setScale(1.75, 1.75);
 	}
+	currentUpgrade();
 }
 //change the gamestate to garage
 void AccelerationScreen::goToGarage()
 {
 	m_game->changeGameState(GameState::Garage);
+}
+
+void AccelerationScreen::currentUpgrade()
+{
+	if (m_smallEquipped)
+	{
+		m_game->m_player->m_car.setAcceleration(2.25f);
+	}
+	else if (m_mediumEquipped)
+	{
+		m_game->m_player->m_car.setAcceleration(2.5f);
+	}
+	else if (m_largeEquipped)
+	{
+		m_game->m_player->m_car.setAcceleration(2.75f);
+	}
 }

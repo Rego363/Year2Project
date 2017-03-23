@@ -26,6 +26,9 @@ ChooseCar::ChooseCar(Game & game):
 	m_cars[8]->Enter = std::bind(&ChooseCar::chooseCar, this);
 	m_gui.vertical = true;
 
+	m_label = new Label("Choose your Car!!!", 650, 400);
+	m_gui.addLabel(m_label);
+
 	for each  (Button* var in m_cars)
 	{
 		m_gui.addButton(var);     //add them to the gui

@@ -21,6 +21,9 @@ public:
 	void increaseSpeed(); //increase cars speed
 	void decreaseSpeed(); //decrease cars speed
 
+	void increaseSpeed(float max); //increase cars speed
+	void decreaseSpeed(float max); //decrease cars speed
+
 	void increaseRotation();
 	void decreaseRotation(); //turning/rotating car
 
@@ -38,7 +41,7 @@ public:
 	void slowDown();
 	bool isCarMoving();
 	void breaks();
-	void setMaxSpeed(float i);
+	
 	
 	void collision();
 	void setAiPosition(sf::Vector2f);
@@ -53,9 +56,25 @@ public:
 	bool turboFlame = false;
 	bool isMoving;
 	sf::Sound m_soundEffect;
+
+
+	void setAcceleration(float newValue);
+	void setMaxSpeed(float newValue);
+	void setSteering(float newValue);
+	void setTurbo(float newValue);
+
+	float getMaxSpeed();
+	float getSlowDownSpeed();
+	float getOriginalMaxSpeed();
+	void setOriginalMaxSpeed(float value);
+
+	void useTurbos();
+	float getTurbos();
+
 private:
 	
 	float m_maxSpeed;
+	float OriginalMaxSpeed;
 	sf::Clock shaderclock;
 	sf::Texture *m_texture; //car texture
 	sf::Texture m_blankTexture;
@@ -77,6 +96,9 @@ private:
 	sf::Shader m_shader;
 	sf::Shader m_Nshader;
 	sf::SoundBuffer m_buffer;
+	float tempMaxSpeed;
+	float m_turboAmount;
+	float m_steering;
 	
 };
 #endif
