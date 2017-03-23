@@ -3,11 +3,8 @@
 SpeedScreen::SpeedScreen(Game & game) :
 	m_game(&game)
 {
-	if (!m_texture.loadFromFile(m_game->getGarageTexture()))
-	{
-		cout << "Error loading steering texture" << endl;
-	}
-	m_sprite.setTexture(m_texture);
+	sf::Texture& texture = m_game->m_manager->m_textureHolder["garage"];
+	m_sprite.setTexture(texture);
 	m_sprite.setTextureRect(sf::IntRect(507, 535, 200, 200));
 	m_sprite.setPosition(600, 300);
 
@@ -64,6 +61,8 @@ void SpeedScreen::smallBuy()
 		m_largeEquipped = false;
 		m_sprite.setScale(1.25, 1.25);
 	}
+	currentUpgrade();
+	m_game->m_player->m_car.setOriginalMaxSpeed(10);
 }
 
 void SpeedScreen::mediumBuy()
@@ -81,6 +80,8 @@ void SpeedScreen::mediumBuy()
 		m_largeEquipped = false;
 		m_sprite.setScale(1.5, 1.5);
 	}
+	currentUpgrade();
+	m_game->m_player->m_car.setOriginalMaxSpeed(12);
 }
 
 void SpeedScreen::largeBuy()
@@ -98,10 +99,28 @@ void SpeedScreen::largeBuy()
 		m_largeEquipped = true;
 		m_sprite.setScale(1.75, 1.75);
 	}
+	currentUpgrade();
+	m_game->m_player->m_car.setOriginalMaxSpeed(15);
 }
 
 
 void SpeedScreen::goToGarage()
 {
 	m_game->changeGameState(GameState::Garage);
+}
+
+void SpeedScreen::currentUpgrade()
+{
+	if (m_smallEquipped)
+	{
+		m_game->m_player->m_car.setMaxSpeed(10);
+	}
+	else if (m_mediumEquipped)
+	{
+		m_game->m_player->m_car.setMaxSpeed(12);
+	}
+	else if (m_largeEquipped)
+	{
+		m_game->m_player->m_car.setMaxSpeed(15);
+	}
 }

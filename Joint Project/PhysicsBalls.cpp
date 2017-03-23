@@ -1,15 +1,15 @@
 #include "PhysicsBalls.h"
 
 /// <summary>
+/// Dylan Murphy
 /// Creates balls
 /// </summary>
 /// <param name="game"></param>
 PhysicsBalls::PhysicsBalls(Game &game) : m_game(&game)
 {
-	if (!m_ballTex.loadFromFile(m_game->m_currentLevel.m_ball.m_fileName))
-	{
-		cout << "blue ball problems" << endl;
-	}
+
+	sf::Texture& ballTex = m_game->m_manager->m_textureHolder["blueBall"];
+
 
 	m_Position = sf::Vector2f(1600, 1100);
 
@@ -27,7 +27,7 @@ PhysicsBalls::PhysicsBalls(Game &game) : m_game(&game)
 		}
 
 		sf::Sprite m_tempBall;
-		m_tempBall.setTexture(m_ballTex);
+		m_tempBall.setTexture(ballTex);
 		m_tempBall.setPosition(m_Position);
 		m_tempBall.setScale(0.5, 0.5);
 		m_ballSprite.push_back(m_tempBall);
@@ -74,7 +74,7 @@ void PhysicsBalls::collision()
 			m_collision = true;
 			if (m_collision)
 			{
-				m_game->m_player->m_car.setMaxSpeed(6);
+				m_game->m_player->m_car.setMaxSpeed(m_game->m_player->m_car.getMaxSpeed()/2.0f);
 				/*m_ballSprite[i].setPosition((m_ballSprite[i].getPosition().x + cos(m_game->m_player->m_car.m_rotation * 3.14 / 180) * m_game->m_player->m_car.m_speed * 2),
 					(m_ballSprite[i].getPosition().y + sin(m_game->m_player->m_car.m_rotation * 3.14 / 180) * m_game->m_player->m_car.m_speed * 2));*/
 

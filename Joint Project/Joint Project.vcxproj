@@ -146,6 +146,7 @@
     <ClCompile Include="GUI.cpp" />
     <ClCompile Include="Help.cpp" />
     <ClCompile Include="Label.cpp" />
+    <ClCompile Include="LevelLoad.cpp" />
     <ClCompile Include="levels.cpp" />
     <ClCompile Include="Liscence.cpp" />
     <ClCompile Include="main.cpp" />
@@ -190,6 +191,7 @@
     <ClInclude Include="GUI.h" />
     <ClInclude Include="Help.h" />
     <ClInclude Include="Label.h" />
+    <ClInclude Include="LevelLoad.h" />
     <ClInclude Include="levels.h" />
     <ClInclude Include="Liscence.h" />
     <ClInclude Include="MainMenu.h" />

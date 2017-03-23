@@ -13,8 +13,9 @@ public:
 	void draw(sf::RenderWindow &window);
 	void update();
 	void goToGarage();
+
+	void currentUpgrade();
 private:
-	sf::Texture m_texture;
 	sf::Sprite m_sprite;
 	Label *m_label;
 	Label *m_playerMoney;

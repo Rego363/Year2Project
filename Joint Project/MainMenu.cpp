@@ -3,7 +3,8 @@
 MainMenu::MainMenu(Game &game):
 	m_game(&game)
 {
-	m_title = new Label("Main Menu", 475, 50);
+	m_title = new Label("Team C Racing", 180, 50, "menuPic.png", "menuPic.png");
+	m_title->setUnderLined();
 	m_gui.addLabel(m_title);
 	m_Play = new Button("Play", 550, 250);
 	m_Play->getFocus();
@@ -21,8 +22,8 @@ MainMenu::MainMenu(Game &game):
 	m_Exit = new Button("Quit", 550, 550);
 	m_Exit->Enter = std::bind(&MainMenu::quit, this);
 
-	m_icons[0] = new Label("Select", 20, 700, "a button.png");
-	m_icons[1] = new Label("Move", 170, 700, "d pad.png");
+	m_icons[0] = new Label("Select", 20, 650, "a button.png");
+	m_icons[1] = new Label("Move", 170, 650, "d pad.png");
 
 	m_gui.addButton(m_Play);
 	m_gui.addButton(m_Garage);
@@ -37,6 +38,7 @@ MainMenu::MainMenu(Game &game):
 	m_currentSelect = 0;
 	m_gui.vertical = true;
 	m_title->changeTextSize(100);
+
 };
 
 

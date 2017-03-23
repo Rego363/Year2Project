@@ -1,5 +1,4 @@
 #include "background.h"
-#include <iostream>
 
 
 
@@ -90,7 +89,7 @@ void Background::draw(sf::RenderWindow &window)
 			{
 				if (m_game->m_player->m_car.useTurbo == false)
 				{
-					m_game->m_player->m_car.setMaxSpeed(10); //normal speed
+					m_game->m_player->m_car.setMaxSpeed(m_game->m_player->m_car.getOriginalMaxSpeed()); //normal speed
 				}
 				else
 				{
@@ -107,7 +106,7 @@ void Background::draw(sf::RenderWindow &window)
 				}
 				else
 				{
-					m_game->m_player->m_car.setMaxSpeed(10);
+					m_game->m_player->m_car.setMaxSpeed(m_game->m_player->m_car.getOriginalMaxSpeed());
 				}
 			}
 			//collision occurs with bricks

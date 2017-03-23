@@ -2,8 +2,10 @@
 
 
 
-Ai::Ai(Game &game, float carX, float carY, sf::Texture &carTexture, std::vector<sf::CircleShape> & const track) : m_game(&game),
-	m_car(carTexture, sf::Vector2f(carX, carY)), 
+
+Ai::Ai(Game &game, float carX, float carY, sf::Texture &carTexture, std::vector<sf::CircleShape> & const track) :
+	m_game(&game),
+	m_car(game, carTexture, sf::Vector2f(carX, carY)), 
 	m_track(track)
 {
 	//m_car.setAiPosition(sf::Vector2f(carX, carY));

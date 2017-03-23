@@ -1,5 +1,6 @@
 #include "changeProfile.h"
 
+
 changeProfile::changeProfile(Game &game, Player &player) :
 	m_game(&game),
 	m_player(&player)

@@ -6,6 +6,7 @@
 #pragma comment(lib,"sfml-network-d.lib")
 #pragma comment(lib,"sfeMovie-d.lib") 
 #pragma comment(lib,"libyaml-cppmdd") 
+#pragma comment(lib, "thor-d.lib")
 #else
 #pragma comment(lib,"sfml-graphics.lib")
 #pragma comment(lib,"sfml-audio.lib")
@@ -14,6 +15,7 @@
 #pragma comment(lib,"sfml-network.lib")
 #pragma comment(lib,"sfeMovie.lib") 
 #pragma comment(lib,"libyaml-cppmd") 
+#pragma comment(lib, "thor-d.lib")
 #endif
 
 #include "Game.h"
@@ -29,7 +31,9 @@
 int main(int argc, char* args[])
 {
 	Game game;
+
 	game.init();
 	game.run();
+
 	return 0;
 }

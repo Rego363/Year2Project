@@ -1,11 +1,11 @@
 #include "Player.h"
 
 Player::Player(float carX, float carY, sf::Texture &carTexture, sf::RenderWindow &window, Game &game):
-	m_car(carTexture, sf::Vector2f(carX,carY)),
+	m_car(game, carTexture, sf::Vector2f(carX,carY)),
 	m_window(&window),
 	m_game(&game)
 {
-	m_money = 1000;
+	m_money = 10000;
 	m_carSelect = 0;
 	m_secHighScore = 1000;
 	m_minHighScore = 1000;
@@ -13,18 +13,18 @@ Player::Player(float carX, float carY, sf::Texture &carTexture, sf::RenderWindow
 	filename = "players.txt";
 
 
-	if (!m_skidmarkText.loadFromFile("Skidmark.png"))
+	/*if (!m_skidmarkText.loadFromFile("Skidmark.png"))
 	{
 		std::cout << "No texture for skidmarks" << std::endl;
-	}
+	}*/
 
-	for (int i = 0; i < 200; i++)
+	/*for (int i = 0; i < 200; i++)
 	{
 		sf::Sprite skidMark;
 		skidMark.setTexture(m_skidmarkText);
 		skidMark.setPosition(m_position);
 		m_skidmarkSprite.push_back(skidMark);
-	}
+	}*/
 }
 
 
@@ -307,9 +307,8 @@ void Player::update(float dt, sf::View &view)
 		if (currentDrift < 0)
 		{
 			currentDrift += 0.5;
-
 			m_skidmarkSprite[currentSkid].setPosition(m_car.getSprite().getPosition().x + cos(m_car.m_rotation + currentDrift * (3.14 / 180.0f))* m_car.m_speed, m_car.getSprite().getPosition().y + sin(m_car.m_rotation + currentDrift *(3.14 / 180.0f))*m_car.m_speed);
-			m_skidmarkSprite[currentSkid].setRotation(m_car.getRot() );
+			m_skidmarkSprite[currentSkid].setRotation(m_car.getRot());
 			currentSkid += 1;
 
 			if (currentSkid >= 200)
@@ -325,9 +324,9 @@ void Player::update(float dt, sf::View &view)
 		{
 			currentDrift += 0.5;
 
-			m_skidmarkSprite[currentSkid].setPosition(m_car.getSprite().getPosition().x + cos(m_car.m_rotation + currentDrift * (3.14 / 180.0f))*m_car.m_speed, m_car.getSprite().getPosition().y + sin(m_car.m_rotation + currentDrift *(3.14 / 180.0f))*m_car.m_speed);
+			/*m_skidmarkSprite[currentSkid].setPosition(m_car.getSprite().getPosition().x + cos(m_car.m_rotation + currentDrift * (3.14 / 180.0f))*m_car.m_speed, m_car.getSprite().getPosition().y + sin(m_car.m_rotation + currentDrift *(3.14 / 180.0f))*m_car.m_speed);
 			m_skidmarkSprite[currentSkid].setRotation(m_car.getRot());
-			currentSkid += 1;
+			currentSkid += 1;*/
 
 			if (currentSkid >= 200)
 			{
@@ -351,9 +350,9 @@ void Player::update(float dt, sf::View &view)
 			currentDrift -= 0.5;
 			
 		
-			m_skidmarkSprite[currentSkid].setPosition(m_car.getSprite().getPosition().x + cos(m_car.m_rotation + currentDrift * (3.14 / 180.0f))*m_car.m_speed, m_car.getSprite().getPosition().y + sin(m_car.m_rotation + currentDrift *(3.14 / 180.0f))*m_car.m_speed);
+		/*	m_skidmarkSprite[currentSkid].setPosition(m_car.getSprite().getPosition().x + cos(m_car.m_rotation + currentDrift * (3.14 / 180.0f))*m_car.m_speed, m_car.getSprite().getPosition().y + sin(m_car.m_rotation + currentDrift *(3.14 / 180.0f))*m_car.m_speed);
 			m_skidmarkSprite[currentSkid].setRotation(m_car.getRot());
-			currentSkid += 1;
+			currentSkid += 1;*/
 
 			if (currentSkid >= 200)
 			{
@@ -366,9 +365,9 @@ void Player::update(float dt, sf::View &view)
 		{
 			currentDrift -= 0.5;
 
-			m_skidmarkSprite[currentSkid].setPosition(m_car.getSprite().getPosition().x + cos(m_car.m_rotation + currentDrift * (3.14 / 180.0f))*m_car.m_speed, m_car.getSprite().getPosition().y + sin(m_car.m_rotation + currentDrift *(3.14 / 180.0f))*m_car.m_speed);
+			/*m_skidmarkSprite[currentSkid].setPosition(m_car.getSprite().getPosition().x + cos(m_car.m_rotation + currentDrift * (3.14 / 180.0f))*m_car.m_speed, m_car.getSprite().getPosition().y + sin(m_car.m_rotation + currentDrift *(3.14 / 180.0f))*m_car.m_speed);
 			m_skidmarkSprite[currentSkid].setRotation(m_car.getRot() );
-			currentSkid += 1;
+			currentSkid += 1;*/
 
 			if (currentSkid >= 200)
 			{
@@ -402,9 +401,10 @@ void Player::update(float dt, sf::View &view)
 
 
 	//press Y to use the cars turbo
-	if (m_xbox.m_currentState.Y && !m_xbox.m_previousState.Y&&m_car.useTurbo == false)
+	if (m_xbox.m_currentState.Y && !m_xbox.m_previousState.Y&&m_car.useTurbo == false && m_car.getTurbos()!=0)
 	{
 		m_car.useTurbo = true;
+		m_car.useTurbos();
 		m_game->m_background->activateTheShader(); //activate blur effect
 		m_turboTimer.restart(); //restart timer
 	}
@@ -428,14 +428,14 @@ void Player::update(float dt, sf::View &view)
 void Player::draw(sf::RenderWindow & window)
 {
 
-	for (int i = 0; i < 200; i++)
+	//for (int i = 0; i < 200; i++)
 
-	{
-			if (currentDrift > 10 || currentDrift < 10)
-			{
-				window.draw(m_skidmarkSprite[i]);
-			}
-	}
+	//{
+	//		if (currentDrift > 10 || currentDrift < 10)
+	//		{
+	//			window.draw(m_skidmarkSprite[i]);
+	//		}
+	//}
 
 	m_car.draw(window);
 }

@@ -7,7 +7,7 @@ GameOverScreen::GameOverScreen(Game & game):
 	//setup the widgets
 	m_label = new Label("Game Over", 10, -80);
 	m_label->changeTextSize(350);
-	m_moneyEarned = new Label("Money earned: ", 60, 450);
+	m_moneyEarned = new Label("Money earned: $1000", 60, 450);
 	m_time = new Label("Time: ", 450, 450);
 	m_placement = new Label("Place: ", 1000, 450);
 	m_button = new Button("Return", 550, 650);
@@ -39,5 +39,6 @@ void GameOverScreen::update()
 //return to the main menu
 void GameOverScreen::goToGame()
 {
+	m_game->m_player->earned(1000);
 	m_game->changeGameState(GameState::TheMenu);
 }
