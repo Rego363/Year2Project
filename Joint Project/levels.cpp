@@ -18,13 +18,6 @@ Levels::Levels(LevelData &level, Player &player,  Ai &ai, Ai &aiTwo, Ai &aiThree
 	m_startLine.setSize(sf::Vector2f(5, 200));
 	m_startLine.setFillColor(sf::Color::Red);
 
-
-	//m_ai->m_car.scaleAi();
-	/*m_ai->m_car.scaleAi();
-	m_aiTwo->m_car.scaleAi();
-	m_aiThree->m_car.scaleAi();*/
-
-
 	m_currentSelect = 0;
 	m_credits = new Button("Press A to end", m_startLine.getPosition().x - 192, m_startLine.getPosition().y);
 	m_credits->getFocus();
@@ -73,9 +66,8 @@ void Levels::update(float dt, sf::View &view)
 			m_bestLap.setPosition(m_currentPlayer->m_car.getPos().x - 620, m_currentPlayer->m_car.getPos().y - 350);
 			m_lastLap.setPosition(m_currentPlayer->m_car.getPos().x - 620, m_currentPlayer->m_car.getPos().y - 310);
 			m_Lap.setPosition(m_currentPlayer->m_car.getPos().x - 620, m_currentPlayer->m_car.getPos().y - 270);
-
+			m_turbos.setString("Turbos: " + to_string((int)m_game->m_player->m_car.getTurbos()));
 			m_turbos.setPosition(m_currentPlayer->m_car.getPos().x - 620, m_currentPlayer->m_car.getPos().y - 190);
-			m_turbos.setString("turbos: " + to_string((int)m_game->m_player->m_car.getTurbos()));
 		}
 
 		if ((sf::IntRect(m_currentPlayer->m_car.getSprite().getPosition().x, m_currentPlayer->m_car.getSprite().getPosition().y - 20,
@@ -271,15 +263,17 @@ std::string Levels::getBestLapTime()
 /// </summary>
 void Levels::resetLevel()
 {
+	m_startRace.restart();
+	m_raceTime.restart();
 	loadImages();
 	loadFont();
 	m_currentPlayer->m_car.resetPosition();
 	m_currentPlayer->m_car.m_rotation = 0;
 	m_currentPlayer->m_car.setRotation(0);
-	setupTexts();
 	m_startLine.setPosition(m_currentPlayer->m_car.getPos().x + 40, m_currentPlayer->m_car.getPos().y - 100);
 	m_startLine.setSize(sf::Vector2f(5, 200));
 	m_startLine.setFillColor(sf::Color::Red);
+	setupTexts();
 	m_currentSelect = 0;
 	m_gui.vertical = true;
 	game_on = true;
@@ -299,16 +293,19 @@ void Levels::resetLevel()
 	m_aiTwo->resetNode();
 	m_aiThree->resetNode();
 	m_credits = new Button("Press A to end", m_startLine.getPosition().x - 192, m_startLine.getPosition().y);
+	tempTime = 1000000;
 
 	if (m_game->m_turboScreen->m_smallEquipped == true)
 	{
 		m_currentPlayer->m_car.setTurbo(1);
 	}
-	else if (m_game->m_turboScreen->m_mediumEquipped == true)
+
+   if (m_game->m_turboScreen->m_mediumEquipped == true)
 	{
 		m_currentPlayer->m_car.setTurbo(2);
 	}
-	else if (m_game->m_turboScreen->m_largeEquipped == true)
+
+	if (m_game->m_turboScreen->m_largeEquipped == true)
 	{
 		m_currentPlayer->m_car.setTurbo(3);
 	}
