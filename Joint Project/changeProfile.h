@@ -13,14 +13,13 @@ class Player;
 #include"Game.h"
 #include <fstream>
 
-
 class changeProfile {
 
 public:
 	changeProfile(Game &game, Player &player);
 	~changeProfile();
-	void render(sf::RenderWindow &  window);
 	void update();
+	void render(sf::RenderWindow &  window);
 
 private:
 

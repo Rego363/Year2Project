@@ -1,5 +1,4 @@
 #include "background.h"
-#include <iostream>
 
 
 

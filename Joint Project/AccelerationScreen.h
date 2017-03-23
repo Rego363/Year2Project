@@ -18,19 +18,17 @@ public:
 	void currentUpgrade();
 
 private:
-	sf::Texture m_texture; //car part image
-	sf::Sprite m_sprite; //sprite to display on screen
+	Game *m_game;//game object
+	sf::Sprite m_sprite;	//sprite to display on screen
 	Label *m_label; //label heading
 	Label *m_playerMoney;  //the players balance
 	static const int MAX_ITEMS = 4; //number of ui elements
 	Widget* m_widgets[MAX_ITEMS];
 	int m_selectedItem = 0;
 	GUI m_gui;
-	Game *m_game; //game object
 	void smallBuy(); //buy the small upgrade
 	void mediumBuy(); //medium upgrade
 	void largeBuy(); //large upgrade
-
 	bool m_smallBought;
 	bool m_mediumBought;
 	bool m_largeBought;

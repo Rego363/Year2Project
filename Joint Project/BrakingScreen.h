@@ -17,12 +17,9 @@ public:
 	void goToGarage(); //go to the garage gamestate
 
 private:
-	sf::Texture m_texture; //car part image
-	sf::Sprite m_sprite; 
-
+	sf::Sprite m_sprite; //car part image
 	Label *m_label; //header/title
 	Label *m_playerMoney; //players balance
-
 	static const int MAX_ITEMS = 4; //num of widgets
 	int m_selectedItem = 0;
 	Widget* m_widgets[MAX_ITEMS]; //widgets

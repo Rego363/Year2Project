@@ -28,8 +28,6 @@ private:
 	int visible;
 
 	sf::Texture m_tileTexture; //texture
-	sf::Texture m_noiseTexture; //blurryness of nightvision
-	sf::Texture m_mask; //goggles effect
 	sf::Sprite spr; //sprite for tiles
 	bool isOnTrack; //bool to indicate on track
 	bool hitWall; //bool to indicate if wall is hit

@@ -7,10 +7,9 @@
 /// <param name="game"></param>
 PhysicsBalls::PhysicsBalls(Game &game) : m_game(&game)
 {
-	if (!m_ballTex.loadFromFile(m_game->m_currentLevel.m_ball.m_fileName))
-	{
-		cout << "blue ball problems" << endl;
-	}
+
+	sf::Texture& ballTex = m_game->m_manager->m_textureHolder["blueBall"];
+
 
 	m_Position = sf::Vector2f(1600, 1100);
 
@@ -28,7 +27,7 @@ PhysicsBalls::PhysicsBalls(Game &game) : m_game(&game)
 		}
 
 		sf::Sprite m_tempBall;
-		m_tempBall.setTexture(m_ballTex);
+		m_tempBall.setTexture(ballTex);
 		m_tempBall.setPosition(m_Position);
 		m_tempBall.setScale(0.5, 0.5);
 		m_ballSprite.push_back(m_tempBall);

@@ -38,6 +38,7 @@ MainMenu::MainMenu(Game &game):
 	m_currentSelect = 0;
 	m_gui.vertical = true;
 	m_title->changeTextSize(100);
+
 };
 
 

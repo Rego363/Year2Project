@@ -29,6 +29,5 @@ private:
 	GUI m_gui; //gui
 
 	Game *m_game;
-
 };
 #endif // !GARAGESCREEN

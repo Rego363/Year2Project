@@ -8,7 +8,7 @@
 class Ai
 {
 public:
-	Ai(float carX, float carY, sf::Texture &carTexture, std::vector<sf::CircleShape> & const track);
+	Ai(Game &game, float carX, float carY, sf::Texture &carTexture, std::vector<sf::CircleShape> & const track);
 	~Ai();
 	void update();	// Update loop
 	void render(sf::RenderWindow &window);	// Draw loop
@@ -16,6 +16,7 @@ public:
 	Car m_car;
 
 private:
+	Game *m_game;
 	sf::Vector2f trackDisVector;
 	sf::Vector2f aiDisVector;
 	sf::Vector2f vectorToNode;

@@ -4,12 +4,10 @@
 BrakingScreen::BrakingScreen(Game & game):
 	m_game(&game)
 {
-	if (!m_texture.loadFromFile(m_game->getGarageTexture()))
-	{
-		cout << "Error loading Braking texture" << endl; //load
-	}
+	sf::Texture& texture = m_game->m_manager->m_textureHolder["garage"];//load
 	//setup sprite
-	m_sprite.setTexture(m_texture);
+	m_sprite.setTexture(texture);
+
 	m_sprite.setTextureRect(sf::IntRect(168, 521, 200, 200));
 	m_sprite.setPosition(600, 300);
 
