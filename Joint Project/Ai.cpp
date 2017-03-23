@@ -2,7 +2,7 @@
 
 
 
-Ai::Ai(float carX, float carY, sf::Texture &carTexture, std::vector<sf::CircleShape> & track) :
+Ai::Ai(Game &game, float carX, float carY, sf::Texture &carTexture, std::vector<sf::CircleShape> & const track) : m_game(&game),
 	m_car(carTexture, sf::Vector2f(carX, carY)), 
 	m_track(track)
 {
@@ -40,7 +40,7 @@ void Ai::update()
 
 	vectorToNode = seekTrack(m_track, m_car.getPos());
 	m_steering += thor::unitVector(vectorToNode);
-	//m_steering += collisionAvoidance(aiId, entities);
+	//m_steering += collisionAvoidance();
 	m_steering = Math::truncate(m_steering, MAX_FORCE);
 	m_velocity = Math::truncate(m_velocity + m_steering, MAX_SPEED);
 
@@ -76,4 +76,57 @@ sf::Vector2f Ai::seekTrack(std::vector<sf::CircleShape> track, sf::Vector2f pos)
 	}
 
 	return sf::Vector2f(trackDisVector.x - aiDisVector.x, trackDisVector.y - aiDisVector.y);
+}
+
+
+
+sf::Vector2f Ai::collisionAvoidance()
+{
+
+	sf::Vector2f avoidence(0, 0);
+
+	auto headingRadians = thor::toRadian(m_car.getRot());
+	sf::Vector2f headingVector(std::cos(headingRadians) * MAX_SEE_AHEAD, std::sin(headingRadians) * MAX_SEE_AHEAD);
+	m_ahead = m_car.getPos() + headingVector;
+	m_halfAhead = m_car.getPos() + (headingVector * 0.5f);
+
+	sf::Sprite mostThreatening = findMostThreateningObstacle();
+	sf::Vector2f avoidance(0, 0);
+
+	if (Math::distance(m_car.getPos(), mostThreatening.getPosition()) <= Math::distance(m_car.getPos(), mostThreatening.getPosition()))
+	{
+		auto threatPos = mostThreatening.getPosition();
+		auto mypos = m_car.getPos();
+		avoidance.x = m_ahead.x - mostThreatening.getPosition().x;
+		avoidance.y = m_ahead.y - mostThreatening.getPosition().y;
+		avoidance = thor::unitVector(avoidance);
+		avoidance *= MAX_AVOID_FORCE;
+	}
+	else
+	{
+		avoidance *= 0.0f;
+	}
+	return avoidance;
+
+
+
+}
+
+sf::Sprite Ai::findMostThreateningObstacle()
+{
+	
+	m_obstacles = m_game->m_physicsBalls->m_ballSprite;
+		int size = m_obstacles.size();
+		sf::Sprite closest;
+
+		for (int i = 0; i < size; i++)
+		{
+			if (Math::distance(m_car.getPos(), m_obstacles.at(i).getPosition()) <= Math::distance(m_car.getPos(), closest.getPosition()))
+			{
+
+				closest = m_obstacles[i];
+			}
+		}
+		return closest;
+	
 }

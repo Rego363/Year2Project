@@ -142,9 +142,9 @@ Game::Game() :
 		m_hardTrack.push_back(circle);
 	}
 
-	m_ai = make_unique< Ai>(m_aiCar->getPos().x, m_aiCar->getPos().y, m_aistartCar, m_easyTrack);
-	m_aiTwo = make_unique< Ai>(m_aiCarTwo->getPos().x, m_aiCarTwo->getPos().y, m_aistartCar, m_mediumTrack);
-	m_aiThree = make_unique< Ai>(m_aiCarThree->getPos().x, m_aiCarThree->getPos().y, m_aistartCar, m_hardTrack);
+	m_ai = make_unique< Ai>(*this, m_aiCar->getPos().x, m_aiCar->getPos().y, m_aistartCar, m_easyTrack);
+	m_aiTwo = make_unique< Ai>(*this, m_aiCarTwo->getPos().x, m_aiCarTwo->getPos().y, m_aistartCar, m_mediumTrack);
+	m_aiThree = make_unique< Ai>(*this, m_aiCarThree->getPos().x, m_aiCarThree->getPos().y, m_aistartCar, m_hardTrack);
 
 	m_background = make_unique<Background>( *this);
 	m_nightMode = make_unique<NightMode>(*this);
