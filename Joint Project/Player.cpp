@@ -308,15 +308,6 @@ void Player::update(float dt, sf::View &view)
 		{
 			currentDrift += 0.5;
 
-			/*m_skidmarkSprite[currentSkid].setPosition(m_car.getSprite().getPosition().x + cos(m_car.m_rotation + currentDrift * (3.14 / 180.0f))* m_car.m_speed, m_car.getSprite().getPosition().y + sin(m_car.m_rotation + currentDrift *(3.14 / 180.0f))*m_car.m_speed);
-			m_skidmarkSprite[currentSkid].setRotation(m_car.getRot() );
-			currentSkid += 1;*/
-
-			if (currentSkid >= 200)
-			{
-				currentSkid = 0;
-			}
-
 
 			m_car.drift(currentDrift);
 		}
@@ -325,15 +316,7 @@ void Player::update(float dt, sf::View &view)
 		{
 			currentDrift += 0.5;
 
-			/*m_skidmarkSprite[currentSkid].setPosition(m_car.getSprite().getPosition().x + cos(m_car.m_rotation + currentDrift * (3.14 / 180.0f))*m_car.m_speed, m_car.getSprite().getPosition().y + sin(m_car.m_rotation + currentDrift *(3.14 / 180.0f))*m_car.m_speed);
-			m_skidmarkSprite[currentSkid].setRotation(m_car.getRot());
-			currentSkid += 1;*/
-
-			if (currentSkid >= 200)
-			{
-				currentSkid = 0;
-			}
-
+			
 
 			m_car.drift(currentDrift);
 		}
@@ -351,14 +334,7 @@ void Player::update(float dt, sf::View &view)
 			currentDrift -= 0.5;
 			
 		
-		/*	m_skidmarkSprite[currentSkid].setPosition(m_car.getSprite().getPosition().x + cos(m_car.m_rotation + currentDrift * (3.14 / 180.0f))*m_car.m_speed, m_car.getSprite().getPosition().y + sin(m_car.m_rotation + currentDrift *(3.14 / 180.0f))*m_car.m_speed);
-			m_skidmarkSprite[currentSkid].setRotation(m_car.getRot());
-			currentSkid += 1;*/
 
-			if (currentSkid >= 200)
-			{
-				currentSkid = 0;
-			}
 			m_car.drift(currentDrift);
 		}
 
@@ -366,14 +342,7 @@ void Player::update(float dt, sf::View &view)
 		{
 			currentDrift -= 0.5;
 
-			/*m_skidmarkSprite[currentSkid].setPosition(m_car.getSprite().getPosition().x + cos(m_car.m_rotation + currentDrift * (3.14 / 180.0f))*m_car.m_speed, m_car.getSprite().getPosition().y + sin(m_car.m_rotation + currentDrift *(3.14 / 180.0f))*m_car.m_speed);
-			m_skidmarkSprite[currentSkid].setRotation(m_car.getRot() );
-			currentSkid += 1;*/
-
-			if (currentSkid >= 200)
-			{
-				currentSkid = 0;
-			}
+			
 			m_car.drift(currentDrift);
 		}
 
@@ -428,16 +397,6 @@ void Player::update(float dt, sf::View &view)
 
 void Player::draw(sf::RenderWindow & window)
 {
-
-	//for (int i = 0; i < 200; i++)
-
-	//{
-	//		if (currentDrift > 10 || currentDrift < 10)
-	//		{
-	//			window.draw(m_skidmarkSprite[i]);
-	//		}
-	//}
-
 	m_car.draw(window);
 }
 

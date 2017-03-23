@@ -331,10 +331,10 @@ void Car::collision()
 	//m_position -= m_sprite.getPosition();
 
 	//m_rotation -= 180;
-	m_sprite.setRotation(m_rotation);
+	//m_sprite.setRotation(m_rotation);
 
-	m_speed *= -1;
-	m_speed -= 0.4f;
+	m_speed *= 1.0;
+	m_speed -= 4.0f;
 
 	/*if (m_rotation <= 178)
 		m_sprite.setPosition(m_sprite.getPosition().x - 20, m_sprite.getPosition().y + 20);

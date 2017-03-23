@@ -32,6 +32,7 @@ TurboScreen::TurboScreen(Game & game):
 		m_gui.addWidget(var);
 	}
 	m_gui.vertical = true;
+	m_smallEquipped = true;
 }
 
 void TurboScreen::draw(sf::RenderWindow &window)

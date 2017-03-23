@@ -150,6 +150,7 @@ public:
 	void resetMap();
 	LevelData m_currentLevel;
 	std::unique_ptr<TurboScreen>m_turboScreen;
+	Xbox360Controller m_xbox;
 
 private:
 	void processInput();
@@ -209,7 +210,6 @@ private:
 	std::vector<sf::CircleShape> m_easyTrack;
 	std::vector<sf::CircleShape> m_mediumTrack;
 	std::vector<sf::CircleShape> m_hardTrack;
-	Xbox360Controller m_xbox;
 
 
 
