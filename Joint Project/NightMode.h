@@ -13,7 +13,7 @@ class NightMode {
 public:
 	NightMode(Game &m_game); //constructor
 	void draw(sf::RenderWindow &window); //draw function
-	void activateTheShader(); //activate blur shader
+	void activateTheShader(bool activateshader1); //activate blur shader
 
 private:
 

@@ -350,11 +350,6 @@ void Game::update(sf::Time time)
 			m_background->activateTheShader();
 		}
 		
-		if(m_xbox.m_currentState.LB && !m_xbox.m_previousState.LB)
-		{
-			m_nightMode->activateTheShader();
-		}
-		
 		break;
 	case GameState::GameOver:
 		m_gameOverScreen->update();

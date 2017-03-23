@@ -71,10 +71,22 @@ void operator >> (const YAML::Node& lisenceNode, LisenceData& lisence)
 	lisence.m_fileName = lisenceNode["file"].as<std::string>();
 }
 
-// video file for Splash screen
+// video for splash
 void operator >> (const YAML::Node& splashNode, SplashData& splash)
 {
 	splash.m_fileName = splashNode["file"].as<std::string>();
+}
+
+// texture file for map 1
+void operator >> (const YAML::Node& map1Node, Map1Data& map1)
+{
+	map1.m_fileName = map1Node["file"].as<std::string>();
+}
+
+// texture file for map 2
+void operator >> (const YAML::Node& map2Node, Map2Data& map2)
+{
+	map2.m_fileName = map2Node["file"].as<std::string>();
 }
 
 //all levelData
@@ -91,6 +103,8 @@ void operator >> (const YAML::Node& levelNode, LevelData& level)
 	levelNode["lisence"] >> level.m_lisence;
 	levelNode["splash"] >> level.m_splash;
 	levelNode["ball"] >> level.m_ball;
+	levelNode["map"] >> level.m_map1;
+	levelNode["map2"] >> level.m_map2;
 
 	// For loop to load track data into m_track 
 	const YAML::Node& mediumTrackNode = levelNode["trackMedium"].as<YAML::Node>();

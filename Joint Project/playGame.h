@@ -51,6 +51,7 @@ private:
 	Game *m_game;
 	void goToMenu();
 	void goToSpecs();
+	void goToSpecsMap2();
 
 };
 

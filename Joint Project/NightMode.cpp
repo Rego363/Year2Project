@@ -114,7 +114,14 @@ void NightMode::draw(sf::RenderWindow &window)
 
 }
 //flip the bool for activating the shader
-void NightMode::activateTheShader()
+void NightMode::activateTheShader(bool activateshader1)
 {
-	activateShader = !(activateShader);
+	if (activateshader1 == true)
+	{
+		activateShader = true;
+	}
+	else if (activateshader1 == false)
+	{
+		activateShader = false;
+	}
 }

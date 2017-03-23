@@ -28,11 +28,9 @@ specs::specs(Game &game, Levels &level):
 	//m_EnemiesNo->getFocus();
 
 	m_title->changeTextSize(100);
-	//m_gui.addSlider(m_EnemiesNo);
 	m_gui.addRadioButton(m_3);
 	m_gui.addRadioButton(m_5);
 	m_gui.addRadioButton(m_7);
-	//m_gui.addButton(m_Time);
 	m_gui.addButton(m_Race);
 	m_gui.addButton(m_Back);
 	
