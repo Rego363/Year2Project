@@ -14,6 +14,7 @@ public:
 	void update();
 
 	void goToGarage();
+	void currentUpgrade();
 private:
 
 	sf::Sprite m_sprite;

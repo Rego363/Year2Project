@@ -78,7 +78,17 @@ Game::Game() :
 	music.setBuffer(m_buffer);
 	music.setLoop(true);
 	music.setVolume(100);
-	music.play();
+	//music.play();
+
+	if (!m_buffer2.loadFromFile("playing music.wav"))
+	{
+		std::cout << "NO MUSIC" << std::endl;
+	}
+
+	m_gameMusic.setBuffer(m_buffer2);
+	m_gameMusic.setLoop(true);
+	m_gameMusic.setVolume(100);
+	//m_gameMusic.play();
 
 	/*  FOR TESTING*/
 	/*******************************************************************************/
@@ -223,6 +233,12 @@ void Game::update(sf::Time time)
 {
 	totalTime += timeSinceLastUpdate.asSeconds();
 
+	if (!m_currentGameState == GameState::Racing)
+	{
+		m_player->m_car.m_soundEffect.stop();
+		m_player->m_car.m_speed = 0;
+	}
+
 	switch (m_currentGameState)
 	{
 
@@ -318,11 +334,6 @@ void Game::update(sf::Time time)
 		if (m_xbox.m_currentState.Back&& !m_xbox.m_previousState.Back)
 		{
 			m_background->activateTheShader();
-		}
-		
-		if(m_xbox.m_currentState.LB && !m_xbox.m_previousState.LB)
-		{
-			m_nightMode->activateTheShader();
 		}
 		
 		break;
@@ -462,8 +473,8 @@ void Game::render()
 	case GameState::Racing:   //put in levels
 		m_window.clear(sf::Color(0, 0, 0, 255));
 		m_background->draw(m_window);
-		m_nightMode->draw(m_window);
 		m_level->render(m_window);
+		m_nightMode->draw(m_window);
 		m_window.display();
 		break;
 	case GameState::GameOver:

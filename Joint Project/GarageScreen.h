@@ -16,16 +16,18 @@ public:
 	void goBack();   //go to gamestate menu
 	void goAccel();	 //go to gamestate acceleration
 	void goTurbo();	 //go to gamestate turbo
-	void goBrake();	 //go to gamestate braking
+		 //go to gamestate braking
 	void goSpeed();	 //go to gamestate speed
 	void goSteer();	 //go to gamestate steering
 
 private:
 	int m_selectedItem = 0;
-	static const int MAX_ITEMS = 6;
+	//widgets
+	static const int MAX_ITEMS = 5;
 	Widget* m_widgets[MAX_ITEMS];
 	Label* m_label;
-	GUI m_gui;
+	GUI m_gui; //gui
+
 	Game *m_game;
 };
 #endif // !GARAGESCREEN

@@ -32,7 +32,7 @@ void Credits::update()
 	if (m_credits.getStatus() == 0)
 	{
 		m_play = true;
-		m_game->music.play();
+		//m_game->music.play();
 		m_game->changeGameState(GameState::TheMenu);
 	}
 }

@@ -1,7 +1,4 @@
 #include "NightMode.h"
-#include <iostream>
-
-
 
 bool NightMode::activateShader = false;
 
@@ -55,17 +52,24 @@ NightMode::NightMode(Game &game) :
 		std::cout << "frag shader failed to load" << std::endl;         //load shader
 	}
 
-
+	sf::Texture& blankTexture = m_game->m_manager->m_textureHolder["blankBackground"];
 	sf::Texture& noiseTexture = m_game->m_manager->m_textureHolder["noise"]; //blurryness of nightvision
 	sf::Texture& mask = m_game->m_manager->m_textureHolder["mask"]; //goggles effect
 
-	m_shader.setParameter("sceneBuffer", m_tileTexture);
-	m_shader.setParameter("noiseTex", noiseTexture);
-	m_shader.setParameter("maskTex", mask);
-	m_shader.setParameter("elapsedTime", elapsedTime.getElapsedTime().asSeconds());
-	m_shader.setParameter("luminanceThreshold", 0.2);
-	m_shader.setParameter("colorAmplification", 4.0);
-	m_shader.setParameter("effectCoverage", 1.0);
+	//sets shaders variables
+	m_shader.setParameter("sceneBuffer", m_blankTexture); // blank texture to follow window
+	m_shader.setParameter("noiseTex", noiseTexture);// movement part which makes it look blurry
+	m_shader.setParameter("maskTex", mask); //black effect around screen
+	m_shader.setParameter("elapsedTime", elapsedTime.getElapsedTime().asSeconds());//movement of noise texture
+	m_shader.setParameter("luminanceThreshold", 4.0);
+	m_shader.setParameter("colorAmplification", 0.5); // brightness of light
+	m_shader.setParameter("effectCoverage", 1.1);//how much of screen
+
+	m_shaderSprite.setTexture(m_blankTexture);
+	m_shaderSprite.scale(1.4, 1.4);
+	m_shaderSprite.setOrigin(sf::Vector2f(640, 360));
+	m_shaderSprite.setPosition(m_game->m_player->m_car.getPos());
+
 }
 
 
@@ -73,6 +77,8 @@ NightMode::NightMode(Game &game) :
 void NightMode::draw(sf::RenderWindow &window)
 {
 	visible = 0; //amount of tiles visible on screen
+
+	m_shaderSprite.setPosition(m_game->m_player->m_car.getPos());
 
 	for (int i = 0; i < loadCounter.x; i++)
 	{
@@ -86,16 +92,24 @@ void NightMode::draw(sf::RenderWindow &window)
 			{
 				if (activateShader == true)
 				{
-					m_shader.setParameter("elapsedTime", elapsedTime.getElapsedTime().asSeconds() * 10 );
-					window.draw(spr, &m_shader);
+					m_shader.setParameter("elapsedTime", elapsedTime.getElapsedTime().asSeconds());
+					window.draw(m_shaderSprite, &m_shader);
 				}
 				
 			}
 		}
 	}
+
 }
 //flip the bool for activating the shader
-void NightMode::activateTheShader()
+void NightMode::activateTheShader(bool activateshader1)
 {
-	activateShader = !(activateShader);
+	if (activateshader1 == true)
+	{
+		activateShader = true;
+	}
+	else if (activateshader1 == false)
+	{
+		activateShader = false;
+	}
 }

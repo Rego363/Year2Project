@@ -39,7 +39,7 @@ Label::Label(std::string s, float x, float y, std::string textureName):
 
 	hasTexture = true;
 	m_id = "label";
-	if (!m_font.loadFromFile("Figurativative.ttf"))
+	if (!m_font.loadFromFile("Fonts/AmericanCaptain.ttf"))
 	{
 		//error message
 	}
@@ -53,6 +53,41 @@ Label::Label(std::string s, float x, float y, std::string textureName):
 	
 }
 
+Label::Label(std::string s, float x, float y, std::string textureName, std::string textureName2)
+{
+	if (!m_texture.loadFromFile(textureName))
+	{
+	}
+	m_sprite.setTexture(m_texture); //texture
+	m_sprite.setPosition(x, y+25);
+	m_sprite.setScale(0.5, 0.5);
+
+
+
+
+	has2Textures = true;
+	m_id = "label";
+	if (!m_font.loadFromFile("Fonts/AmericanCaptain.ttf"))
+	{
+		//error message
+	}
+	m_text.setFont(m_font);
+	m_text.setString(s);
+	m_text.setPosition((x + m_sprite.getGlobalBounds().width), y);
+	m_text.setColor(sf::Color::White);
+	m_text.setCharacterSize(100);
+
+	if (!m_texture2.loadFromFile(textureName2))
+	{
+	}
+	m_sprite2.setTexture(m_texture2); //texture
+	m_sprite2.setPosition((m_text.getPosition().x + m_text.getGlobalBounds().width)+220, y+25);
+	m_sprite2.setScale(-0.5, 0.5);
+	//m_sprite2.setRotation(180);
+
+
+}
+
 //draw the label to the window
 void Label::draw(sf::RenderWindow &window)
 {
@@ -60,6 +95,11 @@ void Label::draw(sf::RenderWindow &window)
 	if (hasTexture == true) //draw the texture if there is one
 	{
 		window.draw(m_sprite);
+	}
+	if (has2Textures == true) //draw the texture if there is one
+	{
+		window.draw(m_sprite);
+		window.draw(m_sprite2);
 	}
 }
 

@@ -7,13 +7,17 @@
 
 #ifndef NIGHTMODE
 #define NIGHTMODE
-
+///<summary>
+/// Dylan Murphy
+/// class to use the night vision shader
+/// file: nightvision.frag
+///<summary>
 class NightMode {
 
 public:
 	NightMode(Game &m_game); //constructor
 	void draw(sf::RenderWindow &window); //draw function
-	void activateTheShader(); //activate blur shader
+	void activateTheShader(bool activateshader1); //activate blur shader
 
 private:
 
@@ -29,7 +33,8 @@ private:
 	bool hitWall; //bool to indicate if wall is hit
 	sf::Vector2i map[2000][2000]; //the map size
 	sf::Vector2i loadCounter; //the amount of tiles
-
+	sf::Texture m_blankTexture;
+	sf::Sprite m_shaderSprite;
 	Game *m_game; //pointer to game class
 
 	sf::Shader m_shader;

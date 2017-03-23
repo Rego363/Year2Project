@@ -9,16 +9,17 @@ OptionsScreen::OptionsScreen(Game & game) :
 	m_game(&game)
 {
 	m_title = new Label("Options", 475, 50);
-	m_difficultyButton = new Button("Difficulty", 550, 250);
+	/*m_difficultyButton = new Button("Difficulty", 550, 250);
 	m_difficultyButton->getFocus();
-	m_difficultyButton->Enter = std::bind(&OptionsScreen::setStateDifficulty, this);
-	m_soundButton = new Button("Sound", 570, 350);
+	m_difficultyButton->Enter = std::bind(&OptionsScreen::setStateDifficulty, this);*/
+	m_soundButton = new Button("Sound", 570, 250);
 	m_soundButton->Enter = std::bind(&OptionsScreen::setStateSound, this);
-	m_displayButton = new Button("Display", 565, 450);
+	m_soundButton->getFocus();
+	m_displayButton = new Button("Display", 565, 350);
 	m_displayButton->Enter = std::bind(&OptionsScreen::setStateDisplay, this);
-	m_backButton = new Button("Back", 575, 550);
+	m_backButton = new Button("Back", 575, 450);
 	m_backButton->Enter = std::bind(&OptionsScreen::setStateBack, this);
-	m_gui.addButton(m_difficultyButton);
+	//m_gui.addButton(m_difficultyButton);
 	m_gui.addButton(m_soundButton);
 	m_gui.addButton(m_displayButton);
 	m_gui.addButton(m_backButton);
@@ -49,7 +50,7 @@ void OptionsScreen::render(sf::RenderWindow & window)
 /// </summary>
 void OptionsScreen::update()
 {
-	m_gui.update(m_currentSelect,4);
+	m_gui.update(m_currentSelect,3);
 }
 
 /// <summary>

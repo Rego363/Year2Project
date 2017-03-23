@@ -5,7 +5,7 @@ Player::Player(float carX, float carY, sf::Texture &carTexture, sf::RenderWindow
 	m_window(&window),
 	m_game(&game)
 {
-	m_money = 1000;
+	m_money = 10000;
 	m_carSelect = 0;
 	m_secHighScore = 1000;
 	m_minHighScore = 1000;
@@ -402,9 +402,10 @@ void Player::update(float dt, sf::View &view)
 
 
 	//press Y to use the cars turbo
-	if (m_xbox.m_currentState.Y && !m_xbox.m_previousState.Y&&m_car.useTurbo == false)
+	if (m_xbox.m_currentState.Y && !m_xbox.m_previousState.Y&&m_car.useTurbo == false && m_car.getTurbos()!=0)
 	{
 		m_car.useTurbo = true;
+		m_car.useTurbos();
 		m_game->m_background->activateTheShader(); //activate blur effect
 		m_turboTimer.restart(); //restart timer
 	}

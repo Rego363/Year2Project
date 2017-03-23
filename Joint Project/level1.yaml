@@ -1,3 +1,7 @@
+map2:
+   file: Map2.png
+map:
+   file: Map1.png
 ball:
    file: blueball.png
 splash:

@@ -14,44 +14,56 @@ Dylan
 1000
 1000
 <<<<<<< HEAD
+<<<<<<< HEAD
 Michael
 =======
 $$$
 >>>>>>> 661b05d72d51d5971bb4080e615c1fe067d8167c
+=======
+MICHAEL
+>>>>>>> 493fc8ba436f7111e95de6cae275996037d08963
 1000
 1000
 1000
-John
+Fry
 1000
 1000
 1000
+<<<<<<< HEAD
 <<<<<<< HEAD
 jack
 =======
 Jack
 >>>>>>> 661b05d72d51d5971bb4080e615c1fe067d8167c
+=======
+Bender
+>>>>>>> 493fc8ba436f7111e95de6cae275996037d08963
 1000
 1000
 1000
-Brendan
+Leela
 1000
 1000
 1000
-Matt
+Zoidberg
 1000
 1000
 1000
-Bob
+Professor_Farnsworth
 1000
 1000
 1000
-David
+Nibbler
 1000
 1000
 1000
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 Logan
+=======
+Zapp
+>>>>>>> 493fc8ba436f7111e95de6cae275996037d08963
 1000
 1000
 1000

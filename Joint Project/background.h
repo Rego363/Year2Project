@@ -8,6 +8,7 @@
 #ifndef BACKGROUND
 #define BACKGROUND
 
+//this class will represent the world / race track of the game
 class Background {
 
 public:
@@ -32,18 +33,7 @@ private:
 
 	Game *m_game; //pointer to game class
 
-	sf::Shader m_shader; 
-	sf::Shader m_shader2; //shaders
-
-
-
-	
+	sf::Shader m_shader;  //shaders	
 	static bool activateShader; //turn on the blur shader
-
-	sf::RenderTexture m_renderTexture;
-	sf::Sprite m_renderSprite;
-	sf::Image m_image;
-	sf::Color color;
-	
 };
 #endif

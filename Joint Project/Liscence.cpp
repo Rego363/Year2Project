@@ -6,7 +6,7 @@ Liscence::Liscence(Game & game) : m_game(&game)
 
 	load();
 	m_animation.fit(sf::FloatRect(0, 0, 1280, 720), true);
-
+	m_animation.setVolume(100);
 }
 
 //destructor
@@ -19,6 +19,7 @@ void Liscence::update()
 {
 
 	m_game->music.pause();
+	m_game->m_gameMusic.pause();
 
 	if (m_play == true)
 	{

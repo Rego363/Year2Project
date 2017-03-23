@@ -13,6 +13,8 @@ public:
 	void draw(sf::RenderWindow &window);
 	void update();
 	void goToGarage();
+
+	void currentUpgrade();
 private:
 	sf::Sprite m_sprite;
 	Label *m_label;

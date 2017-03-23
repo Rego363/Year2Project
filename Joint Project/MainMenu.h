@@ -33,6 +33,7 @@ private:
 
 	GUI m_gui;
 	Label *m_title;
+	Label *m_icons[2];
 	Button *m_Play;
 	Button *m_Garage;
 	Button *m_ChangeProfile;

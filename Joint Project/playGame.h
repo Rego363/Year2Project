@@ -43,10 +43,12 @@ private:
 	sf::RectangleShape m_rect;
 	bool maptrue = false;
 
-
+	sf::Sprite dayMapSprite;
+	sf::Sprite nightMapSprite;
 	Game *m_game;
 	void goToMenu();
 	void goToSpecs();
+	void goToSpecsMap2();
 
 };
 

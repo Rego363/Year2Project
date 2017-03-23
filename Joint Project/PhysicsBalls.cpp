@@ -1,6 +1,7 @@
 #include "PhysicsBalls.h"
 
 /// <summary>
+/// Dylan Murphy
 /// Creates balls
 /// </summary>
 /// <param name="game"></param>
@@ -73,7 +74,7 @@ void PhysicsBalls::collision()
 			m_collision = true;
 			if (m_collision)
 			{
-				m_game->m_player->m_car.setMaxSpeed(6);
+				m_game->m_player->m_car.setMaxSpeed(m_game->m_player->m_car.getMaxSpeed()/2.0f);
 				/*m_ballSprite[i].setPosition((m_ballSprite[i].getPosition().x + cos(m_game->m_player->m_car.m_rotation * 3.14 / 180) * m_game->m_player->m_car.m_speed * 2),
 					(m_ballSprite[i].getPosition().y + sin(m_game->m_player->m_car.m_rotation * 3.14 / 180) * m_game->m_player->m_car.m_speed * 2));*/
 			}

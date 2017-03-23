@@ -17,6 +17,7 @@ Levels::Levels(LevelData &level, Player &player,  Ai &ai, Ai &aiTwo, Ai &aiThree
 	m_Lap.setFont(m_font);
 	easterEgg.setFont(m_font);
 	m_currentSpeed.setFont(m_font);
+	m_turbos.setFont(m_font);
 	setupTexts();
 
 	m_startLine.setPosition(m_currentPlayer->m_car.getPos().x + 40, m_currentPlayer->m_car.getPos().y - 100);
@@ -31,7 +32,7 @@ Levels::Levels(LevelData &level, Player &player,  Ai &ai, Ai &aiTwo, Ai &aiThree
 
 
 	m_currentSelect = 0;
-	m_credits = new Button("Press A to end", m_currentPlayer->m_car.getPos().x , m_currentPlayer->m_car.getPos().y +300);
+	m_credits = new Button("Press A to end", m_startLine.getPosition().x - 192, m_startLine.getPosition().y);
 	m_credits->getFocus();
 	m_credits->Enter = std::bind(&Levels::setStateBack, this);
 	m_gui.addButton(m_credits);
@@ -78,6 +79,9 @@ void Levels::update(float dt, sf::View &view)
 			m_bestLap.setPosition(m_currentPlayer->m_car.getPos().x - 620, m_currentPlayer->m_car.getPos().y - 350);
 			m_lastLap.setPosition(m_currentPlayer->m_car.getPos().x - 620, m_currentPlayer->m_car.getPos().y - 310);
 			m_Lap.setPosition(m_currentPlayer->m_car.getPos().x - 620, m_currentPlayer->m_car.getPos().y - 270);
+
+			m_turbos.setPosition(m_currentPlayer->m_car.getPos().x - 620, m_currentPlayer->m_car.getPos().y - 190);
+			m_turbos.setString("turbos: " + to_string((int)m_game->m_player->m_car.getTurbos()));
 		}
 
 		if ((sf::IntRect(m_currentPlayer->m_car.getSprite().getPosition().x, m_currentPlayer->m_car.getSprite().getPosition().y - 20,
@@ -103,6 +107,8 @@ void Levels::update(float dt, sf::View &view)
 
 				if (currentlap > m_maxLaps)
 				{
+					m_currentPlayer->m_car.m_speed = 0;
+					m_currentPlayer->m_car.m_soundEffect.stop();
 					game_on = false;
 				}
 
@@ -113,6 +119,7 @@ void Levels::update(float dt, sf::View &view)
 	else
 	{
 		m_gui.update(m_currentSelect, 1);
+		m_currentPlayer->m_car.m_speed = 0;
 	}
 }
 
@@ -121,7 +128,6 @@ void Levels::render(sf::RenderWindow & window)
 {
 	if (game_on)
 	{
-		m_currentPlayer->draw(window);
 		m_ai->render(window);
 		m_game->m_physicsBalls->render(window);
 		m_aiTwo->render(window);
@@ -132,6 +138,7 @@ void Levels::render(sf::RenderWindow & window)
 		window.draw(m_lastLap);
 		window.draw(easterEgg);
 		window.draw(m_Lap);
+		window.draw(m_turbos);
 		m_currentPlayer->draw(window);
 		window.draw(m_currentSpeed);
 		if (m_countDown)
@@ -151,6 +158,7 @@ void Levels::render(sf::RenderWindow & window)
 		window.draw(m_lastLap);
 		window.draw(m_Lap);
 		window.draw(m_currentSpeed);
+		window.draw(m_turbos);
 		m_gui.draw(window);
 	}
 }
@@ -222,6 +230,10 @@ void Levels::setupTexts()
 	m_Lap.setCharacterSize(50);
 	m_Lap.setString("Lap: " + to_string(currentlap) + "/" + to_string(m_maxLaps));
 
+	m_turbos.setPosition(m_currentPlayer->m_car.getPos().x - 620, m_currentPlayer->m_car.getPos().y - 190);
+	m_turbos.setCharacterSize(50);
+	m_turbos.setString("turbos: " + to_string((int)m_game->m_player->m_car.getTurbos()));
+
 	easterEgg.setPosition(5700, 215);
 	easterEgg.setCharacterSize(50);
 	easterEgg.setString("Pete is cool");
@@ -257,7 +269,6 @@ void Levels::resetLevel()
 	m_startLine.setPosition(m_currentPlayer->m_car.getPos().x + 40, m_currentPlayer->m_car.getPos().y - 100);
 	m_startLine.setSize(sf::Vector2f(5, 200));
 	m_startLine.setFillColor(sf::Color::Red);
-	//m_ai->m_car.scaleAi();
 	m_currentSelect = 0;
 	m_gui.vertical = true;
 	game_on = true;
@@ -265,10 +276,29 @@ void Levels::resetLevel()
 	m_raceStarted = false;
 	currentlap = 1;
 	m_ai->m_car.setAiPosition(sf::Vector2f(760, 1050));
+	m_aiTwo->m_car.setAiPosition(sf::Vector2f(660.0f, 1050.0f));
+	m_aiThree->m_car.setAiPosition(sf::Vector2f(660.0f, 1100.0f));
+	m_ai->m_car.m_rotation = 0;
+	m_aiTwo->m_car.m_rotation = 0;
+	m_aiThree->m_car.m_rotation = 0;
 	m_ai->m_car.setRotation(0);
 	m_aiTwo->m_car.setRotation(0);
 	m_aiThree->m_car.setRotation(0);
 	m_ai->resetNode();
 	m_aiTwo->resetNode();
 	m_aiThree->resetNode();
+	m_credits = new Button("Press A to end", m_startLine.getPosition().x - 192, m_startLine.getPosition().y);
+
+	if (m_game->m_turboScreen->m_smallEquipped == true)
+	{
+		m_currentPlayer->m_car.setTurbo(1);
+	}
+	else if (m_game->m_turboScreen->m_mediumEquipped == true)
+	{
+		m_currentPlayer->m_car.setTurbo(2);
+	}
+	else if (m_game->m_turboScreen->m_largeEquipped == true)
+	{
+		m_currentPlayer->m_car.setTurbo(3);
+	}
 }

@@ -21,7 +21,9 @@ ResourceManager::ResourceManager()
 	m_textureHolder.acquire("mask", thor::Resources::fromFile<sf::Texture>("./mask.png"));
 	m_textureHolder.acquire("blueBall", thor::Resources::fromFile<sf::Texture>("./blueBall.png"));
 	m_textureHolder.acquire("raceBackground", thor::Resources::fromFile<sf::Texture>("./testTiles.png"));
-	
+	m_textureHolder.acquire("dayLightMap", thor::Resources::fromFile<sf::Texture>("./Map1.PNG"));
+	m_textureHolder.acquire("nightVisionMap", thor::Resources::fromFile<sf::Texture>("./Map2.png"));
+
 	//Fonts
 	m_fontHolder.acquire("americanCap", thor::Resources::fromFile<sf::Font>("Fonts/AmericanCaptain.ttf"));
 	//m_fontHolder.acquire("Figurativative", thor::Resources::fromFile<sf::Font>("Figurativative.ttf"));

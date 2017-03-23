@@ -20,9 +20,7 @@ private:
 	GUI m_gui;
 	Label *m_title;
 
-	//Text animations
 	CheckBox *m_animeOn;
-	//Slider *m_animeSpeed;
 
 	Button *m_backButton;
 

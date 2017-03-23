@@ -1,18 +1,21 @@
 #include "EnterNameScreen.h"
 
+//construct the entername screen
 EnterNameScreen::EnterNameScreen(Game &game, Player &player):
 	m_game(&game),
 	m_player(&player)
 {
+
 	m_enteredName = "";
 
+	//setup the widgets
 	m_label = new Label("Your Name:  "+ m_enteredName, 450, 100);
 	m_gui.addLabel(m_label);
 
 	// Top line
 	m_widgets[0] = new Button("Q", 450, 300, 50);
 	m_widgets[0]->getFocus();
-	m_widgets[0]->Enter = std::bind(&EnterNameScreen::addQ, this);
+	m_widgets[0]->Enter = std::bind(&EnterNameScreen::addQ, this); //assign the functions
 	m_widgets[1] = new Button("W", 500, 300, 50);
 	m_widgets[1]->Enter = std::bind(&EnterNameScreen::addW, this);
 	m_widgets[2] = new Button("E", 550, 300, 50);
@@ -81,27 +84,30 @@ EnterNameScreen::EnterNameScreen(Game &game, Player &player):
 
 	for each (Widget* var in m_widgets)
 	{
-		
-		m_gui.addWidget(var);
+		m_gui.addWidget(var); //add widgets to the gui
 	}
 	m_gui.both = true;
 	m_clock.restart();
 }
 
+//returns the string that is to be the new name
 std::string EnterNameScreen::getEnteredName()
 {
 	return m_enteredName;
 }
 
+//update the gui object
 void EnterNameScreen::update()
 {
 	m_gui.update(m_selectedItem, MAX_ITEMS);	
 }
 
+//draw the gui to the screen
 void EnterNameScreen::draw(sf::RenderWindow & window)
 {
 	m_gui.draw(window);
 	m_xbox.update();
+	//complete the whole process by pressing start
 	if (m_xbox.m_currentState.Start)
 	{
 		m_game->m_player->newPlayer(m_enteredName);
@@ -109,174 +115,179 @@ void EnterNameScreen::draw(sf::RenderWindow & window)
 	}
 }
 
+//add letter q
 void EnterNameScreen::addQ()
 {
 	m_enteredName += "Q";
 	m_label->updateText("Your Name:  " + m_enteredName);
 }
-
+//add letter w
 void EnterNameScreen::addW()
 {
 	m_enteredName += "W";
 	m_label->updateText("Your Name:  " + m_enteredName);
 }
-
+//add letter e
 void EnterNameScreen::addE()
 {
 	m_enteredName += "E";
 	m_label->updateText("Your Name:  " + m_enteredName);
 }
-
+//add letter r
 void EnterNameScreen::addR()
 {
 	m_enteredName += "R";
 	m_label->updateText("Your Name:  " + m_enteredName);
 }
-
+//add letter t
 void EnterNameScreen::addT()
 {
 	m_enteredName += "T";
 	m_label->updateText("Your Name:  " + m_enteredName);
 }
-
+//add letter y
 void EnterNameScreen::addY()
 {
 	m_enteredName += "Y";
 	m_label->updateText("Your Name:  " + m_enteredName);
 }
-
+//add letter u
 void EnterNameScreen::addU()
 {
 	m_enteredName += "U";
 	m_label->updateText("Your Name:  " + m_enteredName);
 }
-
+//add letter i
 void EnterNameScreen::addI()
 {
 	m_enteredName += "I";
 	m_label->updateText("Your Name:  " + m_enteredName);
 }
-
+//add letter o
 void EnterNameScreen::addO()
 {
 	m_enteredName += "O";
 	m_label->updateText("Your Name:  " + m_enteredName);
 }
-
+//add letter p
 void EnterNameScreen::addP()
 {
 	m_enteredName += "P";
 	m_label->updateText("Your Name:  " + m_enteredName);
 }
-
+//add letter a
 void EnterNameScreen::addA()
 {
 	m_enteredName += "A";
 	m_label->updateText("Your Name:  " + m_enteredName);
 }
-
+//add letter s
 void EnterNameScreen::addS()
 {
 	m_enteredName += "S";
 	m_label->updateText("Your Name:  " + m_enteredName);
 }
-
+//add letter d
 void EnterNameScreen::addD()
 {
 	m_enteredName += "D";
 	m_label->updateText("Your Name:  " + m_enteredName);
 }
-
+//add letter f
 void EnterNameScreen::addF()
 {
 	m_enteredName += "F";
 	m_label->updateText("Your Name:  " + m_enteredName);
 }
-
+//add letter g
 void EnterNameScreen::addG()
 {
 	m_enteredName += "G";
 	m_label->updateText("Your Name:  " + m_enteredName);
 }
-
+//add letter h
 void EnterNameScreen::addH()
 {
 	m_enteredName += "H";
 	m_label->updateText("Your Name:  " + m_enteredName);
 }
 
+//add letter j
 void EnterNameScreen::addJ()
 {
 	m_enteredName += "J";
 	m_label->updateText("Your Name:  " + m_enteredName);
 }
 
+//add letter k
 void EnterNameScreen::addK()
 {
 	m_enteredName += "K";
 	m_label->updateText("Your Name:  " + m_enteredName);
 }
 
+//add letter l
 void EnterNameScreen::addL()
 {
 	m_enteredName += "L";
 	m_label->updateText("Your Name:  " + m_enteredName);
 }
 
+//add letter z
 void EnterNameScreen::addZ()
 {
 	m_enteredName += "Z";
 	m_label->updateText("Your Name:  " + m_enteredName);
 }
-
+//add letter x
 void EnterNameScreen::addX()
 {
 	m_enteredName += "X";
 	m_label->updateText("Your Name:  " + m_enteredName);
 }
-
+//add letter c
 void EnterNameScreen::addC()
 {
 	m_enteredName += "C";
 	m_label->updateText("Your Name:  " + m_enteredName);
 }
-
+//add letter v
 void EnterNameScreen::addV()
 {
 	m_enteredName += "V";
 	m_label->updateText("Your Name:  " + m_enteredName);
 }
-
+//add letter b
 void EnterNameScreen::addB()
 {
 	m_enteredName += "B";
 	m_label->updateText("Your Name:  " + m_enteredName);
 }
-
+//add letter n
 void EnterNameScreen::addN()
 {
 	m_enteredName += "N";
 	m_label->updateText("Your Name:  " + m_enteredName);
 }
-
+//add letter m
 void EnterNameScreen::addM()
 {
 	m_enteredName += "M";
 	m_label->updateText("Your Name:  " + m_enteredName);
 }
-
+//add '
 void EnterNameScreen::addChar()
 {
 	m_enteredName += "'";
 	m_label->updateText("Your Name:  " + m_enteredName);
 }
-
+//add letter space/underscore
 void EnterNameScreen::Space()
 {
 	m_enteredName += "_";
 	m_label->updateText("Your Name:  " + m_enteredName);
 }
-
+//remove last letter of the string
 void EnterNameScreen::deleteLetter()
 {
 	if (m_enteredName.size() > 0)
@@ -286,9 +297,9 @@ void EnterNameScreen::deleteLetter()
 	m_label->updateText("Your Name:  " + m_enteredName);
 }
 
+//add $
 void EnterNameScreen::add$()
 {
 	m_enteredName += "$";
 	m_label->updateText("Your Name:  " + m_enteredName);
-	
 }
