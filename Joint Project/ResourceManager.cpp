@@ -1,11 +1,17 @@
 #include "ResourceManager.h"
+/// <summary>
+/// @mainpage Joint Project - 2D racing game.
+/// @Author Dylan Murphy, Sean Regan, Micheal Bridgette, David O'Gorman
+/// @Version 1.0
+/// @brief A 2D racing game.
+/// </summary>
 
 ResourceManager::ResourceManager()
 {
 	// Textures
 	m_textureHolder.acquire("garage", thor::Resources::fromFile<sf::Texture>("./all.png"));
 	m_textureHolder.acquire("blueBackground", thor::Resources::fromFile<sf::Texture>("./backgroundBlue.png"));
-	m_textureHolder.acquire("blankBackground", thor::Resources::fromFile<sf::Texture>("./blankBackground.png"));
+	m_textureHolder.acquire("blankBackground", thor::Resources::fromFile<sf::Texture>("./blank.png"));
 	m_textureHolder.acquire("blankCar", thor::Resources::fromFile<sf::Texture>("./blankNeon.png"));
 	m_textureHolder.acquire("skidMark", thor::Resources::fromFile<sf::Texture>("./Skidmark2.png"));
 	m_textureHolder.acquire("yellowCar", thor::Resources::fromFile<sf::Texture>("./lambo.png"));
@@ -21,44 +27,19 @@ ResourceManager::ResourceManager()
 	m_textureHolder.acquire("mask", thor::Resources::fromFile<sf::Texture>("./mask.png"));
 	m_textureHolder.acquire("blueBall", thor::Resources::fromFile<sf::Texture>("./blueBall.png"));
 	m_textureHolder.acquire("raceBackground", thor::Resources::fromFile<sf::Texture>("./testTiles.png"));
-<<<<<<< HEAD
 	
-	//Fonts
-	m_fontHolder.acquire("americanCap", thor::Resources::fromFile<sf::Font>("./Fonts/AmericanCaptain.ttf"));
-=======
+	//Sounds
 	m_textureHolder.acquire("dayLightMap", thor::Resources::fromFile<sf::Texture>("./Map1.PNG"));
 	m_textureHolder.acquire("nightVisionMap", thor::Resources::fromFile<sf::Texture>("./Map2.png"));
 
 	//Fonts
 	m_fontHolder.acquire("americanCap", thor::Resources::fromFile<sf::Font>("Fonts/AmericanCaptain.ttf"));
->>>>>>> 32c797daf49e9db1913536540631e52b4bd5f281
 	//m_fontHolder.acquire("Figurativative", thor::Resources::fromFile<sf::Font>("Figurativative.ttf"));
+
+	m_songHolder.acquire("IntroSong", thor::Resources::fromFile<sf::SoundBuffer>("music.wav"));
+	m_songHolder.acquire("GameSong", thor::Resources::fromFile<sf::SoundBuffer>("playing music.wav"));
 }
 
 ResourceManager::~ResourceManager()
 {
-<<<<<<< HEAD
-	m_textureHolder.release("Garage");
-	m_textureHolder.release("blueBackground");
-	m_textureHolder.release("blankBackground");
-	m_textureHolder.release("blankCar");
-	m_textureHolder.release("skidMark");
-	m_textureHolder.release("yellowCar");
-	m_textureHolder.release("greenCar");
-	m_textureHolder.release("blueCar");
-	m_textureHolder.release("redCar");
-	m_textureHolder.release("greyCar");
-	m_textureHolder.release("whiteCar");
-	m_textureHolder.release("policeCar");
-	m_textureHolder.release("ambulance");
-	m_textureHolder.release("bus");
-	m_textureHolder.release("noise");
-	m_textureHolder.release("mask");
-	m_textureHolder.release("blueBall");
-	m_textureHolder.release("raceBackground");
-	
-	m_fontHolder.release("americanCap");
-	//m_fontHolder.release("Figurativative");
-=======
->>>>>>> 32c797daf49e9db1913536540631e52b4bd5f281
 }

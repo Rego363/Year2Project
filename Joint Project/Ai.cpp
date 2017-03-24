@@ -1,5 +1,10 @@
 #include "Ai.h"
-
+/// <summary>
+/// @mainpage Joint Project - 2D racing game.
+/// @Author Dylan Murphy, Sean Regan, Micheal Bridgette, David O'Gorman
+/// @Version 1.0
+/// @brief A 2D racing game.
+/// </summary>
 
 
 //Constructor
@@ -85,7 +90,7 @@ sf::Vector2f Ai::seekTrack(std::vector<sf::CircleShape> track, sf::Vector2f pos)
 	return sf::Vector2f(trackDisVector.x - aiDisVector.x, trackDisVector.y - aiDisVector.y);
 }
 
-// Attempt at collision avoidance
+///method created for Ai to avoid crashing into obstacles 
 sf::Vector2f Ai::collisionAvoidance()
 {
 	auto headingRadians = thor::toRadian(m_car.getRot());
@@ -115,7 +120,7 @@ sf::Vector2f Ai::collisionAvoidance()
 
 }
 
-// finds the object the ai is closest to colliding with
+//Finds the closest obatacle to the car 
 sf::Sprite Ai::findMostThreateningObstacle()
 {
 	

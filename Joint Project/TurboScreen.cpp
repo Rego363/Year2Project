@@ -1,14 +1,23 @@
 #include "TurboScreen.h"
+/// <summary>
+/// @mainpage Joint Project - 2D racing game.
+/// @Author Dylan Murphy, Sean Regan, Micheal Bridgette, David O'Gorman
+/// @Version 1.0
+/// @brief A 2D racing game.
+/// </summary>
 
+//construct the turbo screen
 TurboScreen::TurboScreen(Game & game):
 	m_game(&game)
 {
+	//setup texture and sprite
 	sf::Texture& texture = m_game->m_manager->m_textureHolder["garage"];
 	m_sprite.setTexture(texture);
 
 	m_sprite.setTextureRect(sf::IntRect(1096, 313, 179, 160));
 	m_sprite.setPosition(600, 300);
 
+	// setup the widgets
 	m_label = new Label("Turbo", 100, 50);
 	m_label->setUnderLined();
 	m_label->changeTextSize(70);
@@ -27,6 +36,8 @@ TurboScreen::TurboScreen(Game & game):
 	m_widgets[3] = new Button("Back", 100, 450);
 	m_widgets[3]->Enter = std::bind(&TurboScreen::goToGarage, this);
 
+
+	//add the widgets to the gui
 	for each (Widget* var in m_widgets)
 	{
 		m_gui.addWidget(var);
@@ -35,18 +46,21 @@ TurboScreen::TurboScreen(Game & game):
 	m_smallEquipped = true;
 }
 
+//draw the sprite and the gui
 void TurboScreen::draw(sf::RenderWindow &window)
 {
 	window.draw(m_sprite);
 	m_gui.draw(window);
 }
 
+//update the players money and the gui
 void TurboScreen::update()
 {
 	m_playerMoney->updateText("Money: " + std::to_string(m_game->playerMoney()));
 	m_gui.update(m_selectedItem, MAX_ITEMS);
 }
 
+//buy the small upgrade
 void TurboScreen::smallBuy()
 {
 	if (m_game->playerMoney() >= SMALL_PRICE && !m_smallBought)
@@ -63,9 +77,10 @@ void TurboScreen::smallBuy()
 		m_largeEquipped = false;
 		m_sprite.setScale(1.25, 1.25);
 	}
-	currentUpgrade();
+	currentUpgrade(); //equip it
 }
 
+//buy the medium upgrade
 void TurboScreen::mediumBuy()
 {
 	if (m_game->playerMoney() >= MEDIUM_PRICE && !m_mediumBought)
@@ -84,6 +99,7 @@ void TurboScreen::mediumBuy()
 	currentUpgrade();
 }
 
+//buy the large upgrade
 void TurboScreen::largeBuy()
 {
 	if (m_game->playerMoney() >= LARGE_PRICE && !m_largeBought)
@@ -102,11 +118,13 @@ void TurboScreen::largeBuy()
 	currentUpgrade();
 }
 
+//go to the garage screen
 void TurboScreen::goToGarage()
 {
 	m_game->changeGameState(GameState::Garage);
 }
 
+//apply the equiped upgraded
 void TurboScreen::currentUpgrade()
 {
 	if (m_smallEquipped)

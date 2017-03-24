@@ -1,10 +1,10 @@
 #include"Button.h"
-/*
-Created By: Michael Bridgette & David O'Gorman
-Date: 02/03/2017
-Hours Spent: ~15hours
-Summary: A simple sfml game with menu, options that use the common UI elements
-*/
+/// <summary>
+/// @mainpage Joint Project - 2D racing game.
+/// @Author Dylan Murphy, Sean Regan, Micheal Bridgette, David O'Gorman
+/// @Version 1.0
+/// @brief A 2D racing game.
+/// </summary>
 
 
 //constructor

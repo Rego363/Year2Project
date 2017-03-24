@@ -1,4 +1,10 @@
 #include "Player.h"
+/// <summary>
+/// @mainpage Joint Project - 2D racing game.
+/// @Author Dylan Murphy, Sean Regan, Micheal Bridgette, David O'Gorman
+/// @Version 1.0
+/// @brief A 2D racing game.
+/// </summary>
 
 Player::Player(float carX, float carY, sf::Texture &carTexture, sf::RenderWindow &window, Game &game):
 	m_car(game, carTexture, sf::Vector2f(carX,carY)),

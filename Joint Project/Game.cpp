@@ -1,6 +1,12 @@
 #include <iostream>
 
 #include "Game.h"
+/// <summary>
+/// @mainpage Joint Project - 2D racing game.
+/// @Author Dylan Murphy, Sean Regan, Micheal Bridgette, David O'Gorman
+/// @Version 1.0
+/// @brief A 2D racing game.
+/// </summary>
 
 
 static double const MS_PER_UPDATE = 10.0;
@@ -42,7 +48,7 @@ Game::Game() :
 	m_text.setPosition(m_window.getSize().x / 4, m_window.getSize().y / 2);
 	m_text.setCharacterSize(70);
 
-	
+	//initialise all the screens
 	m_optionsScreen = make_unique<OptionsScreen>(*this);
 	m_mapSelect = make_unique<playGame>(*this);
 	m_soundScreen = make_unique<SoundScreen>(*this);
@@ -51,8 +57,6 @@ Game::Game() :
 	m_MainMenu = make_unique<MainMenu>(*this);
 	m_helpScreen = make_unique<HelpScreen>(*this);
 	m_Splash = make_unique<Splash>(*this);
-	m_diffScreen = make_unique<DifficultyScreen>(*this);
-	m_steeringScreen = make_unique<SteeringScreen>(*this);
 	m_turboScreen = make_unique<TurboScreen>(*this);
 	m_brakingScreen = make_unique<BrakingScreen>(*this);
 	m_speedScreen = make_unique<SpeedScreen>(*this);
@@ -66,6 +70,7 @@ Game::Game() :
 	// Car set up
 
 	m_chooseCarScreen = make_unique<ChooseCar>(*this);
+	//initialise AI/Player
 	m_startPos = sf::Vector2f(m_window.getSize().x / 2, m_window.getSize().y / 4);
 	m_car = make_unique<Car>(*this, m_startCar, m_startPos);
 	m_aiCar = make_unique<Car>(*this, m_startCar, sf::Vector2f(760.0f, 1050.0f));
@@ -75,37 +80,29 @@ Game::Game() :
 	//Player
 	m_player = make_unique<Player>(760.0f, 1100.0f, m_startCar, m_window, *this);
 
-	// background music
-	if(!m_buffer.loadFromFile("music.wav"))
-	{
-		std::cout << "NO MUSIC" << std::endl;
-	}
+	//music
+	m_buffer = m_manager->m_songHolder["IntroSong"];
 	music.setBuffer(m_buffer);
 	music.setLoop(true);
 	music.setVolume(100);
-	//music.play();
-
-	if (!m_buffer2.loadFromFile("playing music.wav"))
-	{
-		std::cout << "NO MUSIC" << std::endl;
-	}
-
+	m_buffer2 = m_manager->m_songHolder["GameSong"];
 	m_gameMusic.setBuffer(m_buffer2);
 	m_gameMusic.setLoop(true);
 	m_gameMusic.setVolume(100);
-	//m_gameMusic.play();
-
 	
 
+
+	/*  setup the views*/
+	/*******************************************************************************/
 	m_view = sf::View(sf::Vector2f(0, 0), sf::Vector2f(1280, 720));
 	m_view2 = sf::View(sf::Vector2f(0, 0), sf::Vector2f(1280, 720));
 	m_view2.setCenter(m_window.getSize().x / 2, m_window.getSize().y / 2);
 
 	
 
-	m_diffScreen = make_unique<DifficultyScreen>(*this);
+	/*******************************************************************************/
 
-	m_steeringScreen = make_unique<SteeringScreen>(*this);
+	//more screens
 	m_turboScreen = make_unique<TurboScreen>(*this);
 	m_brakingScreen = make_unique<BrakingScreen>(*this);
 	m_speedScreen = make_unique<SpeedScreen>(*this);
@@ -189,6 +186,7 @@ void Game::run()
 
 
 //check if sprites in view, return false if sprite not in view
+//done by if the rectangle constructed by the view collides with the sprite
 bool Game::isInView(sf::Sprite sprite)
 {
 
@@ -200,19 +198,24 @@ bool Game::isInView(sf::Sprite sprite)
 	return false;
 }
 
+//return the best lap time from the race
 std::string Game::getBestLapTime()
 {
 	return m_level->getBestLapTime();
 }
 
-// Method to reset the players on the track for the next race
+
+//reset all the assets used in the the race
 void Game::resetMap()
 {
 	m_level->resetLevel();
 }
 
-
-
+//find if the player won the race
+bool Game::getPlayerPlace()
+{
+	return m_level->playerPos();
+}
 
 /// <summary>
 /// Process Game inputs
@@ -241,6 +244,7 @@ void Game::update(sf::Time time)
 {
 	totalTime += timeSinceLastUpdate.asSeconds(); // Accumulative time
 
+	//dont make car noises when not racing
 	if (!m_currentGameState == GameState::Racing)
 	{
 		m_player->m_car.m_soundEffect.stop();
@@ -261,9 +265,7 @@ void Game::update(sf::Time time)
 		m_window.setView(m_view2);
 		break;
 	case GameState::Difficulty:
-		m_diffScreen->update();
-		m_smokeShader.setParameter("time", totalTime);
-		m_window.setView(m_view2);
+		
 		break;
 	case GameState::Garage:
 		m_garageScreen->update();
@@ -324,9 +326,7 @@ void Game::update(sf::Time time)
 		m_window.setView(m_view2);
 		break;
 	case GameState::Steering:
-		m_steeringScreen->update();
-		m_smokeShader.setParameter("time", totalTime);
-		m_window.setView(m_view2);
+		
 		break;
 	case GameState::Turbo:
 		m_turboScreen->update();
@@ -338,7 +338,7 @@ void Game::update(sf::Time time)
 		m_level->update(time.asSeconds(), m_view);
 		
 		m_xbox.update();
-		if (m_xbox.m_currentState.Back&& !m_xbox.m_previousState.Back)
+		if (m_xbox.m_currentState.Start&& !m_xbox.m_previousState.Start)
 		{
 			m_background->activateTheShader();
 		}
@@ -400,8 +400,6 @@ void Game::render()
 		break;
 	case GameState::Difficulty:
 		m_window.clear(sf::Color(0, 0, 0, 255));
-		m_window.draw(m_shaderSprite, &m_smokeShader);
-		m_diffScreen->render(m_window);
 		m_window.display();
 		break;
 	case GameState::Garage:
@@ -470,8 +468,6 @@ void Game::render()
 		break;
 	case GameState::Steering:
 		m_window.clear(sf::Color(0, 0, 0, 255));
-		m_window.draw(m_shaderSprite, &m_smokeShader);
-		m_steeringScreen->draw(m_window);
 		m_window.display();
 		break;
 	case GameState::Turbo:
@@ -544,11 +540,6 @@ void Game::changeGameState(GameState gameState)
 	m_currentGameState = gameState;
 }
 
-//function to change the difficulty of the game
-void Game::changeGameDifficulty(GameDifficulty gameDiff)
-{
-	m_currentDifficulty = gameDiff;
-}
 
 string Game::nameDisplay()
 {

@@ -7,6 +7,12 @@
 #include "GUI.h"
 #ifndef CHOOSECAR
 #define CHOOSECAR
+/// <summary>
+/// @mainpage Joint Project - 2D racing game.
+/// @Author Dylan Murphy, Sean Regan, Micheal Bridgette, David O'Gorman
+/// @Version 1.0
+/// @brief A 2D racing game.
+/// </summary>
 
 class Game;
 //this is the screen where the player chooses their cars texture

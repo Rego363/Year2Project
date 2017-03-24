@@ -1,12 +1,12 @@
 #include "XBOX360CONTROLLER.h"
 #include<iostream>
 
-/*Michael Bridgette
-c00205948
-21/11/2016
-time spent: 4hrs
-a simple sfml game for testing the xbox360 controller
-no known bugs*/
+/// <summary>
+/// @mainpage Joint Project - 2D racing game.
+/// @Author Dylan Murphy, Sean Regan, Micheal Bridgette, David O'Gorman
+/// @Version 1.0
+/// @brief A 2D racing game.
+/// </summary>
 
 
 Xbox360Controller::Xbox360Controller() 

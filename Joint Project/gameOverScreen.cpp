@@ -1,4 +1,10 @@
 #include "gameOverScreen.h"
+/// <summary>
+/// @mainpage Joint Project - 2D racing game.
+/// @Author Dylan Murphy, Sean Regan, Micheal Bridgette, David O'Gorman
+/// @Version 1.0
+/// @brief A 2D racing game.
+/// </summary>
 
 //construct the game over screen
 GameOverScreen::GameOverScreen(Game & game):
@@ -34,6 +40,14 @@ void GameOverScreen::update()
 {
 	m_gui.update(m_selectedItem, 1);
 	m_time->updateText(m_game->getBestLapTime()+ " seconds");
+	if (m_game->getPlayerPlace()==true)
+	{
+		m_placement->updateText("You WON!!");
+	}
+	else
+	{
+		m_placement->updateText("You LOST!!");
+	}
 }
 
 //return to the main menu

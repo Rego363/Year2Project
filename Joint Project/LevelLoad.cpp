@@ -1,4 +1,10 @@
 #include "LevelLoad.h"
+/// <summary>
+/// @mainpage Joint Project - 2D racing game.
+/// @Author Dylan Murphy, Sean Regan, Micheal Bridgette, David O'Gorman
+/// @Version 1.0
+/// @brief A 2D racing game.
+/// </summary>
 
 // find the font
 void operator >> (const YAML::Node& FontNode, FontData& font)

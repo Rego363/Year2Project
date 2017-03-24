@@ -1,12 +1,17 @@
 #pragma once
-
+/// <summary>
+/// @mainpage Joint Project - 2D racing game.
+/// @Author Dylan Murphy, Sean Regan, Micheal Bridgette, David O'Gorman
+/// @Version 1.0
+/// @brief A 2D racing game.
+/// </summary>
 #ifndef PLAYGAME
 #define PLAYGAME
 
 
 
 
-
+// classs for the menu screen 
 class Game;
 
 

@@ -1,5 +1,11 @@
 #ifndef GAME
 #define GAME
+/// <summary>
+/// @mainpage Joint Project - 2D racing game.
+/// @Author Dylan Murphy, Sean Regan, Micheal Bridgette, David O'Gorman
+/// @Version 1.0
+/// @brief A 2D racing game.
+/// </summary>
 
 #include <Thor\Resources.hpp>
 #include "include\sfeMovie\Movie.hpp"
@@ -20,8 +26,6 @@
 #include "Help.h"
 #include "Liscence.h"
 #include "Splash.h"
-#include "DifficultyScreen.h"
-#include "SteeringScreen.h"
 #include "TurboScreen.h"
 #include "BrakingScreen.h"
 #include "SpeedScreen.h"
@@ -65,8 +69,6 @@ class GarageScreen;
 class HelpScreen;
 class Player;
 class Ai;
-class DifficultyScreen;
-class SteeringScreen;
 class TurboScreen;
 class BrakingScreen;
 class SpeedScreen;
@@ -86,6 +88,8 @@ class PhysicsBalls;
 class ChooseCar;
 class Cutscene;
 
+
+//each case in this enum represents a screen
 enum GameState {
 	TheLicense,
 	TheSplash,
@@ -114,11 +118,6 @@ enum GameState {
 	CutsceneScreen
 };
 
-enum GameDifficulty {
-	Easy,
-	Medium,
-	Hard
-};
 
 /// <summary>
 /// Game class
@@ -127,30 +126,31 @@ class Game
 {
 public:
 
-	Game();
-	void init();
-	void run();
-	void changeGameState(GameState gameState);
-	void changeGameDifficulty(GameDifficulty gameDiff);
+	Game(); //constructor
+	void init(); //initialise
+	void run(); 
+	void changeGameState(GameState gameState); //function to change the screen
 	std::string getGarageTexture();
 	sf::RenderWindow m_window;
-	std::unique_ptr<Player> m_player;
-	std::unique_ptr<ResourceManager> m_manager;
+	std::unique_ptr<Player> m_player; //player
+	std::unique_ptr<ResourceManager> m_manager; //resource manager
 	string nameDisplay();
+
 	sf::Sound music;
-	sf::Sound m_gameMusic;
+	sf::Sound m_gameMusic; //game background audio
 
 	int playerMoney();
 	void chargePlayer(int amount);
 	std::unique_ptr<PhysicsBalls>m_physicsBalls;
-	std::unique_ptr<Background> m_background;
+	std::unique_ptr<Background> m_background; //the background/ tiles
 	std::unique_ptr<NightMode> m_nightMode;
-	bool isInView(sf::Sprite sprite);
-	std::string getBestLapTime();
+	bool isInView(sf::Sprite sprite); //checks if a sprites in view
+	std::string getBestLapTime(); 
 	void resetMap();
 	LevelData m_currentLevel;
-	std::unique_ptr<TurboScreen>m_turboScreen;
-	Xbox360Controller m_xbox;
+	std::unique_ptr<TurboScreen>m_turboScreen; //turbo screen
+	Xbox360Controller m_xbox; //xbox controller
+	bool getPlayerPlace(); //find out if the player has won
 
 private:
 	void processInput();
@@ -158,17 +158,16 @@ private:
 	void render();
 
 
-	Label* m_currentName;
+	
 	sf::Text m_name;
 
 	sf::Font m_font;
 	sf::Text m_text;
 
-	GameState m_currentGameState = GameState::TheLicense;
-	std::unique_ptr<playGame> m_mapSelect;
-	
-	GameDifficulty m_currentDifficulty = GameDifficulty::Medium;
 
+	GameState m_currentGameState = GameState::TheLicense; //current gamestate/screen
+	//screens
+	std::unique_ptr<playGame> m_mapSelect;
 	std::unique_ptr<OptionsScreen> m_optionsScreen;
 	std::unique_ptr<SoundScreen> m_soundScreen;
 	std::unique_ptr<DisplayScreen> m_displayScreen;
@@ -178,8 +177,6 @@ private:
 	std::unique_ptr<specs>m_specs;
 	std::unique_ptr<Liscence>m_Liscence;
 	std::unique_ptr<Splash>m_Splash;
-	std::unique_ptr<DifficultyScreen>m_diffScreen;
-	std::unique_ptr<SteeringScreen>m_steeringScreen;
 	std::unique_ptr<BrakingScreen>m_brakingScreen;
 	std::unique_ptr<SpeedScreen>m_speedScreen;
 	std::unique_ptr<AccelerationScreen>m_accelerationScreen;
@@ -202,9 +199,10 @@ private:
 	std::unique_ptr<Ai>m_aiThree;
 	/**********************/
 
-
+	//views
 	sf::View m_view;
 	sf::View m_view2;
+
 	sf::Vector2f m_startPos;
 
 	std::vector<sf::CircleShape> m_easyTrack;
@@ -216,7 +214,7 @@ private:
 	LevelLoader m_levelLoader;
 	bool hasName=false;
 	sf::SoundBuffer m_buffer;
-	sf::SoundBuffer m_buffer2;
+	sf::SoundBuffer m_buffer2; //buffers for music
 	sf::Clock clock;
 	sf::Time timeSinceLastUpdate;
 	sf::Time timePerFrame;
