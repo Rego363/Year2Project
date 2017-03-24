@@ -1,3 +1,5 @@
+ball:
+   file: blueball.png
 splash:
    file: SplashScreenS.mp4
 lisence:
@@ -18,7 +20,7 @@ sand:
   sandfile: sand1.png
 garage:
   garagefile: all.png
-track:
+trackMedium:
    - type: checkpoint
      position: {x: 4708, y: 1106}
      size: 5
@@ -55,3 +57,78 @@ track:
    - type: checkpoint
      position: {x: 707, y: 1099}
      size: 5
+trackEasy:
+   - type: checkpoint
+     position: {x: 4707.72, y: 1067.84}
+     size: 5
+   - type: checkpoint
+     position: {x: 4766.98, y: 3961.98}
+     size: 5
+   - type: checkpoint
+     position: {x: 3845.99, y: 3974.42}
+     size: 5
+   - type: checkpoint
+     position: {x: 3969.57, y: 1839.35}
+     size: 5
+   - type: checkpoint
+     position: {x: 3042.82, y: 1821.9}
+     size: 5
+   - type: checkpoint
+     position: {x: 3173.38, y: 2557.29}
+     size: 5
+   - type: checkpoint
+     position: {x: 2235.09, y: 2559.79}
+     size: 5
+   - type: checkpoint
+     position: {x: 2380.09, y: 1837.89}
+     size: 5
+   - type: checkpoint
+     position: {x: 1444.36, y: 1859.37}
+     size: 5
+   - type: checkpoint
+     position: {x: 1578.83, y: 3373.25}
+     size: 5
+   - type: checkpoint
+     position: {x: 643.5, y: 3328.23}
+     size: 5
+   - type: checkpoint
+     position: {x: 652.72, y: 1012.49}
+     size: 5
+trackHard:
+   - type: checkpoint
+     position: {x: 4639.23, y: 1177.08}
+     size: 5
+   - type: checkpoint
+     position: {x: 4619.52, y: 3846.25}
+     size: 5
+   - type: checkpoint
+     position: {x: 3997.5, y: 3805.59}
+     size: 5
+   - type: checkpoint
+     position: {x: 3805.06, y: 1934.31}
+     size: 5
+   - type: checkpoint
+     position: {x: 3164.69, y: 1972.98}
+     size: 5
+   - type: checkpoint
+     position: {x: 2997.97, y: 2443.39}
+     size: 5
+   - type: checkpoint
+     position: {x: 2359.48, y: 2395.59}
+     size: 5
+   - type: checkpoint
+     position: {x: 2222.23, y: 1944.5}
+     size: 5
+   - type: checkpoint
+     position: {x: 1569.92, y: 1985.18}
+     size: 5
+   - type: checkpoint
+     position: {x: 1415.78, y: 3248.96}
+     size: 5
+   - type: checkpoint
+     position: {x: 759.27, y: 3187.78}
+     size: 5
+   - type: checkpoint
+     position: {x: 771.68, y: 1149.36}
+     size: 5
+     

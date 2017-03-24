@@ -1,7 +1,4 @@
 #include "changeProfile.h"
-#include "player.h"
-
-
 
 
 changeProfile::changeProfile(Game &game, Player &player) :
@@ -34,7 +31,7 @@ changeProfile::changeProfile(Game &game, Player &player) :
 	m_Back = new Button("Back", 100, 500);
 	m_Back->Enter = std::bind(&changeProfile::goToMenu, this);
 	m_Save = new Button("Save", 100, 550);
-	m_Save->Enter = std::bind(&changeProfile::save, this);
+	m_Save->Enter = std::bind(&changeProfile::goToSave, this);
 	m_New = new Button("New Profile", 100, 600);
 	m_New->Enter = std::bind(&changeProfile::goToNewProfile, this);
 	//m_currentName = new Label(name, 50, 30);
@@ -54,24 +51,6 @@ changeProfile::changeProfile(Game &game, Player &player) :
 	m_gui.addButton(m_New);
 	m_currentSelect = 0;
 	m_gui.vertical = true;
-
-
-	if (!m_blankTexture.loadFromFile("blankBackground.png"))	// Load blank texture
-	{
-		std::cout << "blankTile failed to load" << std::endl;	//Error message
-	}
-
-	m_shaderSprite.setTexture(m_blankTexture);	// Set texture for the blank sprite
-
-	if (!m_shader.loadFromFile("Shaders/Smoke.frag", sf::Shader::Fragment)) //Load shader
-	{
-		std::cout << "shader failed to load" << std::endl;	// Error message
-	}
-
-	m_shader.setParameter("time", 0.0f);
-	m_shader.setParameter("resolution", 1280.0f, 720.0f);
-	m_shaderSprite.setPosition(0.0f, 0.0f);
-
 }
 
 
@@ -83,15 +62,13 @@ changeProfile::~changeProfile()
 
 void changeProfile::render(sf::RenderWindow & window)
 {
-	window.draw(m_shaderSprite, &m_shader);
 	m_gui.draw(window);
 
 }
 
 
-void changeProfile::update(float dt)
+void changeProfile::update()
 {
-	m_shader.setParameter("time", dt);
 	m_gui.update(m_currentSelect, 13);
 }
 
@@ -164,6 +141,12 @@ void changeProfile::goToNewProfile()
 {
 	m_game->changeGameState(GameState::EnterName);
 }
+
+void changeProfile::goToSave()
+{
+	m_game->changeGameState(GameState::Save);
+}
+
 
 void changeProfile::getProfileName()
 {

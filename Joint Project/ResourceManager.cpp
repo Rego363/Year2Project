@@ -1,132 +1,53 @@
 #include "ResourceManager.h"
 
-// find the font
-void operator >> (const YAML::Node& FontNode, FontData& font)
+ResourceManager::ResourceManager()
 {
-	font.m_fileNameFont = FontNode["fontfile"].as<std::string>();
+	// Textures
+	m_textureHolder.acquire("garage", thor::Resources::fromFile<sf::Texture>("./all.png"));
+	m_textureHolder.acquire("blueBackground", thor::Resources::fromFile<sf::Texture>("./backgroundBlue.png"));
+	m_textureHolder.acquire("blankBackground", thor::Resources::fromFile<sf::Texture>("./blankBackground.png"));
+	m_textureHolder.acquire("blankCar", thor::Resources::fromFile<sf::Texture>("./blankNeon.png"));
+	m_textureHolder.acquire("skidMark", thor::Resources::fromFile<sf::Texture>("./Skidmark2.png"));
+	m_textureHolder.acquire("yellowCar", thor::Resources::fromFile<sf::Texture>("./lambo.png"));
+	m_textureHolder.acquire("greenCar", thor::Resources::fromFile<sf::Texture>("./greenlambo.png"));
+	m_textureHolder.acquire("blueCar", thor::Resources::fromFile<sf::Texture>("./bluelambo.png"));
+	m_textureHolder.acquire("redCar", thor::Resources::fromFile<sf::Texture>("./redlambo.png"));
+	m_textureHolder.acquire("greyCar", thor::Resources::fromFile<sf::Texture>("./greylambo.png"));
+	m_textureHolder.acquire("whiteCar", thor::Resources::fromFile<sf::Texture>("./whitelambo.png"));
+	m_textureHolder.acquire("policeCar", thor::Resources::fromFile<sf::Texture>("./police.png"));
+	m_textureHolder.acquire("ambulance", thor::Resources::fromFile<sf::Texture>("./ambulance.png"));
+	m_textureHolder.acquire("bus", thor::Resources::fromFile<sf::Texture>("./bus.png"));
+	m_textureHolder.acquire("noise", thor::Resources::fromFile<sf::Texture>("./noisetexture.jpg"));
+	m_textureHolder.acquire("mask", thor::Resources::fromFile<sf::Texture>("./mask.png"));
+	m_textureHolder.acquire("blueBall", thor::Resources::fromFile<sf::Texture>("./blueBall.png"));
+	m_textureHolder.acquire("raceBackground", thor::Resources::fromFile<sf::Texture>("./testTiles.png"));
+	
+	//Fonts
+	m_fontHolder.acquire("americanCap", thor::Resources::fromFile<sf::Font>("./Fonts/AmericanCaptain.ttf"));
+	//m_fontHolder.acquire("Figurativative", thor::Resources::fromFile<sf::Font>("Figurativative.ttf"));
 }
 
-//find the car texture
-void operator >> (const YAML::Node& lamboNode, LamboData& lambo)
+ResourceManager::~ResourceManager()
 {
-	lambo.m_fileName = lamboNode["file"].as<std::string>();
-}
-
-//find the car texture
-void operator >> (const YAML::Node& lamboNode, blueLamboData& lambo)
-{
-	lambo.m_fileName = lamboNode["file"].as<std::string>();
-}
-
-//find the tile map texture
-void operator >> (const YAML::Node& tileNode, TileData& maptile)
-{
-	maptile.m_fileName = tileNode["file"].as<std::string>();
-}
-
-///file for the normal background
-void operator >> (const YAML::Node& groundNode, GroundData& ground)
-{
-	ground.m_fileName = groundNode["groundfile"].as<std::string>();
-}
-
-//file for the sand background
-void operator >> (const YAML::Node& sandNode, SandData& sand)
-{
-	sand.m_fileName = sandNode["sandfile"].as<std::string>();
-}
-
-void operator >> (const YAML::Node& garageNode, GarageData& garage)
-{
-	garage.m_fileName = garageNode["garagefile"].as<std::string>();
-}
-
-/// <summary>
-/// Loading data for the track
-/// </summary>
-/// <param name="trackNode"></param>
-/// <param name="track"></param>
-void operator >> (const YAML::Node& trackNode, TrackData& track)
-{
-	track.m_type = trackNode["type"].as<std::string>();				// Loading the type of node
-	track.m_position.x = trackNode["position"]["x"].as<float>();	// Loading the nodes x position
-	track.m_position.y = trackNode["position"]["y"].as<float>();	// Loading the nodes y position
-	track.m_size = trackNode["size"].as<float>();					// Loading the size of the node
-}
-
-//video file for ceredits
-void operator >> (const YAML::Node& creditsNode, CreditsData& credits)
-{
-	credits.m_fileName = creditsNode["file"].as<std::string>();
-}
-
-// video file for Lisence screen
-void operator >> (const YAML::Node& lisenceNode, LisenceData& lisence)
-{
-	lisence.m_fileName = lisenceNode["file"].as<std::string>();
-}
-
-// video file for Splash screen
-void operator >> (const YAML::Node& splashNode, SplashData& splash)
-{
-	splash.m_fileName = splashNode["file"].as<std::string>();
-}
-
-//all levelData
-void operator >> (const YAML::Node& levelNode, LevelData& level)
-{
-	levelNode["bluelambo"] >> level.m_aiLambo;
-	levelNode["lambo"] >> level.m_lambo;
-	levelNode["font"] >> level.m_Font;
-	levelNode["maptile"] >> level.m_Tiles;
-	levelNode["ground"] >> level.m_ground;
-	levelNode["sand"] >> level.m_sand;
-	levelNode["garage"] >> level.m_garage;
-	levelNode["credits"] >> level.m_credits;
-	levelNode["lisence"] >> level.m_lisence;
-	levelNode["splash"] >> level.m_splash;
-
-	// For loop to load track data into m_track 
-	const YAML::Node& trackNode = levelNode["track"].as<YAML::Node>();
-	for (unsigned i = 0; i < trackNode.size(); ++i)
-	{
-		TrackData track;
-		trackNode[i] >> track;
-		level.m_track.push_back(track);
-	}
-}
-
-LevelLoader::LevelLoader()
-{
-}
-
-//Load in the yaml file
-bool LevelLoader::load(LevelData& level)
-{
-	std::stringstream ss;
-	//ss << resourcePath();
-	ss << "level1.yaml";
-
-	try
-	{
-		YAML::Node baseNode = YAML::LoadFile(ss.str());
-		if (baseNode.IsNull())
-		{
-			std::string message("file: " + ss.str() + " not found");
-			throw std::exception(message.c_str());
-		}
-		baseNode >> level;
-	}
-	catch (YAML::ParserException& e)
-	{
-		std::cout << e.what() << "\n";
-		return false;
-	}
-	catch (std::exception& e)
-	{
-		std::cout << e.what() << "\n";
-		return false;
-	}
-
-	return true;
+	m_textureHolder.release("Garage");
+	m_textureHolder.release("blueBackground");
+	m_textureHolder.release("blankBackground");
+	m_textureHolder.release("blankCar");
+	m_textureHolder.release("skidMark");
+	m_textureHolder.release("yellowCar");
+	m_textureHolder.release("greenCar");
+	m_textureHolder.release("blueCar");
+	m_textureHolder.release("redCar");
+	m_textureHolder.release("greyCar");
+	m_textureHolder.release("whiteCar");
+	m_textureHolder.release("policeCar");
+	m_textureHolder.release("ambulance");
+	m_textureHolder.release("bus");
+	m_textureHolder.release("noise");
+	m_textureHolder.release("mask");
+	m_textureHolder.release("blueBall");
+	m_textureHolder.release("raceBackground");
+	
+	m_fontHolder.release("americanCap");
+	//m_fontHolder.release("Figurativative");
 }

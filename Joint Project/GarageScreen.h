@@ -11,7 +11,7 @@
 class GarageScreen {
 public:
 	GarageScreen(float x, float y, Game& game); //constructor
-	void update(float time); //update loop
+	void update(); //update loop
 	void draw(sf::RenderWindow &window); //draw loop 
 	void goBack();   //go to gamestate menu
 	void goAccel();	 //go to gamestate acceleration
@@ -27,9 +27,5 @@ private:
 	Label* m_label;
 	GUI m_gui;
 	Game *m_game;
-	sf::Texture m_blankTexture;
-	sf::Sprite m_shaderSprite;
-	sf::Shader m_shader; // Shader for triangle affect
-
 };
 #endif // !GARAGESCREEN
