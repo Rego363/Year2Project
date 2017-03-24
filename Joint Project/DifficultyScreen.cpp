@@ -90,5 +90,5 @@ void DifficultyScreen::setMedium()
 /// </summary>
 void DifficultyScreen::setHard()
 {
-	m_game->changeGameDifficulty(GameDifficulty::Hard);	// Change the difficulty of the game to hard
+//	m_game->changeGameDifficulty(GameDifficulty::Hard);	// Change the difficulty of the game to hard
 }

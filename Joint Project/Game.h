@@ -55,7 +55,8 @@
 #include "gameOverScreen.h"
 #include "SaveScreen.h"
 #include "PhysicsBalls.h"
-#include"chooseCar.h"
+#include "chooseCar.h"
+#include "Cutscene.h"
 
 using namespace std;
 class SoundScreen;
@@ -85,6 +86,7 @@ class GameOverScreen;
 class SaveScreen;
 class PhysicsBalls;
 class ChooseCar;
+class Cutscene;
 
 
 //each case in this enum represents a screen
@@ -112,7 +114,8 @@ enum GameState {
 	TheCredits,
 	GameOver,
 	Save,
-	PickCar
+	PickCar,
+	CutsceneScreen
 };
 
 
@@ -161,6 +164,7 @@ private:
 	sf::Font m_font;
 	sf::Text m_text;
 
+
 	GameState m_currentGameState = GameState::TheLicense; //current gamestate/screen
 	//screens
 	std::unique_ptr<playGame> m_mapSelect;
@@ -180,6 +184,7 @@ private:
 	std::unique_ptr<Levels>m_level;
 	std::unique_ptr<EnterNameScreen>m_enterName;
 	std::unique_ptr<Credits>m_credits;
+	std::unique_ptr<Cutscene>m_cutscene;
 	std::unique_ptr<GameOverScreen>m_gameOverScreen;
 	std::unique_ptr<SaveScreen>m_saveProfile;
 	std::unique_ptr<ChooseCar>m_chooseCarScreen;

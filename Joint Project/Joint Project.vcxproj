@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -137,6 +137,8 @@
     <ClCompile Include="CheckBox.cpp" />
     <ClCompile Include="chooseCar.cpp" />
     <ClCompile Include="Credits.cpp" />
+    <ClCompile Include="Cutscene.cpp" />
+    <ClCompile Include="DifficultyScreen.cpp" />
     <ClCompile Include="DisplayScreen.cpp" />
     <ClCompile Include="EnterNameScreen.cpp" />
     <ClCompile Include="Game.cpp" />
@@ -180,6 +182,8 @@
     <ClInclude Include="CheckBox.h" />
     <ClInclude Include="chooseCar.h" />
     <ClInclude Include="Credits.h" />
+    <ClInclude Include="Cutscene.h" />
+    <ClInclude Include="DifficultyScreen.h" />
     <ClInclude Include="DisplayScreen.h" />
     <ClInclude Include="EnterNameScreen.h" />
     <ClInclude Include="Game.h" />

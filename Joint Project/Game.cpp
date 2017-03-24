@@ -64,6 +64,7 @@ Game::Game() :
 	m_Liscence = make_unique<Liscence>(*this);
 	m_enterName = make_unique<EnterNameScreen>(*this, *m_player);
 	m_credits = make_unique<Credits>(*this, m_currentLevel);
+	m_cutscene = make_unique<Cutscene>(*this);
 	m_gameOverScreen = make_unique<GameOverScreen>(*this);
 	m_physicsBalls = make_unique<PhysicsBalls>(*this);
 	m_chooseCarScreen = make_unique<ChooseCar>(*this);
@@ -353,6 +354,9 @@ void Game::update(sf::Time time)
 	case GameState::TheCredits:
 		m_credits->update();
 		break;
+	case GameState::CutsceneScreen:
+		m_cutscene->update(totalTime);
+		break;
 	case GameState::PickCar:
 		m_chooseCarScreen->update();
 		break;
@@ -501,6 +505,11 @@ void Game::render()
 	case GameState::TheCredits:
 		m_window.clear();
 		m_credits->render(m_window);
+		m_window.display();
+		break;
+	case GameState::CutsceneScreen:
+		m_window.clear();
+		m_cutscene->render(m_window);
 		m_window.display();
 		break;
 	case GameState::PickCar:

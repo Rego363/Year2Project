@@ -320,7 +320,7 @@ void Levels::setupTexts()
 void Levels::setStateBack()
 {
 	//m_game->m_window.setPosition(sf::Vector2i(0.0f, 0.0f));
-	m_game->changeGameState(GameState::GameOver);
+	m_game->changeGameState(GameState::CutsceneScreen);
 }
 
 std::string Levels::getBestLapTime()
