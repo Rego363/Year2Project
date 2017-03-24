@@ -7,8 +7,12 @@
 
 #ifndef NIGHTMODE
 #define NIGHTMODE
-///<summary>
-/// Dylan Murphy
+/// <summary>
+/// @mainpage Joint Project - 2D racing game.
+/// @Author Dylan Murphy, Sean Regan, Micheal Bridgette, David O'Gorman
+/// @Version 1.0
+/// @brief A 2D racing game.
+/// </summary>
 /// class to use the night vision shader
 /// file: nightvision.frag
 ///<summary>
@@ -39,7 +43,7 @@ private:
 
 	sf::Shader m_shader;
 
-	static bool activateShader; //turn on the blur shader
+	bool activateShader; //turn on the blur shader
 
 };
 #endif

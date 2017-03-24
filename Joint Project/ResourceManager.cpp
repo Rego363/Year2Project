@@ -1,11 +1,17 @@
 #include "ResourceManager.h"
+/// <summary>
+/// @mainpage Joint Project - 2D racing game.
+/// @Author Dylan Murphy, Sean Regan, Micheal Bridgette, David O'Gorman
+/// @Version 1.0
+/// @brief A 2D racing game.
+/// </summary>
 
 ResourceManager::ResourceManager()
 {
 	// Textures
 	m_textureHolder.acquire("garage", thor::Resources::fromFile<sf::Texture>("./all.png"));
 	m_textureHolder.acquire("blueBackground", thor::Resources::fromFile<sf::Texture>("./backgroundBlue.png"));
-	m_textureHolder.acquire("blankBackground", thor::Resources::fromFile<sf::Texture>("./blankBackground.png"));
+	m_textureHolder.acquire("blankBackground", thor::Resources::fromFile<sf::Texture>("./blank.png"));
 	m_textureHolder.acquire("blankCar", thor::Resources::fromFile<sf::Texture>("./blankNeon.png"));
 	m_textureHolder.acquire("skidMark", thor::Resources::fromFile<sf::Texture>("./Skidmark2.png"));
 	m_textureHolder.acquire("yellowCar", thor::Resources::fromFile<sf::Texture>("./lambo.png"));
@@ -27,6 +33,9 @@ ResourceManager::ResourceManager()
 	//Fonts
 	m_fontHolder.acquire("americanCap", thor::Resources::fromFile<sf::Font>("Fonts/AmericanCaptain.ttf"));
 	//m_fontHolder.acquire("Figurativative", thor::Resources::fromFile<sf::Font>("Figurativative.ttf"));
+
+	m_songHolder.acquire("IntroSong", thor::Resources::fromFile<sf::SoundBuffer>("music.wav"));
+	m_songHolder.acquire("GameSong", thor::Resources::fromFile<sf::SoundBuffer>("playing music.wav"));
 }
 
 ResourceManager::~ResourceManager()

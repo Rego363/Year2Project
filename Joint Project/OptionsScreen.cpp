@@ -1,5 +1,10 @@
 #include "OptionsScreen.h"
-
+/// <summary>
+/// @mainpage Joint Project - 2D racing game.
+/// @Author Dylan Murphy, Sean Regan, Micheal Bridgette, David O'Gorman
+/// @Version 1.0
+/// @brief A 2D racing game.
+/// </summary>
 
 /// <summary>
 /// Constructor
@@ -37,7 +42,7 @@ OptionsScreen::~OptionsScreen()
 }
 
 /// <summary>
-/// Update loop
+/// Draw loop
 /// </summary>
 /// <param name="window"></param>
 void OptionsScreen::render(sf::RenderWindow & window)
@@ -46,7 +51,7 @@ void OptionsScreen::render(sf::RenderWindow & window)
 }
 
 /// <summary>
-/// Draw loop
+/// Update loop
 /// </summary>
 void OptionsScreen::update()
 {

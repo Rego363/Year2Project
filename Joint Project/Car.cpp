@@ -1,4 +1,10 @@
 #include "Car.h"
+/// <summary>
+/// @mainpage Joint Project - 2D racing game.
+/// @Author Dylan Murphy, Sean Regan, Micheal Bridgette, David O'Gorman
+/// @Version 1.0
+/// @brief A 2D racing game.
+/// </summary>
 
 double const DEG_TO_RAD = 3.14 / 180.0f;  //calculation for angle degrees to radians
 

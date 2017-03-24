@@ -1,11 +1,11 @@
 #include "GUI.h"
 #include<iostream>
-/*
-Created By: Michael Bridgette & David O'Gorman
-Date: 02/03/2017
-Hours Spent: ~15hours
-Summary: A simple sfml game with menu, options that use the common UI elements
-*/
+/// <summary>
+/// @mainpage Joint Project - 2D racing game.
+/// @Author Dylan Murphy, Sean Regan, Micheal Bridgette, David O'Gorman
+/// @Version 1.0
+/// @brief A 2D racing game.
+/// </summary>
 bool GUI::useAnim = true;
 sf::Clock GUI::m_timeBetweenClicks = sf::Clock::Clock();
 //constructor for gui
@@ -16,7 +16,7 @@ GUI::GUI()
 	both = false;
 	animating = false;	
 	
-	if (!m_buffer.loadFromFile("Gui transition.wav"))
+	if (!m_buffer.loadFromFile("Gui Transition.wav"))
 	{
 	}
 	m_guiSound.setBuffer(m_buffer); //sound effect
@@ -231,6 +231,7 @@ void GUI::activate(int &index)
 	{
 		try
 		{
+			m_guiSound.play();
 			m_elements[index]->Enter();
 			
 		}
@@ -331,14 +332,17 @@ void GUI::decreaseSliderValue(int &index)
 //vertical control scheme for xbox controller, dpad vertical use only
 void GUI::verticalControls(int &index, int maxItems)
 {
-	
-	if (m_xbox.m_currentState.DpadUp == true && !m_xbox.m_previousState.DpadUp || sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+
+	if (!animating)
 	{
-		moveUp(index);
-	}
-	if (m_xbox.m_currentState.DpadDown == true && !m_xbox.m_previousState.DpadDown || sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-	{
-		moveDown(index, maxItems);
+		if (m_xbox.m_currentState.DpadUp == true && !m_xbox.m_previousState.DpadUp || sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+		{
+			moveUp(index);
+		}
+		if (m_xbox.m_currentState.DpadDown == true && !m_xbox.m_previousState.DpadDown || sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+		{
+			moveDown(index, maxItems);
+		}
 	}
 	if (m_xbox.m_currentState.A == true && !m_xbox.m_previousState.A || sf::Keyboard::isKeyPressed(sf::Keyboard::Return))
 	{

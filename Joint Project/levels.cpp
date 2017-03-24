@@ -1,6 +1,11 @@
 #include "levels.h"
 
-//Dylan
+/// <summary>
+/// @mainpage Joint Project - 2D racing game.
+/// @Author Dylan Murphy, Sean Regan, Micheal Bridgette, David O'Gorman
+/// @Version 1.0
+/// @brief A 2D racing game.
+/// </summary>
 //set textures in here for each level
 Levels::Levels(LevelData &level, Player &player,  Ai &ai, Ai &aiTwo, Ai &aiThree, Game &game) : m_currentLevel(&level),
 										m_currentPlayer(&player),
@@ -30,6 +35,12 @@ Levels::Levels(LevelData &level, Player &player,  Ai &ai, Ai &aiTwo, Ai &aiThree
 	m_countDown = true;
 	m_raceStarted = false;
 	m_pause = false;
+
+	//who is winning
+	playerFirst = false;
+	ai1First = false;
+	ai2First = false;
+	ai3First = false;
 }
 
 Levels::~Levels()
@@ -39,9 +50,25 @@ Levels::~Levels()
 //update game
 void Levels::update(float dt, sf::View &view)
 {
+	
+
+	
+
+
 	if (game_on)
 	{
-		if (m_game->m_xbox.m_currentState.Back && !m_game->m_xbox.m_previousState.Back)
+
+		//if player completes laps before the ai does then the player wins
+		if (currentlap > currentLapAI && currentlap > currentLapAI2 && currentlap > currentLapAI3)
+		{
+			playerFirst = true;
+		}
+		else {
+			playerFirst = false;
+		}
+
+
+		if (m_game->m_xbox.m_currentState.Start && !m_game->m_xbox.m_previousState.Start)
 		{
 			if (m_pause == false)
 			{
@@ -116,6 +143,36 @@ void Levels::update(float dt, sf::View &view)
 					}
 
 					m_raceTime.restart();
+				}
+			}
+			//increment ai 1 laps
+			if ((sf::IntRect(m_ai->m_car.getSprite().getPosition().x, m_ai->m_car.getSprite().getPosition().y - 20,
+				60, 60))
+				.intersects(sf::IntRect(m_startLine.getPosition().x, m_startLine.getPosition().y, 5, 200)))
+			{
+				if (m_raceTime.getElapsedTime().asSeconds() > 10)
+				{
+					currentLapAI += 1;
+				}
+			}
+			//increment ai 2 laps
+			if ((sf::IntRect(m_aiTwo->m_car.getSprite().getPosition().x, m_aiTwo->m_car.getSprite().getPosition().y - 20,
+				60, 60))
+				.intersects(sf::IntRect(m_startLine.getPosition().x, m_startLine.getPosition().y, 5, 200)))
+			{
+				if (m_raceTime.getElapsedTime().asSeconds() > 10)
+				{
+					currentLapAI2 += 1;
+				}
+			}
+			//increment ai 3 laps
+			if ((sf::IntRect(m_aiThree->m_car.getSprite().getPosition().x, m_aiThree->m_car.getSprite().getPosition().y - 20,
+				60, 60))
+				.intersects(sf::IntRect(m_startLine.getPosition().x, m_startLine.getPosition().y, 5, 200)))
+			{
+				if (m_raceTime.getElapsedTime().asSeconds() > 10)
+				{
+					currentLapAI3 += 1;
 				}
 			}
 		}
@@ -293,6 +350,9 @@ void Levels::resetLevel()
 	m_countDown = true;
 	m_raceStarted = false;
 	currentlap = 1;
+	currentLapAI = 1;
+	currentLapAI2 = 1;
+	currentLapAI3 = 1;
 	m_ai->m_car.setAiPosition(sf::Vector2f(760, 1050));
 	m_aiTwo->m_car.setAiPosition(sf::Vector2f(660.0f, 1050.0f));
 	m_aiThree->m_car.setAiPosition(sf::Vector2f(660.0f, 1100.0f));
@@ -325,4 +385,14 @@ void Levels::resetLevel()
 	m_raceTime.restart();
 	m_startRace.restart();
 	m_pause = false;
+	playerFirst = false;
+	ai1First = false;
+	ai2First = false;
+	ai3First = false;
+}
+
+//bool to find out if the player is has won the race or not
+bool Levels::playerPos()
+{
+	return playerFirst;
 }

@@ -1,4 +1,10 @@
 #include "Credits.h"
+/// <summary>
+/// @mainpage Joint Project - 2D racing game.
+/// @Author Dylan Murphy, Sean Regan, Micheal Bridgette, David O'Gorman
+/// @Version 1.0
+/// @brief A 2D racing game.
+/// </summary>
 
 //creates credits screen
 Credits::Credits(Game & game, LevelData &level) : m_game(&game),
@@ -18,7 +24,7 @@ Credits::~Credits()
 //updates, displays animations
 void Credits::update()
 {
-	m_game->music.pause();
+	m_game->m_gameMusic.pause();
 
 	if (m_play == true)
 	{
@@ -32,7 +38,7 @@ void Credits::update()
 	if (m_credits.getStatus() == 0)
 	{
 		m_play = true;
-		//m_game->music.play();
+		m_game->m_gameMusic.play();
 		m_game->changeGameState(GameState::TheMenu);
 	}
 }

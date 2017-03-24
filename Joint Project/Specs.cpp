@@ -1,5 +1,11 @@
 #include "Specs.h"
 #include "playGame.h"
+/// <summary>
+/// @mainpage Joint Project - 2D racing game.
+/// @Author Dylan Murphy, Sean Regan, Micheal Bridgette, David O'Gorman
+/// @Version 1.0
+/// @brief A 2D racing game.
+/// </summary>
 
 specs::specs(Game &game, Levels &level):
 	m_game(&game),

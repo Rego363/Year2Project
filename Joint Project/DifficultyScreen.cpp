@@ -1,4 +1,10 @@
 #include "DifficultyScreen.h"
+/// <summary>
+/// @mainpage Joint Project - 2D racing game.
+/// @Author Dylan Murphy, Sean Regan, Micheal Bridgette, David O'Gorman
+/// @Version 1.0
+/// @brief A 2D racing game.
+/// </summary>
 
 DifficultyScreen::DifficultyScreen(Game & game):
 	m_game(&game)
@@ -66,7 +72,7 @@ void DifficultyScreen::goToOptions()
 /// </summary>
 void DifficultyScreen::setEasy()
 {
-	m_game->changeGameDifficulty(GameDifficulty::Easy);	// Change the difficulty of the game to easy
+	//m_game->changeGameDifficulty(GameDifficulty::Easy);	// Change the difficulty of the game to easy
 }
 
 /// <summary>
@@ -75,7 +81,7 @@ void DifficultyScreen::setEasy()
 /// </summary>
 void DifficultyScreen::setMedium()
 {
-	m_game->changeGameDifficulty(GameDifficulty::Medium);	// Change the difficulty of the game to medium
+	//m_game->changeGameDifficulty(GameDifficulty::Medium);	// Change the difficulty of the game to medium
 }
 
 /// <summary>
@@ -84,5 +90,5 @@ void DifficultyScreen::setMedium()
 /// </summary>
 void DifficultyScreen::setHard()
 {
-	m_game->changeGameDifficulty(GameDifficulty::Hard);	// Change the difficulty of the game to hard
+//	m_game->changeGameDifficulty(GameDifficulty::Hard);	// Change the difficulty of the game to hard
 }

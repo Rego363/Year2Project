@@ -1,9 +1,13 @@
 #include "NightMode.h"
 
-bool NightMode::activateShader = false;
+
 
 /// <summary>
-/// Dylan
+/// @mainpage Joint Project - 2D racing game.
+/// @Author Dylan Murphy, Sean Regan, Micheal Bridgette, David O'Gorman
+/// @Version 1.0
+/// @brief A 2D racing game.
+/// </summary>
 /// Nightvision shader
 /// Problem - needs to be applied to the window
 /// </summary>
@@ -11,6 +15,7 @@ bool NightMode::activateShader = false;
 NightMode::NightMode(Game &game) :
 	m_game(&game)
 {
+	activateShader = false;
 	elapsedTime.restart();
 	loadCounter = sf::Vector2i(0, 0);
 
@@ -47,16 +52,16 @@ NightMode::NightMode(Game &game) :
 		loadCounter.y++;
 	}
 
-	if (!m_shader.loadFromFile("nightVision.frag", sf::Shader::Fragment))
+	if (!m_shader.loadFromFile("./nightVision.frag", sf::Shader::Fragment))
 	{
 		std::cout << "frag shader failed to load" << std::endl;         //load shader
 	}
 
-	sf::Texture& blankTexture = m_game->m_manager->m_textureHolder["blankBackground"];
+	sf::Texture& m_blankTexture = m_game->m_manager->m_textureHolder["blankBackground"];
 	sf::Texture& noiseTexture = m_game->m_manager->m_textureHolder["noise"]; //blurryness of nightvision
 	sf::Texture& mask = m_game->m_manager->m_textureHolder["mask"]; //goggles effect
 
-	//sets shaders variables
+																	//sets shaders variables
 	m_shader.setParameter("sceneBuffer", m_blankTexture); // blank texture to follow window
 	m_shader.setParameter("noiseTex", noiseTexture);// movement part which makes it look blurry
 	m_shader.setParameter("maskTex", mask); //black effect around screen
@@ -87,7 +92,7 @@ void NightMode::draw(sf::RenderWindow &window)
 			spr.setPosition(i * 200, j * 200); //set position of each tile
 			spr.setTextureRect(sf::IntRect(map[i][j].x * 225, map[i][j].y * 220, 200, 200)); //texture rectangle
 
-			//only draw if the tile is in the windows view
+																							 //only draw if the tile is in the windows view
 			if (m_game->isInView(spr))
 			{
 				if (activateShader == true)
@@ -95,7 +100,7 @@ void NightMode::draw(sf::RenderWindow &window)
 					m_shader.setParameter("elapsedTime", elapsedTime.getElapsedTime().asSeconds());
 					window.draw(m_shaderSprite, &m_shader);
 				}
-				
+
 			}
 		}
 	}

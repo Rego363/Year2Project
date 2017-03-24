@@ -1,4 +1,10 @@
 #include "changeProfile.h"
+/// <summary>
+/// @mainpage Joint Project - 2D racing game.
+/// @Author Dylan Murphy, Sean Regan, Micheal Bridgette, David O'Gorman
+/// @Version 1.0
+/// @brief A 2D racing game.
+/// </summary>
 
 
 changeProfile::changeProfile(Game &game, Player &player) :
