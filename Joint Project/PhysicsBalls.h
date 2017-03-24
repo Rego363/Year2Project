@@ -1,15 +1,19 @@
 #pragma once
 #ifndef PHISICSBALLS
 #define PHYSICSBALLS
+/// <summary>
+/// @mainpage Joint Project - 2D racing game.
+/// @Author Dylan Murphy, Sean Regan, Micheal Bridgette, David O'Gorman
+/// @Version 1.0
+/// @brief A 2D racing game.
+/// </summary>
 
 #include "Game.h"
 
 class Game;
 
-/// <summary>
-/// Class to create physics balls
-/// Dylan.
-/// </summary>
+
+// Class to create physics balls
 class PhysicsBalls
 {
 public:

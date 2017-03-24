@@ -12,7 +12,6 @@
     <ClCompile Include="CheckBox.cpp" />
     <ClCompile Include="chooseCar.cpp" />
     <ClCompile Include="Credits.cpp" />
-    <ClCompile Include="DifficultyScreen.cpp" />
     <ClCompile Include="DisplayScreen.cpp" />
     <ClCompile Include="EnterNameScreen.cpp" />
     <ClCompile Include="Game.cpp" />
@@ -39,7 +38,6 @@
     <ClCompile Include="Specs.cpp" />
     <ClCompile Include="Splash.cpp" />
     <ClCompile Include="SpeedScreen.cpp" />
-    <ClCompile Include="SteeringScreen.cpp" />
     <ClCompile Include="TurboScreen.cpp" />
     <ClCompile Include="Widget.cpp" />
     <ClCompile Include="XBOX360CONTROLLER.cpp" />
@@ -57,7 +55,6 @@
     <ClInclude Include="CheckBox.h" />
     <ClInclude Include="chooseCar.h" />
     <ClInclude Include="Credits.h" />
-    <ClInclude Include="DifficultyScreen.h" />
     <ClInclude Include="DisplayScreen.h" />
     <ClInclude Include="EnterNameScreen.h" />
     <ClInclude Include="Game.h" />
@@ -83,7 +80,6 @@
     <ClInclude Include="Specs.h" />
     <ClInclude Include="Splash.h" />
     <ClInclude Include="SpeedScreen.h" />
-    <ClInclude Include="SteeringScreen.h" />
     <ClInclude Include="TurboScreen.h" />
     <ClInclude Include="Widget.h" />
     <ClInclude Include="XBOX360CONTROLLER.h" />

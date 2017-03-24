@@ -1,4 +1,10 @@
 #include "chooseCar.h"
+/// <summary>
+/// @mainpage Joint Project - 2D racing game.
+/// @Author Dylan Murphy, Sean Regan, Micheal Bridgette, David O'Gorman
+/// @Version 1.0
+/// @brief A 2D racing game.
+/// </summary>
 
 //construct the choosecar screen
 ChooseCar::ChooseCar(Game & game):

@@ -1,4 +1,10 @@
 #include "SaveScreen.h"
+/// <summary>
+/// @mainpage Joint Project - 2D racing game.
+/// @Author Dylan Murphy, Sean Regan, Micheal Bridgette, David O'Gorman
+/// @Version 1.0
+/// @brief A 2D racing game.
+/// </summary>
 
 SaveScreen::SaveScreen(Game &game, Player &player) :
 	m_game(&game),
