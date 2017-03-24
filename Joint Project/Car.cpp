@@ -222,7 +222,7 @@ void Car::turbo(float MaxturboSpeed)
 	{
 		m_speed += m_acceleration;
 	}
-
+	//bool that if true will draw the flame shader on the car 
 	turboFlame = true;
 }
 
@@ -333,6 +333,7 @@ void Car::collision()
 	//m_rotation -= 180;
 	//m_sprite.setRotation(m_rotation);
 
+	//Equation used to sstop car goinf through wall
 	m_speed *= 1.0;
 	m_speed -= 4.0f;
 

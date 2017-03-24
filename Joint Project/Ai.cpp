@@ -81,7 +81,7 @@ sf::Vector2f Ai::seekTrack(std::vector<sf::CircleShape> track, sf::Vector2f pos)
 }
 
 
-
+///method created for Ai to avoid crashing into obstacles 
 sf::Vector2f Ai::collisionAvoidance()
 {
 
@@ -113,7 +113,7 @@ sf::Vector2f Ai::collisionAvoidance()
 
 
 }
-
+//Finds the closest obatacle to the car 
 sf::Sprite Ai::findMostThreateningObstacle()
 {
 	

@@ -18,17 +18,17 @@ playGame::playGame(Game &game):
 	goBack = new Button("Back", 200, 500);
 	goBack->Enter = std::bind(&playGame::goToMenu, this);
 
-
+	//Creates map one 
 	sf::Texture& dayMapTexture = m_game->m_manager->m_textureHolder["dayLightMap"];
 	dayMapSprite.setTexture(dayMapTexture);
 	dayMapSprite.setPosition(0, 0);
 	
-
+	//Creates map two
 	sf::Texture& nightMapTexture = m_game->m_manager->m_textureHolder["nightVisionMap"];
 	nightMapSprite.setTexture(nightMapTexture);
 	nightMapSprite.setPosition(0, 0);
 
-
+	//adds all the buttons 
 	m_gui.addButton(moveRight);
 	m_gui.addButton(moveDowner);
 	m_gui.addButton(goBack);
@@ -53,7 +53,7 @@ playGame::~playGame()
 
 void playGame::render(sf::RenderWindow & window)
  {
-
+	/// Depending on what button is selected it will either draw one of the two maps 
 	if (m_currentSelect == 0)
 	{
 		window.draw(dayMapSprite);
