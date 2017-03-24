@@ -3,11 +3,8 @@
 SteeringScreen::SteeringScreen(Game & game):
 	m_game(&game)
 {
-	if (!m_texture.loadFromFile(m_game->getGarageTexture()))
-	{
-		cout << "Error loading steering texture" << endl;
-	}
-	m_sprite.setTexture(m_texture);
+	sf::Texture& texture = m_game->m_manager->m_textureHolder["garage"];
+	m_sprite.setTexture(texture);
 	m_sprite.setTextureRect(sf::IntRect(777, 532, 179, 178));
 	m_sprite.setPosition(600, 300);
 
@@ -65,6 +62,7 @@ void SteeringScreen::smallBuy()
 		m_largeEquipped = false;
 		m_sprite.setScale(1.25, 1.25);
 	}
+	currentUpgrade();
 }
 
 void SteeringScreen::mediumBuy()
@@ -82,6 +80,7 @@ void SteeringScreen::mediumBuy()
 		m_largeEquipped = false;
 		m_sprite.setScale(1.5, 1.5);
 	}
+	currentUpgrade();
 }
 
 void SteeringScreen::largeBuy()
@@ -99,9 +98,26 @@ void SteeringScreen::largeBuy()
 		m_largeEquipped = true;
 		m_sprite.setScale(1.75, 1.75);
 	}
+	currentUpgrade();
 }
 
 void SteeringScreen::goToGarage()
 {
 	m_game->changeGameState(GameState::Garage);
+}
+
+void SteeringScreen::currentUpgrade()
+{
+	if (m_smallEquipped)
+	{
+		m_game->m_player->m_car.setSteering(2);
+	}
+	else if (m_mediumEquipped)
+	{
+		m_game->m_player->m_car.setSteering(2.5);
+	}
+	else if (m_largeEquipped)
+	{
+		m_game->m_player->m_car.setSteering(2.75);
+	}
 }

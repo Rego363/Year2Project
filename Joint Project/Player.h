@@ -31,7 +31,6 @@ public:
 	std::string getName();
 	void update(float dt, sf::View &view);
 	void draw(sf::RenderWindow & window);
-	std::vector<sf::Sprite> m_skidmarkSprite;
 	Car m_car; //the players car
 
 private:
@@ -42,7 +41,6 @@ private:
 	std::stringstream fileStream;
 	std::string fileLine;
 	int m_money;
-	int m_carSelect;
 	int m_secHighScore;
 	int m_minHighScore;
 	std::string m_name;
@@ -61,7 +59,6 @@ private:
 
 	std::string strTemp;				// String to hold the data of each player before putting it in the output file
 	int currentSkid = 1;
-	sf::Texture m_skidmarkText;
 	sf::Vector2f m_position;
 
 };

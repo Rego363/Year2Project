@@ -137,6 +137,7 @@
     <ClCompile Include="CheckBox.cpp" />
     <ClCompile Include="chooseCar.cpp" />
     <ClCompile Include="Credits.cpp" />
+    <ClCompile Include="Cutscene.cpp" />
     <ClCompile Include="DifficultyScreen.cpp" />
     <ClCompile Include="DisplayScreen.cpp" />
     <ClCompile Include="EnterNameScreen.cpp" />
@@ -168,7 +169,6 @@
     <ClCompile Include="SteeringScreen.cpp" />
     <ClCompile Include="TurboScreen.cpp" />
     <ClCompile Include="Widget.cpp" />
-    <ClCompile Include="WorldSquares.cpp" />
     <ClCompile Include="XBOX360CONTROLLER.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -183,6 +183,7 @@
     <ClInclude Include="CheckBox.h" />
     <ClInclude Include="chooseCar.h" />
     <ClInclude Include="Credits.h" />
+    <ClInclude Include="Cutscene.h" />
     <ClInclude Include="DifficultyScreen.h" />
     <ClInclude Include="DisplayScreen.h" />
     <ClInclude Include="EnterNameScreen.h" />
@@ -213,7 +214,6 @@
     <ClInclude Include="SteeringScreen.h" />
     <ClInclude Include="TurboScreen.h" />
     <ClInclude Include="Widget.h" />
-    <ClInclude Include="WorldSquares.h" />
     <ClInclude Include="XBOX360CONTROLLER.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

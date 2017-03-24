@@ -23,10 +23,6 @@ DisplayScreen::DisplayScreen(Game & game) :
 	m_gui.addCheckBox(m_animeOn);	// Add to gui array
 
 	m_animeOn->Enter = std::bind(&DisplayScreen::animationOn, this);
-	
-	// Animation speed slider
-	//m_animeSpeed = new Slider(75.0f, 225.0f, m_speed, "Animation speed");	// Constructor
-	//m_gui.addSlider(m_animeSpeed);	// Add to gui array
 
 	// Back button
 	m_backButton = new Button("Back", 50, 600);	// Constructor

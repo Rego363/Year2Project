@@ -12,44 +12,37 @@ Game::Game() :
 	m_window(sf::VideoMode(1280, 720), "Joint Project, Team C")
 {
 
+	// Load in level
 	if (!LevelLoader::load(m_currentLevel))
 	{
 		return;
 	}
 
-	if (!m_startCar.loadFromFile(m_currentLevel.m_lambo.m_fileName))
-	{
-		cout << "car setup" << endl;
-	}
+	// resource manager
+	m_manager = make_unique<ResourceManager>();
 
-	if (!m_aistartCar.loadFromFile(m_currentLevel.m_aiLambo.m_fileName))
-	{
-		cout << "car setup" << endl;
-	}
+	// Loading in the car textures
+	sf::Texture& m_startCar = m_manager->m_textureHolder["yellowCar"];
+	sf::Texture& m_aistartCar = m_manager->m_textureHolder["blueCar"];
 
 	// Shader
-	if (!m_blankTexture.loadFromFile("blankBackground.png"))	// Load blank texture
-	{
-		std::cout << "blankTile failed to load" << std::endl;	//Error message
-	}
-
-	m_shaderSprite.setTexture(m_blankTexture);	// Set texture for the blank sprite
-
+	sf::Texture& blankTexture = m_manager->m_textureHolder["blankBackground"];
+	m_shaderSprite.setTexture(blankTexture);	// Set texture for the blank sprite
 	if (!m_smokeShader.loadFromFile("Shaders/Smoke.frag", sf::Shader::Fragment)) //Load shader
 	{
 		std::cout << "shader failed to load" << std::endl;	// Error message
 	}
-
 	m_smokeShader.setParameter("time", 0.0f);
 	m_smokeShader.setParameter("resolution", 1280.0f, 720.0f);
 	m_shaderSprite.setPosition(0.0f, 0.0f);
 
+	//Title
 	m_text.setFont(m_font);
 	m_text.setString("RACING GAME");
 	m_text.setPosition(m_window.getSize().x / 4, m_window.getSize().y / 2);
 	m_text.setCharacterSize(70);
 
-	m_manager = make_unique<ResourceManager>();
+	
 	m_optionsScreen = make_unique<OptionsScreen>(*this);
 	m_mapSelect = make_unique<playGame>(*this);
 	m_soundScreen = make_unique<SoundScreen>(*this);
@@ -67,36 +60,48 @@ Game::Game() :
 	m_Liscence = make_unique<Liscence>(*this);
 	m_enterName = make_unique<EnterNameScreen>(*this, *m_player);
 	m_credits = make_unique<Credits>(*this, m_currentLevel);
+	m_cutscene = make_unique<Cutscene>(*this);
 	m_gameOverScreen = make_unique<GameOverScreen>(*this);
 	m_physicsBalls = make_unique<PhysicsBalls>(*this);
-	m_chooseCarScreen = make_unique<ChooseCar>(*this);
+	// Car set up
 
+	m_chooseCarScreen = make_unique<ChooseCar>(*this);
 	m_startPos = sf::Vector2f(m_window.getSize().x / 2, m_window.getSize().y / 4);
-	m_car = make_unique<Car>(m_startCar, m_startPos);
-	m_aiCar = make_unique<Car>(m_startCar, sf::Vector2f(760.0f, 1050.0f));
-	m_aiCarTwo = make_unique<Car>(m_startCar, sf::Vector2f(660.0f, 1050.0f));
-	m_aiCarThree = make_unique<Car>(m_startCar, sf::Vector2f(660.0f, 1100.0f));
+	m_car = make_unique<Car>(*this, m_startCar, m_startPos);
+	m_aiCar = make_unique<Car>(*this, m_startCar, sf::Vector2f(760.0f, 1050.0f));
+	m_aiCarTwo = make_unique<Car>(*this, m_startCar, sf::Vector2f(660.0f, 1050.0f));
+	m_aiCarThree = make_unique<Car>(*this, m_startCar, sf::Vector2f(660.0f, 1100.0f));
 	
+	//Player
 	m_player = make_unique<Player>(760.0f, 1100.0f, m_startCar, m_window, *this);
+
+	// background music
 	if(!m_buffer.loadFromFile("music.wav"))
 	{
 		std::cout << "NO MUSIC" << std::endl;
 	}
-
 	music.setBuffer(m_buffer);
 	music.setLoop(true);
 	music.setVolume(100);
-	music.play();
+	//music.play();
 
-	/*  FOR TESTING*/
-	/*******************************************************************************/
+	if (!m_buffer2.loadFromFile("playing music.wav"))
+	{
+		std::cout << "NO MUSIC" << std::endl;
+	}
+
+	m_gameMusic.setBuffer(m_buffer2);
+	m_gameMusic.setLoop(true);
+	m_gameMusic.setVolume(100);
+	//m_gameMusic.play();
+
+	
 
 	m_view = sf::View(sf::Vector2f(0, 0), sf::Vector2f(1280, 720));
 	m_view2 = sf::View(sf::Vector2f(0, 0), sf::Vector2f(1280, 720));
 	m_view2.setCenter(m_window.getSize().x / 2, m_window.getSize().y / 2);
 
-	/*******************************************************************************/
-
+	
 
 	m_diffScreen = make_unique<DifficultyScreen>(*this);
 
@@ -108,6 +113,7 @@ Game::Game() :
 	m_changeProfile = make_unique<changeProfile>(*this, *m_player);
 	m_saveProfile = make_unique<SaveScreen>(*this, *m_player);
 
+	// Loading in the medium difficulty track
 	for (int i = 0; i < m_currentLevel.m_mediumTrack.size(); i++)
 	{
 		sf::CircleShape circle(0, 30);
@@ -116,6 +122,7 @@ Game::Game() :
 		m_mediumTrack.push_back(circle);
 	}
 	
+	// Loading in the easy difficulty track
 	for (int i = 0; i < m_currentLevel.m_easyTrack.size(); i++)
 	{
 		sf::CircleShape circle(0, 30);
@@ -124,6 +131,7 @@ Game::Game() :
 		m_easyTrack.push_back(circle);
 	}
 
+	// Loading in the hard difficulty track
 	for (int i = 0; i < m_currentLevel.m_hardTrack.size(); i++)
 	{
 		sf::CircleShape circle(0, 30);
@@ -132,21 +140,15 @@ Game::Game() :
 		m_hardTrack.push_back(circle);
 	}
 
-	m_ai = make_unique< Ai>(m_aiCar->getPos().x, m_aiCar->getPos().y, m_aistartCar, m_easyTrack);
-	m_aiTwo = make_unique< Ai>(m_aiCarTwo->getPos().x, m_aiCarTwo->getPos().y, m_aistartCar, m_mediumTrack);
-	m_aiThree = make_unique< Ai>(m_aiCarThree->getPos().x, m_aiCarThree->getPos().y, m_aistartCar, m_hardTrack);
+	// Creating the ai players
+	m_ai = make_unique< Ai>(*this, m_aiCar->getPos().x, m_aiCar->getPos().y, m_aistartCar, m_easyTrack);
+	m_aiTwo = make_unique< Ai>(*this, m_aiCarTwo->getPos().x, m_aiCarTwo->getPos().y, m_aistartCar, m_mediumTrack);
+	m_aiThree = make_unique< Ai>(*this, m_aiCarThree->getPos().x, m_aiCarThree->getPos().y, m_aistartCar, m_hardTrack);
 
 	m_background = make_unique<Background>( *this);
 	m_nightMode = make_unique<NightMode>(*this);
 	
 	m_level = make_unique<Levels>(m_currentLevel, *m_player, *m_ai, *m_aiTwo, *m_aiThree, *this);
-
-	if (!m_backgroundImage.loadFromFile("backgroundBlue.png"))
-	{
-
-	}
-	sprBack.setTexture(m_backgroundImage);
-	sprBack.setPosition(0, 0);
 
 	m_specs = make_unique< specs>(*this, *m_level);
 	
@@ -203,6 +205,7 @@ std::string Game::getBestLapTime()
 	return m_level->getBestLapTime();
 }
 
+// Method to reset the players on the track for the next race
 void Game::resetMap()
 {
 	m_level->resetLevel();
@@ -236,7 +239,13 @@ void Game::processInput()
 /// </summary>
 void Game::update(sf::Time time)
 {
-	totalTime += timeSinceLastUpdate.asSeconds();
+	totalTime += timeSinceLastUpdate.asSeconds(); // Accumulative time
+
+	if (!m_currentGameState == GameState::Racing)
+	{
+		m_player->m_car.m_soundEffect.stop();
+		m_player->m_car.m_speed = 0;
+	}
 
 	switch (m_currentGameState)
 	{
@@ -265,7 +274,6 @@ void Game::update(sf::Time time)
 		if (hasName == false)
 		{
 			m_player->setName(m_enterName->getEnteredName());
-			//m_player->save("Dave");
 			hasName = true;
 		}
 		m_Liscence->update();
@@ -335,11 +343,6 @@ void Game::update(sf::Time time)
 			m_background->activateTheShader();
 		}
 		
-		if(m_xbox.m_currentState.LB && !m_xbox.m_previousState.LB)
-		{
-			m_nightMode->activateTheShader();
-		}
-		
 		break;
 	case GameState::GameOver:
 		m_gameOverScreen->update();
@@ -359,6 +362,9 @@ void Game::update(sf::Time time)
 		break;
 	case GameState::TheCredits:
 		m_credits->update();
+		break;
+	case GameState::CutsceneScreen:
+		m_cutscene->update(totalTime);
 		break;
 	case GameState::PickCar:
 		m_chooseCarScreen->update();
@@ -477,8 +483,8 @@ void Game::render()
 	case GameState::Racing:   //put in levels
 		m_window.clear(sf::Color(0, 0, 0, 255));
 		m_background->draw(m_window);
-		m_nightMode->draw(m_window);
 		m_level->render(m_window);
+		m_nightMode->draw(m_window);
 		m_window.display();
 		break;
 	case GameState::GameOver:
@@ -512,6 +518,11 @@ void Game::render()
 	case GameState::TheCredits:
 		m_window.clear();
 		m_credits->render(m_window);
+		m_window.display();
+		break;
+	case GameState::CutsceneScreen:
+		m_window.clear();
+		m_cutscene->render(m_window);
 		m_window.display();
 		break;
 	case GameState::PickCar:

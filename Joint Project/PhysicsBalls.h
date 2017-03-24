@@ -25,7 +25,6 @@ private:
 	Game *m_game;
 	sf::Vector2f m_velocity;
 	sf::Vector2f m_Position;
-	sf::Texture m_ballTex;
 
 	bool m_collision;
 

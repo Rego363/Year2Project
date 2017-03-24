@@ -6,40 +6,47 @@ Dylan
 1000
 1000
 1000
-$$$
+MICHAEL
 1000
 1000
 1000
+<<<<<<< HEAD
 John
 <<<<<<< HEAD
 6
 6
 6
 =======
+<<<<<<< HEAD
+=======
+=======
+Fry
+>>>>>>> 493fc8ba436f7111e95de6cae275996037d08963
+>>>>>>> 32c797daf49e9db1913536540631e52b4bd5f281
 1000
 1000
 1000
-Jack
+Bender
 1000
 1000
 1000
-Brendan
+Leela
 1000
 1000
 1000
-Matt
+Zoidberg
 1000
 1000
 1000
-Bob
+Professor_Farnsworth
 1000
 1000
 1000
-David
+Nibbler
 1000
 1000
 1000
-Logan
+Zapp
 1000
 1000
 1000

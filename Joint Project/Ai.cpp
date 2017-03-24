@@ -2,22 +2,27 @@
 
 
 
-Ai::Ai(float carX, float carY, sf::Texture &carTexture, std::vector<sf::CircleShape> & track) :
-	m_car(carTexture, sf::Vector2f(carX, carY)), 
+//Constructor
+Ai::Ai(Game &game, float carX, float carY, sf::Texture &carTexture, std::vector<sf::CircleShape> & const track) :
+	m_game(&game),
+	m_car(game, carTexture, sf::Vector2f(carX, carY)), 
 	m_track(track)
 {
-	//m_car.setAiPosition(sf::Vector2f(carX, carY));
 }
 
-
+// Deconstructor
 Ai::~Ai()
 {
 }
 
+// Update loop
 void Ai::update()
 {
+	// Path following 
+	// Getting direction
 	auto dest = atan2(-1 * m_velocity.y, -1 * m_velocity.x) / 3.14159265359 * 180 + 180;
 
+	// getting cars current rotation
 	auto currentRotation = m_car.getRot();
 
 	// Find the shortest way to rotate towards the player (clockwise or anti-clockwise)
@@ -38,33 +43,35 @@ void Ai::update()
 		m_car.decreaseAiRotation();
 	}
 
-	vectorToNode = seekTrack(m_track, m_car.getPos());
-	m_steering += thor::unitVector(vectorToNode);
-	//m_steering += collisionAvoidance(aiId, entities);
-	m_steering = Math::truncate(m_steering, MAX_FORCE);
+	vectorToNode = seekTrack(m_track, m_car.getPos());	// Get the vector going from the ai to the node
+	m_steering += thor::unitVector(vectorToNode);	
+	m_steering = Math::truncate(m_steering, MAX_FORCE);	
 	m_velocity = Math::truncate(m_velocity + m_steering, MAX_SPEED);
 
+	// Move car
 	m_car.aiUpdate(m_velocity);
 }
 
+// Draw loop
 void Ai::render(sf::RenderWindow &window)
 {
 	m_car.draw(window);
 }
 
+// Follow the start of the track again
 void Ai::resetNode()
 {
 	m_target = 0;
 }
 
+// Returns the direction of the next node
 sf::Vector2f Ai::seekTrack(std::vector<sf::CircleShape> track, sf::Vector2f pos)
 {
 	trackDisVector = track[m_target].getPosition();
 
 	aiDisVector = pos;
 
-	
-	//	if (track[m_target].getPosition().x - aiDisVector.x < 1 && track[m_target].getPosition().y - aiDisVector.y < 1)
+	// if the ai is close move onto the next node
 	if (Math::distance(aiDisVector, trackDisVector) < track[m_target].getRadius() + 40)
 	{
 		m_target++;
@@ -76,4 +83,52 @@ sf::Vector2f Ai::seekTrack(std::vector<sf::CircleShape> track, sf::Vector2f pos)
 	}
 
 	return sf::Vector2f(trackDisVector.x - aiDisVector.x, trackDisVector.y - aiDisVector.y);
+}
+
+// Attempt at collision avoidance
+sf::Vector2f Ai::collisionAvoidance()
+{
+	auto headingRadians = thor::toRadian(m_car.getRot());
+	sf::Vector2f headingVector(std::cos(headingRadians) * MAX_SEE_AHEAD, std::sin(headingRadians) * MAX_SEE_AHEAD);
+	m_ahead = m_car.getPos() + headingVector;
+	m_halfAhead = m_car.getPos() + (headingVector * 0.5f);
+
+	sf::Sprite mostThreatening = findMostThreateningObstacle();
+	sf::Vector2f avoidance(0, 0);
+
+	if (Math::distance(m_car.getPos(), mostThreatening.getPosition()) <= Math::distance(m_car.getPos(), mostThreatening.getPosition()))
+	{
+		auto threatPos = mostThreatening.getPosition();
+		auto mypos = m_car.getPos();
+		avoidance.x = m_ahead.x - mostThreatening.getPosition().x;
+		avoidance.y = m_ahead.y - mostThreatening.getPosition().y;
+		avoidance = thor::unitVector(avoidance);
+		avoidance *= MAX_AVOID_FORCE;
+	}
+	else
+	{
+		avoidance *= 0.0f;
+	}
+	return avoidance;
+
+
+
+}
+
+// finds the object the ai is closest to colliding with
+sf::Sprite Ai::findMostThreateningObstacle()
+{
+	
+	m_obstacles = m_game->m_physicsBalls->m_ballSprite;
+		int size = m_obstacles.size();
+
+		for (int i = 0; i < size; i++)
+		{
+			if (Math::distance(m_car.getPos(), m_obstacles.at(i).getPosition()) <= Math::distance(m_car.getPos(), m_closest.getPosition()))
+			{
+				m_closest = m_obstacles[i];
+			}
+		}
+		return m_closest;
+	
 }

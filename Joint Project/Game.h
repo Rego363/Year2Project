@@ -41,7 +41,6 @@
 #include "LevelLoad.h"
 #include "ResourceManager.h"
 #include "levels.h"
-#include "WorldSquares.h"
 #include "Ai.h"
 #include "EnterNameScreen.h"
 #include <SFML\Audio.hpp>
@@ -52,7 +51,8 @@
 #include "gameOverScreen.h"
 #include "SaveScreen.h"
 #include "PhysicsBalls.h"
-#include"chooseCar.h"
+#include "chooseCar.h"
+#include "Cutscene.h"
 
 using namespace std;
 class SoundScreen;
@@ -74,7 +74,6 @@ class AccelerationScreen;
 class specs;
 class playGame;
 class changeProfile;
-class worldSquares;
 class Levels;
 class EnterNameScreen;
 class Background;
@@ -85,6 +84,7 @@ class GameOverScreen;
 class SaveScreen;
 class PhysicsBalls;
 class ChooseCar;
+class Cutscene;
 
 enum GameState {
 	TheLicense,
@@ -110,7 +110,8 @@ enum GameState {
 	TheCredits,
 	GameOver,
 	Save,
-	PickCar
+	PickCar,
+	CutsceneScreen
 };
 
 enum GameDifficulty {
@@ -137,6 +138,7 @@ public:
 	std::unique_ptr<ResourceManager> m_manager;
 	string nameDisplay();
 	sf::Sound music;
+	sf::Sound m_gameMusic;
 
 	int playerMoney();
 	void chargePlayer(int amount);
@@ -147,6 +149,8 @@ public:
 	std::string getBestLapTime();
 	void resetMap();
 	LevelData m_currentLevel;
+	std::unique_ptr<TurboScreen>m_turboScreen;
+	Xbox360Controller m_xbox;
 
 private:
 	void processInput();
@@ -160,7 +164,7 @@ private:
 	sf::Font m_font;
 	sf::Text m_text;
 
-	GameState m_currentGameState = GameState::TheMenu;
+	GameState m_currentGameState = GameState::TheLicense;
 	std::unique_ptr<playGame> m_mapSelect;
 	
 	GameDifficulty m_currentDifficulty = GameDifficulty::Medium;
@@ -176,7 +180,6 @@ private:
 	std::unique_ptr<Splash>m_Splash;
 	std::unique_ptr<DifficultyScreen>m_diffScreen;
 	std::unique_ptr<SteeringScreen>m_steeringScreen;
-	std::unique_ptr<TurboScreen>m_turboScreen;
 	std::unique_ptr<BrakingScreen>m_brakingScreen;
 	std::unique_ptr<SpeedScreen>m_speedScreen;
 	std::unique_ptr<AccelerationScreen>m_accelerationScreen;
@@ -184,6 +187,7 @@ private:
 	std::unique_ptr<Levels>m_level;
 	std::unique_ptr<EnterNameScreen>m_enterName;
 	std::unique_ptr<Credits>m_credits;
+	std::unique_ptr<Cutscene>m_cutscene;
 	std::unique_ptr<GameOverScreen>m_gameOverScreen;
 	std::unique_ptr<SaveScreen>m_saveProfile;
 	std::unique_ptr<ChooseCar>m_chooseCarScreen;
@@ -201,20 +205,18 @@ private:
 
 	sf::View m_view;
 	sf::View m_view2;
-	sf::Texture m_startCar;
-	sf::Texture m_aistartCar;
 	sf::Vector2f m_startPos;
 
 	std::vector<sf::CircleShape> m_easyTrack;
 	std::vector<sf::CircleShape> m_mediumTrack;
 	std::vector<sf::CircleShape> m_hardTrack;
-	Xbox360Controller m_xbox;
 
 
 
 	LevelLoader m_levelLoader;
 	bool hasName=false;
 	sf::SoundBuffer m_buffer;
+	sf::SoundBuffer m_buffer2;
 	sf::Clock clock;
 	sf::Time timeSinceLastUpdate;
 	sf::Time timePerFrame;
@@ -230,15 +232,10 @@ private:
 
 	/*******************************/
 
-	sf::Texture m_textureTest;
-	sf::Texture m_textureTest2;
-
 	sf::FloatRect rect;
-	sf::Texture m_backgroundImage;
 	sf::Sprite sprBack;
 
 	// Shader 
-	sf::Texture m_blankTexture;
 	sf::Sprite m_shaderSprite;
 	sf::Shader m_smokeShader;
 

@@ -42,9 +42,12 @@
     <ClCompile Include="SteeringScreen.cpp" />
     <ClCompile Include="TurboScreen.cpp" />
     <ClCompile Include="Widget.cpp" />
-    <ClCompile Include="WorldSquares.cpp" />
     <ClCompile Include="XBOX360CONTROLLER.cpp" />
     <ClCompile Include="LevelLoad.cpp" />
+<<<<<<< HEAD
+=======
+    <ClCompile Include="Cutscene.cpp" />
+>>>>>>> 32c797daf49e9db1913536540631e52b4bd5f281
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AccelerationScreen.h" />
@@ -87,8 +90,11 @@
     <ClInclude Include="SteeringScreen.h" />
     <ClInclude Include="TurboScreen.h" />
     <ClInclude Include="Widget.h" />
-    <ClInclude Include="WorldSquares.h" />
     <ClInclude Include="XBOX360CONTROLLER.h" />
     <ClInclude Include="LevelLoad.h" />
+<<<<<<< HEAD
+=======
+    <ClInclude Include="Cutscene.h" />
+>>>>>>> 32c797daf49e9db1913536540631e52b4bd5f281
   </ItemGroup>
 </Project>

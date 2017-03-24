@@ -21,14 +21,23 @@ ResourceManager::ResourceManager()
 	m_textureHolder.acquire("mask", thor::Resources::fromFile<sf::Texture>("./mask.png"));
 	m_textureHolder.acquire("blueBall", thor::Resources::fromFile<sf::Texture>("./blueBall.png"));
 	m_textureHolder.acquire("raceBackground", thor::Resources::fromFile<sf::Texture>("./testTiles.png"));
+<<<<<<< HEAD
 	
 	//Fonts
 	m_fontHolder.acquire("americanCap", thor::Resources::fromFile<sf::Font>("./Fonts/AmericanCaptain.ttf"));
+=======
+	m_textureHolder.acquire("dayLightMap", thor::Resources::fromFile<sf::Texture>("./Map1.PNG"));
+	m_textureHolder.acquire("nightVisionMap", thor::Resources::fromFile<sf::Texture>("./Map2.png"));
+
+	//Fonts
+	m_fontHolder.acquire("americanCap", thor::Resources::fromFile<sf::Font>("Fonts/AmericanCaptain.ttf"));
+>>>>>>> 32c797daf49e9db1913536540631e52b4bd5f281
 	//m_fontHolder.acquire("Figurativative", thor::Resources::fromFile<sf::Font>("Figurativative.ttf"));
 }
 
 ResourceManager::~ResourceManager()
 {
+<<<<<<< HEAD
 	m_textureHolder.release("Garage");
 	m_textureHolder.release("blueBackground");
 	m_textureHolder.release("blankBackground");
@@ -50,4 +59,6 @@ ResourceManager::~ResourceManager()
 	
 	m_fontHolder.release("americanCap");
 	//m_fontHolder.release("Figurativative");
+=======
+>>>>>>> 32c797daf49e9db1913536540631e52b4bd5f281
 }

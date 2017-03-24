@@ -13,8 +13,12 @@ public:
 	void draw(sf::RenderWindow &window);
 	void update();
 	void goToGarage();
+
+	void currentUpgrade();
+	bool m_smallEquipped;
+	bool m_mediumEquipped;
+	bool m_largeEquipped;
 private:
-	sf::Texture m_texture;
 	sf::Sprite m_sprite;
 	Label *m_label;
 	Label *m_playerMoney;
@@ -29,9 +33,6 @@ private:
 	bool m_smallBought;
 	bool m_mediumBought;
 	bool m_largeBought;
-	bool m_smallEquipped;
-	bool m_mediumEquipped;
-	bool m_largeEquipped;
 	const int SMALL_PRICE = 500;
 	const int MEDIUM_PRICE = 2500;
 	const int LARGE_PRICE = 5000;

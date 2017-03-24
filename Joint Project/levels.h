@@ -5,11 +5,10 @@
 #include <SFML\Graphics.hpp>
 #include "ResourceManager.h"
 #include "Player.h"
-#include "WorldSquares.h"
 #include "Ai.h"
+#include "LevelLoad.h"
 
 class Player;
-class worldSquares;
 class Game;
 class Ai;
 
@@ -22,7 +21,6 @@ public:
 
 	void update(float dt, sf::View &view);
 	void render(sf::RenderWindow & window);
-	void loadImages();
 	void loadFont();
 	sf::Clock m_startRace;
 	int m_maxLaps;
@@ -40,8 +38,7 @@ private:
 	LevelData *m_currentLevel;
 	Player *m_currentPlayer;
 	
-	sf::Texture m_lambo;
-	sf::Font m_Font;
+	sf::Font m_font;
 	Game *m_game;
 
 	sf::Clock m_raceTime;
@@ -53,13 +50,15 @@ private:
 	sf::Text m_bestLap;
 	sf::Text m_lastLap;
 	sf::Text m_Lap;;
+	sf::Text m_turbos;
 	sf::Text easterEgg;
+	sf::Text m_pauseText;
 	float tempTime = 0;
 	int currentlap = 1;
 	GUI m_gui;
 	int m_currentSelect = 0;
-	Button *m_credits;
 	bool game_on;
+	bool m_pause;
 
 	sf::RectangleShape m_startLine;
 	
